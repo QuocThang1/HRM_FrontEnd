@@ -1,19 +1,19 @@
-import React from 'react'
-import ReactDOM from 'react-dom/client'
-import App from './App.jsx'
-import './styles/global.css'
-import { createBrowserRouter, RouterProvider } from 'react-router-dom'
-import RegisterPage from './pages/register.jsx'
-import UserPage from './pages/user.jsx'
-import HomePage from './pages/home.jsx'
-import LoginPage from './pages/login.jsx'
-import UserLayout from './layout/userLayout.jsx'
-import { AuthWrapper } from './context/auth.context.jsx'
-import UserProfilePage from './pages/userProfile.jsx'
+import React from "react";
+import ReactDOM from "react-dom/client";
+import App from "./App.jsx";
+import "./styles/global.css";
+import { createBrowserRouter, RouterProvider } from "react-router-dom";
+import RegisterPage from "./pages/register.jsx";
+import StaffPage from "./pages/staff.jsx";
+import HomePage from "./pages/home.jsx";
+import LoginPage from "./pages/login.jsx";
+import StaffLayout from "./layout/staffLayout.jsx";
+import { AuthWrapper } from "./context/auth.context.jsx";
+import StaffProfilePage from "./pages/staffProfile.jsx";
 
 const router = createBrowserRouter([
   {
-    path: '/',
+    path: "/",
     element: <App />,
     children: [
       {
@@ -21,37 +21,37 @@ const router = createBrowserRouter([
         element: <HomePage />,
       },
       {
-        path: '/user',
-        element: <UserPage />,
+        path: "/staff",
+        element: <StaffPage />,
       },
-    ]
+    ],
   },
   {
-    path: '/register',
+    path: "/register",
     element: <RegisterPage />,
   },
 
   {
-    path: '/login',
+    path: "/login",
     element: <LoginPage />,
   },
 
   {
-    path: '/profile',
-    element: <UserLayout />,
+    path: "/profile",
+    element: <StaffLayout />,
     children: [
       {
         index: true,
-        element: <UserProfilePage />,
+        element: <StaffProfilePage />,
       },
-    ]
+    ],
   },
 ]);
 
-ReactDOM.createRoot(document.getElementById('root')).render(
+ReactDOM.createRoot(document.getElementById("root")).render(
   <React.StrictMode>
     <AuthWrapper>
       <RouterProvider router={router} />
     </AuthWrapper>
   </React.StrictMode>,
-)
+);

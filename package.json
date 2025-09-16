@@ -17,8 +17,10 @@
     "@ant-design/icons": "^5.3.7",
     "antd": "5.19.0",
     "axios": "1.7.2",
+    "i18next": "^25.5.2",
     "react": "18.3.1",
     "react-dom": "18.3.1",
+    "react-i18next": "^15.7.3",
     "react-router-dom": "6.24.0"
   },
   "devDependencies": {

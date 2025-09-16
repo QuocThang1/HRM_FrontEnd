@@ -10,6 +10,7 @@ import LoginPage from "./pages/login.jsx";
 import StaffLayout from "./layout/staffLayout.jsx";
 import { AuthWrapper } from "./context/auth.context.jsx";
 import StaffProfilePage from "./pages/staffProfile.jsx";
+import "./i18n";
 
 const router = createBrowserRouter([
   {

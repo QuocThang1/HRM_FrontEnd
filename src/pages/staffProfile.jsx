@@ -1,10 +1,21 @@
 import { useEffect, useContext } from "react";
-import { Form, Input, Button, Card, Typography, notification } from "antd";
+import {
+  Form,
+  Input,
+  Button,
+  Card,
+  Col,
+  Row,
+  Typography,
+  notification,
+  Select,
+} from "antd";
 import { AuthContext } from "../context/auth.context.jsx";
 import { updateProfileApi } from "../utils/api.js";
 import axios from "../utils/axios.customize.js";
 
 const { Title } = Typography;
+const { Option } = Select;
 
 const StaffProfilePage = () => {
   const { setAuth } = useContext(AuthContext);
@@ -83,6 +94,23 @@ const StaffProfilePage = () => {
           Thông tin cá nhân
         </Title>
         <Form form={form} layout="vertical" onFinish={onFinish}>
+          <Row gutter={16}>
+            <Col span={12}>
+              <Form.Item label="Mã nhân viên" name="staff_code">
+                <Input size="large" />
+              </Form.Item>
+            </Col>
+            <Col span={12}>
+              <Form.Item label="Vai trò" name="role">
+                <Select size="large" placeholder="Chọn vai trò">
+                  <Option value="admin">Admin</Option>
+                  <Option value="manager">Quản lý</Option>
+                  <Option value="staff">Nhân viên</Option>
+                  <Option value="canidate">Ứng viên</Option>
+                </Select>
+              </Form.Item>
+            </Col>
+          </Row>
           <Form.Item
             label="Họ và tên"
             name="name"

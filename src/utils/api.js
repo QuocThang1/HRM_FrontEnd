@@ -39,4 +39,33 @@ const getStaffApi = () => {
   const URL_API = "/v1/api/staff";
   return axios.get(URL_API);
 };
-export { createStaffApi, loginApi, getStaffApi, updateProfileApi };
+
+const addNewEmployeeApi = (username, password, fullName, email, phone, address) => {
+  const URL_API = "/v1/api/add-employee";
+  const data = {
+    username: username,
+    password: password,
+    fullName: fullName,
+    email: email,
+    phone: phone,
+    address: address,
+  };
+
+  return axios.post(URL_API, data);
+};
+
+const deleteEmployeeApi = (staffId) => {
+  const URL_API = `/v1/api/${staffId}`;
+  return axios.delete(URL_API);
+};
+
+const detailEmployeeApi = (staffId) => {
+  const URL_API = `/v1/api/detail-employee/${staffId}`;
+  return axios.get(URL_API);
+}
+
+const updateEmployeeApi = (staffId, updatedData) => {
+  const URL_API = `/v1/api/${staffId}`;
+  return axios.put(URL_API, updatedData);
+};
+export { createStaffApi, loginApi, getStaffApi, updateProfileApi, addNewEmployeeApi, deleteEmployeeApi, detailEmployeeApi, updateEmployeeApi };

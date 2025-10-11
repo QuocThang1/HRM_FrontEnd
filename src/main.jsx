@@ -4,10 +4,11 @@ import App from "./App.jsx";
 import "./styles/global.css";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import RegisterPage from "./pages/register.jsx";
-import StaffPage from "./pages/staff.jsx";
 import HomePage from "./pages/home.jsx";
 import LoginPage from "./pages/login.jsx";
 import StaffLayout from "./layout/staffLayout.jsx";
+import StaffPage from "./pages/Admin/listOfEmployee.jsx";
+import DepartmentPage from "./pages/Admin/listOfDeparment.jsx";
 import { AuthWrapper } from "./context/auth.context.jsx";
 import StaffProfilePage from "./pages/staffProfile.jsx";
 
@@ -44,6 +45,14 @@ const router = createBrowserRouter([
         index: true,
         element: <StaffProfilePage />,
       },
+      {
+        path: "employee-management",
+        element: <StaffPage />,
+      },
+      {
+        path: "department-management",
+        element: <DepartmentPage />,
+      }
     ],
   },
 ]);

@@ -1,78 +1,21 @@
-// import { Layout, Menu, Avatar, Typography } from 'antd';
-// import {
-//     StaffOutlined,
-//     SettingOutlined,
-//     LogoutOutlined,
-// } from '@ant-design/icons';
-// import { Link, useNavigate } from 'react-router-dom';
-// import { useContext } from 'react';
-// import { AuthContext } from '../context/auth.context';
-
-// const { Sider } = Layout;
-// const { Text } = Typography;
-
-// const SideBarStaff = () => {
-//     const navigate = useNavigate();
-//     const { setAuth, auth } = useContext(AuthContext);
-
-//     const handleLogout = () => {
-//         localStorage.removeItem("access_token");
-//         setAuth({
-//             isAuthenticated: false,
-//             staff: { name: '', email: '' }
-//         });
-//         navigate('/login');
-//     };
-
-//     return (
-//         <Sider width={220} style={{ background: '#fff', boxShadow: '2px 0 8px #f0f1f2' }}>
-//             <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', padding: '32px 0 16px 0' }}>
-//                 <Avatar size={64} icon={<StaffOutlined />} style={{ background: '#f0f1f2', color: '#bfbfbf' }} />
-//                 <Text strong style={{ marginTop: 12 }}>{auth?.staff?.name || 'Staff'}</Text>
-//             </div>
-//             <Menu
-//                 mode="inline"
-//                 defaultSelectedKeys={['profile']}
-//                 style={{ height: '100%', borderRight: 0 }}
-//                 items={[
-//                     {
-//                         key: 'profile',
-//                         icon: <StaffOutlined />,
-//                         label: <Link to="/profile">Thông tin cá nhân</Link>,
-//                     },
-//                     {
-//                         key: 'settings',
-//                         icon: <SettingOutlined />,
-//                         label: <Link to="/staff/settings">Cài đặt</Link>,
-//                     },
-//                     {
-//                         key: 'logout',
-//                         icon: <LogoutOutlined />,
-//                         label: <span onClick={handleLogout}>Đăng xuất</span>,
-//                     },
-//                 ]}
-//             />
-//         </Sider>
-//     );
-// };
-
-// export default SideBarStaff;
-
 import { Layout, Menu, Avatar, Typography } from "antd";
 import {
   UserOutlined,
   SettingOutlined,
   LogoutOutlined,
+  TeamOutlined,
 } from "@ant-design/icons";
 import { Link, useNavigate } from "react-router-dom";
 import { useContext } from "react";
 import { AuthContext } from "../context/auth.context";
+import { useLocation } from "react-router-dom";
 
 const { Sider } = Layout;
 const { Text } = Typography;
 
 const SideBarStaff = () => {
   const navigate = useNavigate();
+  const location = useLocation();
   const { setAuth, auth } = useContext(AuthContext);
 
   const handleLogout = () => {
@@ -86,7 +29,7 @@ const SideBarStaff = () => {
 
   return (
     <Sider
-      width={220}
+      width={270}
       style={{
         background: "linear-gradient(135deg, #667eea 0%, #764ba2 100%)",
         boxShadow: "4px 0 20px rgba(102, 126, 234, 0.15)",
@@ -190,7 +133,7 @@ const SideBarStaff = () => {
       <div style={{ padding: "0 16px", position: "relative", zIndex: 2 }}>
         <Menu
           mode="inline"
-          defaultSelectedKeys={["profile"]}
+          selectedKeys={[location.pathname]}
           style={{
             background: "transparent",
             border: "none",
@@ -211,6 +154,48 @@ const SideBarStaff = () => {
                   }}
                 >
                   Profile
+                </Link>
+              ),
+              style: {
+                borderRadius: "12px",
+                marginBottom: "8px",
+                transition: "all 0.3s ease",
+              },
+            },
+            {
+              key: "Employee Management",
+              icon: <TeamOutlined style={{ fontSize: "16px" }} />,
+              label: (
+                <Link
+                  to="/profile/employee-management"
+                  style={{
+                    color: "inherit",
+                    textDecoration: "none",
+                    fontWeight: 500,
+                  }}
+                >
+                  Employee Management
+                </Link>
+              ),
+              style: {
+                borderRadius: "12px",
+                marginBottom: "8px",
+                transition: "all 0.3s ease",
+              },
+            },
+            {
+              key: "Department Management",
+              icon: <TeamOutlined style={{ fontSize: "16px" }} />,
+              label: (
+                <Link
+                  to="/profile/department-management"
+                  style={{
+                    color: "inherit",
+                    textDecoration: "none",
+                    fontWeight: 500,
+                  }}
+                >
+                  Department Management
                 </Link>
               ),
               style: {
@@ -263,32 +248,6 @@ const SideBarStaff = () => {
           ]}
         />
       </div>
-
-      {/* Custom styles for menu items */}
-      <style>{`
-                .ant-menu-dark.ant-menu-inline .ant-menu-item:hover {
-                    background: rgba(255, 255, 255, 0.15) !important;
-                    transform: translateX(4px);
-                }
-                
-                .ant-menu-dark.ant-menu-inline .ant-menu-item-selected {
-                    background: rgba(255, 255, 255, 0.2) !important;
-                    border-radius: 12px;
-                    transform: translateX(4px);
-                }
-                
-                .ant-menu-dark.ant-menu-inline .ant-menu-item {
-                    padding-left: 20px !important;
-                    height: 48px !important;
-                    line-height: 48px !important;
-                    margin-bottom: 4px !important;
-                    border-radius: 12px !important;
-                }
-                
-                .ant-menu-dark .ant-menu-item-icon {
-                    margin-right: 12px;
-                }
-            `}</style>
     </Sider>
   );
 };

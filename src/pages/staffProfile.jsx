@@ -15,10 +15,10 @@ const StaffProfilePage = () => {
       const res = await axios.get(`/v1/api/account`);
       if (res) {
         form.setFieldsValue({
-          name: res.personal_info?.full_name,
-          email: res.personal_info?.email,
-          address: res.personal_info?.address,
-          phone: res.personal_info?.phone,
+          name: res.personalInfo?.fullName,
+          email: res.personalInfo?.email,
+          address: res.personalInfo?.address,
+          phone: res.personalInfo?.phone,
         });
       }
     };
@@ -33,6 +33,7 @@ const StaffProfilePage = () => {
         values.address,
         values.phone,
       );
+      console.log("res", res);
       if (res && res.EC === 0) {
         notification.success({
           message: "Cập nhật thành công",

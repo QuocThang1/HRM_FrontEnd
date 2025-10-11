@@ -2,3 +2,31 @@
   margin: 0;
   padding: 0;
 }
+
+.ant-menu-dark.ant-menu-inline .ant-menu-item:hover {
+  background: rgba(255, 255, 255, 0.15) !important;
+  transform: translateX(4px);
+}
+
+/* Selected */
+.ant-menu-dark.ant-menu-inline .ant-menu-item-selected {
+  background: rgba(255, 255, 255, 0.25) !important;
+  border-radius: 12px !important;
+  transform: translateX(4px);
+  font-weight: 600;
+  transition: all 0.3s ease;
+}
+
+/* Item base */
+.ant-menu-dark.ant-menu-inline .ant-menu-item {
+  padding-left: 20px !important;
+  height: 48px !important;
+  line-height: 48px !important;
+  margin-bottom: 4px !important;
+  border-radius: 12px !important;
+}
+
+/* Icon spacing */
+.ant-menu-dark .ant-menu-item-icon {
+  margin-right: 12px;
+}

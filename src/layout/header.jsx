@@ -32,15 +32,6 @@ const Header = () => {
       key: "home",
       icon: <MailOutlined />,
     },
-    ...(auth.isAuthenticated
-      ? [
-          {
-            label: <Link to="/staff">Staff</Link>,
-            key: "staffs",
-            icon: <MailOutlined />,
-          },
-        ]
-      : []),
   ];
 
   const rightItems = [
@@ -52,22 +43,22 @@ const Header = () => {
       children: [
         ...(auth.isAuthenticated
           ? [
-              {
-                label: <Link to="/profile">Profile</Link>,
-                key: "profile",
-                icon: <UserOutlined />,
-              },
-              {
-                label: "Logout",
-                key: "logout",
-              },
-            ]
+            {
+              label: <Link to="/profile">Profile</Link>,
+              key: "profile",
+              icon: <UserOutlined />,
+            },
+            {
+              label: "Logout",
+              key: "logout",
+            },
+          ]
           : [
-              {
-                label: <Link to="/login">Login</Link>,
-                key: "login",
-              },
-            ]),
+            {
+              label: <Link to="/login">Login</Link>,
+              key: "login",
+            },
+          ]),
       ],
     },
   ];

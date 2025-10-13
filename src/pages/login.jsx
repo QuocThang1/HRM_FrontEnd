@@ -28,6 +28,7 @@ const LoginPage = () => {
           name: res?.staff?.name ?? "",
           address: res?.staff?.address ?? "",
           phone: res?.staff?.phone ?? "",
+          role: res?.staff?.role ?? "",
         },
       });
       navigate("/");

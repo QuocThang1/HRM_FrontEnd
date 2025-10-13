@@ -20,6 +20,7 @@ function App() {
             name: res.personalInfo?.fullName,
             address: res.personalInfo?.address,
             phone: res.personalInfo?.phone,
+            role: res.role,
           },
         });
       }

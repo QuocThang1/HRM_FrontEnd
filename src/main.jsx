@@ -11,6 +11,7 @@ import StaffPage from "./pages/Admin/listOfEmployee.jsx";
 import DepartmentPage from "./pages/Admin/listOfDeparment.jsx";
 import { AuthWrapper } from "./context/auth.context.jsx";
 import StaffProfilePage from "./pages/staffProfile.jsx";
+import ProtectedRoute from "./route/ProtectedRoute.jsx";
 
 const router = createBrowserRouter([
   {
@@ -47,11 +48,19 @@ const router = createBrowserRouter([
       },
       {
         path: "employee-management",
-        element: <StaffPage />,
+        element: (
+          <ProtectedRoute allowedRoles={["admin"]}>
+            <StaffPage />
+          </ProtectedRoute>
+        ),
       },
       {
         path: "department-management",
-        element: <DepartmentPage />,
+        element: (
+          <ProtectedRoute allowedRoles={["admin"]}>
+            <DepartmentPage />
+          </ProtectedRoute>
+        ),
       }
     ],
   },

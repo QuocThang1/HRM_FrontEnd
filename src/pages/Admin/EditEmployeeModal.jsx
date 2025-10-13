@@ -1,6 +1,6 @@
 import { Modal, Form, Input, Select, Button, notification } from "antd";
 import { useEffect, useState } from "react";
-import { detailEmployeeApi, updateEmployeeApi } from "../../utils/api";
+import { detailStaffApi, updateStaffApi } from "../../utils/Api/staffApi";
 
 const { Option } = Select;
 
@@ -14,7 +14,7 @@ const EditEmployeeModal = ({ open, onClose, staffId, onSuccess }) => {
         if (staffId && open) {
             const fetchStaff = async () => {
                 try {
-                    const res = await detailEmployeeApi(staffId);
+                    const res = await detailStaffApi(staffId);
                     form.setFieldsValue({
                         username: res.staff?.username,
                         role: res.staff?.role,
@@ -52,7 +52,7 @@ const EditEmployeeModal = ({ open, onClose, staffId, onSuccess }) => {
             };
 
             setLoading(true);
-            await updateEmployeeApi(staffId, updatedData);
+            await updateStaffApi(staffId, updatedData);
             notification.success({
                 message: "Updated",
                 description: "Employee updated successfully",

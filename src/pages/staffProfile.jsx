@@ -1,7 +1,7 @@
 import { useEffect, useContext } from "react";
 import { Form, Input, Button, Card, Typography, notification } from "antd";
 import { AuthContext } from "../context/auth.context.jsx";
-import { updateProfileApi } from "../utils/api.js";
+import { updateProfileApi } from "../utils/Api/accountApi.js";
 import axios from "../utils/axios.customize.js";
 
 const { Title } = Typography;
@@ -47,6 +47,7 @@ const StaffProfilePage = () => {
             name: values.name,
             address: values.address,
             phone: values.phone,
+            role: res.role,
           },
         });
       } else {

@@ -7,6 +7,7 @@ export const AuthContext = createContext({
     email: "",
     address: "",
     phone: "",
+    role: "",
   },
 });
 
@@ -18,6 +19,7 @@ export const AuthWrapper = (props) => {
       email: "",
       address: "",
       phone: "",
+      role: "",
     },
   });
 

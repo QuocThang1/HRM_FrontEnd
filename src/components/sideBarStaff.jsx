@@ -22,7 +22,13 @@ const SideBarStaff = () => {
     localStorage.removeItem("access_token");
     setAuth({
       isAuthenticated: false,
-      staff: { name: "", email: "" },
+      staff: {
+        email: "",
+        name: "",
+        address: "",
+        phone: "",
+        role: "",
+      },
     });
     navigate("/login");
   };
@@ -162,48 +168,52 @@ const SideBarStaff = () => {
                 transition: "all 0.3s ease",
               },
             },
-            {
-              key: "Employee Management",
-              icon: <TeamOutlined style={{ fontSize: "16px" }} />,
-              label: (
-                <Link
-                  to="/profile/employee-management"
-                  style={{
-                    color: "inherit",
-                    textDecoration: "none",
-                    fontWeight: 500,
-                  }}
-                >
-                  Employee Management
-                </Link>
-              ),
-              style: {
-                borderRadius: "12px",
-                marginBottom: "8px",
-                transition: "all 0.3s ease",
-              },
-            },
-            {
-              key: "Department Management",
-              icon: <TeamOutlined style={{ fontSize: "16px" }} />,
-              label: (
-                <Link
-                  to="/profile/department-management"
-                  style={{
-                    color: "inherit",
-                    textDecoration: "none",
-                    fontWeight: 500,
-                  }}
-                >
-                  Department Management
-                </Link>
-              ),
-              style: {
-                borderRadius: "12px",
-                marginBottom: "8px",
-                transition: "all 0.3s ease",
-              },
-            },
+            ...(auth?.staff?.role === "admin"
+              ? [
+                {
+                  key: "Employee Management",
+                  icon: <TeamOutlined style={{ fontSize: "16px" }} />,
+                  label: (
+                    <Link
+                      to="/profile/employee-management"
+                      style={{
+                        color: "inherit",
+                        textDecoration: "none",
+                        fontWeight: 500,
+                      }}
+                    >
+                      Employee Management
+                    </Link>
+                  ),
+                  style: {
+                    borderRadius: "12px",
+                    marginBottom: "8px",
+                    transition: "all 0.3s ease",
+                  },
+                },
+                {
+                  key: "Department Management",
+                  icon: <TeamOutlined style={{ fontSize: "16px" }} />,
+                  label: (
+                    <Link
+                      to="/profile/department-management"
+                      style={{
+                        color: "inherit",
+                        textDecoration: "none",
+                        fontWeight: 500,
+                      }}
+                    >
+                      Department Management
+                    </Link>
+                  ),
+                  style: {
+                    borderRadius: "12px",
+                    marginBottom: "8px",
+                    transition: "all 0.3s ease",
+                  },
+                },
+              ]
+              : []),
             {
               key: "settings",
               icon: <SettingOutlined style={{ fontSize: "16px" }} />,

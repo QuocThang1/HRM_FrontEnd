@@ -1,6 +1,6 @@
 import { Table, Button, notification, Popconfirm } from "antd";
 import { useEffect, useState } from "react";
-import { getStaffApi, deleteEmployeeApi } from "../../utils/api";
+import { getStaffApi, deleteStaffApi } from "../../utils/Api/staffApi";
 import { PlusOutlined, EditOutlined, DeleteOutlined } from "@ant-design/icons";
 import AddEmployeeModal from "./AddEmployeeModal"; // import modal mới
 import EditEmployeeModal from "./EditEmployeeModal";
@@ -39,7 +39,7 @@ const StaffPage = () => {
 
     const handleDelete = async (staffId) => {
         try {
-            await deleteEmployeeApi(staffId);
+            await deleteStaffApi(staffId);
             notification.success({
                 message: "Deleted",
                 description: "Employee deleted successfully",

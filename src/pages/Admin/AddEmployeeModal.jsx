@@ -1,5 +1,5 @@
 import { Modal, Form, Input, notification } from "antd";
-import { addNewEmployeeApi } from "../../utils/api";
+import { addNewStaffApi } from "../../utils/Api/staffApi";
 
 const AddEmployeeModal = ({ open, onClose, onSuccess }) => {
     const [form] = Form.useForm();
@@ -7,7 +7,7 @@ const AddEmployeeModal = ({ open, onClose, onSuccess }) => {
     const handleConfirm = async () => {
         try {
             const values = await form.validateFields();
-            const res = await addNewEmployeeApi(
+            const res = await addNewStaffApi(
                 values.username,
                 values.password,
                 values.fullName,

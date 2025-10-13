@@ -9,7 +9,7 @@ import {
   Row,
   Col,
 } from "antd";
-import { createStaffApi } from "../utils/api.js";
+import { signUpApi } from "../utils/Api/accountApi.js";
 import { useNavigate } from "react-router-dom";
 import { Link } from "react-router-dom";
 
@@ -22,7 +22,7 @@ const RegisterPage = () => {
   const onFinish = async (values) => {
     const { name, email, password, address, phone, gender } = values;
 
-    const res = await createStaffApi(
+    const res = await signUpApi(
       name,
       email,
       password,

@@ -1,18 +1,18 @@
-import { useEffect, useContext } from "react";
+import { useEffect, useContext, useState } from "react";
 import { Form, Input, Button, Card, Typography, notification } from "antd";
 import { AuthContext } from "../context/auth.context.jsx";
-import { updateProfileApi } from "../utils/Api/accountApi.js";
-import axios from "../utils/axios.customize.js";
+import { updateProfileApi, getAccountApi } from "../utils/Api/accountApi.js";
 
 const { Title } = Typography;
 
 const StaffProfilePage = () => {
   const { setAuth } = useContext(AuthContext);
   const [form] = Form.useForm();
+  const [shouldReloadAccount, setShouldReloadAccount] = useState(false);
 
   useEffect(() => {
     const fetchAccount = async () => {
-      const res = await axios.get(`/v1/api/account`);
+      const res = await getAccountApi();
       if (res) {
         form.setFieldsValue({
           name: res.personalInfo?.fullName,
@@ -20,10 +20,22 @@ const StaffProfilePage = () => {
           address: res.personalInfo?.address,
           phone: res.personalInfo?.phone,
         });
+
+        setAuth({
+          isAuthenticated: true,
+          staff: {
+            email: res.personalInfo?.email,
+            name: res.personalInfo?.fullName,
+            address: res.personalInfo?.address,
+            phone: res.personalInfo?.phone,
+            role: res.role,
+          },
+        });
       }
     };
     fetchAccount();
-  }, [setAuth, form]);
+    setShouldReloadAccount(false);
+  }, [setAuth, form, shouldReloadAccount]);
 
   const onFinish = async (values) => {
     try {
@@ -33,23 +45,12 @@ const StaffProfilePage = () => {
         values.address,
         values.phone,
       );
-      console.log("res", res);
       if (res && res.EC === 0) {
         notification.success({
           message: "Cập nhật thành công",
           description: "Thông tin cá nhân đã được cập nhật.",
         });
-
-        setAuth({
-          isAuthenticated: true,
-          staff: {
-            email: values.email,
-            name: values.name,
-            address: values.address,
-            phone: values.phone,
-            role: res.role,
-          },
-        });
+        setShouldReloadAccount(true);
       } else {
         notification.error({
           message: "Cập nhật thất bại",

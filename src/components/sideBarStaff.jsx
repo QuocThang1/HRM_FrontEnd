@@ -1,9 +1,10 @@
-import { Layout, Menu, Avatar, Typography } from "antd";
+import { Layout, Menu, Avatar, Typography, Button } from "antd";
 import {
   UserOutlined,
   SettingOutlined,
   LogoutOutlined,
   TeamOutlined,
+  ArrowLeftOutlined,
 } from "@ant-design/icons";
 import { Link, useNavigate } from "react-router-dom";
 import { useContext } from "react";
@@ -44,6 +45,29 @@ const SideBarStaff = () => {
         height: "650px",
       }}
     >
+      <div
+        style={{
+          position: "absolute",
+          top: 16,
+          left: 16,
+          zIndex: 3,
+        }}
+      >
+        <Link to="/">
+          <Button
+            type="text"
+            icon={<ArrowLeftOutlined />}
+            style={{
+              color: "#fff",
+              fontWeight: 600,
+              background: "rgba(255,255,255,0.15)",
+              borderRadius: "8px",
+            }}
+          >
+            Back
+          </Button>
+        </Link>
+      </div>
       {/* Background decoration */}
       <div
         style={{
@@ -76,7 +100,7 @@ const SideBarStaff = () => {
           display: "flex",
           flexDirection: "column",
           alignItems: "center",
-          padding: "40px 20px 24px 20px",
+          padding: "80px 20px 24px 20px",
           position: "relative",
           zIndex: 2,
         }}

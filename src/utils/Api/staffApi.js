@@ -34,4 +34,28 @@ const updateStaffApi = (staffId, updatedData) => {
     return axios.put(URL_API, updatedData);
 };
 
-export { getStaffApi, addNewStaffApi, deleteStaffApi, detailStaffApi, updateStaffApi };
+// Lấy danh sách nhân viên theo phòng ban
+const getStaffByDepartmentApi = (departmentId) => {
+    const URL_API = `/v1/api/staff/departments/${departmentId}/`;
+    return axios.get(URL_API);
+};
+
+// Gán nhân viên vào phòng ban
+const assignStaffToDepartmentApi = (staffId, departmentId) => {
+    const URL_API = "/v1/api/staff/assign-department";
+    const data = {
+        staffId: staffId,
+        departmentId: departmentId,
+    };
+    return axios.put(URL_API, data);
+};
+
+const getStaffNotInDepartmentApi = (departmentId) => {
+    const URL_API = `/v1/api/staff/not-in-department/${departmentId}`;
+    return axios.get(URL_API);
+};
+
+export {
+    getStaffApi, addNewStaffApi, deleteStaffApi, detailStaffApi, updateStaffApi, getStaffByDepartmentApi, assignStaffToDepartmentApi,
+    getStaffNotInDepartmentApi
+};

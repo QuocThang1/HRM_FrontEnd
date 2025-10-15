@@ -101,9 +101,9 @@ const StaffPage = () => {
                 dataSource={dataSource}
                 columns={columns}
                 rowKey="_id"
+                locale={{ emptyText: "" }}
                 pagination={{ pageSize: 6 }}
             />
-
             <AddEmployeeModal
                 open={isModalOpen}
                 onClose={() => setIsModalOpen(false)}
@@ -121,3 +121,5 @@ const StaffPage = () => {
 };
 
 export default StaffPage;
+
+

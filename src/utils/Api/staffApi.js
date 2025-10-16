@@ -55,7 +55,13 @@ const getStaffNotInDepartmentApi = (departmentId) => {
     return axios.get(URL_API);
 };
 
+const removeStaffFromDepartmentApi = (staffId) => {
+    const URL_API = "/v1/api/staff/remove-from-department";
+    return axios.put(URL_API, { staffId });
+};
+
 export {
     getStaffApi, addNewStaffApi, deleteStaffApi, detailStaffApi, updateStaffApi, getStaffByDepartmentApi, assignStaffToDepartmentApi,
-    getStaffNotInDepartmentApi
+    getStaffNotInDepartmentApi,
+    removeStaffFromDepartmentApi
 };

@@ -71,7 +71,7 @@ const DepartmentPage = () => {
         {
             title: "Manager",
             dataIndex: "managerId",
-            render: (manager) => manager?.personalInfo?.fullName || "N/A",
+            render: (manager) => manager?.personalInfo?.fullName || "None",
         },
         {
             key: "actions",
@@ -119,7 +119,7 @@ const DepartmentPage = () => {
                 onRow={(record) => ({
                     onClick: () =>
                         navigate(`/profile/departments/${record._id}/employees`, {
-                            state: { departmentName: record.departmentName }
+                            state: { departmentName: record.departmentName, managerId: record.managerId?._id }
                         }),
                     style: { cursor: "pointer" }
                 })}

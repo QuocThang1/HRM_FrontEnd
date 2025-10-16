@@ -30,10 +30,16 @@ const deleteDepartmentApi = (departmentId) => {
     return axios.delete(URL_API);
 };
 
+const getAvailableManagersApi = () => {
+    const URL_API = "/v1/api/staff/available-managers";
+    return axios.get(URL_API);
+};
+
 export {
     getDepartmentsApi,
     getDepartmentByIdApi,
     addNewDepartmentApi,
     updateDepartmentApi,
     deleteDepartmentApi,
+    getAvailableManagersApi
 };

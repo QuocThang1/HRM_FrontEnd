@@ -1,22 +1,27 @@
 import { Modal, Form, Input, Select, notification } from "antd";
 import { useEffect, useState } from "react";
-import { addNewDepartmentApi } from "../../utils/Api/departmentApi";
-import { getStaffApi } from "../../utils/Api/staffApi";
+import { addNewDepartmentApi, getAvailableManagersApi } from "../../utils/Api/departmentApi";
 
 const AddDepartmentModal = ({ open, onClose, onSuccess }) => {
     const [form] = Form.useForm();
-    const [staffList, setStaffList] = useState([]);
+    const [managerList, setManagerList] = useState([]);
 
     useEffect(() => {
-        fetchStaffList();
-    }, []);
+        if (open) {
+            fetchManagerList();
+            form.resetFields();
+        }
+    }, [open]);
 
-    const fetchStaffList = async () => {
+    const fetchManagerList = async () => {
         try {
-            const res = await getStaffApi();
-            setStaffList(res || []);
+            const res = await getAvailableManagersApi();
+            // Nếu API trả về {EC, EM, data}, lấy res.data. Nếu trả về mảng thì lấy luôn res.
+            const managers = Array.isArray(res) ? res : res?.data || [];
+            setManagerList(managers);
         } catch (error) {
-            console.error("Error fetching staff list:", error);
+            setManagerList([]);
+            console.error("Error fetching manager list:", error);
         }
     };
 
@@ -66,9 +71,10 @@ const AddDepartmentModal = ({ open, onClose, onSuccess }) => {
                     <Select
                         allowClear
                         placeholder="Select manager"
-                        options={staffList.map((staff) => ({
-                            value: staff._id,
-                            label: staff.fullName,
+                        notFoundContent="No available manager"
+                        options={managerList.map((manager) => ({
+                            value: manager._id,
+                            label: manager.fullName || manager.personalInfo?.fullName || manager.email,
                         }))}
                     />
                 </Form.Item>

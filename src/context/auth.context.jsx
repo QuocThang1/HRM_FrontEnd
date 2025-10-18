@@ -39,15 +39,15 @@ export const AuthWrapper = (props) => {
       try {
         // Gọi API để xác thực token và lấy lại thông tin staff
         const res = await getAccountApi();
-        if (res && res.personalInfo) {
+        if (res && res.data) {
           setAuth({
             isAuthenticated: true,
             staff: {
-              email: res.personalInfo.email,
-              name: res.personalInfo.fullName,
-              address: res.personalInfo.address,
-              phone: res.personalInfo.phone,
-              role: res.role,
+              email: res.data.personalInfo.email,
+              name: res.data.personalInfo.fullName,
+              address: res.data.personalInfo.address,
+              phone: res.data.personalInfo.phone,
+              role: res.data.role,
             },
           });
         } else {

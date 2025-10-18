@@ -24,8 +24,9 @@ const DepartmentPage = () => {
     const fetchDepartments = async () => {
         try {
             const res = await getDepartmentsApi();
-            if (res && Array.isArray(res)) {
-                setDataSource(res);
+            console.log("Fetched departments:", res);
+            if (res && Array.isArray(res.data)) {
+                setDataSource(res.data);
             } else {
                 notification.error({
                     message: "Error",

@@ -15,20 +15,20 @@ const StaffProfilePage = () => {
       const res = await getAccountApi();
       if (res) {
         form.setFieldsValue({
-          name: res.personalInfo?.fullName,
-          email: res.personalInfo?.email,
-          address: res.personalInfo?.address,
-          phone: res.personalInfo?.phone,
+          name: res.data.personalInfo?.fullName,
+          email: res.data.personalInfo?.email,
+          address: res.data.personalInfo?.address,
+          phone: res.data.personalInfo?.phone,
         });
 
         setAuth({
           isAuthenticated: true,
           staff: {
-            email: res.personalInfo?.email,
-            name: res.personalInfo?.fullName,
-            address: res.personalInfo?.address,
-            phone: res.personalInfo?.phone,
-            role: res.role,
+            email: res.data.personalInfo?.email,
+            name: res.data.personalInfo?.fullName,
+            address: res.data.personalInfo?.address,
+            phone: res.data.personalInfo?.phone,
+            role: res.data.role,
           },
         });
       }

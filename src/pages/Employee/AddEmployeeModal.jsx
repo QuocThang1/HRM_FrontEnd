@@ -16,7 +16,7 @@ const AddEmployeeModal = ({ open, onClose, onSuccess }) => {
                 values.address
             );
 
-            if (res?.staff?._id) {
+            if (res?.data?._id) {
                 notification.success({
                     message: "Success",
                     description: "New employee added successfully!",

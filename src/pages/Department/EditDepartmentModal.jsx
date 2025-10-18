@@ -1,23 +1,24 @@
 import { Modal, Form, Input, Select, notification } from "antd";
 import { useEffect, useState } from "react";
 import { getDepartmentByIdApi, updateDepartmentApi } from "../../utils/Api/departmentApi";
-import { getStaffApi } from "../../utils/Api/staffApi";
+import { getAvailableManagersApi } from "../../utils/Api/departmentApi";
 
 const EditDepartmentModal = ({ open, onClose, departmentId, onSuccess }) => {
     const [form] = Form.useForm();
-    const [staffList, setStaffList] = useState([]);
+    const [managerList, setManagerList] = useState([]);
 
     useEffect(() => {
         if (open && departmentId) {
             fetchDepartmentDetails();
-            fetchStaffList();
+            fetchManagerList();
         }
     }, [open, departmentId]);
 
-    const fetchStaffList = async () => {
+    const fetchManagerList = async () => {
         try {
-            const res = await getStaffApi();
-            setStaffList(res || []);
+            const res = await getAvailableManagersApi();
+            const managers = Array.isArray(res) ? res : res?.data || [];
+            setManagerList(managers);
         } catch (error) {
             console.error("Error fetching staff list:", error);
         }
@@ -26,11 +27,11 @@ const EditDepartmentModal = ({ open, onClose, departmentId, onSuccess }) => {
     const fetchDepartmentDetails = async () => {
         try {
             const res = await getDepartmentByIdApi(departmentId);
-            if (res) {
+            if (res.data) {
                 form.setFieldsValue({
-                    departmentName: res.departmentName,
-                    description: res.description,
-                    managerId: res.managerId?._id,
+                    departmentName: res.data.departmentName,
+                    description: res.data.description,
+                    managerId: res.data.managerId?.personalInfo.fullName,
                 });
             }
         } catch (error) {
@@ -41,6 +42,7 @@ const EditDepartmentModal = ({ open, onClose, departmentId, onSuccess }) => {
     const handleSubmit = async () => {
         try {
             const values = await form.validateFields();
+            console.log("Submitting values:", values);
             await updateDepartmentApi(departmentId, values);
             notification.success({
                 message: "Success",
@@ -83,9 +85,10 @@ const EditDepartmentModal = ({ open, onClose, departmentId, onSuccess }) => {
                     <Select
                         allowClear
                         placeholder="Select manager"
-                        options={staffList.map((staff) => ({
-                            value: staff._id,
-                            label: staff.fullName,
+                        notFoundContent="No available manager"
+                        options={managerList.map((manager) => ({
+                            value: manager._id,
+                            label: manager.personalInfo.fullName,
                         }))}
                     />
                 </Form.Item>

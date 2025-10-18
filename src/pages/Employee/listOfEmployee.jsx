@@ -20,7 +20,7 @@ const StaffPage = () => {
         try {
             const res = await getStaffApi();
             if (!res?.message) {
-                setDataSource(res);
+                setDataSource(res.data);
             } else {
                 notification.error({
                     message: "Error",
@@ -56,8 +56,8 @@ const StaffPage = () => {
 
     const columns = [
         { title: "Id", dataIndex: "_id" },
-        { title: "Email", dataIndex: "email" },
-        { title: "Full Name", dataIndex: "fullName" },
+        { title: "Email", dataIndex: ["personalInfo", "email"] },
+        { title: "Full Name", dataIndex: ["personalInfo", "fullName"] },
         { title: "Role", dataIndex: "role" },
         {
             title: "",

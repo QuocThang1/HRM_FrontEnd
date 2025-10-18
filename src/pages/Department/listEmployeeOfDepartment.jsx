@@ -1,10 +1,11 @@
 import { useEffect, useState } from "react";
-import { Table, notification, Button, Popconfirm } from "antd";
+import { Table, Button, Popconfirm } from "antd";
 import { useParams, useNavigate, useLocation } from "react-router-dom";
 import { getStaffByDepartmentApi, removeStaffFromDepartmentApi } from "../../utils/Api/staffApi";
 import { DeleteOutlined } from "@ant-design/icons";
 import AddEmployeeToDepartmentModal from "./AddEmployeeToDepartmentModal";
 import "../../css/ListEmployeeOfDepartment.css"
+import { toast } from "react-toastify";
 
 const ListEmployeeOfDepartment = () => {
     const { departmentId } = useParams();
@@ -26,16 +27,10 @@ const ListEmployeeOfDepartment = () => {
             if (res && res.EC === 0 && Array.isArray(res.data)) {
                 setEmployees(res.data);
             } else {
-                notification.error({
-                    message: "Error",
-                    description: res?.EM || "Failed to fetch employees",
-                });
+                toast.error(res?.EM || "Failed to fetch employees", { autoClose: 2000 });
             }
         } catch (error) {
-            notification.error({
-                message: "Error",
-                description: "Cannot fetch employees from server",
-            });
+            toast.error("Cannot fetch employees from server", { autoClose: 2000 });
         }
     };
 
@@ -43,13 +38,13 @@ const ListEmployeeOfDepartment = () => {
         try {
             const res = await removeStaffFromDepartmentApi(staffId);
             if (res && res.EC === 0) {
-                notification.success({ message: "Success", description: res.EM });
+                toast.success(res.EM, { autoClose: 2000 });
                 fetchEmployees();
             } else {
-                notification.error({ message: "Error", description: res?.EM || "Failed to remove employee" });
+                toast.error(res?.EM || "Failed to remove employee", { autoClose: 2000 });
             }
         } catch (error) {
-            notification.error({ message: "Error", description: "Cannot remove employee" });
+            toast.error("Error removing employee from department", { autoClose: 2000 });
         }
     };
 

@@ -1,9 +1,10 @@
 import { useState, useContext } from "react";
 import { MailOutlined, SettingOutlined, UserOutlined } from "@ant-design/icons";
-import { Menu, notification } from "antd";
+import { Menu } from "antd";
 import { Link } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
 import { AuthContext } from "../context/auth.context";
+import { toast } from "react-toastify";
 
 const Header = () => {
   const navigate = useNavigate();
@@ -11,10 +12,7 @@ const Header = () => {
 
   const handleLogout = () => {
     localStorage.removeItem("access_token");
-    notification.success({
-      message: "Logout Successful",
-      description: "You have successfully logged out.",
-    });
+    toast.success("Logged out successfully", { autoClose: 2000 });
     setAuth({
       isAuthenticated: false,
       staff: {

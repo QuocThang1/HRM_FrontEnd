@@ -1,7 +1,8 @@
 import { useEffect, useContext, useState } from "react";
-import { Form, Input, Button, Card, Typography, notification } from "antd";
+import { Form, Input, Button, Card, Typography } from "antd";
 import { AuthContext } from "../context/auth.context.jsx";
 import { updateProfileApi, getAccountApi } from "../utils/Api/accountApi.js";
+import { toast } from "react-toastify";
 
 const { Title } = Typography;
 
@@ -46,22 +47,13 @@ const StaffProfilePage = () => {
         values.phone,
       );
       if (res && res.EC === 0) {
-        notification.success({
-          message: "Cập nhật thành công",
-          description: "Thông tin cá nhân đã được cập nhật.",
-        });
+        toast.success(res.EM, { autoClose: 2000 });
         setShouldReloadAccount(true);
       } else {
-        notification.error({
-          message: "Cập nhật thất bại",
-          description: res.data.EM || "Có lỗi xảy ra.",
-        });
+        toast.error(res.EM || "Cập nhật thất bại. Vui lòng thử lại.", { autoClose: 2000 });
       }
     } catch (err) {
-      notification.error({
-        message: "Cập nhật thất bại",
-        description: "Không thể kết nối máy chủ.",
-      });
+      toast.error("Cập nhật thất bại. Vui lòng thử lại.", { autoClose: 2000 });
     }
   };
 

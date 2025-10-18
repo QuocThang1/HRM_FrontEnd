@@ -10,6 +10,7 @@ import { Link, useNavigate } from "react-router-dom";
 import { useContext } from "react";
 import { AuthContext } from "../context/auth.context";
 import { useLocation } from "react-router-dom";
+import { toast } from "react-toastify";
 
 const { Sider } = Layout;
 const { Text } = Typography;
@@ -21,6 +22,7 @@ const SideBarStaff = () => {
 
   const handleLogout = () => {
     localStorage.removeItem("access_token");
+    toast.success("Logged out successfully", { autoClose: 2000 });
     setAuth({
       isAuthenticated: false,
       staff: {

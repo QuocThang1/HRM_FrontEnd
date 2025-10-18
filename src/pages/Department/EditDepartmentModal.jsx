@@ -1,7 +1,8 @@
-import { Modal, Form, Input, Select, notification } from "antd";
+import { Modal, Form, Input, Select } from "antd";
 import { useEffect, useState } from "react";
 import { getDepartmentByIdApi, updateDepartmentApi } from "../../utils/Api/departmentApi";
 import { getAvailableManagersApi } from "../../utils/Api/departmentApi";
+import { toast } from "react-toastify";
 
 const EditDepartmentModal = ({ open, onClose, departmentId, onSuccess }) => {
     const [form] = Form.useForm();
@@ -43,19 +44,13 @@ const EditDepartmentModal = ({ open, onClose, departmentId, onSuccess }) => {
         try {
             const values = await form.validateFields();
             console.log("Submitting values:", values);
-            await updateDepartmentApi(departmentId, values);
-            notification.success({
-                message: "Success",
-                description: "Department updated successfully",
-            });
+            const res = await updateDepartmentApi(departmentId, values);
+            toast.success(res.EM, { autoClose: 2000 });
             onSuccess();
             onClose();
         } catch (error) {
             console.error("Error updating department:", error);
-            notification.error({
-                message: "Error",
-                description: "Failed to update department",
-            });
+            toast.error("Failed to update department", { autoClose: 2000 });
         }
     };
 

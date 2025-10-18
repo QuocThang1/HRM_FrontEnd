@@ -1,9 +1,10 @@
-import { Button, Form, Input, notification, Card, Typography } from "antd";
+import { Button, Form, Input, Card, Typography } from "antd";
 import { loginApi } from "../utils/Api/accountApi.js";
 import { useNavigate } from "react-router-dom";
 import { useContext } from "react";
 import { AuthContext } from "../context/auth.context.jsx";
 import { Link } from "react-router-dom";
+import { toast } from "react-toastify";
 
 const { Title, Text } = Typography;
 
@@ -17,10 +18,7 @@ const LoginPage = () => {
     const res = await loginApi(email, password);
     if (res && res.EC === 0) {
       localStorage.setItem("access_token", res.access_token);
-      notification.success({
-        message: "Đăng nhập thành công",
-        description: "Chào mừng bạn quay trở lại!",
-      });
+      toast.success(res.EM, { autoClose: 2000 });
       setAuth({
         isAuthenticated: true,
         staff: {
@@ -33,10 +31,7 @@ const LoginPage = () => {
       });
       navigate("/");
     } else {
-      notification.error({
-        message: "Đăng nhập thất bại",
-        description: "Vui lòng kiểm tra lại thông tin đăng nhập.",
-      });
+      toast.error(res.EM || "Login failed. Please try again.", { autoClose: 2000 });
     }
   };
 

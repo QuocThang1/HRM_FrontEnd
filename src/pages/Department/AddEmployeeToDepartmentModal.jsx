@@ -1,7 +1,7 @@
 import { Modal, Select, Spin } from "antd";
 import { useEffect, useState } from "react";
 import { getStaffNotInDepartmentApi, assignStaffToDepartmentApi } from "../../utils/Api/staffApi";
-import { notification } from "antd";
+import { toast } from "react-toastify";
 
 const AddEmployeeToDepartmentModal = ({
     open,
@@ -37,15 +37,15 @@ const AddEmployeeToDepartmentModal = ({
         try {
             const res = await assignStaffToDepartmentApi(selectedStaffId, departmentId);
             if (res && res.EC === 0) {
-                notification.success({ message: "Success", description: "Employee assigned successfully" });
+                toast.success(res.EM, { autoClose: 2000 });
                 setSelectedStaffId(null);
                 onClose();
                 onSuccess && onSuccess();
             } else {
-                notification.error({ message: "Error", description: res?.EM || "Failed to assign employee" });
+                toast.error(res?.EM || "Failed to assign employee", { autoClose: 2000 });
             }
         } catch (error) {
-            notification.error({ message: "Error", description: "Cannot assign employee" });
+            toast.error("Error assigning employee", { autoClose: 2000 });
         }
         setLoading(false);
     };

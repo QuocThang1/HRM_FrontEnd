@@ -1,6 +1,7 @@
-import { Modal, Form, Input, Select, notification } from "antd";
+import { Modal, Form, Input, Select } from "antd";
 import { useEffect, useState } from "react";
 import { addNewDepartmentApi, getAvailableManagersApi } from "../../utils/Api/departmentApi";
+import { toast } from 'react-toastify';
 
 const AddDepartmentModal = ({ open, onClose, onSuccess }) => {
     const [form] = Form.useForm();
@@ -29,19 +30,13 @@ const AddDepartmentModal = ({ open, onClose, onSuccess }) => {
         try {
             const values = await form.validateFields();
             await addNewDepartmentApi(values.departmentName, values.description, values.managerId);
-            notification.success({
-                message: "Success",
-                description: "Department created successfully",
-            });
+            toast.success("Department created successfully", { autoClose: 2000 });
             form.resetFields();
             onSuccess();
             onClose();
         } catch (error) {
             console.error("Error creating department:", error);
-            notification.error({
-                message: "Error",
-                description: "Failed to create department",
-            });
+            toast.error("Failed to create department", { autoClose: 2000 });
         }
     };
 

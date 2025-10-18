@@ -65,6 +65,7 @@ const AddEmployeeToDepartmentModal = ({
                     style={{ width: "100%" }}
                     placeholder="Select employee"
                     optionFilterProp="children"
+                    notFoundContent="No available staff"
                     value={selectedStaffId}
                     onChange={setSelectedStaffId}
                     filterOption={(input, option) =>

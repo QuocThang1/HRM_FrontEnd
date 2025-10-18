@@ -16,13 +16,13 @@ const EditEmployeeModal = ({ open, onClose, staffId, onSuccess }) => {
                 try {
                     const res = await detailStaffApi(staffId);
                     form.setFieldsValue({
-                        username: res.staff?.username,
-                        role: res.staff?.role,
-                        fullName: res.staff?.personalInfo?.fullName,
-                        email: res.staff?.personalInfo?.email,
-                        phone: res.staff?.personalInfo?.phone,
-                        address: res.staff?.personalInfo?.address,
-                        gender: res.staff?.personalInfo?.gender,
+                        username: res.data?.username,
+                        role: res.data?.role,
+                        fullName: res.data?.personalInfo?.fullName,
+                        email: res.data?.personalInfo?.email,
+                        phone: res.data?.personalInfo?.phone,
+                        address: res.data?.personalInfo?.address,
+                        gender: res.data?.personalInfo?.gender,
                     });
                 } catch (error) {
                     notification.error({

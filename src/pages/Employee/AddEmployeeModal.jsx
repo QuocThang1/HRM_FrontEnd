@@ -1,5 +1,6 @@
-import { Modal, Form, Input, notification } from "antd";
+import { Modal, Form, Input } from "antd";
 import { addNewStaffApi } from "../../utils/Api/staffApi";
+import { toast } from "react-toastify";
 
 const AddEmployeeModal = ({ open, onClose, onSuccess }) => {
     const [form] = Form.useForm();
@@ -17,25 +18,16 @@ const AddEmployeeModal = ({ open, onClose, onSuccess }) => {
             );
 
             if (res?.data?._id) {
-                notification.success({
-                    message: "Success",
-                    description: "New employee added successfully!",
-                });
+                toast.success(res.EM, { autoClose: 2000 });
                 form.resetFields();
                 onClose(); // đóng modal
                 onSuccess(); // reload danh sách
             } else {
-                notification.error({
-                    message: "Error",
-                    description: res?.data?.message || "Failed to add employee",
-                });
+                toast.error(res?.EM || "Failed to add employee", { autoClose: 2000 });
             }
         } catch (error) {
             console.error("Error adding employee:", error);
-            notification.error({
-                message: "Error",
-                description: "Something went wrong!",
-            });
+            toast.error("Error adding employee", { autoClose: 2000 });
         }
     };
 

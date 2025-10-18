@@ -2,7 +2,6 @@ import {
   Button,
   Form,
   Input,
-  notification,
   Card,
   Typography,
   Select,
@@ -12,6 +11,7 @@ import {
 import { signUpApi } from "../utils/Api/accountApi.js";
 import { useNavigate } from "react-router-dom";
 import { Link } from "react-router-dom";
+import { toast } from "react-toastify";
 
 const { Title, Text } = Typography;
 const { Option } = Select;
@@ -33,24 +33,14 @@ const RegisterPage = () => {
 
     if (res) {
       if (res.EC === 1) {
-        notification.error({
-          message: "Registration Failed",
-          description: res.EM,
-        });
+        toast.error(res.EM || "Registration failed. Please try again.", { autoClose: 2000 });
         return;
       } else {
-        notification.success({
-          message: "Registration Successful",
-          description: "You have successfully registered.",
-        });
+        toast.success(res.EM, { autoClose: 2000 });
         navigate("/login");
       }
     } else {
-      notification.error({
-        message: "Registration Failed",
-        description:
-          "There was an error during registration. Please try again.",
-      });
+      toast.error("Registration failed. Please try again.", { autoClose: 2000 });
     }
   };
 

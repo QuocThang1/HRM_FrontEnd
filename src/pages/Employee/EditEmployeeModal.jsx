@@ -1,6 +1,7 @@
-import { Modal, Form, Input, Select, Button, notification } from "antd";
+import { Modal, Form, Input, Select, Button } from "antd";
 import { useEffect, useState } from "react";
 import { detailStaffApi, updateStaffApi } from "../../utils/Api/staffApi";
+import { toast } from "react-toastify";
 
 const { Option } = Select;
 
@@ -25,10 +26,7 @@ const EditEmployeeModal = ({ open, onClose, staffId, onSuccess }) => {
                         gender: res.data?.personalInfo?.gender,
                     });
                 } catch (error) {
-                    notification.error({
-                        message: "Error",
-                        description: "Failed to load employee details",
-                    });
+                    toast.error("Error fetching employee details", { autoClose: 2000 });
                 }
             };
             fetchStaff();
@@ -52,20 +50,14 @@ const EditEmployeeModal = ({ open, onClose, staffId, onSuccess }) => {
             };
 
             setLoading(true);
-            await updateStaffApi(staffId, updatedData);
-            notification.success({
-                message: "Updated",
-                description: "Employee updated successfully",
-            });
+            const res = await updateStaffApi(staffId, updatedData);
+            toast.success(res.EM, { autoClose: 2000 });
             setLoading(false);
             onSuccess();
             onClose();
         } catch (error) {
             setLoading(false);
-            notification.error({
-                message: "Error",
-                description: error.response?.data?.message || "Failed to update employee",
-            });
+            toast.error("Error updating employee", { autoClose: 2000 });
         }
     };
 

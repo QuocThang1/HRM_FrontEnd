@@ -1,4 +1,4 @@
-import { Table, Button, notification, Popconfirm } from "antd";
+import { Table, Button, Popconfirm } from "antd";
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import {
@@ -9,6 +9,7 @@ import { PlusOutlined, EditOutlined, DeleteOutlined } from "@ant-design/icons";
 import AddDepartmentModal from "./AddDepartmentModal";
 import EditDepartmentModal from "./EditDepartmentModal";
 import "../../styles/global.css";
+import { toast } from "react-toastify";
 
 const DepartmentPage = () => {
     const [dataSource, setDataSource] = useState([]);
@@ -24,21 +25,14 @@ const DepartmentPage = () => {
     const fetchDepartments = async () => {
         try {
             const res = await getDepartmentsApi();
-            console.log("Fetched departments:", res);
             if (res && Array.isArray(res.data)) {
                 setDataSource(res.data);
             } else {
-                notification.error({
-                    message: "Error",
-                    description: res?.EM || "Failed to fetch departments",
-                });
+                toast.error(res?.EM || "Failed to fetch departments", { autoClose: 2000 });
             }
         } catch (error) {
             console.error("Error fetching departments:", error);
-            notification.error({
-                message: "Error",
-                description: "Cannot fetch departments from server",
-            });
+            toast.error("Cannot fetch departments from server", { autoClose: 2000 });
         }
     };
 
@@ -50,18 +44,11 @@ const DepartmentPage = () => {
     const handleDelete = async (departmentId) => {
         try {
             await deleteDepartmentApi(departmentId);
-            notification.success({
-                message: "Deleted",
-                description: "Department deleted successfully",
-            });
+            toast.success("Department deleted successfully", { autoClose: 2000 });
             fetchDepartments();
         } catch (error) {
             console.error("Error deleting department:", error);
-            notification.error({
-                message: "Error",
-                description:
-                    error.response?.data?.message || "Failed to delete department",
-            });
+            toast.error("Failed to delete department", { autoClose: 2000 });
         }
     };
 

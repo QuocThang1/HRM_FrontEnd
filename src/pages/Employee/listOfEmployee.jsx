@@ -1,10 +1,11 @@
-import { Table, Button, notification, Popconfirm } from "antd";
+import { Table, Button, Popconfirm } from "antd";
 import { useEffect, useState } from "react";
 import { getStaffApi, deleteStaffApi } from "../../utils/Api/staffApi";
 import { PlusOutlined, EditOutlined, DeleteOutlined } from "@ant-design/icons";
 import AddEmployeeModal from "./AddEmployeeModal"; // import modal mới
 import EditEmployeeModal from "./EditEmployeeModal";
 import "../../styles/global.css";
+import { toast } from "react-toastify";
 
 const StaffPage = () => {
     const [dataSource, setDataSource] = useState([]);
@@ -22,10 +23,7 @@ const StaffPage = () => {
             if (!res?.message) {
                 setDataSource(res.data);
             } else {
-                notification.error({
-                    message: "Error",
-                    description: res.message,
-                });
+                toast.error(res?.EM || "Failed to fetch staffs", { autoClose: 2000 });
             }
         } catch (error) {
             console.error("Error fetching staffs:", error);
@@ -39,18 +37,12 @@ const StaffPage = () => {
 
     const handleDelete = async (staffId) => {
         try {
-            await deleteStaffApi(staffId);
-            notification.success({
-                message: "Deleted",
-                description: "Employee deleted successfully",
-            });
+            const res = await deleteStaffApi(staffId);
+            toast.success(res.EM, { autoClose: 2000 });
             fetchStaffs(); // reload danh sách
         } catch (error) {
             console.error("Error deleting employee:", error);
-            notification.error({
-                message: "Error",
-                description: error.response?.data?.message || "Failed to delete employee",
-            });
+            toast.error("Failed to delete employee", { autoClose: 2000 });
         }
     };
 

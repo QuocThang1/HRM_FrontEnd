@@ -35,11 +35,41 @@ const getAvailableManagersApi = () => {
     return axios.get(URL_API);
 };
 
+const createDepartmentReviewApi = (departmentId, reviewData) => {
+    const URL_API = `/v1/api/departments/${departmentId}/reviews`;
+    return axios.post(URL_API, reviewData);
+};
+
+const getDepartmentReviewsApi = (departmentId) => {
+    const URL_API = `/v1/api/departments/${departmentId}/reviews`;
+    return axios.get(URL_API);
+};
+
+const getDepartmentReviewsByAdminApi = (month) => {
+    const URL_API = `/v1/api/departments/reviews/admin${month ? `?month=${month}` : ""}`;
+    return axios.get(URL_API);
+};
+
+const updateDepartmentReviewApi = (reviewId, updatedData) => {
+    const URL_API = `/v1/api/departments/reviews/${reviewId}`;
+    return axios.put(URL_API, updatedData);
+};
+
+const deleteDepartmentReviewApi = (reviewId) => {
+    const URL_API = `/v1/api/departments/reviews/${reviewId}`;
+    return axios.delete(URL_API);
+};
+
 export {
     getDepartmentsApi,
     getDepartmentByIdApi,
     addNewDepartmentApi,
     updateDepartmentApi,
     deleteDepartmentApi,
-    getAvailableManagersApi
+    getAvailableManagersApi,
+    createDepartmentReviewApi,
+    getDepartmentReviewsApi,
+    getDepartmentReviewsByAdminApi,
+    updateDepartmentReviewApi,
+    deleteDepartmentReviewApi,
 };

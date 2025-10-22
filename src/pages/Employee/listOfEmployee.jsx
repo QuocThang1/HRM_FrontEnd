@@ -2,9 +2,8 @@ import { Table, Button, Popconfirm } from "antd";
 import { useEffect, useState } from "react";
 import { getStaffApi, deleteStaffApi } from "../../utils/Api/staffApi";
 import { PlusOutlined, EditOutlined, DeleteOutlined } from "@ant-design/icons";
-import AddEmployeeModal from "./AddEmployeeModal"; // import modal mới
-import EditEmployeeModal from "./EditEmployeeModal";
-import "../../styles/global.css";
+import AddEmployeeModal from "./addEmployeeModal"; // import modal mới
+import EditEmployeeModal from "./editEmployeeModal";
 import { toast } from "react-toastify";
 
 const StaffPage = () => {

@@ -11,6 +11,7 @@ import { useContext } from "react";
 import { AuthContext } from "../context/auth.context";
 import { useLocation } from "react-router-dom";
 import { toast } from "react-toastify";
+import "../styles/sideBarStaff.css";
 
 const { Sider } = Layout;
 const { Text } = Typography;
@@ -37,140 +38,43 @@ const SideBarStaff = () => {
   };
 
   return (
-    <Sider
-      width={270}
-      style={{
-        background: "linear-gradient(135deg, #667eea 0%, #764ba2 100%)",
-        boxShadow: "4px 0 20px rgba(102, 126, 234, 0.15)",
-        position: "relative",
-        overflow: "hidden",
-        height: "650px",
-      }}
-    >
-      <div
-        style={{
-          position: "absolute",
-          top: 16,
-          left: 16,
-          zIndex: 3,
-        }}
-      >
+    <Sider width={270} className="sidebar-staff">
+      <div className="sidebar-back-btn">
         <Link to="/">
           <Button
             type="text"
             icon={<ArrowLeftOutlined />}
-            style={{
-              color: "#fff",
-              fontWeight: 600,
-              background: "rgba(255,255,255,0.15)",
-              borderRadius: "8px",
-            }}
+            className="sidebar-back-btn-inner"
           >
             Back
           </Button>
         </Link>
       </div>
       {/* Background decoration */}
-      <div
-        style={{
-          position: "absolute",
-          top: -50,
-          right: -50,
-          width: 100,
-          height: 100,
-          background: "rgba(255, 255, 255, 0.1)",
-          borderRadius: "50%",
-          zIndex: 1,
-        }}
-      />
-      <div
-        style={{
-          position: "absolute",
-          bottom: -30,
-          left: -30,
-          width: 80,
-          height: 80,
-          background: "rgba(255, 255, 255, 0.08)",
-          borderRadius: "50%",
-          zIndex: 1,
-        }}
-      />
+      <div className="sidebar-bg-top" />
+      <div className="sidebar-bg-bottom" />
 
       {/* Staff profile section */}
-      <div
-        style={{
-          display: "flex",
-          flexDirection: "column",
-          alignItems: "center",
-          padding: "80px 20px 24px 20px",
-          position: "relative",
-          zIndex: 2,
-        }}
-      >
-        <div
-          style={{
-            position: "relative",
-            marginBottom: 16,
-          }}
-        >
+      <div className="sidebar-profile">
+        <div className="sidebar-avatar-wrap">
           <Avatar
             size={72}
             icon={<UserOutlined />}
-            style={{
-              background: "linear-gradient(135deg, #ffffff 0%, #f8f9ff 100%)",
-              color: "#667eea",
-              border: "3px solid rgba(255, 255, 255, 0.3)",
-              boxShadow: "0 8px 25px rgba(0, 0, 0, 0.15)",
-            }}
+            className="sidebar-avatar"
           />
-          <div
-            style={{
-              position: "absolute",
-              bottom: 2,
-              right: 2,
-              width: 18,
-              height: 18,
-              background: "#52c41a",
-              borderRadius: "50%",
-              border: "2px solid white",
-              boxShadow: "0 2px 8px rgba(0, 0, 0, 0.15)",
-            }}
-          />
+          <div className="sidebar-avatar-status" />
         </div>
-        <Text
-          strong
-          style={{
-            color: "#ffffff",
-            fontSize: "16px",
-            fontWeight: 600,
-            textShadow: "0 2px 4px rgba(0, 0, 0, 0.2)",
-            textAlign: "center",
-          }}
-        >
+        <Text strong className="sidebar-staff-name">
           {auth?.staff?.name || "Staff"}
         </Text>
-        <div
-          style={{
-            width: "60%",
-            height: "2px",
-            background:
-              "linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.5), transparent)",
-            marginTop: 16,
-            borderRadius: 1,
-          }}
-        />
+        <div className="sidebar-divider" />
       </div>
 
       {/* Menu section */}
-      <div style={{ padding: "0 16px", position: "relative", zIndex: 2 }}>
+      <div className="sidebar-menu-wrap">
         <Menu
           mode="inline"
           selectedKeys={[location.pathname]}
-          style={{
-            background: "transparent",
-            border: "none",
-            color: "#ffffff",
-          }}
           theme="dark"
           items={[
             {
@@ -188,11 +92,6 @@ const SideBarStaff = () => {
                   Profile
                 </Link>
               ),
-              style: {
-                borderRadius: "12px",
-                marginBottom: "8px",
-                transition: "all 0.3s ease",
-              },
             },
             ...(auth?.staff?.role === "admin"
               ? [
@@ -211,32 +110,29 @@ const SideBarStaff = () => {
                       Employee Management
                     </Link>
                   ),
-                  style: {
-                    borderRadius: "12px",
-                    marginBottom: "8px",
-                    transition: "all 0.3s ease",
-                  },
                 },
                 {
-                  key: "Department Management",
-                  icon: <TeamOutlined style={{ fontSize: "16px" }} />,
-                  label: (
-                    <Link
-                      to="/profile/department-management"
-                      style={{
-                        color: "inherit",
-                        textDecoration: "none",
-                        fontWeight: 500,
-                      }}
-                    >
-                      Department Management
-                    </Link>
-                  ),
-                  style: {
-                    borderRadius: "12px",
-                    marginBottom: "8px",
-                    transition: "all 0.3s ease",
-                  },
+                  key: "department",
+                  icon: <TeamOutlined />,
+                  label: "Department",
+                  children: [
+                    {
+                      key: "department-management",
+                      label: (
+                        <Link to="/profile/department-management">
+                          Department Management
+                        </Link>
+                      ),
+                    },
+                    {
+                      key: "department-review-management",
+                      label: (
+                        <Link to="/profile/department-review-management">
+                          Department Review Management
+                        </Link>
+                      ),
+                    },
+                  ],
                 },
               ]
               : []),
@@ -255,11 +151,6 @@ const SideBarStaff = () => {
                   Setting
                 </Link>
               ),
-              style: {
-                borderRadius: "12px",
-                marginBottom: "8px",
-                transition: "all 0.3s ease",
-              },
             },
             {
               key: "logout",
@@ -275,11 +166,6 @@ const SideBarStaff = () => {
                   Log Out
                 </span>
               ),
-              style: {
-                borderRadius: "12px",
-                marginBottom: "8px",
-                transition: "all 0.3s ease",
-              },
             },
           ]}
         />

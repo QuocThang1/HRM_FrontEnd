@@ -1,0 +1,150 @@
+.sidebar-staff {
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%) !important;
+  box-shadow: 4px 0 20px rgba(102, 126, 234, 0.15);
+  position: relative;
+  overflow: hidden;
+  height: 650px;
+}
+
+.sidebar-back-btn {
+  position: absolute;
+  top: 16px;
+  left: 16px;
+  z-index: 3;
+}
+
+.sidebar-back-btn-inner {
+  color: #fff !important;
+  font-weight: 600;
+  background: rgba(255,255,255,0.15) !important;
+  border-radius: 8px !important;
+}
+
+.sidebar-bg-top {
+  position: absolute;
+  top: -50px;
+  right: -50px;
+  width: 100px;
+  height: 100px;
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 50%;
+  z-index: 1;
+}
+
+.sidebar-bg-bottom {
+  position: absolute;
+  bottom: -30px;
+  left: -30px;
+  width: 80px;
+  height: 80px;
+  background: rgba(255, 255, 255, 0.08);
+  border-radius: 50%;
+  z-index: 1;
+}
+
+.sidebar-profile {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 80px 20px 24px 20px;
+  position: relative;
+  z-index: 2;
+}
+
+.sidebar-avatar-wrap {
+  position: relative;
+  margin-bottom: 16px;
+}
+
+.sidebar-avatar {
+  background: linear-gradient(135deg, #ffffff 0%, #f8f9ff 100%);
+  color: #667eea !important;
+  border: 3px solid rgba(255, 255, 255, 0.3);
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+}
+
+.sidebar-avatar-status {
+  position: absolute;
+  bottom: 2px;
+  right: 2px;
+  width: 18px;
+  height: 18px;
+  background: #52c41a;
+  border-radius: 50%;
+  border: 2px solid white;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+}
+
+.sidebar-staff-name {
+  color: #ffffff;
+  font-size: 16px;
+  font-weight: 600;
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+  text-align: center;
+}
+
+.sidebar-divider {
+  width: 60%;
+  height: 2px;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.5), transparent);
+  margin-top: 16px;
+  border-radius: 1px;
+}
+
+.sidebar-menu-wrap {
+  padding: 0 16px;
+  position: relative;
+  z-index: 2;
+}
+
+/* Style cho toàn bộ menu */
+.sidebar-menu-wrap .ant-menu-dark.ant-menu-inline {
+  background: transparent !important;
+  border: none !important;
+  color: #fff !important;
+}
+
+/* Style cho mục cha (Department) khi mở hoặc hover */
+.sidebar-menu-wrap .ant-menu-submenu-inline,
+.sidebar-menu-wrap .ant-menu-submenu-open {
+  border-radius: 12px !important;
+  margin-bottom: 8px !important;
+  transition: all 0.3s ease;
+}
+
+/* Style cho label mục cha */
+.sidebar-menu-wrap .ant-menu-submenu-title {
+  color: #fff !important;
+  font-weight: 600;
+}
+
+/* Style cho mục con (children) của Department */
+.sidebar-menu-wrap .ant-menu-submenu-inline .ant-menu-item-only-child {
+  padding-left: 36px !important;
+  background: transparent !important;
+  border-radius: 12px !important;
+  margin-bottom: 4px !important;
+  color: #fff !important;
+  height: 44px !important;
+  line-height: 44px !important;
+}
+
+/* Hover cho mục con */
+.sidebar-menu-wrap .ant-menu-submenu-inline .ant-menu-item-only-child:hover {
+  background: rgba(255, 255, 255, 0.15) !important;
+  transform: translateX(4px);
+}
+
+/* Selected cho mục con */
+.sidebar-menu-wrap .ant-menu-submenu-inline .ant-menu-item-only-child.ant-menu-item-selected {
+  background: rgba(255, 255, 255, 0.25) !important;
+  border-radius: 12px !important;
+  transform: translateX(4px);
+  font-weight: 600;
+  transition: all 0.3s ease;
+}
+
+/* Ghi đè nền submenu (children group) */
+.sidebar-menu-wrap .ant-menu-sub.ant-menu-inline {
+  background: transparent !important;
+}

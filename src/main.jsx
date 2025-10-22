@@ -1,11 +1,10 @@
 import React from "react";
 import ReactDOM from "react-dom/client";
-import "./styles/global.css";
 import { AuthWrapper } from "./context/auth.context.jsx";
 import AppRouter from "./appRouter.jsx";
 import { ToastContainer } from "react-toastify";
 import 'react-toastify/dist/ReactToastify.css';
-
+import "./styles/global.css";
 
 
 ReactDOM.createRoot(document.getElementById("root")).render(

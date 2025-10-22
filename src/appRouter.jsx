@@ -5,10 +5,11 @@ import HomePage from "./pages/home.jsx";
 import LoginPage from "./pages/login.jsx";
 import StaffLayout from "./layout/staffLayout.jsx";
 import StaffPage from "./pages/Employee/listOfEmployee.jsx";
-import DepartmentPage from "./pages/Department/listOfDeparment.jsx";
+import DepartmentPage from "./pages/Department/ManageDepartment/listOfDeparment.jsx";
 import StaffProfilePage from "./pages/staffProfile.jsx";
 import ProtectedRoute from "./route/ProtectedRoute.jsx";
-import ListEmployeeOfDepartment from "./pages/Department/listEmployeeOfDepartment.jsx";
+import ListEmployeeOfDepartment from "./pages/Department/ManageEmployee/listEmployeeOfDepartment.jsx";
+import ManageDepartmentReview from "./pages/Department/ManageDepartmentReview/departmentReview.jsx";
 const router = createBrowserRouter([
     {
         path: "/",
@@ -38,6 +39,14 @@ const router = createBrowserRouter([
                 element: (
                     <ProtectedRoute allowedRoles={["admin"]}>
                         <DepartmentPage />
+                    </ProtectedRoute>
+                ),
+            },
+            {
+                path: "department-review-management",
+                element: (
+                    <ProtectedRoute allowedRoles={["admin"]}>
+                        <ManageDepartmentReview />
                     </ProtectedRoute>
                 ),
             },

@@ -1,11 +1,14 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState, useContext } from "react";
 import { Table, Button, Popconfirm } from "antd";
 import { useParams, useNavigate, useLocation } from "react-router-dom";
-import { getStaffByDepartmentApi, removeStaffFromDepartmentApi } from "../../utils/Api/staffApi";
+import { getStaffByDepartmentApi, removeStaffFromDepartmentApi } from "../../../utils/Api/staffApi";
 import { DeleteOutlined } from "@ant-design/icons";
-import AddEmployeeToDepartmentModal from "./AddEmployeeToDepartmentModal";
-import "../../css/ListEmployeeOfDepartment.css"
+import AddEmployeeToDepartmentModal from "./addEmployeeToDepartmentModal";
+import "../../../styles/ListEmployeeOfDepartment.css"
+import CreateDepartmentReviewModal from "../ManageDepartmentReview/createDepartmentReviewModal";
+import { AuthContext } from "../../../context/auth.context";
 import { toast } from "react-toastify";
+import ViewDepartmentReviewsModal from "../ManageDepartment/viewDepartmentReviewsModal";
 
 const ListEmployeeOfDepartment = () => {
     const { departmentId } = useParams();
@@ -14,7 +17,10 @@ const ListEmployeeOfDepartment = () => {
     const departmentName = location.state?.departmentName || "Department";
     const managerId = location.state?.managerId;
     const navigate = useNavigate();
-    const [isModalOpen, setIsModalOpen] = useState(false);
+    const { auth } = useContext(AuthContext);
+    const [isAddEmployeeModalOpen, setIsAddEmployeeModalOpen] = useState(false);
+    const [isCreateReviewModalOpen, setIsCreateReviewModalOpen] = useState(false);
+    const [isViewReviewsOpen, setIsViewReviewsOpen] = useState(false);
 
     useEffect(() => {
         fetchEmployees();
@@ -79,9 +85,21 @@ const ListEmployeeOfDepartment = () => {
                 <Button onClick={() => navigate(-1)}>
                     Back
                 </Button>
-                <Button type="primary" onClick={() => setIsModalOpen(true)}>
-                    Add Employee
-                </Button>
+                <div>
+                    <Button type="primary" style={{ marginRight: 8 }} onClick={() => setIsCreateReviewModalOpen(true)}>
+                        Create Review
+                    </Button>
+                    <Button
+                        type="default"
+                        style={{ marginRight: 8 }}
+                        onClick={(e) => { e.stopPropagation(); setIsViewReviewsOpen(true); }}
+                    >
+                        View Reviews
+                    </Button>
+                    <Button type="primary" onClick={() => setIsAddEmployeeModalOpen(true)}>
+                        Add Employee
+                    </Button>
+                </div>
             </div>
             <h2>Employees of {departmentName}</h2>
             <Table
@@ -97,10 +115,22 @@ const ListEmployeeOfDepartment = () => {
             />
 
             <AddEmployeeToDepartmentModal
-                open={isModalOpen}
-                onClose={() => setIsModalOpen(false)}
+                open={isAddEmployeeModalOpen}
+                onClose={() => setIsAddEmployeeModalOpen(false)}
                 departmentId={departmentId}
                 onSuccess={fetchEmployees}
+            />
+            <CreateDepartmentReviewModal
+                open={isCreateReviewModalOpen}
+                onClose={() => setIsCreateReviewModalOpen(false)}
+                departmentId={departmentId}
+                adminId={auth.staff._id}
+                onSuccess={() => {/* Optionally reload reviews */ }}
+            />
+            <ViewDepartmentReviewsModal
+                open={isViewReviewsOpen}
+                onClose={() => setIsViewReviewsOpen(false)}
+                departmentId={departmentId}
             />
         </div>
     );

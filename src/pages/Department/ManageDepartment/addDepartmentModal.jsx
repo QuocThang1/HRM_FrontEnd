@@ -1,66 +1,52 @@
 import { Modal, Form, Input, Select } from "antd";
 import { useEffect, useState } from "react";
-import { getDepartmentByIdApi, updateDepartmentApi } from "../../utils/Api/departmentApi";
-import { getAvailableManagersApi } from "../../utils/Api/departmentApi";
-import { toast } from "react-toastify";
+import { addNewDepartmentApi, getAvailableManagersApi } from "../../../utils/Api/departmentApi";
+import { toast } from 'react-toastify';
 
-const EditDepartmentModal = ({ open, onClose, departmentId, onSuccess }) => {
+const AddDepartmentModal = ({ open, onClose, onSuccess }) => {
     const [form] = Form.useForm();
     const [managerList, setManagerList] = useState([]);
 
     useEffect(() => {
-        if (open && departmentId) {
-            fetchDepartmentDetails();
+        if (open) {
             fetchManagerList();
+            form.resetFields();
         }
-    }, [open, departmentId]);
+    }, [open]);
 
     const fetchManagerList = async () => {
         try {
             const res = await getAvailableManagersApi();
+            // Nếu API trả về {EC, EM, data}, lấy res.data. Nếu trả về mảng thì lấy luôn res.
             const managers = Array.isArray(res) ? res : res?.data || [];
             setManagerList(managers);
         } catch (error) {
-            console.error("Error fetching staff list:", error);
-        }
-    };
-
-    const fetchDepartmentDetails = async () => {
-        try {
-            const res = await getDepartmentByIdApi(departmentId);
-            if (res.data) {
-                form.setFieldsValue({
-                    departmentName: res.data.departmentName,
-                    description: res.data.description,
-                    managerId: res.data.managerId?.personalInfo.fullName,
-                });
-            }
-        } catch (error) {
-            console.error("Error fetching department details:", error);
+            setManagerList([]);
+            console.error("Error fetching manager list:", error);
         }
     };
 
     const handleSubmit = async () => {
         try {
             const values = await form.validateFields();
-            console.log("Submitting values:", values);
-            const res = await updateDepartmentApi(departmentId, values);
-            toast.success(res.EM, { autoClose: 2000 });
+            await addNewDepartmentApi(values.departmentName, values.description, values.managerId);
+            toast.success("Department created successfully", { autoClose: 2000 });
+            form.resetFields();
             onSuccess();
             onClose();
         } catch (error) {
-            console.error("Error updating department:", error);
-            toast.error("Failed to update department", { autoClose: 2000 });
+            console.error("Error creating department:", error);
+            toast.error("Failed to create department", { autoClose: 2000 });
         }
     };
 
     return (
         <Modal
-            title="Edit Department"
+            title="Add Department"
             open={open}
             onOk={handleSubmit}
             onCancel={onClose}
-            okText="Save"
+            okText="Create"
             cancelText="Cancel"
         >
             <Form form={form} layout="vertical">
@@ -83,7 +69,7 @@ const EditDepartmentModal = ({ open, onClose, departmentId, onSuccess }) => {
                         notFoundContent="No available manager"
                         options={managerList.map((manager) => ({
                             value: manager._id,
-                            label: manager.personalInfo.fullName,
+                            label: manager.fullName || manager.personalInfo?.fullName || manager.email,
                         }))}
                     />
                 </Form.Item>
@@ -92,4 +78,4 @@ const EditDepartmentModal = ({ open, onClose, departmentId, onSuccess }) => {
     );
 };
 
-export default EditDepartmentModal;
+export default AddDepartmentModal;

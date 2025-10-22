@@ -1,6 +1,6 @@
 import { Modal, Select, Spin } from "antd";
 import { useEffect, useState } from "react";
-import { getStaffNotInDepartmentApi, assignStaffToDepartmentApi } from "../../utils/Api/staffApi";
+import { getStaffNotInDepartmentApi, assignStaffToDepartmentApi } from "../../../utils/Api/staffApi";
 import { toast } from "react-toastify";
 
 const AddEmployeeToDepartmentModal = ({

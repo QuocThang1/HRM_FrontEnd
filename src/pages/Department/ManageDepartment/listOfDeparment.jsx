@@ -4,11 +4,10 @@ import { useNavigate } from "react-router-dom";
 import {
     getDepartmentsApi,
     deleteDepartmentApi,
-} from "../../utils/Api/departmentApi";
+} from "../../../utils/Api/departmentApi";
 import { PlusOutlined, EditOutlined, DeleteOutlined } from "@ant-design/icons";
-import AddDepartmentModal from "./AddDepartmentModal";
-import EditDepartmentModal from "./EditDepartmentModal";
-import "../../styles/global.css";
+import AddDepartmentModal from "./addDepartmentModal";
+import EditDepartmentModal from "./editDepartmentModal";
 import { toast } from "react-toastify";
 
 const DepartmentPage = () => {

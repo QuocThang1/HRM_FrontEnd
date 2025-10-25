@@ -1,10 +1,18 @@
-import { useState, useContext } from "react";
-import { MailOutlined, SettingOutlined, UserOutlined } from "@ant-design/icons";
-import { Menu } from "antd";
-import { Link } from "react-router-dom";
-import { useNavigate } from "react-router-dom";
+import { Layout, Menu, Button, Avatar } from "antd";
+import {
+  LogoutOutlined,
+  UserOutlined,
+  HomeOutlined,
+  RocketOutlined,
+  PhoneOutlined,
+} from "@ant-design/icons";
+import { Link, useNavigate } from "react-router-dom";
+import { useContext } from "react";
 import { AuthContext } from "../context/auth.context";
 import { toast } from "react-toastify";
+import "../styles/header.css";
+
+const { Header: AntHeader } = Layout;
 
 const Header = () => {
   const navigate = useNavigate();
@@ -16,11 +24,13 @@ const Header = () => {
     setAuth({
       isAuthenticated: false,
       staff: {
-        full_name: "",
         email: "",
+        name: "",
+        address: "",
+        phone: "",
+        role: "",
       },
     });
-    setCurrent("home");
     navigate("/login");
   };
 
@@ -28,77 +38,76 @@ const Header = () => {
     {
       label: <Link to="/">Home Page</Link>,
       key: "home",
-      icon: <MailOutlined />,
+      icon: <HomeOutlined />,
     },
-  ];
-
-  const rightItems = [
     {
-      label: `Welcome ${auth?.staff?.email}`,
-      key: "SubMenu",
-      icon: <SettingOutlined />,
-      style: { marginLeft: "auto" },
-      children: [
-        ...(auth.isAuthenticated
-          ? [
-            {
-              label: <Link to="/profile">Profile</Link>,
-              key: "profile",
-              icon: <UserOutlined />,
-            },
-            {
-              label: "Logout",
-              key: "logout",
-            },
-          ]
-          : [
-            {
-              label: <Link to="/login">Login</Link>,
-              key: "login",
-            },
-          ]),
-      ],
+      label: <Link to="/contact">Contact Us</Link>,
+      key: "/contact",
+      icon: <PhoneOutlined />,
     },
   ];
-
-  const [current, setCurrent] = useState("home");
-  const onClick = (e) => {
-    setCurrent(e.key);
-    if (e.key === "logout") {
-      handleLogout();
-    }
-  };
 
   return (
-    <div
-      style={{
-        display: "flex",
-        justifyContent: "space-between",
-        alignItems: "center",
-      }}
-    >
+    <AntHeader className="custom-header">
+      <div className="header-logo" onClick={() => navigate("/")}>
+        <RocketOutlined className="header-logo-icon" />
+        <span>HRM System</span>
+      </div>
+
       <Menu
-        onClick={onClick}
-        selectedKeys={[current]}
         mode="horizontal"
         items={leftItems}
-        style={{ flex: 1 }}
+        className="header-menu"
+        theme="dark"
       />
-      <Menu
-        onClick={onClick}
-        selectedKeys={[current]}
-        mode="horizontal"
-        items={rightItems}
-        style={{
-          minWidth: 300, // tăng minWidth
-          justifyContent: "flex-end",
-          borderBottom: "none",
-          background: "transparent",
-          overflow: "visible", // cho phép label dài hiển thị
-          flex: "none",
-        }}
-      />
-    </div>
+
+      {/* User Section */}
+      <div className="header-user-section">
+        {auth?.isAuthenticated ? (
+          <>
+            <div
+              className="header-user-info"
+              onClick={() => navigate("/profile")}
+            >
+              <Avatar
+                size={36}
+                icon={<UserOutlined />}
+                className="header-avatar"
+              />
+              <div className="header-user-details">
+                <div className="header-user-name">
+                  {auth?.staff?.name || "User"}
+                </div>
+                {auth?.staff?.role && (
+                  <span className="header-user-role">{auth.staff.role}</span>
+                )}
+              </div>
+            </div>
+
+            <Button
+              className="header-logout-btn"
+              icon={<LogoutOutlined />}
+              onClick={handleLogout}
+            >
+              Logout
+            </Button>
+          </>
+        ) : (
+          <Button
+            type="primary"
+            onClick={() => navigate("/login")}
+            style={{
+              background: "rgba(255, 255, 255, 0.2)",
+              borderColor: "rgba(255, 255, 255, 0.3)",
+              color: "#fff",
+              fontWeight: 600,
+            }}
+          >
+            Login
+          </Button>
+        )}
+      </div>
+    </AntHeader>
   );
 };
 

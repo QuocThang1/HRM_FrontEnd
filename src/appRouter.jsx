@@ -10,6 +10,8 @@ import StaffProfilePage from "./pages/staffProfile.jsx";
 import ProtectedRoute from "./route/ProtectedRoute.jsx";
 import ListEmployeeOfDepartment from "./pages/Department/ManageEmployee/listEmployeeOfDepartment.jsx";
 import ManageDepartmentReview from "./pages/Department/ManageDepartmentReview/departmentReview.jsx";
+import ContactPage from "./pages/contact.jsx";
+
 const router = createBrowserRouter([
     {
         path: "/",
@@ -17,6 +19,7 @@ const router = createBrowserRouter([
         children: [
             { index: true, element: <HomePage /> },
             { path: "/staff", element: <StaffPage /> },
+            { path: "/contact", element: <ContactPage /> },
         ],
     },
     { path: "/register", element: <RegisterPage /> },

@@ -38,7 +38,7 @@ const SideBarStaff = () => {
   };
 
   return (
-    <Sider width={270} className="sidebar-staff">
+    <Sider width={300} className="sidebar-staff">
       <div className="sidebar-back-btn">
         <Link to="/">
           <Button

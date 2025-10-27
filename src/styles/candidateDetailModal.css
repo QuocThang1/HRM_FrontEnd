@@ -1,0 +1,37 @@
+.candidate-detail-modal .candidate-details {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+}
+
+.candidate-detail-modal .detail-row {
+    display: flex;
+    padding: 12px 0;
+    border-bottom: 1px solid #f0f0f0;
+}
+
+.candidate-detail-modal .detail-row:last-child {
+    border-bottom: none;
+}
+
+.candidate-detail-modal .detail-label {
+    font-weight: 600;
+    color: #333;
+    width: 140px;
+    flex-shrink: 0;
+}
+
+.candidate-detail-modal .detail-value {
+    color: #666;
+    flex: 1;
+    word-break: break-word;
+}
+
+.candidate-detail-modal .detail-value a {
+    color: #667eea;
+    text-decoration: none;
+}
+
+.candidate-detail-modal .detail-value a:hover {
+    text-decoration: underline;
+}

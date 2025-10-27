@@ -96,6 +96,22 @@ const SideBarStaff = () => {
             ...(auth?.staff?.role === "admin"
               ? [
                 {
+                  key: "Candidate CV Management",
+                  icon: <TeamOutlined style={{ fontSize: "16px" }} />,
+                  label: (
+                    <Link
+                      to="/profile/candidate-cv-management"
+                      style={{
+                        color: "inherit",
+                        textDecoration: "none",
+                        fontWeight: 500,
+                      }}
+                    >
+                      Candidate CV Management
+                    </Link>
+                  ),
+                },
+                {
                   key: "Employee Management",
                   icon: <TeamOutlined style={{ fontSize: "16px" }} />,
                   label: (

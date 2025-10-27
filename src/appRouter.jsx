@@ -11,6 +11,8 @@ import ProtectedRoute from "./route/ProtectedRoute.jsx";
 import ListEmployeeOfDepartment from "./pages/Department/ManageEmployee/listEmployeeOfDepartment.jsx";
 import ManageDepartmentReview from "./pages/Department/ManageDepartmentReview/departmentReview.jsx";
 import ContactPage from "./pages/contact.jsx";
+import ApplyCVPage from "./pages/applyCV.jsx";
+import CandidateCVManagement from "./pages/Candidate/candidateCVManagement.jsx";
 
 const router = createBrowserRouter([
     {
@@ -20,15 +22,35 @@ const router = createBrowserRouter([
             { index: true, element: <HomePage /> },
             { path: "/staff", element: <StaffPage /> },
             { path: "/contact", element: <ContactPage /> },
+            {
+                path: "/apply-cv",
+                element: (
+                    <ProtectedRoute allowedRoles={["candidate"]}>
+                        <ApplyCVPage />
+                    </ProtectedRoute>
+                ),
+            },
         ],
     },
     { path: "/register", element: <RegisterPage /> },
     { path: "/login", element: <LoginPage /> },
     {
         path: "/profile",
-        element: <StaffLayout />,
+        element: (
+            <ProtectedRoute allowedRoles={["admin", "manager", "staff"]}>
+                <StaffLayout />
+            </ProtectedRoute>
+        ),
         children: [
             { index: true, element: <StaffProfilePage /> },
+            {
+                path: "candidate-cv-management",
+                element: (
+                    <ProtectedRoute allowedRoles={["admin"]}>
+                        <CandidateCVManagement />
+                    </ProtectedRoute>
+                ),
+            },
             {
                 path: "employee-management",
                 element: (

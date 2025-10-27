@@ -5,8 +5,9 @@ import {
   HomeOutlined,
   RocketOutlined,
   PhoneOutlined,
+  FileTextOutlined,
 } from "@ant-design/icons";
-import { Link, useNavigate } from "react-router-dom";
+import { Link, useNavigate, useLocation } from "react-router-dom";
 import { useContext } from "react";
 import { AuthContext } from "../context/auth.context";
 import { toast } from "react-toastify";
@@ -16,6 +17,7 @@ const { Header: AntHeader } = Layout;
 
 const Header = () => {
   const navigate = useNavigate();
+  const location = useLocation();
   const { auth, setAuth } = useContext(AuthContext);
 
   const handleLogout = () => {
@@ -37,7 +39,7 @@ const Header = () => {
   const leftItems = [
     {
       label: <Link to="/">Home Page</Link>,
-      key: "home",
+      key: "/",
       icon: <HomeOutlined />,
     },
     {
@@ -45,7 +47,17 @@ const Header = () => {
       key: "/contact",
       icon: <PhoneOutlined />,
     },
-  ];
+    ...(auth?.staff?.role === "candidate"
+      ? [
+        {
+          label: <Link to="/apply-cv">Apply CV</Link>,
+          key: "/apply-cv",
+          icon: <FileTextOutlined />,
+        },
+      ]
+      : []
+    )
+  ]
 
   return (
     <AntHeader className="custom-header">
@@ -59,6 +71,7 @@ const Header = () => {
         items={leftItems}
         className="header-menu"
         theme="dark"
+        selectedKeys={[location.pathname]}
       />
 
       {/* User Section */}

@@ -1,0 +1,283 @@
+.register-page {
+  display: flex;
+  min-height: 100vh;
+  background: #f6f9fb;
+}
+
+/* ========== Left Side - Branding ========== */
+.register-branding {
+  flex: 1;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 60px;
+  position: relative;
+  overflow: hidden;
+}
+
+.register-branding::before {
+  content: "";
+  position: absolute;
+  width: 500px;
+  height: 500px;
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 50%;
+  top: -200px;
+  right: -200px;
+}
+
+.register-branding::after {
+  content: "";
+  position: absolute;
+  width: 400px;
+  height: 400px;
+  background: rgba(255, 255, 255, 0.08);
+  border-radius: 50%;
+  bottom: -150px;
+  left: -150px;
+}
+
+.branding-content {
+  position: relative;
+  z-index: 1;
+  max-width: 500px;
+}
+
+.brand-logo {
+  width: 80px;
+  height: 80px;
+  background: rgba(255, 255, 255, 0.2);
+  border-radius: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 40px;
+  color: #ffffff;
+  margin-bottom: 32px;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15);
+}
+
+.brand-title {
+  color: #ffffff !important;
+  font-size: 48px !important;
+  font-weight: 700 !important;
+  margin-bottom: 16px !important;
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.brand-subtitle {
+  color: rgba(255, 255, 255, 0.9);
+  font-size: 18px;
+  display: block;
+  margin-bottom: 48px;
+}
+
+.brand-features {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.feature-item {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  color: #ffffff;
+  font-size: 16px;
+  font-weight: 500;
+}
+
+.feature-icon {
+  width: 32px;
+  height: 32px;
+  background: rgba(255, 255, 255, 0.2);
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 700;
+}
+
+/* ========== Right Side - Form ========== */
+.register-form-section {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 40px 20px;
+  overflow-y: auto;
+}
+
+.register-card {
+  width: 100%;
+  max-width: 800px;
+  border-radius: 16px;
+  box-shadow: 0 4px 24px rgba(0, 0, 0, 0.08);
+  padding: 40px;
+}
+
+.form-header {
+  text-align: center;
+  margin-bottom: 32px;
+}
+
+.form-title {
+  color: #333 !important;
+  font-size: 32px !important;
+  font-weight: 700 !important;
+  margin-bottom: 8px !important;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.form-subtitle {
+  color: #666;
+  font-size: 15px;
+}
+
+/* ========== Form Styles ========== */
+.register-form .ant-form-item-label > label {
+  font-weight: 600;
+  color: #333;
+  font-size: 14px;
+}
+
+.register-form .ant-input,
+.register-form .ant-input-affix-wrapper,
+.register-form .ant-picker,
+.register-form .ant-select-selector {
+  border-radius: 8px;
+  border: 1.5px solid #d9d9d9;
+  transition: all 0.3s ease;
+}
+
+.register-form .ant-input:hover,
+.register-form .ant-input-affix-wrapper:hover,
+.register-form .ant-picker:hover,
+.register-form .ant-select-selector:hover {
+  border-color: #667eea;
+}
+
+.register-form .ant-input:focus,
+.register-form .ant-input-affix-wrapper:focus,
+.register-form .ant-input-focused,
+.register-form .ant-picker-focused,
+.register-form .ant-select-focused .ant-select-selector {
+  border-color: #667eea;
+  box-shadow: 0 0 0 2px rgba(102, 126, 234, 0.1);
+}
+
+.register-form .ant-input-prefix,
+.register-form .ant-picker-suffix {
+  color: #667eea;
+  font-size: 16px;
+}
+
+/* Validation */
+.register-form .ant-form-item-explain-error {
+  font-size: 12px;
+  color: #ff4d4f;
+  margin-top: 4px;
+}
+
+.register-form .ant-form-item-has-error .ant-input,
+.register-form .ant-form-item-has-error .ant-input-affix-wrapper,
+.register-form .ant-form-item-has-error .ant-picker,
+.register-form .ant-form-item-has-error .ant-select-selector {
+  border-color: #ff4d4f !important;
+}
+
+/* TextArea */
+.register-form .ant-input-textarea-show-count::after {
+  color: #8c8c8c;
+  font-size: 12px;
+}
+
+/* Register Button */
+.register-button {
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%) !important;
+  border: none !important;
+  height: 48px !important;
+  font-size: 16px !important;
+  font-weight: 600 !important;
+  border-radius: 8px !important;
+  box-shadow: 0 4px 12px rgba(102, 126, 234, 0.3);
+  transition: all 0.3s ease;
+}
+
+.register-button:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(102, 126, 234, 0.4) !important;
+}
+
+.register-button:active {
+  transform: translateY(0);
+}
+
+/* Login Link */
+.login-link {
+  text-align: center;
+  margin-top: 24px;
+}
+
+.link-text {
+  color: #667eea;
+  font-weight: 600;
+  transition: all 0.3s ease;
+}
+
+.link-text:hover {
+  color: #764ba2;
+  text-decoration: underline;
+}
+
+/* Gender Select */
+.register-form .ant-select-item-option-content .ant-space {
+  font-weight: 500;
+}
+
+/* ========== Responsive ========== */
+@media (max-width: 992px) {
+  .register-branding {
+    display: none;
+  }
+
+  .register-form-section {
+    flex: 1;
+  }
+}
+
+@media (max-width: 768px) {
+  .register-card {
+    padding: 24px;
+  }
+
+  .form-title {
+    font-size: 24px !important;
+  }
+
+  .form-subtitle {
+    font-size: 14px;
+  }
+}
+
+/* ========== Scrollbar ========== */
+.register-form-section::-webkit-scrollbar {
+  width: 6px;
+}
+
+.register-form-section::-webkit-scrollbar-track {
+  background: #f0f0f0;
+}
+
+.register-form-section::-webkit-scrollbar-thumb {
+  background: #d9d9d9;
+  border-radius: 3px;
+}
+
+.register-form-section::-webkit-scrollbar-thumb:hover {
+  background: #bfbfbf;
+}

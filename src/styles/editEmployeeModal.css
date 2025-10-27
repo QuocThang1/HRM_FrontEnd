@@ -1,0 +1,202 @@
+.edit-employee-modal .ant-modal-header {
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  border-bottom: none;
+  padding: 20px 24px;
+}
+
+.edit-employee-modal .ant-modal-title {
+  color: #ffffff;
+}
+
+.modal-header {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  font-size: 18px;
+  font-weight: 600;
+  color: #ffffff;
+}
+
+.modal-header-icon {
+  font-size: 24px;
+}
+
+.edit-employee-modal .ant-modal-body {
+  padding: 24px;
+  max-height: 70vh;
+  overflow-y: auto;
+}
+
+/* Custom scrollbar */
+.edit-employee-modal .ant-modal-body::-webkit-scrollbar {
+  width: 6px;
+}
+
+.edit-employee-modal .ant-modal-body::-webkit-scrollbar-track {
+  background: #f0f0f0;
+  border-radius: 3px;
+}
+
+.edit-employee-modal .ant-modal-body::-webkit-scrollbar-thumb {
+  background: #d9d9d9;
+  border-radius: 3px;
+}
+
+.edit-employee-modal .ant-modal-body::-webkit-scrollbar-thumb:hover {
+  background: #bfbfbf;
+}
+
+.edit-employee-modal .ant-modal-footer {
+  border-top: 1px solid #f0f0f0;
+  padding: 16px 24px;
+}
+
+/* Form Styles */
+.employee-edit-form .ant-form-item-label > label {
+  font-weight: 600;
+  color: #333;
+  font-size: 14px;
+}
+
+.employee-edit-form .ant-input,
+.employee-edit-form .ant-input-affix-wrapper,
+.employee-edit-form .ant-picker,
+.employee-edit-form .ant-select-selector {
+  border-radius: 8px;
+  border: 1.5px solid #d9d9d9;
+  transition: all 0.3s ease;
+}
+
+/* Disabled state */
+.employee-edit-form .ant-input[disabled],
+.employee-edit-form .ant-input-affix-wrapper-disabled,
+.employee-edit-form .ant-picker-disabled,
+.employee-edit-form .ant-select-disabled .ant-select-selector {
+  background: #f5f5f5;
+  border-color: #d9d9d9;
+  color: #595959;
+  cursor: not-allowed;
+}
+
+.employee-edit-form .ant-input:not([disabled]):hover,
+.employee-edit-form .ant-input-affix-wrapper:not(.ant-input-affix-wrapper-disabled):hover,
+.employee-edit-form .ant-picker:not(.ant-picker-disabled):hover,
+.employee-edit-form .ant-select:not(.ant-select-disabled):hover .ant-select-selector {
+  border-color: #667eea;
+}
+
+.employee-edit-form .ant-input:focus,
+.employee-edit-form .ant-input-affix-wrapper:focus,
+.employee-edit-form .ant-input-focused,
+.employee-edit-form .ant-picker-focused,
+.employee-edit-form .ant-select-focused .ant-select-selector {
+  border-color: #667eea;
+  box-shadow: 0 0 0 2px rgba(102, 126, 234, 0.1);
+}
+
+.employee-edit-form .ant-input-prefix,
+.employee-edit-form .ant-picker-suffix {
+  color: #667eea;
+  font-size: 16px;
+}
+
+/* Validation */
+.employee-edit-form .ant-form-item-explain-error {
+  font-size: 12px;
+  color: #ff4d4f;
+  margin-top: 4px;
+}
+
+.employee-edit-form .ant-form-item-has-error .ant-input,
+.employee-edit-form .ant-form-item-has-error .ant-input-affix-wrapper,
+.employee-edit-form .ant-form-item-has-error .ant-picker,
+.employee-edit-form .ant-form-item-has-error .ant-select-selector {
+  border-color: #ff4d4f !important;
+}
+
+/* TextArea */
+.employee-edit-form .ant-input-textarea-show-count::after {
+  color: #8c8c8c;
+  font-size: 12px;
+}
+
+/* Action Button (Edit/Confirm) */
+.modal-action-button {
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%) !important;
+  border: none !important;
+  height: 40px !important;
+  font-weight: 600 !important;
+  border-radius: 8px !important;
+  box-shadow: 0 2px 8px rgba(102, 126, 234, 0.3);
+  transition: all 0.3s ease;
+}
+
+.modal-action-button:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(102, 126, 234, 0.4) !important;
+}
+
+/* Cancel Button */
+.modal-cancel-button {
+  height: 40px;
+  border-radius: 8px;
+  font-weight: 500;
+  border: 1.5px solid #d9d9d9;
+  transition: all 0.3s ease;
+}
+
+.modal-cancel-button:hover {
+  border-color: #667eea;
+  color: #667eea;
+}
+
+/* Gender Select */
+.employee-edit-form .ant-select-item-option-content .ant-space {
+  font-weight: 500;
+}
+
+/* Edit mode highlight */
+.employee-edit-form .ant-form-item:has(.ant-input:not([disabled])),
+.employee-edit-form .ant-form-item:has(.ant-select:not(.ant-select-disabled)),
+.employee-edit-form .ant-form-item:has(.ant-picker:not(.ant-picker-disabled)) {
+  position: relative;
+}
+
+.employee-edit-form .ant-form-item:has(.ant-input:not([disabled]))::before,
+.employee-edit-form .ant-form-item:has(.ant-select:not(.ant-select-disabled))::before,
+.employee-edit-form .ant-form-item:has(.ant-picker:not(.ant-picker-disabled))::before {
+  content: "";
+  position: absolute;
+  left: -8px;
+  top: 28px;
+  bottom: 8px;
+  width: 3px;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  border-radius: 2px;
+  opacity: 0.6;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .edit-employee-modal .ant-modal {
+    max-width: calc(100vw - 32px);
+    margin: 16px auto;
+  }
+
+  .edit-employee-modal .ant-modal-body {
+    padding: 16px;
+  }
+
+  .modal-header {
+    font-size: 16px;
+  }
+
+  .modal-header-icon {
+    font-size: 20px;
+  }
+}
+
+/* Loading State */
+.modal-action-button.ant-btn-loading {
+  opacity: 0.8;
+}

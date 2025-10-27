@@ -5,27 +5,21 @@ const getAccountApi = () => {
     return axios.get(URL_API);
 };
 
-const signUpApi = (name, email, password, address, phone, gender) => {
+const signUpApi = (userData) => {
     const URL_API = "/v1/api/register";
-    const data = {
-        name: name,
-        email: email,
-        password: password,
-        address: address,
-        phone: phone,
-        gender: gender,
-    };
-
-    return axios.post(URL_API, data);
+    return axios.post(URL_API, userData);
 };
 
-const updateProfileApi = (name, email, address, phone) => {
+const updateProfileApi = (name, email, address, phone, citizenId, gender, dob) => {
     const URL_API = "/v1/api/profile";
     const data = {
         name: name,
         email: email,
         address: address,
         phone: phone,
+        citizenId: citizenId,
+        gender: gender,
+        dob: dob,
     };
     return axios.put(URL_API, data);
 };

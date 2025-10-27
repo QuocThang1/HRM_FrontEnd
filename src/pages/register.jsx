@@ -7,159 +7,373 @@ import {
   Select,
   Row,
   Col,
+  Space,
+  DatePicker,
 } from "antd";
+import {
+  UserOutlined,
+  MailOutlined,
+  LockOutlined,
+  PhoneOutlined,
+  IdcardOutlined,
+  CalendarOutlined,
+  ManOutlined,
+  WomanOutlined,
+  SafetyOutlined,
+} from "@ant-design/icons";
 import { signUpApi } from "../utils/Api/accountApi.js";
-import { useNavigate } from "react-router-dom";
-import { Link } from "react-router-dom";
+import { useNavigate, Link } from "react-router-dom";
 import { toast } from "react-toastify";
+import dayjs from "dayjs";
+import "../styles/register.css";
 
 const { Title, Text } = Typography;
 const { Option } = Select;
 
 const RegisterPage = () => {
   const navigate = useNavigate();
+  const [form] = Form.useForm();
 
   const onFinish = async (values) => {
-    const { name, email, password, address, phone, gender } = values;
+    try {
+      const registerData = {
+        name: values.fullName,
+        email: values.email,
+        password: values.password,
+        address: values.address,
+        phone: values.phone,
+        citizenId: values.citizenId,
+        gender: values.gender,
+        dob: values.dob ? values.dob.format("YYYY-MM-DD") : null,
+      };
 
-    const res = await signUpApi(
-      name,
-      email,
-      password,
-      address,
-      phone,
-      gender,
-    );
+      const res = await signUpApi(registerData);
 
-    if (res) {
-      if (res.EC === 1) {
-        toast.error(res.EM || "Registration failed. Please try again.", { autoClose: 2000 });
-        return;
-      } else {
-        toast.success(res.EM, { autoClose: 2000 });
+      if (res && res.EC === 0) {
+        toast.success(res.EM || "Registration successful!", { autoClose: 2000 });
+        form.resetFields();
         navigate("/login");
+      } else {
+        toast.error(res?.EM || "Registration failed. Please try again.", {
+          autoClose: 2000,
+        });
       }
-    } else {
+    } catch (error) {
       toast.error("Registration failed. Please try again.", { autoClose: 2000 });
     }
   };
 
+  const validatePhone = (_, value) => {
+    if (!value) {
+      return Promise.reject(new Error("Please enter phone number!"));
+    }
+    const phoneRegex = /^[0-9]{10,11}$/;
+    if (!phoneRegex.test(value)) {
+      return Promise.reject(new Error("Phone number must be 10-11 digits!"));
+    }
+    return Promise.resolve();
+  };
+
+  const validateCitizenId = (_, value) => {
+    if (!value) {
+      return Promise.reject(new Error("Please enter Citizen ID!"));
+    }
+    const citizenIdRegex = /^[0-9]{9,12}$/;
+    if (!citizenIdRegex.test(value)) {
+      return Promise.reject(new Error("Citizen ID must be 9-12 digits!"));
+    }
+    return Promise.resolve();
+  };
+
+  const validateDOB = (_, value) => {
+    if (!value) {
+      return Promise.reject(new Error("Please select date of birth!"));
+    }
+    const age = dayjs().diff(value, "year");
+    if (age < 18) {
+      return Promise.reject(new Error("You must be at least 18 years old!"));
+    }
+    if (age > 100) {
+      return Promise.reject(new Error("Please enter a valid date of birth!"));
+    }
+    return Promise.resolve();
+  };
+
+  const validatePassword = (_, value) => {
+    if (!value) {
+      return Promise.reject(new Error("Please enter password!"));
+    }
+    if (value.length < 6) {
+      return Promise.reject(new Error("Password must be at least 6 characters!"));
+    }
+    if (!/(?=.*[a-z])(?=.*[A-Z])(?=.*\d)/.test(value)) {
+      return Promise.reject(
+        new Error("Password must contain uppercase, lowercase and number!")
+      );
+    }
+    return Promise.resolve();
+  };
+
+  const validateConfirmPassword = ({ getFieldValue }) => ({
+    validator(_, value) {
+      if (!value || getFieldValue("password") === value) {
+        return Promise.resolve();
+      }
+      return Promise.reject(new Error("Passwords do not match!"));
+    },
+  });
+
   return (
-    <div
-      style={{
-        minHeight: "100vh",
-        display: "flex",
-        alignItems: "center",
-        justifyContent: "center",
-        background: "linear-gradient(135deg, #e0eafc 0%, #cfdef3 100%)",
-      }}
-    >
-      <Card
-        style={{
-          width: 600,
-          boxShadow: "0 4px 24px rgba(0,0,0,0.10)",
-          borderRadius: 16,
-          padding: 24,
-        }}
-        bordered={false}
-      >
-        <div style={{ textAlign: "center", marginBottom: 24 }}>
-          <Title level={2} style={{ marginBottom: 0 }}>
-            Đăng ký tài khoản
+    <div className="register-page">
+      {/* Left Side - Branding */}
+      <div className="register-branding">
+        <div className="branding-content">
+          <div className="brand-logo">
+            <SafetyOutlined />
+          </div>
+          <Title level={1} className="brand-title">
+            HRM System
           </Title>
-          <Text type="secondary">Tạo tài khoản mới để sử dụng dịch vụ</Text>
-        </div>
-        <Form
-          name="register"
-          layout="vertical"
-          onFinish={onFinish}
-          autoComplete="off"
-        >
-          <Row gutter={16}>
-            <Col xs={24} sm={12}>
-              <Form.Item
-                label="Email"
-                name="email"
-                rules={[
-                  { required: true, message: "Vui lòng nhập email!" },
-                  { type: "email", message: "Email không hợp lệ!" },
-                ]}
-              >
-                <Input size="large" placeholder="Nhập email" />
-              </Form.Item>
-            </Col>
-            <Col xs={24} sm={12}>
-              <Form.Item
-                label="Mật khẩu"
-                name="password"
-                rules={[
-                  { required: true, message: "Vui lòng nhập mật khẩu!" },
-                  { min: 6, message: "Mật khẩu tối thiểu 6 ký tự!" },
-                ]}
-              >
-                <Input.Password size="large" placeholder="Nhập mật khẩu" />
-              </Form.Item>
-            </Col>
-            <Col xs={24} sm={12}>
-              <Form.Item
-                label="Họ và tên"
-                name="name"
-                rules={[{ required: true, message: "Vui lòng nhập họ tên!" }]}
-              >
-                <Input size="large" placeholder="Nhập họ và tên" />
-              </Form.Item>
-            </Col>
-            <Col xs={24} sm={12}>
-              <Form.Item
-                label="Địa chỉ"
-                name="address"
-                rules={[{ required: true, message: "Vui lòng nhập địa chỉ!" }]}
-              >
-                <Input size="large" placeholder="Nhập địa chỉ" />
-              </Form.Item>
-            </Col>
-            <Col xs={24} sm={12}>
-              <Form.Item
-                label="Số điện thoại"
-                name="phone"
-                rules={[
-                  { required: true, message: "Vui lòng nhập số điện thoại!" },
-                  {
-                    pattern: /^[0-9]{9,12}$/,
-                    message: "Số điện thoại không hợp lệ!",
-                  },
-                ]}
-              >
-                <Input size="large" placeholder="Nhập số điện thoại" />
-              </Form.Item>
-            </Col>
-            <Col xs={24} sm={12}>
-              <Form.Item
-                label="Giới tính"
-                name="gender"
-                rules={[
-                  { required: true, message: "Vui lòng chọn giới tính!" },
-                ]}
-              >
-                <Select size="large" placeholder="Chọn giới tính">
-                  <Option value="male">Nam</Option>
-                  <Option value="female">Nữ</Option>
-                </Select>
-              </Form.Item>
-            </Col>
-          </Row>
-          <Form.Item>
-            <Button type="primary" htmlType="submit" block size="large">
-              Đăng ký
-            </Button>
-          </Form.Item>
-        </Form>
-        <div style={{ textAlign: "center", marginTop: 8 }}>
-          <Text>
-            Bạn đã có tài khoản? <Link to="/login">Đăng nhập</Link>
+          <Text className="brand-subtitle">
+            Human Resource Management Platform
           </Text>
+          <div className="brand-features">
+            <div className="feature-item">
+              <span className="feature-icon">✓</span>
+              <span>Employee Management</span>
+            </div>
+            <div className="feature-item">
+              <span className="feature-icon">✓</span>
+              <span>Department Organization</span>
+            </div>
+            <div className="feature-item">
+              <span className="feature-icon">✓</span>
+              <span>Performance Tracking</span>
+            </div>
+            <div className="feature-item">
+              <span className="feature-icon">✓</span>
+              <span>Candidate Management</span>
+            </div>
+          </div>
         </div>
-      </Card>
+      </div>
+
+      {/* Right Side - Registration Form */}
+      <div className="register-form-section">
+        <Card className="register-card" bordered={false}>
+          <div className="form-header">
+            <Title level={2} className="form-title">
+              Create Account
+            </Title>
+            <Text className="form-subtitle">
+              Join our platform and start managing your workforce
+            </Text>
+          </div>
+
+          <Form
+            form={form}
+            name="register"
+            layout="vertical"
+            onFinish={onFinish}
+            autoComplete="off"
+            className="register-form"
+          >
+            <Row gutter={16}>
+              {/* Full Name */}
+              <Col xs={24} md={12}>
+                <Form.Item
+                  label="Full Name"
+                  name="fullName"
+                  rules={[
+                    { required: true, message: "Please enter your full name!" },
+                    { min: 2, message: "Name must be at least 2 characters!" },
+                    { max: 100, message: "Name must not exceed 100 characters!" },
+                  ]}
+                >
+                  <Input
+                    size="large"
+                    prefix={<UserOutlined />}
+                    placeholder="Enter your full name"
+                  />
+                </Form.Item>
+              </Col>
+
+              {/* Email */}
+              <Col xs={24} md={12}>
+                <Form.Item
+                  label="Email Address"
+                  name="email"
+                  rules={[
+                    { required: true, message: "Please enter your email!" },
+                    { type: "email", message: "Invalid email format!" },
+                  ]}
+                >
+                  <Input
+                    size="large"
+                    prefix={<MailOutlined />}
+                    placeholder="Enter your email"
+                  />
+                </Form.Item>
+              </Col>
+
+              {/* Password */}
+              <Col xs={24} md={12}>
+                <Form.Item
+                  label="Password"
+                  name="password"
+                  rules={[{ validator: validatePassword }]}
+                >
+                  <Input.Password
+                    size="large"
+                    prefix={<LockOutlined />}
+                    placeholder="Create a strong password"
+                  />
+                </Form.Item>
+              </Col>
+
+              {/* Confirm Password */}
+              <Col xs={24} md={12}>
+                <Form.Item
+                  label="Confirm Password"
+                  name="confirmPassword"
+                  dependencies={["password"]}
+                  rules={[
+                    { required: true, message: "Please confirm your password!" },
+                    validateConfirmPassword,
+                  ]}
+                >
+                  <Input.Password
+                    size="large"
+                    prefix={<LockOutlined />}
+                    placeholder="Confirm your password"
+                  />
+                </Form.Item>
+              </Col>
+
+              {/* Phone */}
+              <Col xs={24} md={12}>
+                <Form.Item
+                  label="Phone Number"
+                  name="phone"
+                  rules={[{ validator: validatePhone }]}
+                >
+                  <Input
+                    size="large"
+                    prefix={<PhoneOutlined />}
+                    placeholder="Enter phone (10-11 digits)"
+                    maxLength={11}
+                  />
+                </Form.Item>
+              </Col>
+
+              {/* Citizen ID */}
+              <Col xs={24} md={12}>
+                <Form.Item
+                  label="Citizen ID"
+                  name="citizenId"
+                  rules={[{ validator: validateCitizenId }]}
+                >
+                  <Input
+                    size="large"
+                    prefix={<IdcardOutlined />}
+                    placeholder="Enter Citizen ID (9-12 digits)"
+                    maxLength={12}
+                  />
+                </Form.Item>
+              </Col>
+
+              {/* Date of Birth */}
+              <Col xs={24} md={12}>
+                <Form.Item
+                  label="Date of Birth"
+                  name="dob"
+                  rules={[{ validator: validateDOB }]}
+                >
+                  <DatePicker
+                    size="large"
+                    style={{ width: "100%" }}
+                    format="DD/MM/YYYY"
+                    placeholder="Select your date of birth"
+                    suffixIcon={<CalendarOutlined />}
+                    disabledDate={(current) =>
+                      current && current > dayjs().subtract(18, "year")
+                    }
+                  />
+                </Form.Item>
+              </Col>
+
+              {/* Gender */}
+              <Col xs={24} md={12}>
+                <Form.Item
+                  label="Gender"
+                  name="gender"
+                  rules={[{ required: true, message: "Please select your gender!" }]}
+                >
+                  <Select size="large" placeholder="Select gender">
+                    <Option value="male">
+                      <Space>
+                        <ManOutlined style={{ color: "#1890ff" }} />
+                        Male
+                      </Space>
+                    </Option>
+                    <Option value="female">
+                      <Space>
+                        <WomanOutlined style={{ color: "#eb2f96" }} />
+                        Female
+                      </Space>
+                    </Option>
+                    <Option value="other">Other</Option>
+                  </Select>
+                </Form.Item>
+              </Col>
+
+              {/* Address */}
+              <Col xs={24}>
+                <Form.Item
+                  label="Address"
+                  name="address"
+                  rules={[
+                    { required: true, message: "Please enter your address!" },
+                    { min: 5, message: "Address must be at least 5 characters!" },
+                    { max: 200, message: "Address must not exceed 200 characters!" },
+                  ]}
+                >
+                  <Input.TextArea
+                    size="large"
+                    rows={3}
+                    placeholder="Enter your full address"
+                    maxLength={200}
+                    showCount
+                  />
+                </Form.Item>
+              </Col>
+            </Row>
+
+            {/* Submit Button */}
+            <Form.Item style={{ marginTop: 8 }}>
+              <Button
+                type="primary"
+                htmlType="submit"
+                size="large"
+                block
+                className="register-button"
+              >
+                Create Account
+              </Button>
+            </Form.Item>
+          </Form>
+
+          {/* Login Link */}
+          <div className="login-link">
+            <Text>
+              Already have an account?{" "}
+              <Link to="/login" className="link-text">
+                Sign In
+              </Link>
+            </Text>
+          </div>
+        </Card>
+      </div>
     </div>
   );
 };

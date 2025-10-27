@@ -1,15 +1,18 @@
-import { Layout, Menu, Avatar, Typography, Button } from "antd";
+import { Layout, Menu, Avatar, Typography, Badge } from "antd";
 import {
   UserOutlined,
   SettingOutlined,
   LogoutOutlined,
   TeamOutlined,
   ArrowLeftOutlined,
+  HomeOutlined,
+  FolderOutlined,
+  StarOutlined,
+  SafetyOutlined,
 } from "@ant-design/icons";
-import { Link, useNavigate } from "react-router-dom";
+import { Link, useNavigate, useLocation } from "react-router-dom";
 import { useContext } from "react";
 import { AuthContext } from "../context/auth.context";
-import { useLocation } from "react-router-dom";
 import { toast } from "react-toastify";
 import "../styles/sideBarStaff.css";
 
@@ -37,114 +40,108 @@ const SideBarStaff = () => {
     navigate("/login");
   };
 
+  const getRoleBadge = (role) => {
+    const badges = {
+      admin: { color: "#ff4d4f", text: "Admin" },
+      manager: { color: "#1890ff", text: "Manager" },
+      staff: { color: "#52c41a", text: "Staff" },
+    };
+    return badges[role] || badges.staff;
+  };
+
+  const roleBadge = getRoleBadge(auth?.staff?.role);
+
   return (
-    <Sider width={300} className="sidebar-staff">
-      <div className="sidebar-back-btn">
-        <Link to="/">
-          <Button
-            type="text"
-            icon={<ArrowLeftOutlined />}
-            className="sidebar-back-btn-inner"
-          >
-            Back
-          </Button>
+    <Sider width={280} className="sidebar-staff">
+      {/* Header */}
+      <div className="sidebar-header">
+        <div className="sidebar-logo">
+          <div className="logo-icon">
+            <SafetyOutlined />
+          </div>
+          <div className="logo-text">
+            <div className="logo-title">HRM System</div>
+            <div className="logo-subtitle">Management Portal</div>
+          </div>
+        </div>
+      </div>
+
+      {/* Profile Card */}
+      <div className="sidebar-profile-card">
+        <div className="profile-avatar-wrapper">
+          <Avatar size={64} icon={<UserOutlined />} className="profile-avatar" />
+          <div className="profile-status-dot" />
+        </div>
+        <div className="profile-info">
+          <Text className="profile-name">{auth?.staff?.name || "Staff"}</Text>
+          <Badge
+            count={roleBadge.text}
+            style={{
+              backgroundColor: roleBadge.color,
+              fontSize: "11px",
+              height: "20px",
+              lineHeight: "20px",
+              borderRadius: "10px",
+            }}
+          />
+        </div>
+        <Link to="/" className="back-home-btn">
+          <ArrowLeftOutlined /> Back to Home
         </Link>
       </div>
-      {/* Background decoration */}
-      <div className="sidebar-bg-top" />
-      <div className="sidebar-bg-bottom" />
 
-      {/* Staff profile section */}
-      <div className="sidebar-profile">
-        <div className="sidebar-avatar-wrap">
-          <Avatar
-            size={72}
-            icon={<UserOutlined />}
-            className="sidebar-avatar"
-          />
-          <div className="sidebar-avatar-status" />
-        </div>
-        <Text strong className="sidebar-staff-name">
-          {auth?.staff?.name || "Staff"}
-        </Text>
-        <div className="sidebar-divider" />
-      </div>
-
-      {/* Menu section */}
-      <div className="sidebar-menu-wrap">
+      {/* Navigation Menu */}
+      <div className="sidebar-menu-container">
+        <div className="menu-section-title">NAVIGATION</div>
         <Menu
           mode="inline"
           selectedKeys={[location.pathname]}
-          theme="dark"
+          className="sidebar-menu"
           items={[
             {
-              key: "profile",
-              icon: <UserOutlined style={{ fontSize: "16px" }} />,
-              label: (
-                <Link
-                  to="/profile"
-                  style={{
-                    color: "inherit",
-                    textDecoration: "none",
-                    fontWeight: 500,
-                  }}
-                >
-                  Profile
-                </Link>
-              ),
+              key: "/profile",
+              icon: <HomeOutlined />,
+              label: <Link to="/profile">Profile</Link>,
             },
             ...(auth?.staff?.role === "admin"
               ? [
                 {
-                  key: "Candidate CV Management",
-                  icon: <TeamOutlined style={{ fontSize: "16px" }} />,
+                  key: "/profile/candidate-cv-management",
+                  icon: <FolderOutlined />,
                   label: (
-                    <Link
-                      to="/profile/candidate-cv-management"
-                      style={{
-                        color: "inherit",
-                        textDecoration: "none",
-                        fontWeight: 500,
-                      }}
-                    >
-                      Candidate CV Management
+                    <Link to="/profile/candidate-cv-management">
+                      Candidate CVs
                     </Link>
                   ),
                 },
                 {
-                  key: "Employee Management",
-                  icon: <TeamOutlined style={{ fontSize: "16px" }} />,
-                  label: (
-                    <Link
-                      to="/profile/employee-management"
-                      style={{
-                        color: "inherit",
-                        textDecoration: "none",
-                        fontWeight: 500,
-                      }}
-                    >
-                      Employee Management
-                    </Link>
-                  ),
-                },
-                {
-                  key: "department",
+                  key: "/profile/employee-management",
                   icon: <TeamOutlined />,
-                  label: "Department",
+                  label: (
+                    <Link to="/profile/employee-management">Employees</Link>
+                  ),
+                },
+                {
+                  type: "divider",
+                },
+                {
+                  key: "department-group",
+                  icon: <StarOutlined />,
+                  label: "Departments",
                   children: [
                     {
-                      key: "department-management",
+                      key: "/profile/department-management",
                       label: (
                         <Link to="/profile/department-management">
-                          Department Management
+                          Management
                         </Link>
                       ),
                     },
                     {
-                      key: "department-review-management",
+                      key: "/profile/department-review-management",
                       label: (
                         <Link to="/profile/department-review-management">
-                          Department Review Management
+                          Reviews
                         </Link>
                       ),
                     },
@@ -152,39 +149,36 @@ const SideBarStaff = () => {
                 },
               ]
               : []),
+          ]}
+        />
+
+        <div className="menu-section-title" style={{ marginTop: "24px" }}>
+          SETTINGS
+        </div>
+        <Menu
+          mode="inline"
+          selectedKeys={[location.pathname]}
+          className="sidebar-menu"
+          items={[
             {
-              key: "settings",
-              icon: <SettingOutlined style={{ fontSize: "16px" }} />,
-              label: (
-                <Link
-                  to="/staff/settings"
-                  style={{
-                    color: "inherit",
-                    textDecoration: "none",
-                    fontWeight: 500,
-                  }}
-                >
-                  Setting
-                </Link>
-              ),
+              key: "/staff/settings",
+              icon: <SettingOutlined />,
+              label: <Link to="/staff/settings">Preferences</Link>,
             },
             {
               key: "logout",
-              icon: <LogoutOutlined style={{ fontSize: "16px" }} />,
-              label: (
-                <span
-                  onClick={handleLogout}
-                  style={{
-                    fontWeight: 500,
-                    cursor: "pointer",
-                  }}
-                >
-                  Log Out
-                </span>
-              ),
+              icon: <LogoutOutlined />,
+              label: <span onClick={handleLogout}>Sign Out</span>,
+              danger: true,
             },
           ]}
         />
+      </div>
+
+      {/* Footer */}
+      <div className="sidebar-footer">
+        <div className="footer-text">© 2025 HRM System</div>
+        <div className="footer-version">Version 1.0.0</div>
       </div>
     </Sider>
   );

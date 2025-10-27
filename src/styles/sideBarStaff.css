@@ -1,150 +1,316 @@
+/* Sidebar Container */
 .sidebar-staff {
-  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%) !important;
-  box-shadow: 4px 0 20px rgba(102, 126, 234, 0.15);
-  height: 100vh !important; /* Chiều cao full viewport */
+  background: #ffffff !important;
+  border-right: 1px solid #f0f0f0 !important;
+  height: 100vh !important;
+  position: sticky !important;
+  top: 0 !important;
+  overflow-y: auto;
+  overflow-x: hidden;
+  box-shadow: 2px 0 8px rgba(0, 0, 0, 0.04);
+  display: flex;
+  flex-direction: column;
+}
+
+/* Custom Scrollbar */
+.sidebar-staff::-webkit-scrollbar {
+  width: 4px;
+}
+
+.sidebar-staff::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.sidebar-staff::-webkit-scrollbar-thumb {
+  background: #d9d9d9;
+  border-radius: 4px;
+}
+
+.sidebar-staff::-webkit-scrollbar-thumb:hover {
+  background: #bfbfbf;
+}
+
+/* ========== Header ========== */
+.sidebar-header {
+  padding: 24px 20px;
+  border-bottom: 1px solid #f0f0f0;
+}
+
+.sidebar-logo {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.logo-icon {
+  width: 48px;
+  height: 48px;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #fff;
+  font-size: 24px;
+  box-shadow: 0 4px 12px rgba(102, 126, 234, 0.3);
+}
+
+.logo-text {
+  flex: 1;
+}
+
+.logo-title {
+  font-size: 18px;
+  font-weight: 700;
+  color: #1a1a1a;
+  line-height: 1.2;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.logo-subtitle {
+  font-size: 11px;
+  color: #8c8c8c;
+  font-weight: 500;
+  margin-top: 2px;
+}
+
+/* ========== Profile Card ========== */
+.sidebar-profile-card {
+  padding: 24px 20px;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 16px;
   position: relative;
   overflow: hidden;
 }
 
-.sidebar-back-btn {
+.sidebar-profile-card::before {
+  content: "";
   position: absolute;
-  top: 16px;
-  left: 16px;
-  z-index: 3;
-}
-
-.sidebar-back-btn-inner {
-  color: #fff !important;
-  font-weight: 600;
-  background: rgba(255,255,255,0.15) !important;
-  border-radius: 8px !important;
-}
-
-.sidebar-bg-top {
-  position: absolute;
-  top: -50px;
-  right: -50px;
-  width: 100px;
-  height: 100px;
+  width: 200px;
+  height: 200px;
   background: rgba(255, 255, 255, 0.1);
   border-radius: 50%;
+  top: -100px;
+  right: -100px;
+}
+
+.profile-avatar-wrapper {
+  position: relative;
   z-index: 1;
 }
 
-.sidebar-bg-bottom {
-  position: absolute;
-  bottom: -30px;
-  left: -30px;
-  width: 80px;
-  height: 80px;
-  background: rgba(255, 255, 255, 0.08);
-  border-radius: 50%;
-  z-index: 1;
-}
-
-.sidebar-profile {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  padding: 80px 20px 24px 20px;
-  position: relative;
-  z-index: 2;
-}
-
-.sidebar-avatar-wrap {
-  position: relative;
-  margin-bottom: 16px;
-}
-
-.sidebar-avatar {
-  background: linear-gradient(135deg, #ffffff 0%, #f8f9ff 100%);
+.profile-avatar {
+  background: #ffffff !important;
   color: #667eea !important;
   border: 3px solid rgba(255, 255, 255, 0.3);
-  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.2);
 }
 
-.sidebar-avatar-status {
+.profile-status-dot {
   position: absolute;
   bottom: 2px;
   right: 2px;
-  width: 18px;
-  height: 18px;
+  width: 16px;
+  height: 16px;
   background: #52c41a;
+  border: 3px solid #ffffff;
   border-radius: 50%;
-  border: 2px solid white;
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
 }
 
-.sidebar-staff-name {
-  color: #ffffff;
+.profile-info {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  z-index: 1;
+}
+
+.profile-name {
+  color: #ffffff !important;
   font-size: 16px;
   font-weight: 600;
-  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
-  text-align: center;
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
-.sidebar-divider {
-  width: 60%;
-  height: 2px;
-  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.5), transparent);
-  margin-top: 16px;
-  border-radius: 1px;
+.back-home-btn {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 16px;
+  background: rgba(255, 255, 255, 0.2);
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  border-radius: 8px;
+  color: #ffffff !important;
+  font-size: 13px;
+  font-weight: 500;
+  transition: all 0.3s ease;
+  z-index: 1;
 }
 
-.sidebar-menu-wrap {
-  padding: 0 16px;
-  position: relative;
-  z-index: 2;
+.back-home-btn:hover {
+  background: rgba(255, 255, 255, 0.3);
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
 }
 
-/* Style cho toàn bộ menu */
-.sidebar-menu-wrap .ant-menu-dark.ant-menu-inline {
+/* ========== Menu Container ========== */
+.sidebar-menu-container {
+  flex: 1;
+  padding: 24px 16px;
+  overflow-y: auto;
+}
+
+.menu-section-title {
+  font-size: 11px;
+  font-weight: 700;
+  color: #8c8c8c;
+  letter-spacing: 0.5px;
+  padding: 0 12px;
+  margin-bottom: 12px;
+}
+
+/* ========== Menu Styles ========== */
+.sidebar-menu {
   background: transparent !important;
   border: none !important;
-  color: #fff !important;
 }
 
-/* Style cho mục cha (Department) khi mở hoặc hover */
-.sidebar-menu-wrap .ant-menu-submenu-inline,
-.sidebar-menu-wrap .ant-menu-submenu-open {
-  border-radius: 12px !important;
-  margin-bottom: 8px !important;
+.sidebar-menu .ant-menu-item,
+.sidebar-menu .ant-menu-submenu-title {
+  height: 44px;
+  line-height: 44px;
+  margin: 4px 0;
+  border-radius: 10px;
   transition: all 0.3s ease;
+  font-weight: 500;
+  color: #595959 !important;
 }
 
-/* Style cho label mục cha */
-.sidebar-menu-wrap .ant-menu-submenu-title {
-  color: #fff !important;
+.sidebar-menu .ant-menu-item a,
+.sidebar-menu .ant-menu-submenu-title span {
+  color: inherit;
+}
+
+.sidebar-menu .ant-menu-item:hover,
+.sidebar-menu .ant-menu-submenu-title:hover {
+  background: #f5f5f5 !important;
+  color: #667eea !important;
+}
+
+.sidebar-menu .ant-menu-item-selected {
+  background: linear-gradient(135deg, #667eea15 0%, #764ba215 100%) !important;
+  color: #667eea !important;
   font-weight: 600;
 }
 
-/* Style cho mục con (children) của Department */
-.sidebar-menu-wrap .ant-menu-submenu-inline .ant-menu-item-only-child {
-  padding-left: 36px !important;
+.sidebar-menu .ant-menu-item-selected::after {
+  border-right: 3px solid #667eea;
+}
+
+.sidebar-menu .ant-menu-item .anticon,
+.sidebar-menu .ant-menu-submenu-title .anticon {
+  font-size: 18px;
+  color: inherit;
+}
+
+/* Danger Item (Logout) */
+.sidebar-menu .ant-menu-item-danger {
+  color: #ff4d4f !important;
+}
+
+.sidebar-menu .ant-menu-item-danger:hover {
+  background: #fff1f0 !important;
+  color: #ff4d4f !important;
+}
+
+/* Submenu */
+.sidebar-menu .ant-menu-submenu-open > .ant-menu-submenu-title {
+  color: #667eea !important;
+  background: #f5f5f5 !important;
+}
+
+.sidebar-menu .ant-menu-sub {
   background: transparent !important;
-  border-radius: 12px !important;
-  margin-bottom: 4px !important;
-  color: #fff !important;
-  height: 44px !important;
-  line-height: 44px !important;
 }
 
-/* Hover cho mục con */
-.sidebar-menu-wrap .ant-menu-submenu-inline .ant-menu-item-only-child:hover {
-  background: rgba(255, 255, 255, 0.15) !important;
-  transform: translateX(4px);
+.sidebar-menu .ant-menu-sub .ant-menu-item {
+  padding-left: 48px !important;
+  height: 40px;
+  line-height: 40px;
+  font-size: 13px;
 }
 
-/* Selected cho mục con */
-.sidebar-menu-wrap .ant-menu-submenu-inline .ant-menu-item-only-child.ant-menu-item-selected {
-  background: rgba(255, 255, 255, 0.25) !important;
-  border-radius: 12px !important;
-  transform: translateX(4px);
-  font-weight: 600;
-  transition: all 0.3s ease;
+.sidebar-menu .ant-menu-item-divider {
+  margin: 12px 0;
+  background: #f0f0f0;
 }
 
-/* Ghi đè nền submenu (children group) */
-.sidebar-menu-wrap .ant-menu-sub.ant-menu-inline {
-  background: transparent !important;
+/* ========== Footer ========== */
+.sidebar-footer {
+  padding: 16px 20px;
+  border-top: 1px solid #f0f0f0;
+  text-align: center;
+  background: #fafafa;
+}
+
+.footer-text {
+  font-size: 12px;
+  color: #8c8c8c;
+  font-weight: 500;
+  margin-bottom: 4px;
+}
+
+.footer-version {
+  font-size: 11px;
+  color: #bfbfbf;
+}
+
+/* ========== Responsive ========== */
+@media (max-width: 768px) {
+  .sidebar-staff {
+    position: fixed !important;
+    left: -280px;
+    transition: left 0.3s ease;
+    z-index: 1000;
+  }
+
+  .sidebar-staff.mobile-open {
+    left: 0 !important;
+  }
+
+  .sidebar-header {
+    padding: 16px;
+  }
+
+  .sidebar-profile-card {
+    padding: 16px;
+  }
+
+  .sidebar-menu-container {
+    padding: 16px 12px;
+  }
+}
+
+/* ========== Animations ========== */
+@keyframes slideIn {
+  from {
+    opacity: 0;
+    transform: translateX(-20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+.sidebar-menu .ant-menu-item,
+.sidebar-menu .ant-menu-submenu {
+  animation: slideIn 0.3s ease;
 }

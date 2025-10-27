@@ -1,10 +1,15 @@
-import { Button, Form, Input, Card, Typography } from "antd";
+import { Button, Form, Input, Card, Typography, Checkbox } from "antd";
+import {
+  MailOutlined,
+  LockOutlined,
+  SafetyOutlined,
+} from "@ant-design/icons";
 import { loginApi } from "../utils/Api/accountApi.js";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, Link } from "react-router-dom";
 import { useContext } from "react";
 import { AuthContext } from "../context/auth.context.jsx";
-import { Link } from "react-router-dom";
 import { toast } from "react-toastify";
+import "../styles/login.css";
 
 const { Title, Text } = Typography;
 
@@ -18,7 +23,7 @@ const LoginPage = () => {
     const res = await loginApi(email, password);
     if (res && res.EC === 0) {
       localStorage.setItem("access_token", res.access_token);
-      toast.success(res.EM, { autoClose: 2000 });
+      toast.success(res.EM || "Login successful!", { autoClose: 2000 });
       setAuth({
         isAuthenticated: true,
         staff: {
@@ -31,71 +36,151 @@ const LoginPage = () => {
       });
       navigate("/");
     } else {
-      toast.error(res.EM || "Login failed. Please try again.", { autoClose: 2000 });
+      toast.error(res.EM || "Login failed. Please try again.", {
+        autoClose: 2000,
+      });
     }
   };
 
   return (
-    <div
-      style={{
-        minHeight: "100vh",
-        display: "flex",
-        alignItems: "center",
-        justifyContent: "center",
-        background: "linear-gradient(135deg, #e0eafc 0%, #cfdef3 100%)",
-      }}
-    >
-      <Card
-        style={{
-          width: 400,
-          boxShadow: "0 4px 24px rgba(0,0,0,0.10)",
-          borderRadius: 16,
-          padding: 24,
-        }}
-        bordered={false}
-      >
-        <div style={{ textAlign: "center", marginBottom: 24 }}>
-          {/* <img src="/logo.png" alt="Logo" style={{ width: 60, marginBottom: 12 }} /> */}
-          <Title level={2} style={{ marginBottom: 0 }}>
-            Đăng nhập
+    <div className="login-page">
+      {/* Left Side - Branding */}
+      <div className="login-branding">
+        <div className="branding-content">
+          <div className="brand-logo">
+            <SafetyOutlined />
+          </div>
+          <Title level={1} className="brand-title">
+            HRM System
           </Title>
-          <Text type="secondary">Chào mừng bạn quay trở lại!</Text>
-        </div>
-        <Form
-          name="login"
-          layout="vertical"
-          onFinish={onFinish}
-          autoComplete="off"
-        >
-          <Form.Item
-            label="Email"
-            name="email"
-            rules={[
-              { required: true, message: "Vui lòng nhập email!" },
-              { type: "email", message: "Email không hợp lệ!" },
-            ]}
-          >
-            <Input size="large" placeholder="Nhập email" />
-          </Form.Item>
-          <Form.Item
-            label="Mật khẩu"
-            name="password"
-            rules={[{ required: true, message: "Vui lòng nhập mật khẩu!" }]}
-          >
-            <Input.Password size="large" placeholder="Nhập mật khẩu" />
-          </Form.Item>
-          <Form.Item>
-            <Button type="primary" htmlType="submit" block size="large">
-              Đăng nhập
-            </Button>
-          </Form.Item>
-        </Form>
-        <div style={{ textAlign: "center", marginTop: 8 }}>
-          <Text>
-            Bạn chưa có tài khoản? <Link to="/register">Đăng kí</Link>
+          <Text className="brand-subtitle">
+            Human Resource Management Platform
           </Text>
+          <div className="brand-features">
+            <div className="feature-item">
+              <span className="feature-icon">✓</span>
+              <span>Streamlined Employee Management</span>
+            </div>
+            <div className="feature-item">
+              <span className="feature-icon">✓</span>
+              <span>Advanced Analytics Dashboard</span>
+            </div>
+            <div className="feature-item">
+              <span className="feature-icon">✓</span>
+              <span>Secure & Reliable Platform</span>
+            </div>
+            <div className="feature-item">
+              <span className="feature-icon">✓</span>
+              <span>24/7 Support & Assistance</span>
+            </div>
+          </div>
         </div>
-      </Card>
+      </div>
+
+      {/* Right Side - Login Form */}
+      <div className="login-form-section">
+        <Card className="login-card" bordered={false}>
+          <div className="form-header">
+            <div className="welcome-icon">
+              <SafetyOutlined />
+            </div>
+            <Title level={2} className="form-title">
+              Welcome Back
+            </Title>
+            <Text className="form-subtitle">
+              Sign in to continue to your account
+            </Text>
+          </div>
+
+          <Form
+            name="login"
+            layout="vertical"
+            onFinish={onFinish}
+            autoComplete="off"
+            className="login-form"
+          >
+            <Form.Item
+              label="Email Address"
+              name="email"
+              rules={[
+                { required: true, message: "Please enter your email!" },
+                { type: "email", message: "Invalid email format!" },
+              ]}
+            >
+              <Input
+                size="large"
+                prefix={<MailOutlined />}
+                placeholder="Enter your email"
+              />
+            </Form.Item>
+
+            <Form.Item
+              label="Password"
+              name="password"
+              rules={[
+                { required: true, message: "Please enter your password!" },
+              ]}
+            >
+              <Input.Password
+                size="large"
+                prefix={<LockOutlined />}
+                placeholder="Enter your password"
+              />
+            </Form.Item>
+
+            <Form.Item>
+              <div className="form-options">
+                <Checkbox>Remember me</Checkbox>
+                <Link to="/forgot-password" className="forgot-link">
+                  Forgot password?
+                </Link>
+              </div>
+            </Form.Item>
+
+            <Form.Item>
+              <Button
+                type="primary"
+                htmlType="submit"
+                block
+                size="large"
+                className="login-button"
+              >
+                Sign In
+              </Button>
+            </Form.Item>
+          </Form>
+
+          <div className="register-link">
+            <Text>
+              Don't have an account?{" "}
+              <Link to="/register" className="link-text">
+                Sign Up
+              </Link>
+            </Text>
+          </div>
+
+          <div className="divider">
+            <span className="divider-text">or continue with</span>
+          </div>
+
+          <div className="social-login">
+            <Button className="social-button google" size="large">
+              <img
+                src="https://www.gstatic.com/firebasejs/ui/2.0.0/images/auth/google.svg"
+                alt="Google"
+              />
+              Google
+            </Button>
+            <Button className="social-button microsoft" size="large">
+              <img
+                src="https://upload.wikimedia.org/wikipedia/commons/4/44/Microsoft_logo.svg"
+                alt="Microsoft"
+              />
+              Microsoft
+            </Button>
+          </div>
+        </Card>
+      </div>
     </div>
   );
 };

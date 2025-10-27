@@ -5,15 +5,17 @@ const getStaffApi = () => {
     return axios.get(URL_API);
 };
 
-const addNewStaffApi = (username, password, fullName, email, phone, address) => {
+const addNewStaffApi = (password, fullName, email, phone, address, citizenId, gender, dob) => {
     const URL_API = "/v1/api/add-employee";
     const data = {
-        username: username,
         password: password,
         fullName: fullName,
         email: email,
         phone: phone,
         address: address,
+        citizenId: citizenId,
+        gender: gender,
+        dob: dob
     };
 
     return axios.post(URL_API, data);

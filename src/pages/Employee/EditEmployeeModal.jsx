@@ -1,7 +1,20 @@
-import { Modal, Form, Input, Select, Button } from "antd";
+import { Modal, Form, Input, Select, Button, Row, Col, DatePicker, Space } from "antd";
+import {
+    UserOutlined,
+    MailOutlined,
+    PhoneOutlined,
+    IdcardOutlined,
+    CalendarOutlined,
+    ManOutlined,
+    WomanOutlined,
+    EditOutlined,
+    CheckOutlined,
+} from "@ant-design/icons";
 import { useEffect, useState } from "react";
 import { detailStaffApi, updateStaffApi } from "../../utils/Api/staffApi";
 import { toast } from "react-toastify";
+import dayjs from "dayjs";
+import "../../styles/editEmployeeModal.css";
 
 const { Option } = Select;
 
@@ -10,27 +23,29 @@ const EditEmployeeModal = ({ open, onClose, staffId, onSuccess }) => {
     const [isEditing, setIsEditing] = useState(false);
     const [loading, setLoading] = useState(false);
 
-    // Load dữ liệu chi tiết nhân viên
     useEffect(() => {
         if (staffId && open) {
             const fetchStaff = async () => {
                 try {
                     const res = await detailStaffApi(staffId);
+                    const personalInfo = res.data?.personalInfo || {};
+
                     form.setFieldsValue({
-                        username: res.data?.username,
                         role: res.data?.role,
-                        fullName: res.data?.personalInfo?.fullName,
-                        email: res.data?.personalInfo?.email,
-                        phone: res.data?.personalInfo?.phone,
-                        address: res.data?.personalInfo?.address,
-                        gender: res.data?.personalInfo?.gender,
+                        fullName: personalInfo.fullName,
+                        email: personalInfo.email,
+                        phone: personalInfo.phone,
+                        address: personalInfo.address,
+                        citizenId: personalInfo.citizenId,
+                        gender: personalInfo.gender,
+                        dob: personalInfo.dob ? dayjs(personalInfo.dob) : null,
                     });
                 } catch (error) {
                     toast.error("Error fetching employee details", { autoClose: 2000 });
                 }
             };
             fetchStaff();
-            setIsEditing(false); // reset trạng thái edit
+            setIsEditing(false);
         }
     }, [staffId, open, form]);
 
@@ -38,119 +53,282 @@ const EditEmployeeModal = ({ open, onClose, staffId, onSuccess }) => {
         try {
             const values = await form.validateFields();
             const updatedData = {
-                username: values.username,
                 role: values.role,
                 personalInfo: {
                     fullName: values.fullName,
                     email: values.email,
                     phone: values.phone,
                     address: values.address,
+                    citizenId: values.citizenId,
                     gender: values.gender,
+                    dob: values.dob ? values.dob.format("YYYY-MM-DD") : null,
                 },
             };
 
             setLoading(true);
             const res = await updateStaffApi(staffId, updatedData);
-            toast.success(res.EM, { autoClose: 2000 });
+
+            if (res && res.EC === 0) {
+                toast.success(res.EM || "Employee updated successfully!", { autoClose: 2000 });
+                onSuccess();
+                onClose();
+                setIsEditing(false);
+            } else {
+                toast.error(res.EM || "Failed to update employee", { autoClose: 2000 });
+            }
             setLoading(false);
-            onSuccess();
-            onClose();
         } catch (error) {
             setLoading(false);
             toast.error("Error updating employee", { autoClose: 2000 });
         }
     };
 
+    const validatePhone = (_, value) => {
+        if (!value) {
+            return Promise.reject(new Error("Please enter phone number!"));
+        }
+        const phoneRegex = /^[0-9]{10,11}$/;
+        if (!phoneRegex.test(value)) {
+            return Promise.reject(new Error("Phone number must be 10-11 digits!"));
+        }
+        return Promise.resolve();
+    };
+
+    const validateCitizenId = (_, value) => {
+        if (!value) {
+            return Promise.reject(new Error("Please enter Citizen ID!"));
+        }
+        const citizenIdRegex = /^[0-9]{9,12}$/;
+        if (!citizenIdRegex.test(value)) {
+            return Promise.reject(new Error("Citizen ID must be 9-12 digits!"));
+        }
+        return Promise.resolve();
+    };
+
+    const validateDOB = (_, value) => {
+        if (!value) {
+            return Promise.reject(new Error("Please select date of birth!"));
+        }
+        const age = dayjs().diff(value, "year");
+        if (age < 18) {
+            return Promise.reject(new Error("Employee must be at least 18 years old!"));
+        }
+        if (age > 100) {
+            return Promise.reject(new Error("Please enter a valid date of birth!"));
+        }
+        return Promise.resolve();
+    };
+
     return (
         <Modal
-            title="Edit Employee"
+            title={
+                <div className="modal-header">
+                    <EditOutlined className="modal-header-icon" />
+                    <span>Edit Employee Information</span>
+                </div>
+            }
             open={open}
-            onCancel={onClose}
+            onCancel={() => {
+                setIsEditing(false);
+                onClose();
+            }}
+            width={800}
+            className="edit-employee-modal"
             footer={[
-                <Button key="cancel" onClick={onClose}>
+                <Button
+                    key="cancel"
+                    onClick={() => {
+                        setIsEditing(false);
+                        onClose();
+                    }}
+                    className="modal-cancel-button"
+                >
                     Cancel
                 </Button>,
                 <Button
                     key="edit"
                     type="primary"
                     loading={loading}
+                    icon={isEditing ? <CheckOutlined /> : <EditOutlined />}
                     onClick={() => {
                         if (!isEditing) {
-                            setIsEditing(true); // bật chế độ edit
+                            setIsEditing(true);
                         } else {
-                            handleConfirm(); // confirm update
+                            handleConfirm();
                         }
                     }}
+                    className="modal-action-button"
                 >
-                    {isEditing ? "Confirm" : "Edit"}
+                    {isEditing ? "Confirm Changes" : "Edit"}
                 </Button>,
             ]}
         >
-            <Form form={form} layout="vertical">
-                <Form.Item
-                    label="Username"
-                    name="username"
-                    rules={[{ required: true, message: "Please input username!" }]}
-                >
-                    <Input disabled={!isEditing} />
-                </Form.Item>
+            <Form form={form} layout="vertical" className="employee-edit-form">
+                <Row gutter={16}>
+                    {/* Role */}
+                    <Col xs={24} md={12}>
+                        <Form.Item
+                            label="Role"
+                            name="role"
+                            rules={[{ required: true, message: "Please select role!" }]}
+                        >
+                            <Select
+                                disabled={!isEditing}
+                                size="large"
+                                placeholder="Select role"
+                            >
+                                <Option value="admin">Admin</Option>
+                                <Option value="manager">Manager</Option>
+                                <Option value="staff">Staff</Option>
+                            </Select>
+                        </Form.Item>
+                    </Col>
 
-                <Form.Item
-                    label="Role"
-                    name="role"
-                    rules={[{ required: true, message: "Please select role!" }]}
-                >
-                    <Select disabled={!isEditing}>
-                        <Option value="admin">Admin</Option>
-                        <Option value="manager">Manager</Option>
-                        <Option value="staff">Staff</Option>
-                        <Option value="candidate">Candidate</Option>
-                    </Select>
-                </Form.Item>
+                    {/* Full Name */}
+                    <Col xs={24} md={12}>
+                        <Form.Item
+                            label="Full Name"
+                            name="fullName"
+                            rules={[
+                                { required: true, message: "Please enter full name!" },
+                                { min: 2, message: "Name must be at least 2 characters!" },
+                                { max: 100, message: "Name must not exceed 100 characters!" },
+                            ]}
+                        >
+                            <Input
+                                disabled={!isEditing}
+                                size="large"
+                                prefix={<UserOutlined />}
+                                placeholder="Enter full name"
+                            />
+                        </Form.Item>
+                    </Col>
 
-                <Form.Item
-                    label="Full Name"
-                    name="fullName"
-                    rules={[{ required: true, message: "Please input full name!" }]}
-                >
-                    <Input disabled={!isEditing} />
-                </Form.Item>
+                    {/* Email */}
+                    <Col xs={24} md={12}>
+                        <Form.Item
+                            label="Email"
+                            name="email"
+                            rules={[
+                                { required: true, message: "Please enter email!" },
+                                { type: "email", message: "Invalid email format!" },
+                            ]}
+                        >
+                            <Input
+                                disabled={!isEditing}
+                                size="large"
+                                prefix={<MailOutlined />}
+                                placeholder="Enter email address"
+                            />
+                        </Form.Item>
+                    </Col>
 
-                <Form.Item
-                    label="Email"
-                    name="email"
-                    rules={[{ required: true, type: "email", message: "Invalid email!" }]}
-                >
-                    <Input disabled={!isEditing} />
-                </Form.Item>
+                    {/* Phone */}
+                    <Col xs={24} md={12}>
+                        <Form.Item
+                            label="Phone Number"
+                            name="phone"
+                            rules={[{ validator: validatePhone }]}
+                        >
+                            <Input
+                                disabled={!isEditing}
+                                size="large"
+                                prefix={<PhoneOutlined />}
+                                placeholder="Enter phone (10-11 digits)"
+                                maxLength={11}
+                            />
+                        </Form.Item>
+                    </Col>
 
-                <Form.Item
-                    label="Phone"
-                    name="phone"
-                    rules={[{ required: true, message: "Please input phone!" }]}
-                >
-                    <Input disabled={!isEditing} />
-                </Form.Item>
+                    {/* Citizen ID */}
+                    <Col xs={24} md={12}>
+                        <Form.Item
+                            label="Citizen ID"
+                            name="citizenId"
+                            rules={[{ validator: validateCitizenId }]}
+                        >
+                            <Input
+                                disabled={!isEditing}
+                                size="large"
+                                prefix={<IdcardOutlined />}
+                                placeholder="Enter Citizen ID (9-12 digits)"
+                                maxLength={12}
+                            />
+                        </Form.Item>
+                    </Col>
 
-                <Form.Item
-                    label="Address"
-                    name="address"
-                    rules={[{ required: true, message: "Please input address!" }]}
-                >
-                    <Input disabled={!isEditing} />
-                </Form.Item>
+                    {/* Date of Birth */}
+                    <Col xs={24} md={12}>
+                        <Form.Item
+                            label="Date of Birth"
+                            name="dob"
+                            rules={[{ validator: validateDOB }]}
+                        >
+                            <DatePicker
+                                disabled={!isEditing}
+                                size="large"
+                                style={{ width: "100%" }}
+                                format="DD/MM/YYYY"
+                                placeholder="Select date of birth"
+                                suffixIcon={<CalendarOutlined />}
+                                disabledDate={(current) =>
+                                    current && current > dayjs().subtract(18, "year")
+                                }
+                            />
+                        </Form.Item>
+                    </Col>
 
-                <Form.Item
-                    label="Gender"
-                    name="gender"
-                    rules={[{ required: true, message: "Please select gender!" }]}
-                >
-                    <Select disabled={!isEditing}>
-                        <Option value="male">Male</Option>
-                        <Option value="female">Female</Option>
-                        <Option value="other">Other</Option>
-                    </Select>
-                </Form.Item>
+                    {/* Gender */}
+                    <Col xs={24} md={12}>
+                        <Form.Item
+                            label="Gender"
+                            name="gender"
+                            rules={[{ required: true, message: "Please select gender!" }]}
+                        >
+                            <Select
+                                disabled={!isEditing}
+                                size="large"
+                                placeholder="Select gender"
+                            >
+                                <Option value="male">
+                                    <Space>
+                                        <ManOutlined style={{ color: "#1890ff" }} />
+                                        Male
+                                    </Space>
+                                </Option>
+                                <Option value="female">
+                                    <Space>
+                                        <WomanOutlined style={{ color: "#eb2f96" }} />
+                                        Female
+                                    </Space>
+                                </Option>
+                                <Option value="other">Other</Option>
+                            </Select>
+                        </Form.Item>
+                    </Col>
+
+                    {/* Address */}
+                    <Col xs={24}>
+                        <Form.Item
+                            label="Address"
+                            name="address"
+                            rules={[
+                                { required: true, message: "Please enter address!" },
+                                { min: 5, message: "Address must be at least 5 characters!" },
+                                { max: 200, message: "Address must not exceed 200 characters!" },
+                            ]}
+                        >
+                            <Input.TextArea
+                                disabled={!isEditing}
+                                size="large"
+                                rows={3}
+                                placeholder="Enter full address"
+                                maxLength={200}
+                                showCount
+                            />
+                        </Form.Item>
+                    </Col>
+                </Row>
             </Form>
         </Modal>
     );

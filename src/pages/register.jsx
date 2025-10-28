@@ -20,10 +20,10 @@ const RegisterPage = () => {
   const navigate = useNavigate();
 
   const onFinish = async (values) => {
-    const { name, email, password, address, phone, gender } = values;
+    const { fullName, email, password, address, phone, gender } = values;
 
     const res = await createStaffApi(
-      name,
+      fullName,
       email,
       password,
       address,
@@ -113,7 +113,7 @@ const RegisterPage = () => {
             <Col xs={24} sm={12}>
               <Form.Item
                 label="Họ và tên"
-                name="name"
+                name="fullName"
                 rules={[{ required: true, message: "Vui lòng nhập họ tên!" }]}
               >
                 <Input size="large" placeholder="Nhập họ và tên" />

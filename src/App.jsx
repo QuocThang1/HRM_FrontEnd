@@ -1,7 +1,6 @@
 import { useEffect, useContext } from "react";
 import axios from "./utils/axios.customize.js";
 import Header from "./layout/header.jsx";
-import { Outlet } from "react-router-dom";
 import { AuthContext } from "./context/auth.context.jsx";
 import { Spin } from "antd";
 
@@ -16,10 +15,11 @@ function App() {
         setAuth({
           isAuthenticated: true,
           staff: {
-            email: res.personal_info?.email,
-            name: res.personal_info?.full_name,
-            address: res.personal_info?.address,
-            phone: res.personal_info?.phone,
+            email: res.personalInfor?.email,
+            fullName: res.personalInfor?.fullName,
+            address: res.personalInfor?.address,
+            phone: res.personalInfor?.phone,
+            role: res.role ?? res.staff?.role ?? "",
           },
         });
       }
@@ -44,7 +44,6 @@ function App() {
       ) : (
         <>
           <Header />
-          <Outlet />
         </>
       )}
     </div>

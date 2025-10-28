@@ -26,10 +26,10 @@ const StaffProfilePage = () => {
       const res = await axios.get(`/v1/api/account`);
       if (res) {
         form.setFieldsValue({
-          name: res.personal_info?.full_name,
-          email: res.personal_info?.email,
-          address: res.personal_info?.address,
-          phone: res.personal_info?.phone,
+          fullName: res.personalInfor?.fullName,
+          email: res.personalInfor?.email,
+          address: res.personalInfor?.address,
+          phone: res.personalInfor?.phone,
         });
       }
     };
@@ -39,7 +39,7 @@ const StaffProfilePage = () => {
   const onFinish = async (values) => {
     try {
       const res = await updateProfileApi(
-        values.name,
+        values.fullName,
         values.email,
         values.address,
         values.phone,
@@ -54,7 +54,7 @@ const StaffProfilePage = () => {
           isAuthenticated: true,
           staff: {
             email: values.email,
-            name: values.name,
+            fullName: values.fullName,
             address: values.address,
             phone: values.phone,
           },
@@ -113,7 +113,7 @@ const StaffProfilePage = () => {
           </Row>
           <Form.Item
             label="Họ và tên"
-            name="name"
+            name="fullName"
             rules={[{ required: true, message: "Vui lòng nhập họ tên!" }]}
           >
             <Input size="large" />

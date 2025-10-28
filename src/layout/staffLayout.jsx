@@ -14,10 +14,10 @@ const StaffLayout = () => {
         setAuth({
           isAuthenticated: true,
           staff: {
-            email: res.personal_info?.email,
-            name: res.personal_info?.full_name,
-            address: res.personal_info?.address,
-            phone: res.personal_info?.phone,
+            email: res.personalInfor?.email,
+            fullName: res.personalInfor?.fullName,
+            address: res.personalInfor?.address,
+            phone: res.personalInfor?.phone,
           },
         });
       }

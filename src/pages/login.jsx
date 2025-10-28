@@ -24,10 +24,11 @@ const LoginPage = () => {
       setAuth({
         isAuthenticated: true,
         staff: {
-          email: res?.staff?.email ?? "",
-          name: res?.staff?.name ?? "",
-          address: res?.staff?.address ?? "",
-          phone: res?.staff?.phone ?? "",
+          email: res?.personalInfo?.email ?? res?.username ?? "",
+          fullName: res?.personalInfo?.fullName ?? "",
+          address: res?.personalInfo?.address ?? "",
+          phone: res?.personalInfo?.phone ?? "",
+          role: res?.role ?? "",
         },
       });
       navigate("/");

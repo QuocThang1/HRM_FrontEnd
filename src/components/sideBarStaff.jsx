@@ -79,7 +79,7 @@ const SideBarStaff = () => {
     localStorage.removeItem("access_token");
     setAuth({
       isAuthenticated: false,
-      staff: { name: "", email: "" },
+      staff: { fullName: "", email: "" },
     });
     navigate("/login");
   };
@@ -172,7 +172,7 @@ const SideBarStaff = () => {
             textAlign: "center",
           }}
         >
-          {auth?.staff?.name || "Staff"}
+          {auth?.staff?.fullName || "Staff"}
         </Text>
         <div
           style={{

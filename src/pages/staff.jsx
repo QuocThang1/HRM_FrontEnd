@@ -37,7 +37,7 @@ const StaffPage = () => {
     },
     {
       title: "Full Name",
-      dataIndex: "full_name",
+      dataIndex: "fullName",
     },
     {
       title: "Role",

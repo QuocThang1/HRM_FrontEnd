@@ -1,9 +1,9 @@
 import axios from "./axios.customize.js";
 
-const createStaffApi = (name, email, password, address, phone, gender) => {
+const createStaffApi = (fullName, email, password, address, phone, gender) => {
   const URL_API = "/v1/api/register";
   const data = {
-    name: name,
+    fullName: fullName,
     email: email,
     password: password,
     address: address,
@@ -14,10 +14,10 @@ const createStaffApi = (name, email, password, address, phone, gender) => {
   return axios.post(URL_API, data);
 };
 
-const updateProfileApi = (name, email, address, phone) => {
+const updateProfileApi = (fullName, email, address, phone) => {
   const URL_API = "/v1/api/profile";
   const data = {
-    name: name,
+    fullName: fullName,
     email: email,
     address: address,
     phone: phone,

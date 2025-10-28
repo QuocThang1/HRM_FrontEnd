@@ -1,7 +1,7 @@
 import axios from "../axios.customize.js";
 
-const getStaffApi = () => {
-    const URL_API = "/v1/api/staff";
+const getStaffApi = (role) => {
+    const URL_API = `/v1/api/staff${role ? `?role=${role}` : ""}`;
     return axios.get(URL_API);
 };
 

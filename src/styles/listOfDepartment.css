@@ -1,0 +1,333 @@
+.department-management-page {
+  padding: 0;
+  background: #f6f9fb;
+  min-height: 100vh;
+}
+
+/* ========== Page Header ========== */
+.page-header {
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  padding: 40px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-radius: 0 0 24px 24px;
+  box-shadow: 0 8px 32px rgba(102, 126, 234, 0.2);
+  margin-bottom: 32px;
+}
+
+.header-content {
+  flex: 1;
+}
+
+.page-title {
+  color: #ffffff;
+  font-size: 32px;
+  font-weight: 700;
+  margin: 0 0 8px 0;
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.page-subtitle {
+  color: rgba(255, 255, 255, 0.9);
+  font-size: 15px;
+  margin: 0;
+}
+
+.add-button {
+  background: rgba(255, 255, 255, 0.2) !important;
+  border: 1px solid rgba(255, 255, 255, 0.3) !important;
+  color: #ffffff !important;
+  font-weight: 600 !important;
+  height: 48px !important;
+  border-radius: 8px !important;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  transition: all 0.3s ease;
+}
+
+.add-button:hover {
+  background: rgba(255, 255, 255, 0.3) !important;
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.2) !important;
+}
+
+/* ========== Stats Cards ========== */
+.stats-cards {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 20px;
+  padding: 0 32px;
+  margin-bottom: 24px;
+}
+
+.stat-card {
+  border-radius: 12px;
+  border: 2px solid transparent;
+  transition: all 0.3s ease;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
+}
+
+.stat-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.12);
+  border-color: #667eea;
+}
+
+.stat-card .ant-card-body {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  padding: 24px;
+}
+
+.stat-icon {
+  width: 64px;
+  height: 64px;
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 28px;
+  color: #ffffff;
+}
+
+.stat-icon.total {
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+}
+
+.stat-icon.managed {
+  background: linear-gradient(135deg, #52c41a 0%, #73d13d 100%);
+}
+
+.stat-icon.unmanaged {
+  background: linear-gradient(135deg, #faad14 0%, #ffc53d 100%);
+}
+
+.stat-content {
+  flex: 1;
+}
+
+.stat-value {
+  font-size: 32px;
+  font-weight: 700;
+  color: #333;
+  line-height: 1;
+  margin-bottom: 8px;
+}
+
+.stat-label {
+  font-size: 14px;
+  color: #666;
+  font-weight: 500;
+}
+
+/* ========== Table Card ========== */
+.table-card {
+  margin: 0 32px 32px 32px;
+  border-radius: 12px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
+  overflow: hidden;
+}
+
+.department-table .ant-table {
+  border-radius: 8px;
+}
+
+.department-table .ant-table-thead > tr > th {
+  background: #fafafa;
+  font-weight: 600;
+  color: #333;
+  border-bottom: 2px solid #f0f0f0;
+  white-space: nowrap;
+}
+
+.department-table .ant-table-tbody > tr.clickable-row {
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.department-table .ant-table-tbody > tr.clickable-row:hover > td {
+  background: #f5f7ff;
+}
+
+.department-table .ant-table-tbody > tr > td {
+  padding: 12px 16px;
+}
+
+/* ========== Table Cell Styles ========== */
+.department-id {
+  color: #8c8c8c;
+  font-family: monospace;
+  font-size: 12px;
+}
+
+.department-name-cell {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.department-icon {
+  color: #667eea;
+  font-size: 16px;
+}
+
+.department-name {
+  font-weight: 600;
+  color: #333;
+}
+
+.description-text {
+  color: #666;
+  font-size: 14px;
+}
+
+.manager-cell {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.manager-avatar {
+  background: #667eea;
+}
+
+/* ========== Action Buttons ========== */
+.action-button {
+  border-radius: 6px !important;
+  font-weight: 500 !important;
+  transition: all 0.3s ease;
+  height: 32px !important;
+  padding: 4px 12px !important;
+  display: inline-flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  gap: 4px !important;
+}
+
+.action-button .anticon {
+  font-size: 14px;
+}
+
+.edit-button {
+  background: #1890ff !important;
+  border-color: #1890ff !important;
+}
+
+.edit-button:hover {
+  background: #40a9ff !important;
+  border-color: #40a9ff !important;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(24, 144, 255, 0.3);
+}
+
+.delete-button {
+  background: #ffffff !important;
+  border-color: #ff4d4f !important;
+  color: #ff4d4f !important;
+}
+
+.delete-button:hover {
+  background: #ff4d4f !important;
+  border-color: #ff4d4f !important;
+  color: #ffffff !important;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(255, 77, 79, 0.3);
+}
+
+/* ========== Pagination ========== */
+.department-table .ant-pagination {
+  margin: 16px 0 0 0;
+}
+
+.department-table .ant-pagination-item-active {
+  border-color: #667eea;
+  background: #667eea;
+}
+
+.department-table .ant-pagination-item-active a {
+  color: #ffffff;
+}
+
+/* ========== Responsive ========== */
+@media (max-width: 768px) {
+  .page-header {
+    flex-direction: column;
+    gap: 16px;
+    padding: 24px;
+    border-radius: 0 0 16px 16px;
+  }
+
+  .page-title {
+    font-size: 24px;
+  }
+
+  .stats-cards {
+    grid-template-columns: 1fr;
+    padding: 0 16px;
+  }
+
+  .table-card {
+    margin: 0 16px 24px 16px;
+  }
+
+  /* Hide button text on mobile */
+  .action-button span:not(.anticon) {
+    display: none;
+  }
+
+  .action-button {
+    padding: 4px 8px !important;
+    min-width: 32px;
+  }
+
+  .department-table .ant-table-tbody > tr > td {
+    padding: 8px;
+    font-size: 13px;
+  }
+
+  .department-table .ant-table-thead > tr > th {
+    padding: 8px;
+    font-size: 13px;
+  }
+}
+
+@media (max-width: 576px) {
+  .department-id {
+    font-size: 11px;
+  }
+
+  .stat-icon {
+    width: 48px;
+    height: 48px;
+    font-size: 24px;
+  }
+
+  .stat-value {
+    font-size: 24px;
+  }
+
+  .stat-card .ant-card-body {
+    padding: 16px;
+  }
+}
+
+/* ========== Loading State ========== */
+.department-table .ant-spin-container {
+  min-height: 400px;
+}
+
+/* ========== Empty State ========== */
+.department-table .ant-empty {
+  padding: 60px 0;
+}
+
+/* ========== Fixed Column ========== */
+.department-table .ant-table-cell-fix-right {
+  background: #ffffff;
+  position: sticky !important;
+}
+
+.department-table .ant-table-tbody > tr:hover .ant-table-cell-fix-right {
+  background: #f5f7ff;
+}

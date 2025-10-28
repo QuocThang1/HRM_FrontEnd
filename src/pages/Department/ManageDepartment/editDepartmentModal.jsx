@@ -10,8 +10,8 @@ const EditDepartmentModal = ({ open, onClose, departmentId, onSuccess }) => {
 
     useEffect(() => {
         if (open && departmentId) {
-            fetchDepartmentDetails();
             fetchManagerList();
+            fetchDepartmentDetails();
         }
     }, [open, departmentId]);
 
@@ -32,7 +32,10 @@ const EditDepartmentModal = ({ open, onClose, departmentId, onSuccess }) => {
                 form.setFieldsValue({
                     departmentName: res.data.departmentName,
                     description: res.data.description,
-                    managerId: res.data.managerId?.personalInfo.fullName,
+                    managerId: {
+                        value: res.data.managerId?._id || null,
+                        label: res.data.managerId?.personalInfo.fullName || null,
+                    }
                 });
             }
         } catch (error) {
@@ -43,8 +46,11 @@ const EditDepartmentModal = ({ open, onClose, departmentId, onSuccess }) => {
     const handleSubmit = async () => {
         try {
             const values = await form.validateFields();
-            console.log("Submitting values:", values);
-            const res = await updateDepartmentApi(departmentId, values);
+            const submitValues = {
+                ...values,
+                managerId: values.managerId.value || null,
+            };
+            const res = await updateDepartmentApi(departmentId, submitValues);
             toast.success(res.EM, { autoClose: 2000 });
             onSuccess();
             onClose();
@@ -79,6 +85,7 @@ const EditDepartmentModal = ({ open, onClose, departmentId, onSuccess }) => {
                 <Form.Item label="Manager" name="managerId">
                     <Select
                         allowClear
+                        labelInValue
                         placeholder="Select manager"
                         notFoundContent="No available manager"
                         options={managerList.map((manager) => ({

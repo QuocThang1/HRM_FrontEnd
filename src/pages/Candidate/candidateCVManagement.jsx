@@ -167,7 +167,7 @@ const CandidateCVManagement = () => {
                     </Button>
                     <Select
                         value={record.candidateInfo?.status || "pending"}
-                        style={{ width: 120 }}
+                        style={{ width: 100 }}
                         onChange={(value) => handleStatusChange(record._id, value)}
                         size="small"
                     >

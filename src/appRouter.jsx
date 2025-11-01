@@ -13,6 +13,7 @@ import ManageDepartmentReview from "./pages/Department/ManageDepartmentReview/de
 import ContactPage from "./pages/contact.jsx";
 import ApplyCVPage from "./pages/applyCV.jsx";
 import CandidateCVManagement from "./pages/Candidate/candidateCVManagement.jsx";
+import ShiftManagementPage from "./pages/ShiftType/listOfShift.jsx";
 
 const router = createBrowserRouter([
     {
@@ -55,6 +56,14 @@ const router = createBrowserRouter([
                 element: (
                     <ProtectedRoute allowedRoles={["admin"]}>
                         <StaffPage />
+                    </ProtectedRoute>
+                ),
+            },
+            {
+                path: "shift-management",
+                element: (
+                    <ProtectedRoute allowedRoles={["admin"]}>
+                        <ShiftManagementPage />
                     </ProtectedRoute>
                 ),
             },

@@ -9,6 +9,7 @@ import {
   FolderOutlined,
   StarOutlined,
   SafetyOutlined,
+  ClockCircleOutlined,
 } from "@ant-design/icons";
 import { Link, useNavigate, useLocation } from "react-router-dom";
 import { useContext } from "react";
@@ -119,6 +120,13 @@ const SideBarStaff = () => {
                   icon: <TeamOutlined />,
                   label: (
                     <Link to="/profile/employee-management">Employees</Link>
+                  ),
+                },
+                {
+                  key: "/profile/shift-management",
+                  icon: <ClockCircleOutlined />,
+                  label: (
+                    <Link to="/profile/shift-management">Shifts</Link>
                   ),
                 },
                 {

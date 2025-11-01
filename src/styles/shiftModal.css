@@ -1,0 +1,175 @@
+/* Shift Modal Styles */
+.shift-modal .ant-modal-header {
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  border-radius: 8px 8px 0 0;
+}
+
+.shift-modal .ant-modal-title {
+  color: #ffffff;
+  font-size: 18px;
+  font-weight: 600;
+}
+
+.shift-modal .ant-modal-close {
+  color: #ffffff;
+}
+
+.shift-modal .ant-modal-close:hover {
+  color: rgba(255, 255, 255, 0.8);
+}
+
+.shift-modal .ant-modal-body {
+  padding: 24px;
+  max-height: 70vh;
+  overflow-y: auto;
+}
+
+/* Form Sections */
+.form-section {
+  margin-bottom: 8px;
+}
+
+.section-title {
+  color: #333;
+  font-size: 16px;
+  font-weight: 600;
+  margin-bottom: 16px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.section-title::before {
+  content: '';
+  width: 4px;
+  height: 20px;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  border-radius: 2px;
+}
+
+/* Form Items */
+.shift-modal .ant-form-item-label > label {
+  font-weight: 500;
+  color: #333;
+}
+
+.shift-modal .ant-form-item {
+  margin-bottom: 20px;
+}
+
+/* Input Styles */
+.shift-modal .ant-input,
+.shift-modal .ant-input-number,
+.shift-modal .ant-picker {
+  border-radius: 6px;
+}
+
+.shift-modal .ant-input:focus,
+.shift-modal .ant-input-number:focus,
+.shift-modal .ant-picker:focus,
+.shift-modal .ant-input:hover,
+.shift-modal .ant-input-number:hover,
+.shift-modal .ant-picker:hover {
+  border-color: #667eea;
+  box-shadow: 0 0 0 2px rgba(102, 126, 234, 0.1);
+}
+
+/* TextArea */
+.shift-modal .ant-input-textarea textarea {
+  border-radius: 6px;
+}
+
+/* Switch */
+.shift-modal .ant-switch-checked {
+  background: linear-gradient(135deg, #52c41a 0%, #73d13d 100%);
+}
+
+.shift-modal .ant-switch {
+  background: #bfbfbf;
+}
+
+/* Divider */
+.shift-modal .ant-divider {
+  margin: 20px 0;
+  border-color: #f0f0f0;
+}
+
+/* Modal Footer */
+.shift-modal .ant-modal-footer {
+  border-top: 1px solid #f0f0f0;
+  padding: 16px 24px;
+}
+
+.shift-modal .ant-btn-primary {
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  border: none;
+  border-radius: 6px;
+  font-weight: 500;
+  height: 40px;
+  padding: 0 24px;
+}
+
+.shift-modal .ant-btn-primary:hover {
+  background: linear-gradient(135deg, #7c8ff0 0%, #8a5bb0 100%);
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(102, 126, 234, 0.3);
+}
+
+.shift-modal .ant-btn-default {
+  border-radius: 6px;
+  height: 40px;
+  padding: 0 24px;
+  font-weight: 500;
+}
+
+/* Tooltip */
+.shift-modal .ant-form-item-tooltip {
+  color: #667eea;
+}
+
+/* InputNumber addon */
+.shift-modal .ant-input-number-group-addon {
+  background: #f5f7ff;
+  color: #667eea;
+  border-color: #d6e4ff;
+  font-weight: 500;
+}
+
+/* Responsive */
+@media (max-width: 576px) {
+  .shift-modal .ant-modal {
+    width: 95% !important;
+    max-width: 95% !important;
+  }
+
+  .section-title {
+    font-size: 14px;
+  }
+
+  .shift-modal .ant-modal-body {
+    padding: 16px;
+  }
+
+  .shift-modal .ant-form-item {
+    margin-bottom: 16px;
+  }
+}
+
+/* Scrollbar */
+.shift-modal .ant-modal-body::-webkit-scrollbar {
+  width: 6px;
+}
+
+.shift-modal .ant-modal-body::-webkit-scrollbar-track {
+  background: #f0f0f0;
+  border-radius: 3px;
+}
+
+.shift-modal .ant-modal-body::-webkit-scrollbar-thumb {
+  background: #bfbfbf;
+  border-radius: 3px;
+}
+
+.shift-modal .ant-modal-body::-webkit-scrollbar-thumb:hover {
+  background: #999;
+}

@@ -60,6 +60,11 @@ const deleteDepartmentReviewApi = (reviewId) => {
     return axios.delete(URL_API);
 };
 
+const getManagerDepartmentApi = () => {
+    const URL_API = "/v1/api/departments/manager-department";
+    return axios.get(URL_API);
+};
+
 export {
     getDepartmentsApi,
     getDepartmentByIdApi,
@@ -72,4 +77,5 @@ export {
     getDepartmentReviewsByAdminApi,
     updateDepartmentReviewApi,
     deleteDepartmentReviewApi,
+    getManagerDepartmentApi,
 };

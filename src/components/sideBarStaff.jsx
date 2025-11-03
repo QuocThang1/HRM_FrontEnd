@@ -157,6 +157,17 @@ const SideBarStaff = () => {
                 },
               ]
               : []),
+            ...(auth?.staff?.role === "manager"
+              ? [{
+                key: "/profile/department-shift-management",
+                label: (
+                  <Link to="/profile/department-shift-management">
+                    Shift Management
+                  </Link>
+                ),
+              },
+              ]
+              : []),
           ]}
         />
 

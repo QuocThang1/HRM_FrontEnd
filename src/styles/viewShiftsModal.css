@@ -1,0 +1,224 @@
+/* View Shifts Modal */
+.view-shifts-modal .ant-modal-header {
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  border-radius: 8px 8px 0 0;
+  padding: 20px 24px;
+}
+
+.view-shifts-modal .ant-modal-title {
+  color: #ffffff;
+}
+
+.view-shifts-modal .modal-title {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 18px;
+  font-weight: 600;
+}
+
+.view-shifts-modal .modal-icon {
+  font-size: 20px;
+}
+
+.view-shifts-modal .ant-modal-close {
+  color: #ffffff;
+}
+
+.view-shifts-modal .ant-modal-close:hover {
+  color: rgba(255, 255, 255, 0.8);
+}
+
+.view-shifts-modal .ant-modal-body {
+  padding: 24px;
+  max-height: 60vh;
+  overflow-y: auto;
+}
+
+/* Shift Assignment Item */
+.shift-assignment-item {
+  padding: 16px;
+  border-radius: 12px;
+  border: 2px solid #f0f0f0;
+  margin-bottom: 16px;
+  transition: all 0.3s ease;
+  background: #ffffff;
+}
+
+.shift-assignment-item:hover {
+  border-color: #667eea;
+  box-shadow: 0 4px 12px rgba(102, 126, 234, 0.1);
+}
+
+.shift-assignment-item:last-child {
+  margin-bottom: 0;
+}
+
+/* Status Colors */
+.shift-assignment-item.scheduled {
+  border-left: 4px solid #faad14;
+}
+
+.shift-assignment-item.cancelled {
+  border-left: 4px solid #ff4d4f;
+  background: #fff1f0;
+}
+
+.shift-assignment-item.completed {
+  border-left: 4px solid #52c41a;
+  background: #f6ffed;
+}
+
+/* Shift Icon Wrapper với màu theo status */
+.shift-icon-wrapper {
+  width: 48px;
+  height: 48px;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.3s ease;
+}
+
+.shift-icon-wrapper.scheduled {
+  background: linear-gradient(135deg, #faad14 0%, #ffc53d 100%);
+}
+
+.shift-icon-wrapper.cancelled {
+  background: linear-gradient(135deg, #ff4d4f 0%, #ff7875 100%);
+}
+
+.shift-icon-wrapper.completed {
+  background: linear-gradient(135deg, #52c41a 0%, #73d13d 100%);
+}
+
+.shift-icon {
+  font-size: 24px;
+  color: #ffffff;
+}
+
+/* Shift Title */
+.shift-title {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex-wrap: wrap;
+  margin-bottom: 8px;
+}
+
+.shift-code {
+  font-size: 16px;
+  font-weight: 600;
+  color: #333;
+}
+
+/* Shift Details */
+.shift-details {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  margin-top: 8px;
+}
+
+.detail-row {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 14px;
+}
+
+.detail-icon {
+  color: #667eea;
+  font-size: 14px;
+  flex-shrink: 0;
+}
+
+.detail-row.description {
+  padding: 8px 12px;
+  background: #f5f7ff;
+  border-radius: 6px;
+  margin-top: 4px;
+}
+
+/* Completed item style */
+.shift-assignment-item.completed {
+  opacity: 0.9;
+}
+
+.shift-assignment-item.completed .shift-code {
+  color: #52c41a;
+}
+
+/* Cancelled item style */
+.shift-assignment-item.cancelled .shift-code {
+  color: #ff4d4f;
+  text-decoration: line-through;
+}
+
+/* List Actions */
+.shift-assignment-item .ant-list-item-action {
+  margin-left: 16px;
+}
+
+.shift-assignment-item .ant-btn-link {
+  font-weight: 500;
+}
+
+/* Dropdown Menu */
+.ant-dropdown-menu-item {
+  padding: 8px 12px;
+}
+
+.ant-dropdown-menu-item .anticon {
+  margin-right: 8px;
+}
+
+/* Scrollbar */
+.view-shifts-modal .ant-modal-body::-webkit-scrollbar {
+  width: 6px;
+}
+
+.view-shifts-modal .ant-modal-body::-webkit-scrollbar-track {
+  background: #f0f0f0;
+  border-radius: 3px;
+}
+
+.view-shifts-modal .ant-modal-body::-webkit-scrollbar-thumb {
+  background: #bfbfbf;
+  border-radius: 3px;
+}
+
+.view-shifts-modal .ant-modal-body::-webkit-scrollbar-thumb:hover {
+  background: #999;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .view-shifts-modal {
+    width: 95% !important;
+    max-width: 95% !important;
+  }
+
+  .shift-assignment-item {
+    padding: 12px;
+  }
+
+  .shift-icon-wrapper {
+    width: 40px;
+    height: 40px;
+  }
+
+  .shift-icon {
+    font-size: 20px;
+  }
+
+  .shift-code {
+    font-size: 14px;
+  }
+
+  .shift-assignment-item .ant-list-item-action {
+    margin-left: 0;
+    margin-top: 12px;
+  }
+}

@@ -1,0 +1,410 @@
+.manager-department-page {
+  padding: 0;
+  background: #f6f9fb;
+  min-height: 100vh;
+}
+
+/* ========== Page Header ========== */
+.page-header {
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  padding: 32px 40px;
+  border-radius: 0 0 24px 24px;
+  box-shadow: 0 8px 32px rgba(102, 126, 234, 0.2);
+  margin-bottom: 32px;
+}
+
+.header-content {
+  max-width: 1400px;
+  margin: 0 auto;
+}
+
+.page-title {
+  color: #ffffff !important;
+  margin: 0 0 16px 0 !important;
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  font-size: 28px;
+}
+
+.dept-header-info {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.dept-title {
+  color: #ffffff !important;
+  margin: 0 !important;
+  font-size: 32px;
+  font-weight: 700;
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.dept-subtitle {
+  color: rgba(255, 255, 255, 0.9);
+  font-size: 16px;
+}
+
+/* ========== Content Wrapper ========== */
+.content-wrapper {
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 0 32px 32px 32px;
+}
+
+/* ========== Stats Cards ========== */
+.stat-card {
+  border-radius: 12px;
+  border: none;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
+  transition: all 0.3s ease;
+}
+
+.stat-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+.stat-card .ant-statistic-title {
+  font-size: 14px;
+  color: #8c8c8c;
+  margin-bottom: 8px;
+}
+
+.stat-card .ant-statistic-content {
+  font-size: 24px;
+  font-weight: 600;
+}
+
+/* ========== Staff Card ========== */
+.staff-card {
+  border-radius: 12px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
+  border: none;
+}
+
+.card-title {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 16px;
+  font-weight: 600;
+}
+
+.title-icon {
+  color: #667eea;
+  font-size: 18px;
+}
+
+/* ========== Staff Item Cards ========== */
+.staff-item-card {
+  border-radius: 16px;
+  border: 2px solid #f0f0f0;
+  transition: all 0.3s ease;
+  height: 100%;
+  position: relative;
+  overflow: hidden;
+  background: #ffffff;
+}
+
+.staff-item-card:hover {
+  border-color: #d6e4ff;
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
+  transform: translateY(-4px);
+}
+
+/* Manager Highlight - Màu vàng */
+.staff-item-card.manager {
+  background: linear-gradient(135deg, #fffbf0 0%, #fff7e6 100%);
+  border-color: #ffd666;
+  box-shadow: 0 4px 12px rgba(255, 193, 7, 0.2);
+}
+
+.staff-item-card.manager:hover {
+  border-color: #ffc53d;
+  box-shadow: 0 8px 20px rgba(255, 193, 7, 0.3);
+  transform: translateY(-6px);
+}
+
+.manager-badge {
+  position: absolute;
+  top: 12px;
+  right: 12px;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 6px 12px;
+  background: #faad14;
+  color: #ffffff;
+  font-size: 12px;
+  font-weight: 600;
+  border-radius: 12px;
+  box-shadow: 0 2px 8px rgba(250, 173, 20, 0.4);
+  z-index: 1;
+}
+
+.manager-badge .anticon {
+  font-size: 14px;
+}
+
+.staff-item-card .ant-card-body {
+  padding: 24px 16px;
+  text-align: center;
+}
+
+.staff-avatar-wrapper {
+  margin-bottom: 16px;
+  display: flex;
+  justify-content: center;
+}
+
+.staff-avatar {
+  border: 4px solid #f0f0f0;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.staff-item-card.manager .staff-avatar {
+  border-color: #ffd666;
+  box-shadow: 0 4px 12px rgba(255, 193, 7, 0.3);
+}
+
+.staff-info {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  align-items: center;
+}
+
+.staff-name {
+  margin: 0 !important;
+  color: #333;
+  font-size: 16px;
+  text-align: center;
+  word-break: break-word;
+}
+
+.role-tag {
+  font-size: 11px;
+  border-radius: 4px;
+  font-weight: 600;
+}
+
+.contact-info {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  margin-top: 12px;
+  padding-top: 12px;
+  border-top: 1px solid #f0f0f0;
+}
+
+.staff-item-card.manager .contact-info {
+  border-top-color: #ffe7ba;
+}
+
+.contact-item {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 6px 12px;
+  background: #fafafa;
+  border-radius: 6px;
+  text-align: left;
+}
+
+.staff-item-card.manager .contact-item {
+  background: rgba(255, 193, 7, 0.08);
+}
+
+.contact-icon {
+  font-size: 14px;
+  color: #8c8c8c;
+  flex-shrink: 0;
+}
+
+.contact-text {
+  font-size: 13px;
+  color: #595959;
+  flex: 1;
+  min-width: 0;
+}
+
+/* ========== Loading ========== */
+.loading-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 60vh;
+}
+
+/* ========== Scrollbar ========== */
+.manager-department-page ::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+.manager-department-page ::-webkit-scrollbar-track {
+  background: #f0f0f0;
+  border-radius: 4px;
+}
+
+.manager-department-page ::-webkit-scrollbar-thumb {
+  background: #bfbfbf;
+  border-radius: 4px;
+}
+
+.manager-department-page ::-webkit-scrollbar-thumb:hover {
+  background: #999;
+}
+
+/* ========== Responsive ========== */
+@media (max-width: 1200px) {
+  .content-wrapper {
+    padding: 0 24px 24px 24px;
+  }
+
+  .stat-card .ant-statistic-content {
+    font-size: 20px;
+  }
+}
+
+@media (max-width: 768px) {
+  .page-header {
+    padding: 24px;
+    border-radius: 0 0 16px 16px;
+  }
+
+  .page-title {
+    font-size: 24px;
+  }
+
+  .dept-title {
+    font-size: 26px;
+  }
+
+  .dept-subtitle {
+    font-size: 14px;
+  }
+
+  .content-wrapper {
+    padding: 0 16px 24px 16px;
+  }
+
+  .staff-item-card .ant-card-body {
+    padding: 20px 12px;
+  }
+
+  .staff-avatar {
+    width: 64px !important;
+    height: 64px !important;
+  }
+
+  .staff-name {
+    font-size: 14px;
+  }
+
+  .contact-text {
+    font-size: 12px;
+  }
+
+  .stat-card .ant-statistic-content {
+    font-size: 18px;
+  }
+}
+
+@media (max-width: 576px) {
+  .page-header {
+    padding: 20px;
+  }
+
+  .page-title {
+    font-size: 20px;
+    margin-bottom: 12px !important;
+  }
+
+  .dept-title {
+    font-size: 22px;
+  }
+
+  .dept-header-info {
+    gap: 6px;
+  }
+
+  .stat-card .ant-statistic-content {
+    font-size: 16px;
+  }
+
+  .stat-card .ant-statistic-title {
+    font-size: 13px;
+  }
+
+  .manager-badge {
+    top: 8px;
+    right: 8px;
+    padding: 4px 8px;
+    font-size: 11px;
+  }
+
+  .contact-item {
+    padding: 4px 8px;
+  }
+}
+
+/* ========== Animation ========== */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.staff-item-card {
+  animation: fadeIn 0.3s ease-out;
+}
+
+/* ========== Print Styles ========== */
+@media print {
+  .page-header {
+    background: #667eea !important;
+    -webkit-print-color-adjust: exact;
+    print-color-adjust: exact;
+  }
+
+  .staff-item-card.manager {
+    background: #fffbf0 !important;
+    border-color: #ffd666 !important;
+    -webkit-print-color-adjust: exact;
+    print-color-adjust: exact;
+  }
+}
+
+.shift-management-btn {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 12px 24px;
+  background: rgba(255, 255, 255, 0.95);
+  color: #667eea;
+  border: none;
+  border-radius: 8px;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  white-space: nowrap;
+}
+
+.shift-management-btn:hover {
+  background: #ffffff;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+}
+
+.shift-management-btn .anticon {
+  font-size: 16px;
+}

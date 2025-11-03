@@ -19,6 +19,11 @@ const getShiftAssignmentApi = (id) => {
     return axios.get(URL_API);
 };
 
+const getShiftAssignmentByStaffIdApi = () => {
+    const URL_API = `/v1/api/shift-schedule`;
+    return axios.get(URL_API);
+};
+
 const updateShiftAssignmentApi = (id, updateData) => {
     const URL_API = `/v1/api/shift-assignments/${id}`;
     return axios.put(URL_API, updateData);
@@ -35,4 +40,5 @@ export {
     getShiftAssignmentApi,
     updateShiftAssignmentApi,
     deleteShiftAssignmentApi,
+    getShiftAssignmentByStaffIdApi,
 };

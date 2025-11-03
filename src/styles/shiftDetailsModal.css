@@ -1,0 +1,160 @@
+/* Shift Details Modal */
+.shift-details-modal .ant-modal-header {
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  border-radius: 8px 8px 0 0;
+  padding: 20px 24px;
+}
+
+.shift-details-modal .ant-modal-title {
+  color: #ffffff;
+}
+
+.shift-details-modal .modal-title {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 18px;
+  font-weight: 600;
+}
+
+.shift-details-modal .modal-icon {
+  font-size: 20px;
+}
+
+.shift-details-modal .ant-modal-close {
+  color: #ffffff;
+}
+
+.shift-details-modal .ant-modal-close:hover {
+  color: rgba(255, 255, 255, 0.8);
+}
+
+.shift-details-modal .ant-modal-body {
+  padding: 24px;
+}
+
+/* Shift Detail Item */
+.shift-detail-item {
+  padding: 0;
+  border: none;
+}
+
+.shift-detail-content {
+  width: 100%;
+  padding: 20px;
+  border-radius: 12px;
+  background: #ffffff;
+  border: 2px solid #f0f0f0;
+}
+
+.shift-detail-item.scheduled .shift-detail-content {
+  border-left: 4px solid #faad14;
+  background: #fffbe6;
+}
+
+.shift-detail-item.completed .shift-detail-content {
+  border-left: 4px solid #52c41a;
+  background: #f6ffed;
+}
+
+/* Shift Header */
+.shift-header {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  margin-bottom: 20px;
+  padding-bottom: 16px;
+  border-bottom: 2px solid #f0f0f0;
+}
+
+.shift-icon-wrapper {
+  width: 56px;
+  height: 56px;
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+}
+
+.shift-icon {
+  font-size: 28px;
+  color: #ffffff;
+}
+
+.shift-title-section {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+.shift-name {
+  margin: 0;
+  color: #333;
+  font-size: 20px;
+}
+
+/* Shift Info Grid */
+.shift-info-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 16px;
+  margin-bottom: 16px;
+}
+
+.info-item {
+  display: flex;
+  gap: 12px;
+  padding: 12px;
+  border-radius: 8px;
+  background: rgba(102, 126, 234, 0.05);
+}
+
+.info-icon {
+  color: #667eea;
+  font-size: 18px;
+  margin-top: 4px;
+}
+
+.info-label {
+  display: block;
+  font-size: 12px;
+  margin-bottom: 4px;
+}
+
+.info-value {
+  display: block;
+  font-size: 14px;
+  color: #333;
+}
+
+/* Shift Description */
+.shift-description {
+  padding: 12px;
+  border-radius: 8px;
+  background: rgba(102, 126, 234, 0.05);
+}
+
+/* Responsive */
+@media (max-width: 576px) {
+  .shift-details-modal {
+    width: 95% !important;
+    max-width: 95% !important;
+  }
+
+  .shift-header {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .shift-info-grid {
+    grid-template-columns: 1fr;
+    gap: 12px;
+  }
+
+  .shift-name {
+    font-size: 18px;
+  }
+}

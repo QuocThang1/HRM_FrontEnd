@@ -170,6 +170,18 @@ const SideBarStaff = () => {
               },
               ]
               : []),
+            ...(auth?.staff?.role === "staff"
+              ? [{
+                key: "/profile/shift-schedule",
+                icon: <CalendarOutlined />,
+                label: (
+                  <Link to="/profile/shift-schedule">
+                    Shift Schedule
+                  </Link>
+                ),
+              },
+              ]
+              : []),
           ]}
         />
 

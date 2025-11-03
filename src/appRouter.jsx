@@ -17,6 +17,7 @@ import ShiftManagementPage from "./pages/ShiftType/listOfShift.jsx";
 import ManagerDepartmentPage from "./pages/DepartmentShift/listOfDepartment.jsx";
 import DepartmentShiftsPage from "./pages/DepartmentShift/departmentShifts.jsx";
 import StaffShiftAssignmentPage from "./pages/DepartmentShift/staffShiftManagement/staffShiftAssignment.jsx";
+import StaffShiftSchedulePage from "./pages/Staff/ShiftSchedule/staffShiftSchedule.jsx";
 
 const router = createBrowserRouter([
     {
@@ -99,6 +100,14 @@ const router = createBrowserRouter([
                 element: (
                     <ProtectedRoute allowedRoles={["manager"]}>
                         <StaffShiftAssignmentPage />
+                    </ProtectedRoute>
+                ),
+            },
+            {
+                path: "shift-schedule",
+                element: (
+                    <ProtectedRoute allowedRoles={["staff"]}>
+                        <StaffShiftSchedulePage />
                     </ProtectedRoute>
                 ),
             },

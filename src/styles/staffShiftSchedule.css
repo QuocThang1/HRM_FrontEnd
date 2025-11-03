@@ -1,0 +1,375 @@
+/* Staff Shift Schedule Page */
+.staff-shift-schedule-page {
+  padding: 0;
+  background: #f6f9fb;
+  min-height: 100vh;
+}
+
+/* Page Header */
+.page-header {
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  padding: 32px 40px;
+  border-radius: 0 0 24px 24px;
+  box-shadow: 0 8px 32px rgba(102, 126, 234, 0.2);
+  margin-bottom: 32px;
+}
+
+.header-content {
+  max-width: 1400px;
+  margin: 0 auto;
+}
+
+.header-title-section {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+.header-icon {
+  font-size: 48px;
+  color: rgba(255, 255, 255, 0.9);
+}
+
+.page-title {
+  color: #ffffff !important;
+  margin: 0 !important;
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.page-subtitle {
+  color: rgba(255, 255, 255, 0.9);
+  font-size: 15px;
+}
+
+/* Content Wrapper */
+.content-wrapper {
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 0 32px 32px 32px;
+}
+
+/* Stats Container */
+.stats-container {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 24px;
+  margin-bottom: 24px;
+}
+
+.stat-card {
+  border-radius: 12px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
+  border: none;
+  overflow: hidden;
+}
+
+.stat-card.scheduled {
+  border-left: 4px solid #faad14;
+}
+
+.stat-card.completed {
+  border-left: 4px solid #52c41a;
+}
+
+.stat-content {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+.stat-icon {
+  width: 60px;
+  height: 60px;
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 28px;
+}
+
+.stat-card.scheduled .stat-icon {
+  background: #fffbe6;
+  color: #faad14;
+}
+
+.stat-card.completed .stat-icon {
+  background: #f6ffed;
+  color: #52c41a;
+}
+
+.stat-info {
+  flex: 1;
+}
+
+.stat-value {
+  font-size: 32px;
+  font-weight: 700;
+  color: #333;
+  line-height: 1;
+  margin-bottom: 4px;
+}
+
+.stat-label {
+  font-size: 14px;
+  color: #8c8c8c;
+}
+
+/* Upcoming Shifts Card */
+.upcoming-shifts-card {
+  margin-bottom: 24px;
+  border-radius: 12px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
+}
+
+.upcoming-shifts-card .card-title {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 16px;
+  font-weight: 600;
+}
+
+.upcoming-shifts-card .title-icon {
+  color: #667eea;
+  font-size: 18px;
+}
+
+.upcoming-shifts-list {
+  display: grid;
+  gap: 16px;
+}
+
+.upcoming-shift-item {
+  display: flex;
+  gap: 16px;
+  padding: 16px;
+  border-radius: 12px;
+  background: linear-gradient(135deg, #f5f7ff 0%, #e8ecff 100%);
+  border: 2px solid #d6e4ff;
+  transition: all 0.3s ease;
+}
+
+.upcoming-shift-item:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(102, 126, 234, 0.15);
+}
+
+.shift-date {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-width: 70px;
+  padding: 12px;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  border-radius: 12px;
+  color: #ffffff;
+}
+
+.date-number {
+  font-size: 28px;
+  font-weight: 700;
+  line-height: 1;
+}
+
+.date-month {
+  font-size: 12px;
+  font-weight: 600;
+  text-transform: uppercase;
+  opacity: 0.9;
+}
+
+.shift-details {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.shift-name {
+  font-size: 18px;
+  font-weight: 600;
+  color: #333;
+  margin: 0;
+}
+
+.shift-time {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 14px;
+  color: #595959;
+}
+
+.time-icon {
+  color: #667eea;
+}
+
+.shift-period {
+  font-size: 12px;
+  color: #8c8c8c;
+}
+
+/* Legend Card */
+.legend-card {
+  margin-bottom: 24px;
+  border-radius: 12px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
+}
+
+.legend-content {
+  display: flex;
+  align-items: center;
+  gap: 32px;
+  flex-wrap: wrap;
+}
+
+.legend-item {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.legend-note {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-left: auto;
+}
+
+.note-icon {
+  color: #667eea;
+}
+
+/* Calendar Card */
+.calendar-card {
+  border-radius: 12px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
+}
+
+.calendar-card .card-title {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 16px;
+  font-weight: 600;
+}
+
+.calendar-card .title-icon {
+  color: #667eea;
+  font-size: 18px;
+}
+
+/* Calendar Styles */
+.shift-calendar {
+  background: #ffffff;
+}
+
+.shift-calendar .ant-picker-calendar-header {
+  padding: 16px 24px;
+  border-bottom: 2px solid #f0f0f0;
+}
+
+.shift-calendar .ant-picker-calendar-date {
+  border: 1px solid #f0f0f0;
+  cursor: pointer;
+}
+
+.shift-calendar .ant-picker-calendar-date:hover {
+  background: #f5f7ff;
+}
+
+.shift-calendar
+  .ant-picker-cell-in-view.ant-picker-cell-selected
+  .ant-picker-cell-inner {
+  background: #e8ecff;
+}
+
+.shift-calendar
+  .ant-picker-cell-in-view.ant-picker-cell-today
+  .ant-picker-cell-inner::before {
+  border-color: #667eea;
+}
+
+.calendar-cell-content {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  margin-top: 4px;
+}
+
+.shift-badge {
+  font-size: 12px;
+  margin: 0;
+}
+
+.shift-badge.scheduled .ant-badge-status-dot {
+  background-color: #faad14;
+}
+
+.shift-badge.completed .ant-badge-status-dot {
+  background-color: #52c41a;
+}
+
+.shift-badge-text {
+  font-size: 11px;
+  font-weight: 500;
+}
+
+/* Loading */
+.loading-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 400px;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .page-header {
+    padding: 24px;
+    border-radius: 0 0 16px 16px;
+  }
+
+  .content-wrapper {
+    padding: 0 16px 24px 16px;
+  }
+
+  .header-title-section {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .header-icon {
+    font-size: 36px;
+  }
+
+  .stats-container {
+    grid-template-columns: 1fr;
+    gap: 16px;
+  }
+
+  .stat-value {
+    font-size: 28px;
+  }
+
+  .upcoming-shift-item {
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+  }
+
+  .shift-date {
+    width: 100%;
+  }
+
+  .legend-content {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 16px;
+  }
+
+  .legend-note {
+    margin-left: 0;
+  }
+}

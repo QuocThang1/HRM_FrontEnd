@@ -42,30 +42,30 @@ const AddShiftModal = ({ open, onClose, onSuccess }) => {
         onClose();
     };
 
-    // Disable toTime hours trước fromTime
-    const disabledToHours = () => {
-        const fromTime = form.getFieldValue('fromTime');
-        if (!fromTime) return [];
-
-        const hours = [];
-        for (let i = 0; i < fromTime.hour(); i++) {
-            hours.push(i);
-        }
-        return hours;
-    };
-
-    // Validate toTime phải sau fromTime
     const validateToTime = (_, value) => {
         const fromTime = form.getFieldValue('fromTime');
         if (!value || !fromTime) {
             return Promise.resolve();
         }
 
-        if (value.hour() <= fromTime.hour()) {
+        // so sánh giờ, cho phép toTime là giờ ngày tiếp theo
+        let diff = value.hour() - fromTime.hour();
+        if (diff <= 0) diff += 24; // nếu toTime nhỏ hơn hoặc bằng => tính là ngày tiếp theo
+        if (diff <= 0) {
             return Promise.reject(new Error('End time must be after start time!'));
         }
-
         return Promise.resolve();
+    };
+
+    const handleFromTimeChange = (time) => {
+        if (!time) {
+            form.setFieldsValue({ toTime: undefined });
+            form.validateFields(['toTime']).catch(() => { });
+            return;
+        }
+        const defaultTo = time.add(8, 'hour');
+        form.setFieldsValue({ toTime: defaultTo });
+        form.validateFields(['toTime']).catch(() => { });
     };
 
     return (
@@ -149,10 +149,7 @@ const AddShiftModal = ({ open, onClose, onSuccess }) => {
                                     size="large"
                                     showNow={false}
                                     hideDisabledOptions
-                                    onChange={() => {
-                                        // Reset toTime validation khi fromTime thay đổi
-                                        form.validateFields(['toTime']);
-                                    }}
+                                    onChange={handleFromTimeChange}
                                 />
                             </Form.Item>
                         </Col>
@@ -174,9 +171,6 @@ const AddShiftModal = ({ open, onClose, onSuccess }) => {
                                     size="large"
                                     showNow={false}
                                     hideDisabledOptions
-                                    disabledTime={() => ({
-                                        disabledHours: disabledToHours,
-                                    })}
                                 />
                             </Form.Item>
                         </Col>

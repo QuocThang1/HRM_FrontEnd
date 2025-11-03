@@ -14,6 +14,9 @@ import ContactPage from "./pages/contact.jsx";
 import ApplyCVPage from "./pages/applyCV.jsx";
 import CandidateCVManagement from "./pages/Candidate/candidateCVManagement.jsx";
 import ShiftManagementPage from "./pages/ShiftType/listOfShift.jsx";
+import ManagerDepartmentPage from "./pages/DepartmentShift/listOfDepartment.jsx";
+import DepartmentShiftsPage from "./pages/DepartmentShift/departmentShifts.jsx";
+import StaffShiftAssignmentPage from "./pages/DepartmentShift/staffShiftManagement/staffShiftAssignment.jsx";
 
 const router = createBrowserRouter([
     {
@@ -72,6 +75,30 @@ const router = createBrowserRouter([
                 element: (
                     <ProtectedRoute allowedRoles={["admin"]}>
                         <DepartmentPage />
+                    </ProtectedRoute>
+                ),
+            },
+            {
+                path: "department-shift-management",
+                element: (
+                    <ProtectedRoute allowedRoles={["manager"]}>
+                        <ManagerDepartmentPage />
+                    </ProtectedRoute>
+                ),
+            },
+            {
+                path: "department-shift-management/:departmentId",
+                element: (
+                    <ProtectedRoute allowedRoles={["manager"]}>
+                        <DepartmentShiftsPage />
+                    </ProtectedRoute>
+                ),
+            },
+            {
+                path: "staff-shift-assignment/:staffId",
+                element: (
+                    <ProtectedRoute allowedRoles={["manager"]}>
+                        <StaffShiftAssignmentPage />
                     </ProtectedRoute>
                 ),
             },

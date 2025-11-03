@@ -10,6 +10,7 @@ import {
   StarOutlined,
   SafetyOutlined,
   ClockCircleOutlined,
+  CalendarOutlined,
 } from "@ant-design/icons";
 import { Link, useNavigate, useLocation } from "react-router-dom";
 import { useContext } from "react";
@@ -160,6 +161,7 @@ const SideBarStaff = () => {
             ...(auth?.staff?.role === "manager"
               ? [{
                 key: "/profile/department-shift-management",
+                icon: <CalendarOutlined />,
                 label: (
                   <Link to="/profile/department-shift-management">
                     Shift Management

@@ -1,13 +1,13 @@
 .register-page {
   display: flex;
   min-height: 100vh;
-  background: #f6f9fb;
+  background: #f8fafc; /* Light blue-gray */
 }
 
 /* ========== Left Side - Branding ========== */
 .register-branding {
   flex: 1;
-  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  background: #2563eb; /* Blue 600 - Solid */
   display: flex;
   align-items: center;
   justify-content: center;
@@ -115,6 +115,8 @@
   border-radius: 16px;
   box-shadow: 0 4px 24px rgba(0, 0, 0, 0.08);
   padding: 40px;
+  background: #ffffff;
+  border: 1px solid #e2e8f0;
 }
 
 .form-header {
@@ -123,25 +125,21 @@
 }
 
 .form-title {
-  color: #333 !important;
+  color: #0f172a !important; /* Slate 900 */
   font-size: 32px !important;
   font-weight: 700 !important;
   margin-bottom: 8px !important;
-  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
 }
 
 .form-subtitle {
-  color: #666;
+  color: #64748b; /* Slate 500 */
   font-size: 15px;
 }
 
 /* ========== Form Styles ========== */
 .register-form .ant-form-item-label > label {
   font-weight: 600;
-  color: #333;
+  color: #1e293b; /* Slate 800 */
   font-size: 14px;
 }
 
@@ -150,7 +148,7 @@
 .register-form .ant-picker,
 .register-form .ant-select-selector {
   border-radius: 8px;
-  border: 1.5px solid #d9d9d9;
+  border: 1.5px solid #e2e8f0;
   transition: all 0.3s ease;
 }
 
@@ -158,7 +156,7 @@
 .register-form .ant-input-affix-wrapper:hover,
 .register-form .ant-picker:hover,
 .register-form .ant-select-selector:hover {
-  border-color: #667eea;
+  border-color: #2563eb; /* Blue 600 */
 }
 
 .register-form .ant-input:focus,
@@ -166,13 +164,13 @@
 .register-form .ant-input-focused,
 .register-form .ant-picker-focused,
 .register-form .ant-select-focused .ant-select-selector {
-  border-color: #667eea;
-  box-shadow: 0 0 0 2px rgba(102, 126, 234, 0.1);
+  border-color: #2563eb; /* Blue 600 */
+  box-shadow: 0 0 0 2px rgba(37, 99, 235, 0.1);
 }
 
 .register-form .ant-input-prefix,
 .register-form .ant-picker-suffix {
-  color: #667eea;
+  color: #2563eb; /* Blue 600 */
   font-size: 16px;
 }
 
@@ -198,19 +196,20 @@
 
 /* Register Button */
 .register-button {
-  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%) !important;
+  background: #2563eb !important; /* Blue 600 - Solid */
   border: none !important;
   height: 48px !important;
   font-size: 16px !important;
   font-weight: 600 !important;
   border-radius: 8px !important;
-  box-shadow: 0 4px 12px rgba(102, 126, 234, 0.3);
+  box-shadow: 0 4px 12px rgba(37, 99, 235, 0.3);
   transition: all 0.3s ease;
 }
 
 .register-button:hover {
+  background: #1e40af !important; /* Blue 800 */
   transform: translateY(-2px);
-  box-shadow: 0 6px 20px rgba(102, 126, 234, 0.4) !important;
+  box-shadow: 0 6px 20px rgba(37, 99, 235, 0.4) !important;
 }
 
 .register-button:active {
@@ -223,14 +222,18 @@
   margin-top: 24px;
 }
 
+.login-link .ant-typography {
+  color: #64748b; /* Slate 500 */
+}
+
 .link-text {
-  color: #667eea;
+  color: #2563eb; /* Blue 600 */
   font-weight: 600;
   transition: all 0.3s ease;
 }
 
 .link-text:hover {
-  color: #764ba2;
+  color: #1e40af; /* Blue 800 */
   text-decoration: underline;
 }
 
@@ -280,4 +283,13 @@
 
 .register-form-section::-webkit-scrollbar-thumb:hover {
   background: #bfbfbf;
+}
+
+/* ========== Print Styles ========== */
+@media print {
+  .register-branding {
+    background: #2563eb !important;
+    -webkit-print-color-adjust: exact;
+    print-color-adjust: exact;
+  }
 }

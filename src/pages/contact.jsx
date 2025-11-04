@@ -15,7 +15,7 @@ const ContactPage = () => {
     const [form] = Form.useForm();
     const [loading, setLoading] = useState(false);
 
-    const handleSubmit = async (values) => {
+    const handleSubmit = async () => {
         setLoading(true);
         // Simulate API call
         setTimeout(() => {

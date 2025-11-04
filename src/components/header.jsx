@@ -70,7 +70,6 @@ const Header = () => {
         mode="horizontal"
         items={leftItems}
         className="header-menu"
-        theme="dark"
         selectedKeys={[location.pathname]}
       />
 

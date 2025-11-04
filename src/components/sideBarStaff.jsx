@@ -168,6 +168,15 @@ const SideBarStaff = () => {
                   </Link>
                 ),
               },
+              {
+                key: "/profile/attendance-management",
+                icon: <CalendarOutlined />,
+                label: (
+                  <Link to="/profile/attendance-management">
+                    Attendance Management
+                  </Link>
+                ),
+              },
               ]
               : []),
             ...(auth?.staff?.role === "staff"

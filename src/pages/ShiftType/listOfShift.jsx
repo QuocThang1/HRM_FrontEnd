@@ -53,8 +53,14 @@ const ShiftManagementPage = () => {
     const handleDelete = async (shiftId) => {
         try {
             setLoading(true);
-            await deleteShiftTypeApi(shiftId);
-            toast.success("Shift deleted successfully", { autoClose: 2000 });
+            const res = await deleteShiftTypeApi(shiftId);
+            if (res && res.EC === 0) {
+                toast.success(res.EM, { autoClose: 2000 });
+            } else {
+                toast.error(res?.EM || "Failed to delete shift", {
+                    autoClose: 2000,
+                });
+            }
             fetchShifts();
         } catch (error) {
             console.error("Error deleting shift:", error);

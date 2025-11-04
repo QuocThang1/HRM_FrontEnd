@@ -180,6 +180,15 @@ const SideBarStaff = () => {
                   </Link>
                 ),
               },
+              {
+                key: "/profile/attendance",
+                icon: <CalendarOutlined />,
+                label: (
+                  <Link to="/profile/attendance">
+                    Attendance
+                  </Link>
+                ),
+              },
               ]
               : []),
           ]}

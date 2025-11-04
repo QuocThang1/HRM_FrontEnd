@@ -9,10 +9,10 @@ import {
     ManOutlined,
     WomanOutlined,
 } from "@ant-design/icons";
-import { addNewStaffApi } from "../../utils/Api/staffApi";
+import { addNewStaffApi } from "../../../utils/Api/staffApi";
 import { toast } from "react-toastify";
 import dayjs from "dayjs";
-import "../../styles/addEmployeeModal.css";
+import "../../../styles/addEmployeeModal.css";
 
 const { Option } = Select;
 

@@ -1,9 +1,9 @@
 import { useState, useEffect } from "react";
 import { Modal, Button, List, Empty, Tag } from "antd";
 import { PlusOutlined, ClockCircleOutlined } from "@ant-design/icons";
-import { getAvailableShiftsForDepartmentApi } from "../../utils/Api/departmentShiftApi";
+import { getAvailableShiftsForDepartmentApi } from "../../../utils/Api/departmentShiftApi";
 import { toast } from "react-toastify";
-import "../../styles/addDepartmentShiftModal.css";
+import "../../../styles/addDepartmentShiftModal.css";
 
 const AddShiftModal = ({ open, onClose, departmentId, onSuccess }) => {
     const [availableShifts, setAvailableShifts] = useState([]);

@@ -3,7 +3,7 @@ import { useEffect, useState } from "react";
 import {
     getAllShiftTypesApi,
     deleteShiftTypeApi,
-} from "../../utils/Api/shiftTypeApi";
+} from "../../../utils/Api/shiftTypeApi";
 import {
     PlusOutlined,
     EditOutlined,
@@ -13,7 +13,7 @@ import {
 import AddShiftModal from "./addShiftModal";
 import EditShiftModal from "./editShiftModal";
 import { toast } from "react-toastify";
-import "../../styles/listOfShift.css";
+import "../../../styles/listOfShift.css";
 
 const ShiftManagementPage = () => {
     const [dataSource, setDataSource] = useState([]);

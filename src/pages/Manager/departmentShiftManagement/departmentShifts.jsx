@@ -19,17 +19,17 @@ import {
     ExclamationCircleOutlined,
 } from "@ant-design/icons";
 import { useParams, useNavigate } from "react-router-dom";
-import { getDepartmentByIdApi } from "../../utils/Api/departmentApi";
+import { getDepartmentByIdApi } from "../../../utils/Api/departmentApi";
 import {
     getDepartmentShiftsApi,
     addShiftToDepartmentApi,
     deleteDepartmentShiftApi,
     updateDepartmentShiftStatusApi,
-} from "../../utils/Api/departmentShiftApi";
+} from "../../../utils/Api/departmentShiftApi";
 import { toast } from "react-toastify";
 import { Modal } from "antd";
 import AddShiftModal from "./addShiftModal";
-import "../../styles/departmentShifts.css";
+import "../../../styles/departmentShifts.css";
 
 const { Title, Text } = Typography;
 const { confirm } = Modal;

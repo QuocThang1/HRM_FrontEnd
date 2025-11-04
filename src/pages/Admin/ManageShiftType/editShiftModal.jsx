@@ -1,17 +1,49 @@
 import { Modal, Form, Input, TimePicker, InputNumber, Switch, Row, Col, Divider } from "antd";
+import { useEffect } from "react";
 import { ClockCircleOutlined, FieldTimeOutlined } from "@ant-design/icons";
-import { createShiftTypeApi } from "../../utils/Api/shiftTypeApi";
+import {
+    getShiftTypeApi,
+    updateShiftTypeApi,
+} from "../../../utils/Api/shiftTypeApi";
 import { toast } from "react-toastify";
-import "../../styles/shiftModal.css";
+import dayjs from "dayjs";
+import "../../../styles/shiftModal.css";
 
-const AddShiftModal = ({ open, onClose, onSuccess }) => {
+const EditShiftModal = ({ open, onClose, shiftId, onSuccess }) => {
     const [form] = Form.useForm();
+
+    useEffect(() => {
+        if (open && shiftId) {
+            fetchShiftDetails();
+        } else {
+            form.resetFields();
+        }
+    }, [open, shiftId]);
+
+    const fetchShiftDetails = async () => {
+        try {
+            const res = await getShiftTypeApi(shiftId);
+            if (res.data) {
+                form.setFieldsValue({
+                    shiftCode: res.data.shiftCode,
+                    description: res.data.description,
+                    fromTime: dayjs(res.data.fromTime, "HH:00"),
+                    toTime: dayjs(res.data.toTime, "HH:00"),
+                    allowedLateMinute: res.data.allowedLateMinute,
+                    allowedEarlyLeaveMinute: res.data.allowedEarlyLeaveMinute,
+                    isOvertime: res.data.isOvertime === "overtime",
+                });
+            }
+        } catch (error) {
+            console.error("Error fetching shift details:", error);
+            toast.error("Failed to load shift details", { autoClose: 2000 });
+        }
+    };
 
     const handleSubmit = async () => {
         try {
             const values = await form.validateFields();
 
-            // Format time to HH:00
             const submitData = {
                 ...values,
                 fromTime: values.fromTime.format("HH:00"),
@@ -19,21 +51,18 @@ const AddShiftModal = ({ open, onClose, onSuccess }) => {
                 isOvertime: values.isOvertime ? "overtime" : "normal"
             };
 
-            console.log("Submit data:", submitData);
-            const res = await createShiftTypeApi(submitData);
-
+            const res = await updateShiftTypeApi(shiftId, submitData);
             if (res.EC === 0) {
                 toast.success(res.EM, { autoClose: 2000 });
             } else {
                 toast.error(res.EM, { autoClose: 2000 });
                 return;
             }
-            form.resetFields();
             onSuccess();
             onClose();
         } catch (error) {
-            console.error("Error creating shift:", error);
-            toast.error("Failed to create shift", { autoClose: 2000 });
+            console.error("Error updating shift:", error);
+            toast.error("Failed to update shift", { autoClose: 2000 });
         }
     };
 
@@ -73,26 +102,18 @@ const AddShiftModal = ({ open, onClose, onSuccess }) => {
             title={
                 <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
                     <ClockCircleOutlined style={{ color: '#667eea' }} />
-                    <span>Add New Shift</span>
+                    <span>Edit Shift</span>
                 </div>
             }
             open={open}
             onOk={handleSubmit}
             onCancel={handleCancel}
-            okText="Create"
+            okText="Save"
             cancelText="Cancel"
             width={650}
             className="shift-modal"
         >
-            <Form
-                form={form}
-                layout="vertical"
-                initialValues={{
-                    isOvertime: false,
-                    allowedLateMinute: 0,
-                    allowedEarlyLeaveMinute: 0
-                }}
-            >
+            <Form form={form} layout="vertical">
                 {/* Basic Info Section */}
                 <div className="form-section">
                     <h4 className="section-title">Basic Information</h4>
@@ -252,4 +273,4 @@ const AddShiftModal = ({ open, onClose, onSuccess }) => {
     );
 };
 
-export default AddShiftModal;
+export default EditShiftModal;

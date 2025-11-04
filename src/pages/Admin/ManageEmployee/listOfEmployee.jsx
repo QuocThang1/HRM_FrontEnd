@@ -1,6 +1,6 @@
 import { Table, Button, Popconfirm, Card, Space, Tag, Select } from "antd";
 import { useEffect, useState } from "react";
-import { getStaffApi, deleteStaffApi } from "../../utils/Api/staffApi";
+import { getStaffApi, deleteStaffApi } from "../../../utils/Api/staffApi";
 import {
     PlusOutlined,
     EditOutlined,
@@ -13,7 +13,7 @@ import {
 import AddEmployeeModal from "./addEmployeeModal";
 import EditEmployeeModal from "./editEmployeeModal";
 import { toast } from "react-toastify";
-import "../../styles/listOfEmployee.css";
+import "../../../styles/listOfEmployee.css";
 
 const { Option } = Select;
 

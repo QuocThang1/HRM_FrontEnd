@@ -11,10 +11,10 @@ import {
     CheckOutlined,
 } from "@ant-design/icons";
 import { useEffect, useState } from "react";
-import { detailStaffApi, updateStaffApi } from "../../utils/Api/staffApi";
+import { detailStaffApi, updateStaffApi } from "../../../utils/Api/staffApi";
 import { toast } from "react-toastify";
 import dayjs from "dayjs";
-import "../../styles/editEmployeeModal.css";
+import "../../../styles/editEmployeeModal.css";
 
 const { Option } = Select;
 

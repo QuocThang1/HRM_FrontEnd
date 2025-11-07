@@ -192,8 +192,8 @@ const StaffAttendancePage = () => {
 
     const getAttendanceForDate = (date) => {
         return attendances.find((att) => {
-            const attDate = dayjs(att.date);
-            return attDate.isSame(date, "day");
+            const attDate = dayjs(att.checkIn);
+            return attDate.format('YYYY-MM-DD') === date.format('YYYY-MM-DD');
         });
     };
 
@@ -462,6 +462,7 @@ const StaffAttendancePage = () => {
                         </div>
                     ) : (
                         <Calendar
+                            value={selectedMonth}
                             cellRender={dateCellRender}
                             onPanelChange={handleMonthChange}
                             className="attendance-calendar"

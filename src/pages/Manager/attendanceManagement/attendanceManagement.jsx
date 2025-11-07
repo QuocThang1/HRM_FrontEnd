@@ -121,20 +121,20 @@ const ManagerAttendanceManagement = () => {
     const columns = [
         {
             title: "Date",
-            dataIndex: "date",
+            dataIndex: "checkIn",
             key: "date",
             width: 120,
             fixed: "left",
-            sorter: (a, b) => dayjs(a.date).unix() - dayjs(b.date).unix(),
-            render: (date) => (
+            sorter: (a, b) => dayjs(a.checkIn).unix() - dayjs(b.checkIn).unix(),
+            render: (checkIn) => (
                 <div className="date-cell">
                     <CalendarOutlined className="date-icon" />
                     <div>
                         <div className="date-day">
-                            {dayjs(date).format("DD MMM")}
+                            {dayjs(checkIn).format("DD MMM")}
                         </div>
                         <div className="date-weekday">
-                            {dayjs(date).format("ddd")}
+                            {dayjs(checkIn).format("ddd")}
                         </div>
                     </div>
                 </div>

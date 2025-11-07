@@ -4,11 +4,11 @@ import {
     CalendarOutlined,
     ClockCircleOutlined,
 } from "@ant-design/icons";
-import { getAllShiftAssignmentsApi } from "../utils/Api/shiftAssignmentApi";
+import { getAllShiftAssignmentsApi } from "../../../utils/Api/shiftAssignmentApi";
 import { toast } from "react-toastify";
 import dayjs from "dayjs";
 import isBetween from "dayjs/plugin/isBetween";
-import "../styles/departmentScheduleTable.css";
+import "../../../styles/departmentScheduleTable.css";
 
 dayjs.extend(isBetween);
 

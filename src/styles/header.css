@@ -154,6 +154,29 @@
   font-size: 14px;
 }
 
+.header-login-btn {
+  background: #2563eb !important;
+  border: 1px solid #2563eb !important;
+  color: #fff !important;
+  font-weight: 600;
+  border-radius: 20px;
+  padding: 4px 20px;
+  height: 36px;
+  transition: all 0.3s ease;
+  line-height: 1 !important;
+}
+
+.header-login-btn:hover {
+  background: #1e40af !important;
+  border-color: #1e40af !important;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(37, 99, 235, 0.3);
+}
+
+.header-login-btn .anticon {
+  font-size: 14px;
+}
+
 /* Responsive */
 @media (max-width: 768px) {
   .header-logo {

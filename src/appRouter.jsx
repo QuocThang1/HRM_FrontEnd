@@ -20,6 +20,7 @@ import StaffShiftAssignmentPage from "./pages/Manager/staffShiftManagement/staff
 import StaffShiftSchedulePage from "./pages/Staff/ShiftSchedule/staffShiftSchedule.jsx";
 import StaffAttendancePage from "./pages/Staff/Attendance/staffAttendance";
 import ManagerAttendanceManagement from "./pages/Manager/attendanceManagement/attendanceManagement";
+import AboutPage from "./pages/about.jsx";
 
 const router = createBrowserRouter([
     {
@@ -28,6 +29,7 @@ const router = createBrowserRouter([
         children: [
             { index: true, element: <HomePage /> },
             { path: "/contact", element: <ContactPage /> },
+            { path: "/about", element: <AboutPage /> },
             {
                 path: "/apply-cv",
                 element: (

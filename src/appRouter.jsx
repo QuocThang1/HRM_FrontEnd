@@ -14,7 +14,7 @@ import ContactPage from "./pages/contact.jsx";
 import ApplyCVPage from "./pages/applyCV.jsx";
 import CandidateCVManagement from "./pages/Candidate/candidateCVManagement.jsx";
 import ShiftManagementPage from "./pages/Admin/ManageShiftType/listOfShift.jsx";
-import ManagerDepartmentPage from "./pages/Manager/departmentShiftManagement/listOfDepartment.jsx";
+import ManagerDepartmentPage from "./pages/Manager/departmentShiftManagement/dashBoardDepartment.jsx";
 import DepartmentShiftsPage from "./pages/Manager/departmentShiftManagement/departmentShifts.jsx";
 import StaffShiftAssignmentPage from "./pages/Manager/staffShiftManagement/staffShiftAssignment.jsx";
 import StaffShiftSchedulePage from "./pages/Staff/ShiftSchedule/staffShiftSchedule.jsx";

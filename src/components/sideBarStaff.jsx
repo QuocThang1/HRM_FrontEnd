@@ -11,6 +11,7 @@ import {
   SafetyOutlined,
   ClockCircleOutlined,
   CalendarOutlined,
+  FileTextOutlined,
 } from "@ant-design/icons";
 import { Link, useNavigate, useLocation } from "react-router-dom";
 import { useContext } from "react";
@@ -117,21 +118,23 @@ const SideBarStaff = () => {
                   ),
                 },
                 {
+                  key: "/profile/resignation-management",
+                  icon: <FileTextOutlined />,
+                  label: (
+                    <Link to="/profile/resignation-management">
+                      Resignation
+                    </Link>
+                  ),
+                },
+                {
+                  type: "divider",
+                },
+                {
                   key: "/profile/employee-management",
                   icon: <TeamOutlined />,
                   label: (
                     <Link to="/profile/employee-management">Employees</Link>
                   ),
-                },
-                {
-                  key: "/profile/shift-management",
-                  icon: <ClockCircleOutlined />,
-                  label: (
-                    <Link to="/profile/shift-management">Shifts</Link>
-                  ),
-                },
-                {
-                  type: "divider",
                 },
                 {
                   key: "department-group",
@@ -155,6 +158,13 @@ const SideBarStaff = () => {
                       ),
                     },
                   ],
+                },
+                {
+                  key: "/profile/shift-management",
+                  icon: <ClockCircleOutlined />,
+                  label: (
+                    <Link to="/profile/shift-management">Shifts</Link>
+                  ),
                 },
               ]
               : []),
@@ -195,6 +205,15 @@ const SideBarStaff = () => {
                 label: (
                   <Link to="/profile/attendance">
                     Attendance
+                  </Link>
+                ),
+              },
+              {
+                key: "/profile/resignation",
+                icon: <FileTextOutlined />,
+                label: (
+                  <Link to="/profile/resignation">
+                    Submit Resignation
                   </Link>
                 ),
               },

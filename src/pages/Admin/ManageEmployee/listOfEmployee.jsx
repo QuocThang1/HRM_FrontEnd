@@ -1,4 +1,4 @@
-import { Table, Button, Popconfirm, Card, Space, Tag, Select } from "antd";
+import { Table, Button, Popconfirm, Card, Space, Tag, Select, Tooltip } from "antd";
 import { useEffect, useState } from "react";
 import { getStaffApi, deleteStaffApi } from "../../../utils/Api/staffApi";
 import {
@@ -118,7 +118,9 @@ const StaffPage = () => {
             width: 120,
             ellipsis: true,
             render: (id) => (
-                <span className="employee-id">{id.substring(0, 8)}...</span>
+                <Tooltip title={id}>
+                    <span className="employee-id">{id.substring(0, 8)}...</span>
+                </Tooltip>
             ),
         },
         {
@@ -135,14 +137,19 @@ const StaffPage = () => {
             title: "Email",
             dataIndex: ["personalInfo", "email"],
             key: "email",
-            width: 180,
+            width: 160,
             ellipsis: true,
+            render: (email) => (
+                <Tooltip title={email}>
+                    <span className="employee-email">{email}</span>
+                </Tooltip>
+            ),
         },
         {
             title: "Role",
             dataIndex: "role",
             key: "role",
-            width: 120,
+            width: 110,
             render: (role) => getRoleTag(role),
         },
         {

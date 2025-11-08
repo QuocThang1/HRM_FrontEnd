@@ -21,6 +21,8 @@ import StaffShiftSchedulePage from "./pages/Staff/ShiftSchedule/staffShiftSchedu
 import StaffAttendancePage from "./pages/Staff/Attendance/staffAttendance";
 import ManagerAttendanceManagement from "./pages/Manager/attendanceManagement/attendanceManagement";
 import AboutPage from "./pages/about.jsx";
+import StaffResignationPage from "./pages/Staff/Resignation/staffResignation.jsx";
+import AdminResignationManagement from "./pages/Admin/ManageResignation/listOfResignation.jsx";
 
 const router = createBrowserRouter([
     {
@@ -56,6 +58,14 @@ const router = createBrowserRouter([
                 element: (
                     <ProtectedRoute allowedRoles={["admin"]}>
                         <CandidateCVManagement />
+                    </ProtectedRoute>
+                ),
+            },
+            {
+                path: "resignation-management",
+                element: (
+                    <ProtectedRoute allowedRoles={["admin"]}>
+                        <AdminResignationManagement />
                     </ProtectedRoute>
                 ),
             },
@@ -128,6 +138,14 @@ const router = createBrowserRouter([
                 element: (
                     <ProtectedRoute allowedRoles={["staff"]}>
                         <StaffAttendancePage />
+                    </ProtectedRoute>
+                ),
+            },
+            {
+                path: "resignation",
+                element: (
+                    <ProtectedRoute allowedRoles={["staff"]}>
+                        <StaffResignationPage />
                     </ProtectedRoute>
                 ),
             },

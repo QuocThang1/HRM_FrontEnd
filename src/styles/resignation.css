@@ -1,0 +1,130 @@
+.resignation-page {
+  padding: 24px;
+  background: #f0f2f5;
+  min-height: 100vh;
+}
+
+/* Page Header */
+.page-header {
+  margin-bottom: 24px;
+}
+
+.page-header h2 {
+  margin-bottom: 8px;
+  color: #001529;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.page-header .ant-typography {
+  font-size: 14px;
+}
+
+/* Form Card & Status Card */
+.form-card,
+.status-card {
+  border-radius: 12px;
+  border: none;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+  max-width: 900px;
+  margin: 0 auto;
+}
+
+.form-card .ant-card-head,
+.status-card .ant-card-head {
+  border-bottom: 1px solid #f0f0f0;
+  font-weight: 600;
+  font-size: 18px;
+  background: #fafafa;
+}
+
+/* Form Items */
+.form-card .ant-form-item-label > label {
+  font-weight: 600;
+  color: #262626;
+}
+
+.form-card .ant-input,
+.form-card .ant-input-affix-wrapper,
+.form-card .ant-select-selector {
+  border-radius: 8px;
+}
+
+.form-card .ant-btn-primary {
+  height: 48px;
+  font-size: 16px;
+  font-weight: 600;
+  border-radius: 8px;
+}
+
+/* Descriptions */
+.status-card .ant-descriptions-item-label {
+  font-weight: 600;
+  background: #fafafa;
+  width: 180px;
+}
+
+.status-card .ant-descriptions-item-content {
+  padding: 16px;
+}
+
+/* Alerts */
+.resignation-page .ant-alert {
+  border-radius: 8px;
+}
+
+/* Tags */
+.resignation-page .ant-tag {
+  border-radius: 6px;
+  font-weight: 500;
+}
+
+/* Buttons */
+.resignation-page .ant-btn {
+  border-radius: 6px;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .resignation-page {
+    padding: 16px;
+  }
+
+  .page-header h2 {
+    font-size: 20px;
+  }
+
+  .form-card,
+  .status-card {
+    margin: 0 8px;
+  }
+
+  .status-card .ant-descriptions-item-label {
+    width: 120px;
+  }
+
+  .form-card .ant-btn-primary {
+    height: 42px;
+    font-size: 14px;
+  }
+}
+
+@media (max-width: 576px) {
+  .resignation-page {
+    padding: 12px;
+  }
+
+  .page-header h2 {
+    font-size: 18px;
+  }
+
+  .form-card .ant-card-head,
+  .status-card .ant-card-head {
+    font-size: 16px;
+  }
+
+  .status-card .ant-descriptions {
+    font-size: 13px;
+  }
+}

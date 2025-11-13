@@ -1,14 +1,13 @@
-import SideBarStaff from "../components/sideBarStaff";
+import HeaderStaff from "../components/headerStaff";
 import { Outlet } from "react-router-dom";
 import { Layout } from "antd";
 
 const { Content } = Layout;
 
 const StaffLayout = () => {
-
   return (
     <Layout style={{ minHeight: "100vh", background: "#ffffff" }}>
-      <SideBarStaff />
+      <HeaderStaff />
       <Layout>
         <Content
           style={{

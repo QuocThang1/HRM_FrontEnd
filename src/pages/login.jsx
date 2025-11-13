@@ -1,9 +1,5 @@
 import { Button, Form, Input, Card, Typography, Checkbox } from "antd";
-import {
-  MailOutlined,
-  LockOutlined,
-  SafetyOutlined,
-} from "@ant-design/icons";
+import { MailOutlined, LockOutlined, SafetyOutlined } from "@ant-design/icons";
 import { loginApi } from "../utils/Api/accountApi.js";
 import { useNavigate, Link } from "react-router-dom";
 import { useContext } from "react";
@@ -152,7 +148,7 @@ const LoginPage = () => {
 
           <div className="register-link">
             <Text>
-              Don't have an account?{" "}
+              Don&apos;t have an account?{" "}
               <Link to="/register" className="link-text">
                 Sign Up
               </Link>

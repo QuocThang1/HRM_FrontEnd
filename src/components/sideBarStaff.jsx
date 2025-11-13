@@ -4,11 +4,10 @@ import {
   SettingOutlined,
   LogoutOutlined,
   TeamOutlined,
-  ArrowLeftOutlined,
   HomeOutlined,
   FolderOutlined,
   StarOutlined,
-  SafetyOutlined,
+  DashboardOutlined,
 } from "@ant-design/icons";
 import { Link, useNavigate, useLocation } from "react-router-dom";
 import { useContext } from "react";
@@ -19,7 +18,7 @@ import "../styles/sideBarStaff.css";
 const { Sider } = Layout;
 const { Text } = Typography;
 
-const SideBarStaff = () => {
+const SideBarStaff = ({ collapsed }) => {
   const navigate = useNavigate();
   const location = useLocation();
   const { setAuth, auth } = useContext(AuthContext);
@@ -52,26 +51,23 @@ const SideBarStaff = () => {
   const roleBadge = getRoleBadge(auth?.staff?.role);
 
   return (
-    <Sider width={280} className="sidebar-staff">
-      {/* Header */}
-      <div className="sidebar-header">
-        <div className="sidebar-logo">
-          <div className="logo-icon">
-            <SafetyOutlined />
-          </div>
-          <div className="logo-text">
-            <div className="logo-title">HRM System</div>
-            <div className="logo-subtitle">Management Portal</div>
-          </div>
-        </div>
-      </div>
-
+    <Sider
+      width={300}
+      collapsed={collapsed}
+      collapsedWidth={0}
+      className="sidebar-staff"
+    >
       {/* Profile Card */}
       <div className="sidebar-profile-card">
         <div className="profile-avatar-wrapper">
-          <Avatar size={64} icon={<UserOutlined />} className="profile-avatar" />
+          <Avatar
+            size={64}
+            icon={<UserOutlined />}
+            className="profile-avatar"
+          />
           <div className="profile-status-dot" />
         </div>
+
         <div className="profile-info">
           <Text className="profile-name">{auth?.staff?.name || "Staff"}</Text>
           <Badge
@@ -85,9 +81,15 @@ const SideBarStaff = () => {
             }}
           />
         </div>
-        <Link to="/" className="back-home-btn">
-          <ArrowLeftOutlined /> Back to Home
-        </Link>
+
+        <div className="profile-actions">
+          <Link to="/" className="profile-btn">
+            <HomeOutlined /> Home
+          </Link>
+          <Link to="/profile" className="profile-btn">
+            <UserOutlined /> View Profile
+          </Link>
+        </div>
       </div>
 
       {/* Navigation Menu */}
@@ -99,55 +101,49 @@ const SideBarStaff = () => {
           className="sidebar-menu"
           items={[
             {
-              key: "/profile",
-              icon: <HomeOutlined />,
-              label: <Link to="/profile">Profile</Link>,
+              key: "/dashboard",
+              icon: <DashboardOutlined />,
+              label: <Link to="/dashboard">Dashboard</Link>,
             },
             ...(auth?.staff?.role === "admin"
               ? [
-                {
-                  key: "/profile/candidate-cv-management",
-                  icon: <FolderOutlined />,
-                  label: (
-                    <Link to="/profile/candidate-cv-management">
-                      Candidate CVs
-                    </Link>
-                  ),
-                },
-                {
-                  key: "/profile/employee-management",
-                  icon: <TeamOutlined />,
-                  label: (
-                    <Link to="/profile/employee-management">Employees</Link>
-                  ),
-                },
-                {
-                  type: "divider",
-                },
-                {
-                  key: "department-group",
-                  icon: <StarOutlined />,
-                  label: "Departments",
-                  children: [
-                    {
-                      key: "/profile/department-management",
-                      label: (
-                        <Link to="/profile/department-management">
-                          Management
-                        </Link>
-                      ),
-                    },
-                    {
-                      key: "/profile/department-review-management",
-                      label: (
-                        <Link to="/profile/department-review-management">
-                          Reviews
-                        </Link>
-                      ),
-                    },
-                  ],
-                },
-              ]
+                  {
+                    key: "/candidate-cv-management",
+                    icon: <FolderOutlined />,
+                    label: (
+                      <Link to="/candidate-cv-management">Candidate CVs</Link>
+                    ),
+                  },
+                  {
+                    key: "/employee-management",
+                    icon: <TeamOutlined />,
+                    label: <Link to="/employee-management">Employees</Link>,
+                  },
+                  {
+                    type: "divider",
+                  },
+                  {
+                    key: "department-group",
+                    icon: <StarOutlined />,
+                    label: "Departments",
+                    children: [
+                      {
+                        key: "/department-management",
+                        label: (
+                          <Link to="/department-management">Management</Link>
+                        ),
+                      },
+                      {
+                        key: "/department-review-management",
+                        label: (
+                          <Link to="/department-review-management">
+                            Reviews
+                          </Link>
+                        ),
+                      },
+                    ],
+                  },
+                ]
               : []),
           ]}
         />

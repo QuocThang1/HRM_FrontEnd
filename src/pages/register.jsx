@@ -50,7 +50,9 @@ const RegisterPage = () => {
       const res = await signUpApi(registerData);
 
       if (res && res.EC === 0) {
-        toast.success(res.EM || "Registration successful!", { autoClose: 2000 });
+        toast.success(res.EM || "Registration successful!", {
+          autoClose: 2000,
+        });
         form.resetFields();
         navigate("/login");
       } else {
@@ -59,7 +61,9 @@ const RegisterPage = () => {
         });
       }
     } catch (error) {
-      toast.error("Registration failed. Please try again.", { autoClose: 2000 });
+      toast.error("Registration failed. Please try again.", {
+        autoClose: 2000,
+      });
     }
   };
 
@@ -104,11 +108,13 @@ const RegisterPage = () => {
       return Promise.reject(new Error("Please enter password!"));
     }
     if (value.length < 6) {
-      return Promise.reject(new Error("Password must be at least 6 characters!"));
+      return Promise.reject(
+        new Error("Password must be at least 6 characters!"),
+      );
     }
     if (!/(?=.*[a-z])(?=.*[A-Z])(?=.*\d)/.test(value)) {
       return Promise.reject(
-        new Error("Password must contain uppercase, lowercase and number!")
+        new Error("Password must contain uppercase, lowercase and number!"),
       );
     }
     return Promise.resolve();
@@ -187,7 +193,10 @@ const RegisterPage = () => {
                   rules={[
                     { required: true, message: "Please enter your full name!" },
                     { min: 2, message: "Name must be at least 2 characters!" },
-                    { max: 100, message: "Name must not exceed 100 characters!" },
+                    {
+                      max: 100,
+                      message: "Name must not exceed 100 characters!",
+                    },
                   ]}
                 >
                   <Input
@@ -238,7 +247,10 @@ const RegisterPage = () => {
                   name="confirmPassword"
                   dependencies={["password"]}
                   rules={[
-                    { required: true, message: "Please confirm your password!" },
+                    {
+                      required: true,
+                      message: "Please confirm your password!",
+                    },
                     validateConfirmPassword,
                   ]}
                 >
@@ -307,7 +319,9 @@ const RegisterPage = () => {
                 <Form.Item
                   label="Gender"
                   name="gender"
-                  rules={[{ required: true, message: "Please select your gender!" }]}
+                  rules={[
+                    { required: true, message: "Please select your gender!" },
+                  ]}
                 >
                   <Select size="large" placeholder="Select gender">
                     <Option value="male">
@@ -334,8 +348,14 @@ const RegisterPage = () => {
                   name="address"
                   rules={[
                     { required: true, message: "Please enter your address!" },
-                    { min: 5, message: "Address must be at least 5 characters!" },
-                    { max: 200, message: "Address must not exceed 200 characters!" },
+                    {
+                      min: 5,
+                      message: "Address must be at least 5 characters!",
+                    },
+                    {
+                      max: 200,
+                      message: "Address must not exceed 200 characters!",
+                    },
                   ]}
                 >
                   <Input.TextArea

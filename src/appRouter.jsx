@@ -13,79 +13,86 @@ import ManageDepartmentReview from "./pages/Department/ManageDepartmentReview/de
 import ContactPage from "./pages/contact.jsx";
 import ApplyCVPage from "./pages/applyCV.jsx";
 import CandidateCVManagement from "./pages/Candidate/candidateCVManagement.jsx";
+import Dashboard from "./pages/dashboard.jsx";
 
 const router = createBrowserRouter([
-    {
-        path: "/",
-        element: <App />,
-        children: [
-            { index: true, element: <HomePage /> },
-            { path: "/contact", element: <ContactPage /> },
-            {
-                path: "/apply-cv",
-                element: (
-                    <ProtectedRoute allowedRoles={["candidate"]}>
-                        <ApplyCVPage />
-                    </ProtectedRoute>
-                ),
-            },
-        ],
-    },
-    { path: "/register", element: <RegisterPage /> },
-    { path: "/login", element: <LoginPage /> },
-    {
-        path: "/profile",
+  {
+    path: "/",
+    element: <App />,
+    children: [
+      { index: true, element: <HomePage /> },
+      { path: "/contact", element: <ContactPage /> },
+      {
+        path: "/apply-cv",
         element: (
-            <ProtectedRoute allowedRoles={["admin", "manager", "staff"]}>
-                <StaffLayout />
-            </ProtectedRoute>
+          <ProtectedRoute allowedRoles={["candidate"]}>
+            <ApplyCVPage />
+          </ProtectedRoute>
         ),
-        children: [
-            { index: true, element: <StaffProfilePage /> },
-            {
-                path: "candidate-cv-management",
-                element: (
-                    <ProtectedRoute allowedRoles={["admin"]}>
-                        <CandidateCVManagement />
-                    </ProtectedRoute>
-                ),
-            },
-            {
-                path: "employee-management",
-                element: (
-                    <ProtectedRoute allowedRoles={["admin"]}>
-                        <StaffPage />
-                    </ProtectedRoute>
-                ),
-            },
-            {
-                path: "department-management",
-                element: (
-                    <ProtectedRoute allowedRoles={["admin"]}>
-                        <DepartmentPage />
-                    </ProtectedRoute>
-                ),
-            },
-            {
-                path: "department-review-management",
-                element: (
-                    <ProtectedRoute allowedRoles={["admin"]}>
-                        <ManageDepartmentReview />
-                    </ProtectedRoute>
-                ),
-            },
-            {
-                path: "departments/:departmentId/employees",
-                element: (
-                    <ProtectedRoute allowedRoles={["admin"]}>
-                        <ListEmployeeOfDepartment />
-                    </ProtectedRoute>
-                ),
-            }
-        ],
-    },
+      },
+    ],
+  },
+  { path: "/register", element: <RegisterPage /> },
+  { path: "/login", element: <LoginPage /> },
+  {
+    element: (
+      <ProtectedRoute allowedRoles={["admin", "manager", "staff"]}>
+        <StaffLayout />
+      </ProtectedRoute>
+    ),
+    children: [
+      {
+        path: "/dashboard",
+        element: <Dashboard />,
+      },
+      {
+        path: "/profile",
+        element: <StaffProfilePage />,
+      },
+      {
+        path: "/candidate-cv-management",
+        element: (
+          <ProtectedRoute allowedRoles={["admin"]}>
+            <CandidateCVManagement />
+          </ProtectedRoute>
+        ),
+      },
+      {
+        path: "/employee-management",
+        element: (
+          <ProtectedRoute allowedRoles={["admin"]}>
+            <StaffPage />
+          </ProtectedRoute>
+        ),
+      },
+      {
+        path: "/department-management",
+        element: (
+          <ProtectedRoute allowedRoles={["admin"]}>
+            <DepartmentPage />
+          </ProtectedRoute>
+        ),
+      },
+      {
+        path: "/department-review-management",
+        element: (
+          <ProtectedRoute allowedRoles={["admin"]}>
+            <ManageDepartmentReview />
+          </ProtectedRoute>
+        ),
+      },
+      {
+        path: "/departments/:departmentId/employees",
+        element: (
+          <ProtectedRoute allowedRoles={["admin"]}>
+            <ListEmployeeOfDepartment />
+          </ProtectedRoute>
+        ),
+      },
+    ],
+  },
 ]);
 
 export default function AppRouter() {
-    return <RouterProvider router={router} />;
+  return <RouterProvider router={router} />;
 }

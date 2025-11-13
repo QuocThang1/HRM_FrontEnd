@@ -85,7 +85,7 @@ const StaffProfilePage = () => {
         formattedValues.phone,
         formattedValues.citizenId,
         formattedValues.gender,
-        formattedValues.dob
+        formattedValues.dob,
       );
 
       if (res && res.EC === 0) {
@@ -109,9 +109,7 @@ const StaffProfilePage = () => {
     }
     const phoneRegex = /^[0-9]{10,11}$/;
     if (!phoneRegex.test(value)) {
-      return Promise.reject(
-        new Error("Phone number must be 10-11 digits!")
-      );
+      return Promise.reject(new Error("Phone number must be 10-11 digits!"));
     }
     return Promise.resolve();
   };
@@ -122,9 +120,7 @@ const StaffProfilePage = () => {
     }
     const citizenIdRegex = /^[0-9]{9,12}$/;
     if (!citizenIdRegex.test(value)) {
-      return Promise.reject(
-        new Error("Citizen ID must be 9-12 digits!")
-      );
+      return Promise.reject(new Error("Citizen ID must be 9-12 digits!"));
     }
     return Promise.resolve();
   };
@@ -160,7 +156,10 @@ const StaffProfilePage = () => {
               </Title>
               <Space>
                 <Text type="secondary">Role:</Text>
-                <Text strong style={{ color: "black", textTransform: "capitalize" }}>
+                <Text
+                  strong
+                  style={{ color: "black", textTransform: "capitalize" }}
+                >
                   {auth?.staff?.role || "Staff"}
                 </Text>
               </Space>
@@ -185,7 +184,10 @@ const StaffProfilePage = () => {
                   rules={[
                     { required: true, message: "Please enter full name!" },
                     { min: 2, message: "Name must be at least 2 characters!" },
-                    { max: 100, message: "Name must not exceed 100 characters!" },
+                    {
+                      max: 100,
+                      message: "Name must not exceed 100 characters!",
+                    },
                   ]}
                 >
                   <Input
@@ -302,8 +304,14 @@ const StaffProfilePage = () => {
                   name="address"
                   rules={[
                     { required: true, message: "Please enter address!" },
-                    { min: 5, message: "Address must be at least 5 characters!" },
-                    { max: 200, message: "Address must not exceed 200 characters!" },
+                    {
+                      min: 5,
+                      message: "Address must be at least 5 characters!",
+                    },
+                    {
+                      max: 200,
+                      message: "Address must not exceed 200 characters!",
+                    },
                   ]}
                 >
                   <Input.TextArea

@@ -79,9 +79,12 @@
 }
 
 .employee-edit-form .ant-input:not([disabled]):hover,
-.employee-edit-form .ant-input-affix-wrapper:not(.ant-input-affix-wrapper-disabled):hover,
+.employee-edit-form
+  .ant-input-affix-wrapper:not(.ant-input-affix-wrapper-disabled):hover,
 .employee-edit-form .ant-picker:not(.ant-picker-disabled):hover,
-.employee-edit-form .ant-select:not(.ant-select-disabled):hover .ant-select-selector {
+.employee-edit-form
+  .ant-select:not(.ant-select-disabled):hover
+  .ant-select-selector {
   border-color: #667eea;
 }
 
@@ -163,8 +166,10 @@
 }
 
 .employee-edit-form .ant-form-item:has(.ant-input:not([disabled]))::before,
-.employee-edit-form .ant-form-item:has(.ant-select:not(.ant-select-disabled))::before,
-.employee-edit-form .ant-form-item:has(.ant-picker:not(.ant-picker-disabled))::before {
+.employee-edit-form
+  .ant-form-item:has(.ant-select:not(.ant-select-disabled))::before,
+.employee-edit-form
+  .ant-form-item:has(.ant-picker:not(.ant-picker-disabled))::before {
   content: "";
   position: absolute;
   left: -8px;

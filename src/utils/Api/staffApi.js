@@ -6,7 +6,7 @@ const getStaffApi = (role) => {
 };
 
 const addNewStaffApi = (password, fullName, email, phone, address, citizenId, gender, dob) => {
-    const URL_API = "/v1/api/add-employee";
+    const URL_API = "/v1/api/staff/add-employee";
     const data = {
         password: password,
         fullName: fullName,
@@ -22,17 +22,17 @@ const addNewStaffApi = (password, fullName, email, phone, address, citizenId, ge
 };
 
 const deleteStaffApi = (staffId) => {
-    const URL_API = `/v1/api/${staffId}`;
+    const URL_API = `/v1/api/staff/${staffId}`;
     return axios.delete(URL_API);
 };
 
 const detailStaffApi = (staffId) => {
-    const URL_API = `/v1/api/detail-employee/${staffId}`;
+    const URL_API = `/v1/api/staff/detail-employee/${staffId}`;
     return axios.get(URL_API);
 }
 
 const updateStaffApi = (staffId, updatedData) => {
-    const URL_API = `/v1/api/${staffId}`;
+    const URL_API = `/v1/api/staff/${staffId}`;
     return axios.put(URL_API, updatedData);
 };
 

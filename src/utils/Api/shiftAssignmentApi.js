@@ -20,7 +20,7 @@ const getShiftAssignmentApi = (id) => {
 };
 
 const getShiftAssignmentByStaffIdApi = () => {
-    const URL_API = `/v1/api/shift-schedule`;
+    const URL_API = `/v1/api/shift-assignments/shift-schedule`;
     return axios.get(URL_API);
 };
 

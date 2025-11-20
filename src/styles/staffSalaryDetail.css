@@ -1,0 +1,137 @@
+.staff-salary-detail-page {
+  padding: 30px;
+  background: #f6f9fb;
+  min-height: 100vh;
+}
+
+.loading-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 400px;
+}
+
+.page-header {
+  margin-bottom: 32px;
+}
+
+.page-title {
+  font-size: 28px;
+  font-weight: 700;
+  color: #333;
+  margin: 8px 0;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.page-subtitle {
+  font-size: 14px;
+  color: #666;
+  margin: 0;
+}
+
+/* Info Card */
+.info-card {
+  border-radius: 12px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+  margin-bottom: 24px;
+}
+
+.info-card .ant-card-head {
+  background: #fafafa;
+  font-weight: 600;
+  font-size: 16px;
+}
+
+.info-card .ant-descriptions-item-label {
+  font-weight: 600;
+  background: #f6f9fb;
+  color: #333;
+}
+
+/* Salary Card */
+.salary-card {
+  border-radius: 12px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+}
+
+.salary-card .ant-card-head {
+  background: #fafafa;
+  font-weight: 600;
+  font-size: 16px;
+}
+
+.salary-info {
+  padding: 20px 0;
+}
+
+.salary-display {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+  padding: 24px;
+   background: linear-gradient(135deg, #1e2d3d 0%, #2980b9 100%) !important;
+  border-radius: 12px;
+  color: white;
+  margin-bottom: 24px;
+}
+
+.salary-amount {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+}
+
+.salary-icon {
+  font-size: 48px;
+  color: white;
+}
+
+.salary-amount h2 {
+  color: white !important;
+}
+
+.salary-meta {
+  padding-top: 12px;
+  border-top: 1px solid rgba(255, 255, 255, 0.3);
+}
+
+.salary-meta .ant-typography {
+  color: rgba(255, 255, 255, 0.9);
+}
+
+.estimated-salary {
+  margin-top: 16px;
+}
+
+/* No Salary State */
+.no-salary {
+  padding: 60px 20px;
+  text-align: center;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .staff-salary-detail-page {
+    padding: 16px;
+  }
+
+  .page-header {
+    margin-bottom: 24px;
+  }
+
+  .salary-display {
+    padding: 16px;
+  }
+
+  .salary-icon {
+    font-size: 36px;
+  }
+
+  .salary-amount {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 12px;
+  }
+}

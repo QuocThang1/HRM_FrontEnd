@@ -12,6 +12,7 @@ import {
   ClockCircleOutlined,
   CalendarOutlined,
   FileTextOutlined,
+  DollarOutlined,
 } from "@ant-design/icons";
 import { Link, useNavigate, useLocation } from "react-router-dom";
 import { useContext } from "react";
@@ -135,6 +136,37 @@ const SideBarStaff = () => {
                   label: (
                     <Link to="/profile/employee-management">Employees</Link>
                   ),
+                },
+                {
+                  key: "salary-group",
+                  icon: <DollarOutlined />,
+                  label: "Salaries",
+                  children: [
+                    {
+                      key: "/profile/salary-management",
+                      label: (
+                        <Link to="/profile/salary-management">
+                          Salary Details
+                        </Link>
+                      ),
+                    },
+                    {
+                      key: "/profile/monthly-salary-create",
+                      label: (
+                        <Link to="/profile/monthly-salary-create">
+                          Monthly Salary Creation
+                        </Link>
+                      ),
+                    },
+                    {
+                      key: "/profile/salary-dashboard",
+                      label: (
+                        <Link to="/profile/salary-dashboard">
+                          Monthly Salary Report
+                        </Link>
+                      ),
+                    },
+                  ],
                 },
                 {
                   key: "department-group",

@@ -1,6 +1,6 @@
 .about-page {
   min-height: 100vh;
-  background: #f8fafc;
+  background: #f6f9fb; /* Đồng bộ với background chính */
 }
 
 /* Hero Section */
@@ -27,7 +27,7 @@
   left: 0;
   width: 100%;
   height: 100%;
-  background: rgba(0, 0, 0, 0.3);
+  background: linear-gradient(135deg, rgba(44, 62, 80, 0.5) 0%, rgba(52, 152, 219, 0.5) 100%); /* Navy gradient với opacity thấp để không che mờ ảnh */
   z-index: 1;
 }
 
@@ -45,14 +45,14 @@
   font-weight: 800;
   margin-bottom: 16px;
   color: #fff;
-  text-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+  text-shadow: 0 2px 8px rgba(0, 0, 0, 0.3); /* Giảm shadow để text rõ hơn */
 }
 
 .about-hero-subtitle {
   font-size: 24px;
   font-weight: 400;
   color: rgba(255, 255, 255, 0.95);
-  text-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.2); /* Giảm shadow */
 }
 
 /* Container */
@@ -75,7 +75,7 @@
 .section-title {
   font-size: 40px;
   font-weight: 800;
-  color: #0f172a;
+  color: #2c3e50; /* Navy */
   margin-bottom: 24px;
   line-height: 1.2;
 }
@@ -102,14 +102,14 @@
 
 .mission-card:hover {
   transform: translateY(-8px);
-  border-color: #2563eb;
-  box-shadow: 0 12px 32px rgba(37, 99, 235, 0.15);
+  border-color: #3498db; /* Blue */
+  box-shadow: 0 12px 32px rgba(52, 152, 219, 0.2);
 }
 
 .mission-card h3 {
   font-size: 22px;
   font-weight: 700;
-  color: #2563eb;
+  color: #3498db; /* Blue */
   margin-bottom: 12px;
   display: flex;
   align-items: center;
@@ -126,7 +126,7 @@
 /* Statistics Section */
 .about-stats {
   padding: 80px 0;
-  background: linear-gradient(135deg, #2563eb 0%, #1e40af 100%);
+  background: linear-gradient(135deg, #2c3e50 0%, #3498db 100%); /* Navy gradient */
 }
 
 .stat-card {
@@ -141,12 +141,16 @@
 
 .stat-card:hover {
   transform: translateY(-8px);
-  box-shadow: 0 16px 48px rgba(0, 0, 0, 0.15);
+  box-shadow: 0 16px 48px rgba(255, 255, 255, 0.2);
+  background: rgba(255, 255, 255, 1);
 }
 
 .stat-icon {
   font-size: 48px;
-  color: #2563eb;
+  background: linear-gradient(135deg, #2c3e50 0%, #3498db 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
   margin-bottom: 16px;
 }
 
@@ -157,10 +161,18 @@
   margin-top: 12px;
 }
 
+.stat-card .ant-statistic-content {
+  background: linear-gradient(135deg, #2c3e50 0%, #3498db 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  font-weight: 700 !important;
+}
+
 /* Core Values Section */
 .about-values {
   padding: 100px 0;
-  background: #f8fafc;
+  background: #f6f9fb; /* Đồng bộ với background chính */
 }
 
 .section-header {
@@ -187,20 +199,23 @@
 
 .value-card:hover {
   transform: translateY(-12px);
-  border-color: #2563eb;
-  box-shadow: 0 12px 32px rgba(37, 99, 235, 0.2);
+  border-color: #3498db; /* Blue */
+  box-shadow: 0 12px 32px rgba(52, 152, 219, 0.25);
 }
 
 .value-icon {
   font-size: 56px;
-  color: #2563eb;
+  background: linear-gradient(135deg, #2c3e50 0%, #3498db 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
   margin-bottom: 20px;
 }
 
 .value-title {
   font-size: 22px;
   font-weight: 700;
-  color: #0f172a;
+  color: #2c3e50; /* Navy */
   margin-bottom: 12px;
 }
 
@@ -226,7 +241,10 @@
 
 .timeline-icon {
   font-size: 24px;
-  color: #2563eb;
+  color: #3498db; /* Blue */
+  background: rgba(52, 152, 219, 0.1);
+  padding: 8px;
+  border-radius: 50%;
 }
 
 .timeline-card {
@@ -237,21 +255,24 @@
 }
 
 .timeline-card:hover {
-  border-color: #2563eb;
-  box-shadow: 0 8px 24px rgba(37, 99, 235, 0.15);
+  border-color: #3498db; /* Blue */
+  box-shadow: 0 8px 24px rgba(52, 152, 219, 0.2);
 }
 
 .timeline-year {
   font-size: 24px;
   font-weight: 800;
-  color: #2563eb;
+  background: linear-gradient(135deg, #2c3e50 0%, #3498db 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
   margin-bottom: 8px;
 }
 
 .timeline-title {
   font-size: 20px;
   font-weight: 700;
-  color: #0f172a;
+  color: #2c3e50; /* Navy */
   margin-bottom: 8px;
 }
 
@@ -264,7 +285,7 @@
 /* CTA Section */
 .about-cta {
   padding: 100px 0;
-  background: linear-gradient(135deg, #2563eb 0%, #1e40af 100%);
+  background: linear-gradient(135deg, #2c3e50 0%, #3498db 100%); /* Navy gradient */
 }
 
 .cta-content {
@@ -277,11 +298,12 @@
   font-weight: 800;
   color: #fff;
   margin-bottom: 16px;
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
 }
 
 .cta-subtitle {
   font-size: 20px;
-  color: rgba(255, 255, 255, 0.9);
+  color: rgba(255, 255, 255, 0.95);
   margin-bottom: 40px;
 }
 
@@ -305,14 +327,15 @@
 
 .cta-button.primary {
   background: #ffffff;
-  color: #2563eb;
+  color: #2c3e50; /* Navy text */
   border: 2px solid #ffffff;
 }
 
 .cta-button.primary:hover {
   background: #f1f5f9;
+  color: #3498db; /* Blue on hover */
   transform: translateY(-4px);
-  box-shadow: 0 12px 32px rgba(255, 255, 255, 0.3);
+  box-shadow: 0 12px 32px rgba(255, 255, 255, 0.4);
 }
 
 .cta-button.secondary {
@@ -322,8 +345,9 @@
 }
 
 .cta-button.secondary:hover {
-  background: rgba(255, 255, 255, 0.1);
+  background: rgba(255, 255, 255, 0.15);
   transform: translateY(-4px);
+  box-shadow: 0 8px 24px rgba(255, 255, 255, 0.3);
 }
 
 /* Animations */
@@ -393,5 +417,16 @@
   .cta-button {
     padding: 12px 32px;
     font-size: 16px;
+  }
+}
+
+/* Print Styles */
+@media print {
+  .about-hero-overlay,
+  .about-stats,
+  .about-cta {
+    background: linear-gradient(135deg, #2c3e50 0%, #3498db 100%) !important;
+    -webkit-print-color-adjust: exact;
+    print-color-adjust: exact;
   }
 }

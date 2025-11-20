@@ -1,12 +1,12 @@
 .contact-page {
   min-height: 100vh;
-  background: #f8fafc; /* Light blue-gray */
+  background: #f6f9fb; /* Đồng bộ với background chính */
 }
 
 /* Hero Section */
 .contact-hero {
   position: relative;
-  background: #2563eb; /* Blue 600 - Solid blue */
+  background: linear-gradient(135deg, #2c3e50 0%, #3498db 100%); /* Navy gradient */
   padding: 100px 0 80px 0;
   overflow: hidden;
 }
@@ -37,7 +37,7 @@
   font-weight: 800;
   color: #fff;
   margin-bottom: 16px;
-  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
 }
 
 .contact-hero-subtitle {
@@ -50,7 +50,7 @@
 /* Contact Info Section */
 .contact-info-section {
   padding: 80px 0;
-  background: #f8fafc; /* Slate 50 */
+  background: #f6f9fb; /* Đồng bộ với background chính */
   margin-top: -40px;
   position: relative;
   z-index: 2;
@@ -65,41 +65,44 @@
 .contact-info-card {
   text-align: center;
   border-radius: 12px;
-  border: 1px solid #e2e8f0;
+  border: 2px solid transparent;
   background: #ffffff;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
   transition: all 0.3s ease;
   height: 100%;
 }
 
 .contact-info-card:hover {
   transform: translateY(-8px);
-  box-shadow: 0 8px 24px rgba(37, 99, 235, 0.2);
-  border-color: #2563eb;
+  box-shadow: 0 8px 24px rgba(52, 152, 219, 0.25);
+  border-color: #3498db;
 }
 
 .contact-info-icon {
   font-size: 48px;
-  color: #2563eb; /* Blue 600 */
+  background: linear-gradient(135deg, #2c3e50 0%, #3498db 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
   margin-bottom: 16px;
 }
 
 .contact-info-title {
   font-size: 18px;
   font-weight: 600;
-  color: #0f172a; /* Slate 900 */
+  color: #2c3e50; /* Navy */
   margin-bottom: 12px;
 }
 
 .contact-info-content {
   font-size: 14px;
-  color: #475569; /* Slate 600 */
+  color: #475569;
   margin-bottom: 4px;
 }
 
 .contact-info-subcontent {
   font-size: 14px;
-  color: #64748b; /* Slate 500 */
+  color: #64748b;
 }
 
 /* Contact Form Section */
@@ -115,13 +118,13 @@
 .section-title {
   font-size: 36px;
   font-weight: 700;
-  color: #0f172a; /* Slate 900 */
+  color: #2c3e50; /* Navy */
   margin-bottom: 16px;
 }
 
 .section-description {
   font-size: 16px;
-  color: #475569; /* Slate 600 */
+  color: #475569;
   line-height: 1.8;
   margin-bottom: 32px;
 }
@@ -141,7 +144,7 @@
 .feature-icon {
   width: 32px;
   height: 32px;
-  background: #2563eb; /* Blue 600 - Solid */
+  background: linear-gradient(135deg, #2c3e50 0%, #3498db 100%); /* Navy gradient */
   color: #fff;
   border-radius: 50%;
   display: flex;
@@ -149,69 +152,78 @@
   justify-content: center;
   font-weight: 700;
   flex-shrink: 0;
-  box-shadow: 0 2px 8px rgba(37, 99, 235, 0.3);
+  box-shadow: 0 2px 8px rgba(44, 62, 80, 0.3);
 }
 
 .contact-feature h4 {
   font-size: 16px;
   font-weight: 600;
-  color: #1e293b; /* Slate 800 */
+  color: #2c3e50; /* Navy */
   margin-bottom: 4px;
 }
 
 .contact-feature p {
   font-size: 14px;
-  color: #64748b; /* Slate 500 */
+  color: #64748b;
   margin: 0;
 }
 
 .contact-form-card {
   border-radius: 12px;
   box-shadow: 0 4px 24px rgba(0, 0, 0, 0.06);
-  border: 1px solid #e2e8f0;
+  border: 2px solid #e2e8f0;
   background: #ffffff;
+  transition: all 0.3s ease;
+}
+
+.contact-form-card:hover {
+  border-color: #3498db;
+  box-shadow: 0 4px 24px rgba(52, 152, 219, 0.15);
 }
 
 .contact-form-card .ant-form-item-label > label {
   font-weight: 600;
-  color: #1e293b; /* Slate 800 */
+  color: #2c3e50; /* Navy */
 }
 
 .contact-form-card .ant-input,
 .contact-form-card .ant-input-textarea {
   border-color: #e2e8f0;
+  transition: all 0.3s ease;
 }
 
 .contact-form-card .ant-input:hover,
 .contact-form-card .ant-input-textarea:hover {
-  border-color: #2563eb;
+  border-color: #3498db;
 }
 
 .contact-form-card .ant-input:focus,
 .contact-form-card .ant-input-textarea:focus {
-  border-color: #2563eb;
-  box-shadow: 0 0 0 2px rgba(37, 99, 235, 0.1);
+  border-color: #3498db;
+  box-shadow: 0 0 0 2px rgba(52, 152, 219, 0.1);
 }
 
 .submit-btn {
-  background: #2563eb !important; /* Blue 600 - Solid */
+  background: linear-gradient(135deg, #2c3e50 0%, #3498db 100%) !important; /* Navy gradient */
   border: none !important;
+  color: #fff !important;
   font-weight: 600;
   height: 48px;
   font-size: 16px;
-  box-shadow: 0 4px 12px rgba(37, 99, 235, 0.3);
+  box-shadow: 0 4px 12px rgba(44, 62, 80, 0.3);
+  transition: all 0.3s ease;
 }
 
 .submit-btn:hover {
-  background: #1e40af !important; /* Blue 800 */
+  background: linear-gradient(135deg, #1e2d3d 0%, #2980b9 100%) !important; /* Darker gradient */
   transform: translateY(-2px);
-  box-shadow: 0 8px 24px rgba(37, 99, 235, 0.4);
+  box-shadow: 0 8px 24px rgba(44, 62, 80, 0.4);
 }
 
 /* Map Section */
 .map-section {
   padding: 80px 0;
-  background: #f8fafc; /* Slate 50 */
+  background: #f6f9fb; /* Đồng bộ với background chính */
 }
 
 .map-container {
@@ -219,6 +231,12 @@
   overflow: hidden;
   box-shadow: 0 4px 24px rgba(0, 0, 0, 0.08);
   border: 2px solid #e2e8f0;
+  transition: all 0.3s ease;
+}
+
+.map-container:hover {
+  border-color: #3498db;
+  box-shadow: 0 8px 32px rgba(52, 152, 219, 0.2);
 }
 
 /* Responsive */
@@ -260,13 +278,18 @@
 /* Print Styles */
 @media print {
   .contact-hero {
-    background: #2563eb !important;
+    background: linear-gradient(135deg, #2c3e50 0%, #3498db 100%) !important;
     -webkit-print-color-adjust: exact;
     print-color-adjust: exact;
   }
 
   .contact-info-section,
   .map-section {
-    background: #f8fafc !important;
+    background: #f6f9fb !important;
+  }
+
+  .feature-icon,
+  .submit-btn {
+    background: linear-gradient(135deg, #2c3e50 0%, #3498db 100%) !important;
   }
 }

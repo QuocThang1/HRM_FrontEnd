@@ -55,9 +55,39 @@ const ListEmployeeOfDepartment = () => {
     };
 
     const columns = [
-        { title: "ID", dataIndex: "_id" },
-        { title: "Full Name", dataIndex: ["personalInfo", "fullName"] },
-        { title: "Email", dataIndex: ["personalInfo", "email"] },
+        {
+            title: "No",
+            key: "index",
+            width: 60,
+            align: "center",
+            render: (text, record, index) => index + 1,
+        },
+        {
+            title: "Full Name",
+            dataIndex: ["personalInfo", "fullName"],
+            render: (text) => (
+                <div style={{
+                    whiteSpace: "normal",
+                    wordWrap: "break-word",
+                    lineHeight: "1.5"
+                }}>
+                    {text}
+                </div>
+            ),
+        },
+        {
+            title: "Email",
+            dataIndex: ["personalInfo", "email"],
+            render: (text) => (
+                <div style={{
+                    whiteSpace: "normal",
+                    wordWrap: "break-word",
+                    lineHeight: "1.5"
+                }}>
+                    {text}
+                </div>
+            ),
+        },
         { title: "Role", dataIndex: "role" },
         {
             title: "",

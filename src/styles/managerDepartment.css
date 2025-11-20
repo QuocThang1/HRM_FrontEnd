@@ -4,26 +4,11 @@
   min-height: 100vh;
 }
 
-/* ========== Page Header ========== */
-.page-header {
-  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-  padding: 32px 40px;
-  border-radius: 0 0 24px 24px;
-  box-shadow: 0 8px 32px rgba(102, 126, 234, 0.2);
-  margin-bottom: 32px;
-}
-
 .header-content {
   max-width: 1400px;
   margin: 0 auto;
 }
 
-.page-title {
-  color: #ffffff !important;
-  margin: 0 0 16px 0 !important;
-  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-  font-size: 28px;
-}
 
 .dept-header-info {
   display: flex;

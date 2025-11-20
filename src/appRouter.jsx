@@ -23,6 +23,10 @@ import ManagerAttendanceManagement from "./pages/Manager/attendanceManagement/at
 import AboutPage from "./pages/about.jsx";
 import StaffResignationPage from "./pages/Staff/Resignation/staffResignation.jsx";
 import AdminResignationManagement from "./pages/Admin/ManageResignation/listOfResignation.jsx";
+import SalaryDetail from './pages/Admin/ManageSalary/SalaryDetail/salaryDetail';
+import StaffSalaryDetail from './pages/Admin/ManageSalary/SalaryDetail/staffSalaryDetail.jsx';
+import SalaryDashboard from './pages/Admin/ManageSalary/SalaryDashboard/salaryDashboard.jsx';
+import CreateSalaryByMonth from './pages/Admin/ManageSalary/CreateMonthSalaryForStaff/createSalaryByMonth.jsx';
 
 const router = createBrowserRouter([
     {
@@ -74,6 +78,38 @@ const router = createBrowserRouter([
                 element: (
                     <ProtectedRoute allowedRoles={["admin"]}>
                         <StaffPage />
+                    </ProtectedRoute>
+                ),
+            },
+            {
+                path: "salary-management",
+                element: (
+                    <ProtectedRoute allowedRoles={["admin"]}>
+                        <SalaryDetail />
+                    </ProtectedRoute>
+                ),
+            },
+            {
+                path: "salary-management/:staffId",
+                element: (
+                    <ProtectedRoute allowedRoles={["admin"]}>
+                        <StaffSalaryDetail />
+                    </ProtectedRoute>
+                ),
+            },
+            {
+                path: "monthly-salary-create",
+                element: (
+                    <ProtectedRoute allowedRoles={["admin"]}>
+                        <CreateSalaryByMonth />
+                    </ProtectedRoute>
+                ),
+            },
+            {
+                path: "salary-dashboard",
+                element: (
+                    <ProtectedRoute allowedRoles={["admin"]}>
+                        <SalaryDashboard />
                     </ProtectedRoute>
                 ),
             },

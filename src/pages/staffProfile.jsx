@@ -147,7 +147,7 @@ const StaffProfilePage = () => {
     <div className="staff-profile-page">
       <div className="profile-container">
         {/* Header Section */}
-        <div className="profile-header">
+        <div className="page-header">
           <div className="header-content">
             <Avatar
               size={100}

@@ -97,7 +97,7 @@ const AboutPage = () => {
                                     <h2 className="section-title">Who We Are</h2>
                                     <p className="about-description">
                                         Personnel Hub is a leading provider of comprehensive Human Resource Management solutions.
-                                        Since our founding in 2015, we've been dedicated to transforming the way organizations
+                                        Since our founding in 2015, we have been dedicated to transforming the way organizations
                                         manage their most valuable asset - their people.
                                     </p>
                                     <p className="about-description">
@@ -123,7 +123,7 @@ const AboutPage = () => {
                                             <GlobalOutlined /> Our Vision
                                         </h3>
                                         <p>
-                                            To become the world's most trusted and comprehensive HR management platform,
+                                            To become the world is most trusted and comprehensive HR management platform,
                                             transforming how businesses manage and develop their workforce.
                                         </p>
                                     </Card>
@@ -183,13 +183,13 @@ const AboutPage = () => {
                         <div className="section-header">
                             <h2 className="section-title">Our Journey</h2>
                             <p className="section-subtitle">
-                                Major milestones in our company's growth
+                                Major milestones in our company growth
                             </p>
                         </div>
                         <Timeline
                             mode="alternate"
                             className="custom-timeline"
-                            items={milestones.map((milestone, index) => ({
+                            items={milestones.map((milestone) => ({
                                 dot: <CheckCircleOutlined className="timeline-icon" />,
                                 children: (
                                     <Card className="timeline-card">

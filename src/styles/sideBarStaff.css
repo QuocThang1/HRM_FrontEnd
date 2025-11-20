@@ -7,7 +7,7 @@
   top: 0 !important;
   overflow-y: auto;
   overflow-x: hidden;
-  box-shadow: 2px 0 8px rgba(37, 99, 235, 0.06);
+  box-shadow: 2px 0 8px rgba(44, 62, 80, 0.06);
   display: flex;
   flex-direction: column;
 }
@@ -45,14 +45,14 @@
 .logo-icon {
   width: 48px;
   height: 48px;
-  background: #2563eb; /* Blue 600 - Solid */
+  background: linear-gradient(135deg, #2c3e50 0%, #3498db 100%); /* Navy gradient */
   border-radius: 12px;
   display: flex;
   align-items: center;
   justify-content: center;
   color: #fff;
   font-size: 24px;
-  box-shadow: 0 4px 12px rgba(37, 99, 235, 0.3);
+  box-shadow: 0 4px 12px rgba(44, 62, 80, 0.3);
 }
 
 .logo-text {
@@ -62,10 +62,11 @@
 .logo-title {
   font-size: 18px;
   font-weight: 700;
-  color: #2563eb; /* Blue 600 - Solid color */
+  background: linear-gradient(135deg, #2c3e50 0%, #3498db 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
   line-height: 1.2;
-  background: none;
-  -webkit-text-fill-color: currentColor;
 }
 
 .logo-subtitle {
@@ -78,7 +79,7 @@
 /* ========== Profile Card ========== */
 .sidebar-profile-card {
   padding: 24px 20px;
-  background: #2563eb; /* Blue 600 - Solid */
+  background: linear-gradient(135deg, #2c3e50 0%, #3498db 100%); /* Navy gradient */
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -105,7 +106,7 @@
 
 .profile-avatar {
   background: #ffffff !important;
-  color: #2563eb !important; /* Blue 600 */
+  color: #2c3e50 !important; /* Navy */
   border: 3px solid rgba(255, 255, 255, 0.3);
   box-shadow: 0 8px 24px rgba(0, 0, 0, 0.2);
 }
@@ -172,6 +173,7 @@
   letter-spacing: 0.5px;
   padding: 0 12px;
   margin-bottom: 12px;
+  text-transform: uppercase;
 }
 
 /* ========== Menu Styles ========== */
@@ -198,24 +200,29 @@
 
 .sidebar-menu .ant-menu-item:hover,
 .sidebar-menu .ant-menu-submenu-title:hover {
-  background: rgba(37, 99, 235, 0.08) !important; /* Light blue */
-  color: #2563eb !important; /* Blue 600 */
+  background: rgba(52, 152, 219, 0.08) !important; /* Light blue */
+  color: #3498db !important; /* Blue */
 }
 
 .sidebar-menu .ant-menu-item-selected {
-  background: rgba(37, 99, 235, 0.12) !important; /* Light blue */
-  color: #2563eb !important; /* Blue 600 */
+  background: linear-gradient(135deg, rgba(44, 62, 80, 0.1) 0%, rgba(52, 152, 219, 0.1) 100%) !important;
+  color: #2c3e50 !important; /* Navy */
   font-weight: 600;
+  border-left: 3px solid #3498db; /* Blue accent */
 }
 
 .sidebar-menu .ant-menu-item-selected::after {
-  border-right: 3px solid #2563eb; /* Blue 600 */
+  display: none;
 }
 
 .sidebar-menu .ant-menu-item .anticon,
 .sidebar-menu .ant-menu-submenu-title .anticon {
   font-size: 18px;
   color: inherit;
+}
+
+.sidebar-menu .ant-menu-item-selected .anticon {
+  color: #3498db !important; /* Blue icon */
 }
 
 /* Danger Item (Logout) */
@@ -230,8 +237,8 @@
 
 /* Submenu */
 .sidebar-menu .ant-menu-submenu-open > .ant-menu-submenu-title {
-  color: #2563eb !important; /* Blue 600 */
-  background: rgba(37, 99, 235, 0.08) !important;
+  color: #3498db !important; /* Blue */
+  background: rgba(52, 152, 219, 0.08) !important;
 }
 
 .sidebar-menu .ant-menu-sub {
@@ -243,6 +250,14 @@
   height: 40px;
   line-height: 40px;
   font-size: 13px;
+}
+
+.sidebar-menu .ant-menu-sub .ant-menu-item-selected {
+  background: rgba(52, 152, 219, 0.12) !important;
+  color: #3498db !important;
+  border-left: none;
+  padding-left: 45px !important;
+  border-left: 3px solid #3498db;
 }
 
 .sidebar-menu .ant-menu-item-divider {
@@ -268,6 +283,19 @@
 .footer-version {
   font-size: 11px;
   color: #94a3b8; /* Slate 400 */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 4px;
+}
+
+.version-badge {
+  background: linear-gradient(135deg, #2c3e50 0%, #3498db 100%);
+  color: #fff;
+  padding: 2px 8px;
+  border-radius: 12px;
+  font-size: 10px;
+  font-weight: 600;
 }
 
 /* ========== Responsive ========== */
@@ -316,9 +344,13 @@
 /* ========== Print Styles ========== */
 @media print {
   .sidebar-profile-card {
-    background: #2563eb !important;
+    background: linear-gradient(135deg, #2c3e50 0%, #3498db 100%) !important;
     -webkit-print-color-adjust: exact;
     print-color-adjust: exact;
+  }
+
+  .logo-icon {
+    background: linear-gradient(135deg, #2c3e50 0%, #3498db 100%) !important;
   }
 
   .sidebar-footer {

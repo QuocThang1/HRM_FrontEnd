@@ -106,27 +106,6 @@
   font-size: 16px;
 }
 
-/* Submit Button */
-.submit-button {
-  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%) !important;
-  border: none !important;
-  height: 48px !important;
-  font-size: 16px !important;
-  font-weight: 600 !important;
-  border-radius: 8px !important;
-  box-shadow: 0 4px 12px rgba(102, 126, 234, 0.3);
-  transition: all 0.3s ease;
-}
-
-.submit-button:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 6px 20px rgba(102, 126, 234, 0.4);
-}
-
-.submit-button:active {
-  transform: translateY(0);
-}
-
 /* Validation Messages */
 .profile-form-card .ant-form-item-explain-error {
   font-size: 13px;

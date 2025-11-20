@@ -155,13 +155,20 @@ const AdminResignationManagement = () => {
             title: "Staff",
             dataIndex: ["staffId", "personalInfo", "fullName"],
             key: "staff",
+            width: 150,
             render: (name, record) => (
-                <Space direction="vertical" size={0}>
-                    <Text strong>{name || "N/A"}</Text>
-                    <Text type="secondary" style={{ fontSize: 12 }}>
-                        {record.staffId?.personalInfo?.email || ""}
-                    </Text>
-                </Space>
+                <div style={{
+                    whiteSpace: "normal",
+                    wordWrap: "break-word",
+                    lineHeight: "1.5"
+                }}>
+                    <Space direction="vertical" size={0}>
+                        <Text strong>{name || "N/A"}</Text>
+                        <Text type="secondary" style={{ fontSize: 12 }}>
+                            {record.staffId?.personalInfo?.fullName || ""}
+                        </Text>
+                    </Space>
+                </div>
             ),
         },
         {

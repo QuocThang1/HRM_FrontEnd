@@ -112,16 +112,11 @@ const StaffPage = () => {
 
     const columns = [
         {
-            title: "ID",
-            dataIndex: "_id",
-            key: "_id",
-            width: 120,
-            ellipsis: true,
-            render: (id) => (
-                <Tooltip title={id}>
-                    <span className="employee-id">{id.substring(0, 8)}...</span>
-                </Tooltip>
-            ),
+            title: "No",
+            key: "index",
+            width: 60,
+            align: "center",
+            render: (text, record, index) => index + 1,
         },
         {
             title: "Full Name",
@@ -132,6 +127,15 @@ const StaffPage = () => {
                 (a.personalInfo?.fullName || "").localeCompare(
                     b.personalInfo?.fullName || ""
                 ),
+            render: (text) => (
+                <div style={{
+                    whiteSpace: "normal",
+                    wordWrap: "break-word",
+                    lineHeight: "1.5"
+                }}>
+                    {text}
+                </div>
+            ),
         },
         {
             title: "Email",
@@ -140,9 +144,15 @@ const StaffPage = () => {
             width: 160,
             ellipsis: true,
             render: (email) => (
-                <Tooltip title={email}>
-                    <span className="employee-email">{email}</span>
-                </Tooltip>
+                <div style={{
+                    whiteSpace: "normal",
+                    wordWrap: "break-word",
+                    lineHeight: "1.5"
+                }}>
+                    <Tooltip title={email}>
+                        <span className="employee-email">{email}</span>
+                    </Tooltip>
+                </div>
             ),
         },
         {

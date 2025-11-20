@@ -1,6 +1,6 @@
 .custom-header {
-  background: #ffffff !important; /* White */
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+  background: linear-gradient(135deg, #2c3e50 0%, #3498db 100%) !important;
+  box-shadow: 0 4px 16px rgba(44, 62, 80, 0.3);
   padding: 0 24px !important;
   height: 64px !important;
   line-height: 64px !important;
@@ -10,14 +10,14 @@
   position: sticky;
   top: 0;
   z-index: 1000;
-  border-bottom: 2px solid #2563eb;
+  border-bottom: none;
 }
 
 .header-logo {
   display: flex;
   align-items: center;
   gap: 12px;
-  color: #2563eb; /* Blue text */
+  color: #ffffff !important; /* White text */
   font-size: 20px;
   font-weight: 700;
   cursor: pointer;
@@ -31,7 +31,7 @@
 
 .header-logo-icon {
   font-size: 28px;
-  color: #2563eb;
+  color: #ffffff;
 }
 
 .header-menu {
@@ -43,7 +43,7 @@
 }
 
 .header-menu .ant-menu-item {
-  color: #475569 !important; /* Dark gray */
+  color: rgba(255, 255, 255, 0.8) !important; /* White with opacity */
   font-weight: 500;
   border-bottom: 2px solid transparent !important;
   transition: all 0.3s ease;
@@ -52,15 +52,15 @@
 }
 
 .header-menu .ant-menu-item:hover {
-  color: #2563eb !important; /* Blue */
-  background: rgba(37, 99, 235, 0.05) !important;
-  border-bottom: 2px solid #2563eb !important;
+  color: #ffffff !important;
+  background: rgba(255, 255, 255, 0.1) !important;
+  border-bottom: 2px solid #ffffff !important;
 }
 
 .header-menu .ant-menu-item-selected {
-  color: #2563eb !important;
-  background: rgba(37, 99, 235, 0.1) !important;
-  border-bottom: 2px solid #2563eb !important;
+  color: #ffffff !important;
+  background: rgba(255, 255, 255, 0.15) !important;
+  border-bottom: 2px solid #ffffff !important;
 }
 
 .header-menu .ant-menu-item .anticon {
@@ -79,7 +79,7 @@
   align-items: center;
   gap: 12px;
   padding: 6px 16px;
-  background: rgba(37, 99, 235, 0.1);
+  background: rgba(255, 255, 255, 0.15);
   border-radius: 24px;
   cursor: pointer;
   transition: all 0.3s ease;
@@ -87,14 +87,14 @@
 }
 
 .header-user-info:hover {
-  background: rgba(37, 99, 235, 0.15);
+  background: rgba(255, 255, 255, 0.25);
   transform: translateY(-2px);
-  box-shadow: 0 4px 12px rgba(37, 99, 235, 0.15);
+  box-shadow: 0 4px 12px rgba(255, 255, 255, 0.2);
 }
 
 .header-avatar {
-  border: 2px solid #2563eb !important;
-  box-shadow: 0 2px 8px rgba(37, 99, 235, 0.15);
+  border: 2px solid #ffffff !important;
+  box-shadow: 0 2px 8px rgba(255, 255, 255, 0.3);
   flex-shrink: 0;
 }
 
@@ -107,7 +107,7 @@
 }
 
 .header-user-name {
-  color: #1e293b !important; /* Dark text */
+  color: #ffffff !important;
   font-weight: 600;
   font-size: 14px;
   max-width: 150px;
@@ -121,7 +121,7 @@
 .header-user-role {
   display: inline-block;
   padding: 2px 8px;
-  background: #2563eb;
+  background: rgba(255, 255, 255, 0.25);
   border-radius: 12px;
   color: #fff;
   font-size: 11px;
@@ -129,11 +129,12 @@
   text-transform: uppercase;
   letter-spacing: 0.5px;
   line-height: 1 !important;
+  border: 1px solid rgba(255, 255, 255, 0.3);
 }
 
 .header-logout-btn {
-  background: #2563eb !important;
-  border: 1px solid #2563eb !important;
+  background: rgba(255, 255, 255, 0.2) !important;
+  border: 1px solid rgba(255, 255, 255, 0.4) !important;
   color: #fff !important;
   font-weight: 600;
   border-radius: 20px;
@@ -144,10 +145,10 @@
 }
 
 .header-logout-btn:hover {
-  background: #1e40af !important;
-  border-color: #1e40af !important;
+  background: rgba(255, 255, 255, 0.3) !important;
+  border-color: rgba(255, 255, 255, 0.6) !important;
   transform: translateY(-2px);
-  box-shadow: 0 4px 12px rgba(37, 99, 235, 0.3);
+  box-shadow: 0 4px 12px rgba(255, 255, 255, 0.3);
 }
 
 .header-logout-btn .anticon {
@@ -155,8 +156,8 @@
 }
 
 .header-login-btn {
-  background: #2563eb !important;
-  border: 1px solid #2563eb !important;
+  background: rgba(255, 255, 255, 0.2) !important;
+  border: 1px solid rgba(255, 255, 255, 0.4) !important;
   color: #fff !important;
   font-weight: 600;
   border-radius: 20px;
@@ -167,10 +168,10 @@
 }
 
 .header-login-btn:hover {
-  background: #1e40af !important;
-  border-color: #1e40af !important;
+  background: rgba(255, 255, 255, 0.3) !important;
+  border-color: rgba(255, 255, 255, 0.6) !important;
   transform: translateY(-2px);
-  box-shadow: 0 4px 12px rgba(37, 99, 235, 0.3);
+  box-shadow: 0 4px 12px rgba(255, 255, 255, 0.3);
 }
 
 .header-login-btn .anticon {

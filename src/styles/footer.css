@@ -1,5 +1,5 @@
 .custom-footer {
-  background: #1e40af; /* Blue 800 - Same as CTA section */
+  background: linear-gradient(135deg, #2c3e50 0%, #3498db 100%); /* Navy gradient - đồng bộ với theme */
   color: #fff;
   padding: 60px 0 0 0;
   margin-top: 60px;
@@ -31,12 +31,12 @@
   bottom: 0;
   width: 50px;
   height: 3px;
-  background: #60a5fa; /* Blue 400 - Lighter blue accent */
+  background: #ffffff; /* White accent */
   border-radius: 2px;
 }
 
 .footer-description {
-  color: rgba(255, 255, 255, 0.85);
+  color: rgba(255, 255, 255, 0.9);
   font-size: 14px;
   line-height: 1.8;
   margin-bottom: 20px;
@@ -53,20 +53,20 @@
   justify-content: center;
   width: 36px;
   height: 36px;
-  background: rgba(96, 165, 250, 0.2); /* Light blue background */
+  background: rgba(255, 255, 255, 0.15); /* White transparent background */
   border-radius: 50%;
   color: #fff;
   font-size: 16px;
   transition: all 0.3s ease;
-  border: 1px solid rgba(96, 165, 250, 0.3);
+  border: 1px solid rgba(255, 255, 255, 0.3);
 }
 
 .social-icon:hover {
-  background: #2563eb; /* Blue 600 */
-  border-color: #2563eb;
+  background: rgba(255, 255, 255, 0.25); /* Lighter on hover */
+  border-color: #ffffff;
   transform: translateY(-3px);
   color: #fff;
-  box-shadow: 0 4px 12px rgba(37, 99, 235, 0.4);
+  box-shadow: 0 4px 12px rgba(255, 255, 255, 0.3);
 }
 
 .footer-links {
@@ -87,7 +87,7 @@
 }
 
 .footer-links a:hover {
-  color: #60a5fa; /* Blue 400 */
+  color: #ffffff; /* Pure white on hover */
   transform: translateX(5px);
   text-decoration: none;
 }
@@ -111,7 +111,7 @@
   font-size: 16px;
   margin-right: 12px;
   margin-top: 2px;
-  color: #60a5fa; /* Blue 400 */
+  color: #ffffff; /* White icon */
   flex-shrink: 0;
 }
 
@@ -121,13 +121,13 @@
   align-items: center;
   padding: 24px 0;
   margin-top: 40px;
-  border-top: 1px solid rgba(96, 165, 250, 0.2);
+  border-top: 1px solid rgba(255, 255, 255, 0.2);
   flex-wrap: wrap;
   gap: 16px;
 }
 
 .footer-copyright {
-  color: rgba(255, 255, 255, 0.85);
+  color: rgba(255, 255, 255, 0.9);
   font-size: 14px;
 }
 
@@ -144,7 +144,7 @@
 }
 
 .footer-legal a:hover {
-  color: #60a5fa; /* Blue 400 */
+  color: #ffffff; /* Pure white on hover */
   text-decoration: underline;
 }
 

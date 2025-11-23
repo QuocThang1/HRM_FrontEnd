@@ -1,0 +1,30 @@
+.my-salary-page {
+    padding: 24px;
+    background: #f6f9fb;
+    min-height: 100vh;
+}
+
+/* Loading Container */
+.loading-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 400px;
+}
+
+/* Table Custom Styles */
+.ant-table-tbody > tr:hover {
+    background: rgba(52, 152, 219, 0.05) !important;
+    transition: all 0.3s ease;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .my-salary-page {
+        padding: 16px;
+    }
+
+    .ant-table {
+        font-size: 12px;
+    }
+}

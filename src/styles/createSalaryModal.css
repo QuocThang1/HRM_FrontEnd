@@ -157,48 +157,6 @@
   resize: none;
 }
 
-/* Submit Button */
-.salary-submit-button {
-  background: linear-gradient(135deg, #2c3e50 0%, #3498db 100%) !important;
-  border: none !important;
-  height: 40px !important;
-  padding: 0 24px !important;
-  font-weight: 600 !important;
-  border-radius: 8px !important;
-  box-shadow: 0 2px 8px rgba(52, 152, 219, 0.3);
-  transition: all 0.3s ease;
-  color: #ffffff !important;
-}
-
-.salary-submit-button:hover:not(:disabled) {
-  transform: translateY(-2px);
-  box-shadow: 0 4px 12px rgba(52, 152, 219, 0.4) !important;
-  background: linear-gradient(135deg, #1e2d3d 0%, #2980b9 100%) !important;
-}
-
-.salary-submit-button:disabled {
-  opacity: 0.6;
-  cursor: not-allowed;
-  transform: none;
-}
-
-/* Cancel Button */
-.salary-cancel-button {
-  height: 40px !important;
-  padding: 0 24px !important;
-  border-radius: 8px !important;
-  font-weight: 500 !important;
-  border: 1.5px solid #d9d9d9 !important;
-  transition: all 0.3s ease;
-  background: #ffffff !important;
-  color: rgba(0, 0, 0, 0.85) !important;
-}
-
-.salary-cancel-button:hover {
-  border-color: #3498db !important;
-  color: #3498db !important;
-}
-
 /* Loading Spinner */
 .create-salary-modal .ant-spin-nested-loading {
   min-height: 200px;

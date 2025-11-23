@@ -106,6 +106,22 @@
   font-size: 16px;
 }
 
+.salary-info-card {
+  border-radius: 12px;
+  border: 2px solid #52c41a;
+  box-shadow: 0 2px 8px rgba(82, 196, 26, 0.15);
+  transition: all 0.3s ease;
+}
+
+.salary-info-card:hover {
+  box-shadow: 0 4px 16px rgba(82, 196, 26, 0.25);
+  transform: translateY(-2px);
+}
+
+.salary-info-card .ant-card-body {
+  padding: 20px 24px;
+}
+
 /* Validation Messages */
 .profile-form-card .ant-form-item-explain-error {
   font-size: 13px;

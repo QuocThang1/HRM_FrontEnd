@@ -1,21 +1,4 @@
 /* Add Shift Modal Styles */
-.add-shift-modal .ant-modal-header {
-  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-  border-radius: 8px 8px 0 0;
-  padding: 20px 24px;
-}
-
-.add-shift-modal .ant-modal-title {
-  color: #ffffff;
-}
-
-.add-shift-modal .modal-title {
-  display: flex;
-  align-items: center;
-  gap: 10px;
-  font-size: 18px;
-  font-weight: 600;
-}
 
 .add-shift-modal .modal-icon {
   font-size: 20px;
@@ -27,12 +10,6 @@
 
 .add-shift-modal .ant-modal-close:hover {
   color: rgba(255, 255, 255, 0.8);
-}
-
-.add-shift-modal .ant-modal-body {
-  padding: 24px;
-  max-height: 60vh;
-  overflow-y: auto;
 }
 
 /* Loading */
@@ -169,27 +146,6 @@
   background: #f5f7ff;
   border-radius: 6px;
   margin-top: 4px;
-}
-
-/* Add Button */
-.add-btn {
-  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-  border: none;
-  border-radius: 8px;
-  font-weight: 500;
-  padding: 0 20px;
-  height: 36px;
-}
-
-.add-btn:hover {
-  background: linear-gradient(135deg, #7c8ff0 0%, #8a5bb0 100%);
-  transform: translateY(-2px);
-  box-shadow: 0 4px 12px rgba(102, 126, 234, 0.3);
-}
-
-.add-btn:disabled {
-  background: #d9d9d9;
-  transform: none;
 }
 
 /* Scrollbar */

@@ -27,6 +27,11 @@ import SalaryDetail from './pages/Admin/ManageSalary/SalaryDetail/salaryDetail';
 import StaffSalaryDetail from './pages/Admin/ManageSalary/SalaryDetail/staffSalaryDetail.jsx';
 import SalaryDashboard from './pages/Admin/ManageSalary/SalaryDashboard/salaryDashboard.jsx';
 import CreateSalaryByMonth from './pages/Admin/ManageSalary/CreateMonthSalaryForStaff/createSalaryByMonth.jsx';
+import ReviewDepartment from "./pages/Manager/reviewDepartmentManagement/reviewDepartment.jsx";
+import ReviewStatistics from "./pages/Manager/reviewDepartmentManagement/reviewStatistics.jsx";
+import MySalary from "./pages/StaffAndManager/Salary/mySalary.jsx";
+import ListOfPolicy from "./pages/Admin/ManagePolicy/listOfPolicy";
+import PolicyDetail from "./pages/Admin/ManagePolicy/policyDetail"
 
 const router = createBrowserRouter([
     {
@@ -57,6 +62,22 @@ const router = createBrowserRouter([
         ),
         children: [
             { index: true, element: <StaffProfilePage /> },
+            {
+                path: "policy-management",
+                element: (
+                    <ProtectedRoute allowedRoles={["admin"]}>
+                        <ListOfPolicy />
+                    </ProtectedRoute>
+                ),
+            },
+            {
+                path: "policy-management/:policyId",
+                element: (
+                    <ProtectedRoute allowedRoles={["admin"]}>
+                        <PolicyDetail />
+                    </ProtectedRoute>
+                ),
+            },
             {
                 path: "candidate-cv-management",
                 element: (
@@ -158,6 +179,30 @@ const router = createBrowserRouter([
                 element: (
                     <ProtectedRoute allowedRoles={["manager"]}>
                         <ManagerAttendanceManagement />
+                    </ProtectedRoute>
+                ),
+            },
+            {
+                path: "view-reviews",
+                element: (
+                    <ProtectedRoute allowedRoles={["manager"]}>
+                        <ReviewDepartment />
+                    </ProtectedRoute>
+                ),
+            },
+            {
+                path: "review-statistics",
+                element: (
+                    <ProtectedRoute allowedRoles={["manager"]}>
+                        <ReviewStatistics />
+                    </ProtectedRoute>
+                ),
+            },
+            {
+                path: "my-salaries",
+                element: (
+                    <ProtectedRoute allowedRoles={["staff", "manager"]}>
+                        <MySalary />
                     </ProtectedRoute>
                 ),
             },

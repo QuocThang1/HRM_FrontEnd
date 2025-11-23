@@ -41,17 +41,6 @@
   color: rgba(255, 255, 255, 0.9);
 }
 
-.page-title {
-  color: #ffffff !important;
-  margin: 0 !important;
-  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-}
-
-.page-subtitle {
-  color: rgba(255, 255, 255, 0.9);
-  font-size: 15px;
-}
-
 .staff-meta {
   display: flex;
   gap: 8px;

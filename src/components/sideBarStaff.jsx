@@ -13,6 +13,8 @@ import {
   CalendarOutlined,
   FileTextOutlined,
   DollarOutlined,
+  LineChartOutlined,
+  FileProtectOutlined,
 } from "@ant-design/icons";
 import { Link, useNavigate, useLocation } from "react-router-dom";
 import { useContext } from "react";
@@ -106,6 +108,17 @@ const SideBarStaff = () => {
               key: "/profile",
               icon: <HomeOutlined />,
               label: <Link to="/profile">Profile</Link>,
+            },
+            ...(auth?.staff?.role === "admin"
+              ? [
+                {
+                  key: "/profile/policy-management",
+                  icon: <FileProtectOutlined />,
+                  label: <Link to="/profile/policy-management">Policy Management</Link>,
+                },]
+              : []),
+            {
+              type: "divider",
             },
             ...(auth?.staff?.role === "admin"
               ? [
@@ -219,6 +232,36 @@ const SideBarStaff = () => {
                   </Link>
                 ),
               },
+              {
+                key: "review-group",
+                icon: <LineChartOutlined />,
+                label: "View Reviews",
+                children: [
+                  {
+                    key: "/profile/review-statistics",
+                    label: (
+                      <Link to="/profile/review-statistics">
+                        Review Statistics
+                      </Link>
+                    ),
+                  },
+                  {
+                    key: "/profile/view-reviews",
+                    label: (
+                      <Link to="/profile/view-reviews">View Reviews</Link>
+                    ),
+                  },
+                ],
+              },
+              {
+                key: "/profile/my-salaries",
+                icon: <DollarOutlined />,
+                label: (
+                  <Link to="/profile/my-salaries">
+                    My Salaries
+                  </Link>
+                ),
+              },
               ]
               : []),
             ...(auth?.staff?.role === "staff"
@@ -237,6 +280,15 @@ const SideBarStaff = () => {
                 label: (
                   <Link to="/profile/attendance">
                     Attendance
+                  </Link>
+                ),
+              },
+              {
+                key: "/profile/my-salaries",
+                icon: <DollarOutlined />,
+                label: (
+                  <Link to="/profile/my-salaries">
+                    My Salaries
                   </Link>
                 ),
               },
@@ -270,7 +322,8 @@ const SideBarStaff = () => {
             {
               key: "logout",
               icon: <LogoutOutlined />,
-              label: <span onClick={handleLogout}>Sign Out</span>,
+              label: "Sign Out",
+              onClick: handleLogout,
               danger: true,
             },
           ]}

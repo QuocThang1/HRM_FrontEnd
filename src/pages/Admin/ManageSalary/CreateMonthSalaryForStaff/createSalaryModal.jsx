@@ -37,12 +37,14 @@ const CreateSalaryModal = ({
     const [hourlyRate, setHourlyRate] = useState(0);
     const [totalHours, setTotalHours] = useState(0);
     const [estimatedSalary, setEstimatedSalary] = useState(0);
-    const [existingMonths, setExistingMonths] = useState([]); // Lưu danh sách tháng đã tạo
+    const [existingMonths, setExistingMonths] = useState([]);
+
+    const isManager = staff?.role === "manager";
 
     useEffect(() => {
         if (visible && staff) {
             fetchHourlyRate();
-            fetchExistingSalaries(); // Lấy danh sách tháng đã tạo
+            fetchExistingSalaries();
         }
     }, [visible, staff]);
 
@@ -67,7 +69,6 @@ const CreateSalaryModal = ({
         try {
             const response = await getMonthlySalariesByStaffApi(staff._id);
             if (response?.EC === 0 && response.data) {
-                // Tạo array các key "MM-YYYY" cho những tháng đã có
                 const months = response.data.map(salary => {
                     const monthStr = salary.month.toString().padStart(2, '0');
                     return `${monthStr}-${salary.year}`;
@@ -80,6 +81,10 @@ const CreateSalaryModal = ({
     };
 
     const calculateTotalHours = async (staffId, month, year) => {
+        if (isManager) {
+            return 160;
+        }
+
         try {
             const startDate = dayjs(`${year}-${month}-01`).format("YYYY-MM-DD");
             const endDate = dayjs(`${year}-${month}-01`)
@@ -116,7 +121,6 @@ const CreateSalaryModal = ({
         const year = date.year();
         const monthKey = `${month.toString().padStart(2, '0')}-${year}`;
 
-        // Kiểm tra nếu tháng đã được tạo
         if (existingMonths.includes(monthKey)) {
             toast.warning(`Salary for ${date.format('MM/YYYY')} has already been created!`, {
                 autoClose: 3000
@@ -133,7 +137,8 @@ const CreateSalaryModal = ({
         setEstimatedSalary(estimated);
         setLoading(false);
 
-        if (hours === 0) {
+        // Chỉ hiển thị warning nếu không phải Manager và không có giờ làm
+        if (hours === 0 && !isManager) {
             toast.info("No working hours found for the selected month.", { autoClose: 3000 });
         }
     };
@@ -146,7 +151,7 @@ const CreateSalaryModal = ({
     };
 
     const handleSubmit = async (values) => {
-        if (totalHours === 0) {
+        if (totalHours === 0 && !isManager) {
             toast.error("Cannot create salary record with zero working hours.", { autoClose: 2000 });
             return;
         }
@@ -155,7 +160,6 @@ const CreateSalaryModal = ({
         const year = values.month.year();
         const monthKey = `${month.toString().padStart(2, '0')}-${year}`;
 
-        // Kiểm tra lần nữa trước khi submit
         if (existingMonths.includes(monthKey)) {
             toast.error("Salary for this month already exists!", { autoClose: 2000 });
             return;
@@ -202,7 +206,6 @@ const CreateSalaryModal = ({
         }).format(amount);
     };
 
-    // Custom cell render để tô đỏ các tháng đã tạo
     const dateRender = (currentDate) => {
         const month = (currentDate.month() + 1).toString().padStart(2, '0');
         const year = currentDate.year();
@@ -241,11 +244,13 @@ const CreateSalaryModal = ({
         >
             <Spin spinning={loading}>
                 <Alert
-                    message="Basic Salary Information"
+                    message={"Basic Salary Information"}
                     description={
                         <Space direction="vertical" style={{ width: "100%" }}>
                             <Text>Hourly Rate: {formatCurrency(hourlyRate)}</Text>
-                            <Text>Total Hours: {totalHours.toFixed(1)}h</Text>
+                            <Text>
+                                Total Hours: {totalHours.toFixed(1)}h
+                            </Text>
                             <Text strong style={{ color: "#2c3e50" }}>
                                 Estimated Salary: {formatCurrency(estimatedSalary)}
                             </Text>
@@ -328,15 +333,15 @@ const CreateSalaryModal = ({
                         <Space style={{ width: "100%", justifyContent: "flex-end" }}>
                             <button
                                 type="button"
-                                className="salary-cancel-button"
+                                className="ant-btn-default"
                                 onClick={handleClose}
                             >
                                 Cancel
                             </button>
                             <button
                                 type="submit"
-                                className="salary-submit-button"
-                                disabled={submitting || totalHours === 0}
+                                className="ant-btn-primary"
+                                disabled={submitting || (totalHours === 0 && !isManager)}
                             >
                                 {submitting ? "Creating..." : "Create Salary"}
                             </button>

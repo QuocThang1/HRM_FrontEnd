@@ -34,7 +34,7 @@ import dayjs from "dayjs";
 import { toast } from "react-toastify";
 import "../../../styles/resignation.css";
 
-const { Title, Text, Paragraph } = Typography;
+const { Text, Paragraph } = Typography;
 const { TextArea } = Input;
 const { Option } = Select;
 
@@ -140,10 +140,12 @@ const StaffResignationPage = () => {
     return (
         <div className="resignation-page">
             <div className="page-header">
-                <Title level={2}>
+                <div className="page-title">
                     <FileTextOutlined /> Resignation Request
-                </Title>
-                <Text type="secondary">Submit and track your resignation request</Text>
+                </div>
+                <div className="page-subtitle">
+                    Submit and track your resignation request
+                </div>
             </div>
 
             {/* Existing Resignation Status */}

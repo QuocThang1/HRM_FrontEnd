@@ -1,3 +1,4 @@
+
 import { useState, useEffect } from "react";
 import {
     Card,
@@ -20,7 +21,7 @@ import {
 } from "@ant-design/icons";
 import { getManagerDepartmentApi } from "../../../utils/Api/departmentApi";
 import { getStaffByDepartmentApi } from "../../../utils/Api/staffApi";
-import DepartmentScheduleTable from "./departmentScheduleTable";
+import DepartmentScheduleTable from "../../../components/departmentScheduleTable";
 import { toast } from "react-toastify";
 import { useNavigate } from "react-router-dom";
 import "../../../styles/managerDepartment.css";

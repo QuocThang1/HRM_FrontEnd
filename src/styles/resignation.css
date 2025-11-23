@@ -4,23 +4,6 @@
   min-height: 100vh;
 }
 
-/* Page Header */
-.page-header {
-  margin-bottom: 24px;
-}
-
-.page-header h2 {
-  margin-bottom: 8px;
-  color: #001529;
-  display: flex;
-  align-items: center;
-  gap: 8px;
-}
-
-.page-header .ant-typography {
-  font-size: 14px;
-}
-
 /* Form Card & Status Card */
 .form-card,
 .status-card {

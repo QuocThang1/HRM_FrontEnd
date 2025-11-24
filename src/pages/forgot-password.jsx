@@ -13,17 +13,22 @@ const ForgotPasswordPage = () => {
   const onFinish = async (values) => {
     const { email } = values;
     try {
-      const frontendUrl = window.location.origin; // pass current frontend origin so backend can build link
+      const frontendUrl = window.location.origin; // pass current frontend origin so backend can build link or send OTP
       const res = await forgotPasswordApi(email, frontendUrl);
       if (res && res.EC === 0) {
         toast.success(
-          res.EM || `If ${email} is registered, a reset link has been sent.`,
-          { autoClose: 3000 },
+          res.EM ||
+            `If ${email} is registered, a verification code has been sent.`,
+          { autoClose: 2000 },
+        );
+        // navigate to OTP entry page with email as query
+        setTimeout(
+          () => navigate(`/enter-otp?email=${encodeURIComponent(email)}`),
+          800,
         );
       } else {
         toast.error(res.EM || "Could not process request", { autoClose: 3000 });
       }
-      setTimeout(() => navigate("/login"), 1400);
     } catch (error) {
       console.error(error);
       toast.error("An error occurred. Please try again later.", {

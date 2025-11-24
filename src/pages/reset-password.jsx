@@ -14,7 +14,8 @@ function useQuery() {
 const ResetPasswordPage = () => {
   const navigate = useNavigate();
   const query = useQuery();
-  const token = query.get("token") || "";
+  const email = query.get("email") || "";
+  const otp = query.get("otp") || "";
 
   const onFinish = async (values) => {
     const { newPassword, confirmPassword } = values;
@@ -24,7 +25,7 @@ const ResetPasswordPage = () => {
     }
 
     try {
-      const res = await resetPasswordApi(token, newPassword);
+      const res = await resetPasswordApi(email, otp, newPassword);
       if (res && res.EC === 0) {
         toast.success(res.EM || "Password reset successfully", {
           autoClose: 2000,

@@ -47,9 +47,14 @@ const forgotPasswordApi = (email, frontendUrl) => {
   return axios.post(URL_API, { email, frontendUrl });
 };
 
-const resetPasswordApi = (token, newPassword) => {
+const resetPasswordApi = (email, otp, newPassword) => {
   const URL_API = "/v1/api/reset-password";
-  return axios.post(URL_API, { token, newPassword });
+  return axios.post(URL_API, { email, otp, newPassword });
+};
+
+const verifyOtpApi = (email, code) => {
+  const URL_API = "/v1/api/verify-otp";
+  return axios.post(URL_API, { email, code });
 };
 
 export {
@@ -59,4 +64,5 @@ export {
   getAccountApi,
   forgotPasswordApi,
   resetPasswordApi,
+  verifyOtpApi,
 };

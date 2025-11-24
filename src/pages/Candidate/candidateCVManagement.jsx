@@ -29,10 +29,6 @@ const CandidateCVManagement = () => {
     fetchCandidates();
   }, []);
 
-  useEffect(() => {
-    filterCandidates();
-  }, [statusFilter, candidates]);
-
   const fetchCandidates = async () => {
     setLoading(true);
     try {
@@ -47,17 +43,6 @@ const CandidateCVManagement = () => {
       setFilteredCandidates([]);
     } finally {
       setLoading(false);
-    }
-  };
-
-  const filterCandidates = () => {
-    if (statusFilter === "all") {
-      setFilteredCandidates(candidates);
-    } else {
-      const filtered = candidates.filter(
-        (c) => c.candidateInfo?.status === statusFilter,
-      );
-      setFilteredCandidates(filtered);
     }
   };
 

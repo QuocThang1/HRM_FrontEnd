@@ -15,8 +15,4 @@ const updateCandidateStatusApi = (candidateId, status) => {
     return axios.put(URL_API, { status });
 };
 
-export {
-    submitCVApi,
-    getAllCandidatesApi,
-    updateCandidateStatusApi,
-};
+export { submitCVApi, getAllCandidatesApi, updateCandidateStatusApi };

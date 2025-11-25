@@ -66,7 +66,7 @@ const HomePage = () => {
 
   const prevSlide = () => {
     setCurrentSlide((prev) =>
-      prev === 0 ? sliderImages.length - 1 : prev - 1
+      prev === 0 ? sliderImages.length - 1 : prev - 1,
     );
   };
 
@@ -165,7 +165,7 @@ const HomePage = () => {
         <div className="hero-content">
           <div className="hero-text">
             <h1 className="hero-title">
-              Welcome to <span className="gradient-text">HRM System</span>
+              Welcome to <span className="gradient-text">NextGen Solution</span>
             </h1>
             <p className="hero-subtitle">
               Streamline your HR operations with our comprehensive human
@@ -178,7 +178,7 @@ const HomePage = () => {
                   type="primary"
                   size="large"
                   icon={<RocketOutlined />}
-                  onClick={() => navigate("/profile")}
+                  onClick={() => navigate("/dashboard")}
                   className="hero-btn-primary"
                 >
                   Go to Dashboard

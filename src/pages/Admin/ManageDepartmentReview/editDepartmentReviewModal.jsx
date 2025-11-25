@@ -65,7 +65,11 @@ const EditDepartmentReviewModal = ({ open, onClose, review, onSuccess }) => {
           name="month"
           rules={[{ required: true, message: "Please select month" }]}
         >
-          <DatePicker picker="month" format="YYYY-MM" style={{ width: "100%" }} />
+          <DatePicker
+            picker="month"
+            format="YYYY-MM"
+            style={{ width: "100%" }}
+          />
         </Form.Item>
 
         <Form.Item

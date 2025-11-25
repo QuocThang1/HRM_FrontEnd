@@ -113,7 +113,7 @@ const StaffProfilePage = () => {
         formattedValues.phone,
         formattedValues.citizenId,
         formattedValues.gender,
-        formattedValues.dob
+        formattedValues.dob,
       );
 
       if (res && res.EC === 0) {
@@ -225,10 +225,7 @@ const StaffProfilePage = () => {
                     {salaryLoading ? (
                       <Spin size="small" />
                     ) : hourlyRate !== null ? (
-                      <Text
-                        strong
-                        style={{ fontSize: 24, color: "#52c41a" }}
-                      >
+                      <Text strong style={{ fontSize: 24, color: "#52c41a" }}>
                         {formatCurrency(hourlyRate)}/h
                       </Text>
                     ) : (
@@ -366,9 +363,7 @@ const StaffProfilePage = () => {
                 <Form.Item
                   label="Gender"
                   name="gender"
-                  rules={[
-                    { required: true, message: "Please select gender!" },
-                  ]}
+                  rules={[{ required: true, message: "Please select gender!" }]}
                 >
                   <Select
                     size="large"

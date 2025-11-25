@@ -55,21 +55,20 @@ const Header = () => {
     },
     ...(auth?.staff?.role === "candidate"
       ? [
-        {
-          label: <Link to="/apply-cv">Apply CV</Link>,
-          key: "/apply-cv",
-          icon: <FileTextOutlined />,
-        },
-      ]
-      : []
-    )
-  ]
+          {
+            label: <Link to="/apply-cv">Apply CV</Link>,
+            key: "/apply-cv",
+            icon: <FileTextOutlined />,
+          },
+        ]
+      : []),
+  ];
 
   return (
     <AntHeader className="custom-header">
       <div className="header-logo" onClick={() => navigate("/")}>
         <RocketOutlined className="header-logo-icon" />
-        <span>HRM System</span>
+        <span>NextGen Solution</span>
       </div>
 
       <Menu

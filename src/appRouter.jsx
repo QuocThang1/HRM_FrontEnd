@@ -1,6 +1,9 @@
 import { RouterProvider, createBrowserRouter } from "react-router-dom";
 import App from "./layout/generalLayout.jsx";
 import RegisterPage from "./pages/register.jsx";
+import ForgotPasswordPage from "./pages/forgot-password.jsx";
+import ResetPasswordPage from "./pages/reset-password.jsx";
+import EnterOtpPage from "./pages/enter-otp.jsx";
 import HomePage from "./pages/home.jsx";
 import LoginPage from "./pages/login.jsx";
 import StaffLayout from "./layout/staffLayout.jsx";
@@ -37,264 +40,272 @@ import StaffContracts from "./pages/Admin/ManageContract/staffContracts.jsx";
 import ContractDetail from "./pages/Admin/ManageContract/contractDetail.jsx";
 import ListContract from "./pages/StaffAndManager/Contract/listContract.jsx";
 import ContractDetailPage from "./pages/StaffAndManager/Contract/contractDetailPage.jsx";
+import Dashboard from "./pages/dashboard.jsx";
 
 const router = createBrowserRouter([
-    {
-        path: "/",
-        element: <App />,
-        children: [
-            { index: true, element: <HomePage /> },
-            { path: "/contact", element: <ContactPage /> },
-            { path: "/about", element: <AboutPage /> },
-            {
-                path: "/apply-cv",
-                element: (
-                    <ProtectedRoute allowedRoles={["candidate"]}>
-                        <ApplyCVPage />
-                    </ProtectedRoute>
-                ),
-            },
-        ],
-    },
-    { path: "/register", element: <RegisterPage /> },
-    { path: "/login", element: <LoginPage /> },
-    {
-        path: "/profile",
+  {
+    path: "/",
+    element: <App />,
+    children: [
+      { index: true, element: <HomePage /> },
+      { path: "/contact", element: <ContactPage /> },
+      { path: "/about", element: <AboutPage /> },
+      {
+        path: "/apply-cv",
         element: (
-            <ProtectedRoute allowedRoles={["admin", "manager", "staff"]}>
-                <StaffLayout />
-            </ProtectedRoute>
+          <ProtectedRoute allowedRoles={["candidate"]}>
+            <ApplyCVPage />
+          </ProtectedRoute>
         ),
-        children: [
-            { index: true, element: <StaffProfilePage /> },
-            {
-                path: "policy-management",
-                element: (
-                    <ProtectedRoute allowedRoles={["admin"]}>
-                        <ListOfPolicy />
-                    </ProtectedRoute>
-                ),
-            },
-            {
-                path: "policy-management/:policyId",
-                element: (
-                    <ProtectedRoute allowedRoles={["admin"]}>
-                        <PolicyDetail />
-                    </ProtectedRoute>
-                )
-            },
-            {
-                path: "contract-management",
-                element: (
-                    <ProtectedRoute allowedRoles={["admin"]}>
-                        <ListOfContract />
-                    </ProtectedRoute>
-                ),
-            },
-            {
-                path: "contract-management/staff/:staffId",
-                element: (
-                    <ProtectedRoute allowedRoles={["admin"]}>
-                        <StaffContracts />
-                    </ProtectedRoute>
-                ),
-            },
-            {
-                path: "contract-management/detail/:contractId",
-                element: (
-                    <ProtectedRoute allowedRoles={["admin"]}>
-                        <ContractDetail />
-                    </ProtectedRoute>
-                ),
-            },
-            {
-                path: "candidate-cv-management",
-                element: (
-                    <ProtectedRoute allowedRoles={["admin"]}>
-                        <CandidateCVManagement />
-                    </ProtectedRoute>
-                ),
-            },
-            {
-                path: "resignation-management",
-                element: (
-                    <ProtectedRoute allowedRoles={["admin"]}>
-                        <AdminResignationManagement />
-                    </ProtectedRoute>
-                ),
-            },
-            {
-                path: "employee-management",
-                element: (
-                    <ProtectedRoute allowedRoles={["admin"]}>
-                        <StaffPage />
-                    </ProtectedRoute>
-                ),
-            },
-            {
-                path: "salary-management",
-                element: (
-                    <ProtectedRoute allowedRoles={["admin"]}>
-                        <SalaryDetail />
-                    </ProtectedRoute>
-                ),
-            },
-            {
-                path: "salary-management/:staffId",
-                element: (
-                    <ProtectedRoute allowedRoles={["admin"]}>
-                        <StaffSalaryDetail />
-                    </ProtectedRoute>
-                ),
-            },
-            {
-                path: "monthly-salary-create",
-                element: (
-                    <ProtectedRoute allowedRoles={["admin"]}>
-                        <CreateSalaryByMonth />
-                    </ProtectedRoute>
-                ),
-            },
-            {
-                path: "salary-dashboard",
-                element: (
-                    <ProtectedRoute allowedRoles={["admin"]}>
-                        <SalaryDashboard />
-                    </ProtectedRoute>
-                ),
-            },
-            {
-                path: "shift-management",
-                element: (
-                    <ProtectedRoute allowedRoles={["admin"]}>
-                        <ShiftManagementPage />
-                    </ProtectedRoute>
-                ),
-            },
-            {
-                path: "department-management",
-                element: (
-                    <ProtectedRoute allowedRoles={["admin"]}>
-                        <DepartmentPage />
-                    </ProtectedRoute>
-                ),
-            },
-            {
-                path: "department-shift-management",
-                element: (
-                    <ProtectedRoute allowedRoles={["manager"]}>
-                        <ManagerDepartmentPage />
-                    </ProtectedRoute>
-                ),
-            },
-            {
-                path: "department-shift-management/:departmentId",
-                element: (
-                    <ProtectedRoute allowedRoles={["manager"]}>
-                        <DepartmentShiftsPage />
-                    </ProtectedRoute>
-                ),
-            },
-            {
-                path: "staff-shift-assignment/:staffId",
-                element: (
-                    <ProtectedRoute allowedRoles={["manager"]}>
-                        <StaffShiftAssignmentPage />
-                    </ProtectedRoute>
-                ),
-            },
-            {
-                path: "attendance-management",
-                element: (
-                    <ProtectedRoute allowedRoles={["manager"]}>
-                        <ManagerAttendanceManagement />
-                    </ProtectedRoute>
-                ),
-            },
-            {
-                path: "view-reviews",
-                element: (
-                    <ProtectedRoute allowedRoles={["manager"]}>
-                        <ReviewDepartment />
-                    </ProtectedRoute>
-                ),
-            },
-            {
-                path: "review-statistics",
-                element: (
-                    <ProtectedRoute allowedRoles={["manager"]}>
-                        <ReviewStatistics />
-                    </ProtectedRoute>
-                ),
-            },
-            {
-                path: "my-salaries",
-                element: (
-                    <ProtectedRoute allowedRoles={["staff", "manager"]}>
-                        <MySalary />
-                    </ProtectedRoute>
-                ),
-            },
-            {
-                path: "contract",
-                element: (
-                    <ProtectedRoute allowedRoles={["staff", "manager"]}>
-                        <ListContract />
-                    </ProtectedRoute>
-                ),
-            },
-            {
-                path: "contract/:contractId",
-                element: (
-                    <ProtectedRoute allowedRoles={["staff", "manager"]}>
-                        <ContractDetailPage />
-                    </ProtectedRoute>
-                ),
-            },
-            {
-                path: "shift-schedule",
-                element: (
-                    <ProtectedRoute allowedRoles={["staff"]}>
-                        <StaffShiftSchedulePage />
-                    </ProtectedRoute>
-                ),
-            },
-            {
-                path: "attendance",
-                element: (
-                    <ProtectedRoute allowedRoles={["staff"]}>
-                        <StaffAttendancePage />
-                    </ProtectedRoute>
-                ),
-            },
-            {
-                path: "resignation",
-                element: (
-                    <ProtectedRoute allowedRoles={["staff"]}>
-                        <StaffResignationPage />
-                    </ProtectedRoute>
-                ),
-            },
-            {
-                path: "department-review-management",
-                element: (
-                    <ProtectedRoute allowedRoles={["admin"]}>
-                        <ManageDepartmentReview />
-                    </ProtectedRoute>
-                ),
-            },
-            {
-                path: "departments/:departmentId/employees",
-                element: (
-                    <ProtectedRoute allowedRoles={["admin"]}>
-                        <ListEmployeeOfDepartment />
-                    </ProtectedRoute>
-                ),
-            }
-        ],
-    },
+      },
+    ],
+  },
+  { path: "/register", element: <RegisterPage /> },
+  { path: "/login", element: <LoginPage /> },
+  { path: "/forgot-password", element: <ForgotPasswordPage /> },
+  { path: "/enter-otp", element: <EnterOtpPage /> },
+  { path: "/reset-password", element: <ResetPasswordPage /> },
+  {
+    path: "/profile",
+    element: (
+      <ProtectedRoute allowedRoles={["admin", "manager", "staff"]}>
+        <StaffLayout />
+      </ProtectedRoute>
+    ),
+    children: [
+      { index: true, element: <StaffProfilePage /> },
+      {
+        path: "/dashboard",
+        element: <Dashboard />,
+      },
+      {
+        path: "policy-management",
+        element: (
+          <ProtectedRoute allowedRoles={["admin"]}>
+            <ListOfPolicy />
+          </ProtectedRoute>
+        ),
+      },
+      {
+        path: "policy-management/:policyId",
+        element: (
+          <ProtectedRoute allowedRoles={["admin"]}>
+            <PolicyDetail />
+          </ProtectedRoute>
+        )
+      },
+      {
+        path: "contract-management",
+        element: (
+          <ProtectedRoute allowedRoles={["admin"]}>
+            <ListOfContract />
+          </ProtectedRoute>
+        ),
+      },
+      {
+        path: "contract-management/staff/:staffId",
+        element: (
+          <ProtectedRoute allowedRoles={["admin"]}>
+            <StaffContracts />
+          </ProtectedRoute>
+        ),
+      },
+      {
+        path: "contract-management/detail/:contractId",
+        element: (
+          <ProtectedRoute allowedRoles={["admin"]}>
+            <ContractDetail />
+          </ProtectedRoute>
+        ),
+      },
+      {
+        path: "candidate-cv-management",
+        element: (
+          <ProtectedRoute allowedRoles={["admin"]}>
+            <CandidateCVManagement />
+          </ProtectedRoute>
+        ),
+      },
+      {
+        path: "resignation-management",
+        element: (
+          <ProtectedRoute allowedRoles={["admin"]}>
+            <AdminResignationManagement />
+          </ProtectedRoute>
+        ),
+      },
+      {
+        path: "employee-management",
+        element: (
+          <ProtectedRoute allowedRoles={["admin"]}>
+            <StaffPage />
+          </ProtectedRoute>
+        ),
+      },
+      {
+        path: "salary-management",
+        element: (
+          <ProtectedRoute allowedRoles={["admin"]}>
+            <SalaryDetail />
+          </ProtectedRoute>
+        ),
+      },
+      {
+        path: "salary-management/:staffId",
+        element: (
+          <ProtectedRoute allowedRoles={["admin"]}>
+            <StaffSalaryDetail />
+          </ProtectedRoute>
+        ),
+      },
+      {
+        path: "monthly-salary-create",
+        element: (
+          <ProtectedRoute allowedRoles={["admin"]}>
+            <CreateSalaryByMonth />
+          </ProtectedRoute>
+        ),
+      },
+      {
+        path: "salary-dashboard",
+        element: (
+          <ProtectedRoute allowedRoles={["admin"]}>
+            <SalaryDashboard />
+          </ProtectedRoute>
+        ),
+      },
+      {
+        path: "shift-management",
+        element: (
+          <ProtectedRoute allowedRoles={["admin"]}>
+            <ShiftManagementPage />
+          </ProtectedRoute>
+        ),
+      },
+      {
+        path: "department-management",
+        element: (
+          <ProtectedRoute allowedRoles={["admin"]}>
+            <DepartmentPage />
+          </ProtectedRoute>
+        ),
+      },
+      {
+        path: "department-shift-management",
+        element: (
+          <ProtectedRoute allowedRoles={["manager"]}>
+            <ManagerDepartmentPage />
+          </ProtectedRoute>
+        ),
+      },
+      {
+        path: "department-shift-management/:departmentId",
+        element: (
+          <ProtectedRoute allowedRoles={["manager"]}>
+            <DepartmentShiftsPage />
+          </ProtectedRoute>
+        ),
+      },
+      {
+        path: "staff-shift-assignment/:staffId",
+        element: (
+          <ProtectedRoute allowedRoles={["manager"]}>
+            <StaffShiftAssignmentPage />
+          </ProtectedRoute>
+        ),
+      },
+      {
+        path: "attendance-management",
+        element: (
+          <ProtectedRoute allowedRoles={["manager"]}>
+            <ManagerAttendanceManagement />
+          </ProtectedRoute>
+        ),
+      },
+      {
+        path: "view-reviews",
+        element: (
+          <ProtectedRoute allowedRoles={["manager"]}>
+            <ReviewDepartment />
+          </ProtectedRoute>
+        ),
+      },
+      {
+        path: "review-statistics",
+        element: (
+          <ProtectedRoute allowedRoles={["manager"]}>
+            <ReviewStatistics />
+          </ProtectedRoute>
+        ),
+      },
+      {
+        path: "my-salaries",
+        element: (
+          <ProtectedRoute allowedRoles={["staff", "manager"]}>
+            <MySalary />
+          </ProtectedRoute>
+        ),
+      },
+      {
+        path: "contract",
+        element: (
+          <ProtectedRoute allowedRoles={["staff", "manager"]}>
+            <ListContract />
+          </ProtectedRoute>
+        ),
+      },
+      {
+        path: "contract/:contractId",
+        element: (
+          <ProtectedRoute allowedRoles={["staff", "manager"]}>
+            <ContractDetailPage />
+          </ProtectedRoute>
+        ),
+      },
+      {
+        path: "shift-schedule",
+        element: (
+          <ProtectedRoute allowedRoles={["staff"]}>
+            <StaffShiftSchedulePage />
+          </ProtectedRoute>
+        ),
+      },
+      {
+        path: "attendance",
+        element: (
+          <ProtectedRoute allowedRoles={["staff"]}>
+            <StaffAttendancePage />
+          </ProtectedRoute>
+        ),
+      },
+      {
+        path: "resignation",
+        element: (
+          <ProtectedRoute allowedRoles={["staff"]}>
+            <StaffResignationPage />
+          </ProtectedRoute>
+        ),
+      },
+      {
+        path: "department-review-management",
+        element: (
+          <ProtectedRoute allowedRoles={["admin"]}>
+            <ManageDepartmentReview />
+          </ProtectedRoute>
+        ),
+      },
+      {
+        path: "departments/:departmentId/employees",
+        element: (
+          <ProtectedRoute allowedRoles={["admin"]}>
+            <ListEmployeeOfDepartment />
+          </ProtectedRoute>
+        ),
+      }
+    ],
+  },
 ]);
 
 export default function AppRouter() {
-    return <RouterProvider router={router} />;
+  return <RouterProvider router={router} />;
 }

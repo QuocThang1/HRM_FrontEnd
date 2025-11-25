@@ -4,11 +4,9 @@ import {
   SettingOutlined,
   LogoutOutlined,
   TeamOutlined,
-  ArrowLeftOutlined,
   HomeOutlined,
   FolderOutlined,
   StarOutlined,
-  SafetyOutlined,
   ClockCircleOutlined,
   CalendarOutlined,
   FileTextOutlined,
@@ -16,6 +14,7 @@ import {
   LineChartOutlined,
   FileProtectOutlined,
   FolderOpenOutlined,
+  DashboardOutlined,
 } from "@ant-design/icons";
 import { Link, useNavigate, useLocation } from "react-router-dom";
 import { useContext } from "react";
@@ -26,7 +25,7 @@ import "../styles/sideBarStaff.css";
 const { Sider } = Layout;
 const { Text } = Typography;
 
-const SideBarStaff = () => {
+const SideBarStaff = ({ collapsed }) => {
   const navigate = useNavigate();
   const location = useLocation();
   const { setAuth, auth } = useContext(AuthContext);
@@ -59,26 +58,23 @@ const SideBarStaff = () => {
   const roleBadge = getRoleBadge(auth?.staff?.role);
 
   return (
-    <Sider width={280} className="sidebar-staff">
-      {/* Header */}
-      <div className="sidebar-header">
-        <div className="sidebar-logo">
-          <div className="logo-icon">
-            <SafetyOutlined />
-          </div>
-          <div className="logo-text">
-            <div className="logo-title">HRM System</div>
-            <div className="logo-subtitle">Management Portal</div>
-          </div>
-        </div>
-      </div>
-
+    <Sider
+      width={300}
+      collapsed={collapsed}
+      collapsedWidth={0}
+      className="sidebar-staff"
+    >
       {/* Profile Card */}
       <div className="sidebar-profile-card">
         <div className="profile-avatar-wrapper">
-          <Avatar size={64} icon={<UserOutlined />} className="profile-avatar" />
+          <Avatar
+            size={64}
+            icon={<UserOutlined />}
+            className="profile-avatar"
+          />
           <div className="profile-status-dot" />
         </div>
+
         <div className="profile-info">
           <Text className="profile-name">{auth?.staff?.name || "Staff"}</Text>
           <Badge
@@ -92,9 +88,15 @@ const SideBarStaff = () => {
             }}
           />
         </div>
-        <Link to="/" className="back-home-btn">
-          <ArrowLeftOutlined /> Back to Home
-        </Link>
+
+        <div className="profile-actions">
+          <Link to="/" className="profile-btn">
+            <HomeOutlined /> Home
+          </Link>
+          <Link to="/profile" className="profile-btn">
+            <UserOutlined /> View Profile
+          </Link>
+        </div>
       </div>
 
       {/* Navigation Menu */}
@@ -106,9 +108,9 @@ const SideBarStaff = () => {
           className="sidebar-menu"
           items={[
             {
-              key: "/profile",
-              icon: <HomeOutlined />,
-              label: <Link to="/profile">Profile</Link>,
+              key: "/dashboard",
+              icon: <DashboardOutlined />,
+              label: <Link to="/dashboard">Dashboard</Link>,
             },
             ...(auth?.staff?.role === "admin"
               ? [
@@ -220,100 +222,120 @@ const SideBarStaff = () => {
                 {
                   key: "/profile/shift-management",
                   icon: <ClockCircleOutlined />,
-                  label: (
-                    <Link to="/profile/shift-management">Shifts</Link>
-                  ),
+                  label: <Link to="/profile/shift-management">Shifts</Link>,
                 },
               ]
               : []),
             ...(auth?.staff?.role === "manager"
-              ? [{
-                key: "/profile/department-shift-management",
-                icon: <CalendarOutlined />,
-                label: (
-                  <Link to="/profile/department-shift-management">
-                    Shift Management
-                  </Link>
-                ),
-              },
-              {
-                key: "/profile/attendance-management",
-                icon: <CalendarOutlined />,
-                label: (
-                  <Link to="/profile/attendance-management">
-                    Attendance Management
-                  </Link>
-                ),
-              },
-              {
-                key: "review-group",
-                icon: <LineChartOutlined />,
-                label: "View Reviews",
-                children: [
-                  {
-                    key: "/profile/review-statistics",
-                    label: (
-                      <Link to="/profile/review-statistics">
-                        Review Statistics
-                      </Link>
-                    ),
-                  },
-                  {
-                    key: "/profile/view-reviews",
-                    label: (
-                      <Link to="/profile/view-reviews">View Reviews</Link>
-                    ),
-                  },
-                ],
-              },
-              {
-                key: "/profile/my-salaries",
-                icon: <DollarOutlined />,
-                label: (
-                  <Link to="/profile/my-salaries">
-                    My Salaries
-                  </Link>
-                ),
-              },
+              ? [
+                {
+                  key: "/profile/department-shift-management",
+                  icon: <CalendarOutlined />,
+                  label: (
+                    <Link to="/profile/department-shift-management">
+                      Shift Management
+                    </Link>
+                  ),
+                },
+                {
+                  key: "/profile/attendance-management",
+                  icon: <CalendarOutlined />,
+                  label: (
+                    <Link to="/profile/attendance-management">
+                      Attendance Management
+                    </Link>
+                  ),
+                },
+                {
+                  key: "review-group",
+                  icon: <LineChartOutlined />,
+                  label: "View Reviews",
+                  children: [
+                    {
+                      key: "/profile/review-statistics",
+                      label: (
+                        <Link to="/profile/review-statistics">
+                          Review Statistics
+                        </Link>
+                      ),
+                    },
+                    {
+                      key: "/profile/view-reviews",
+                      label: (
+                        <Link to="/profile/view-reviews">View Reviews</Link>
+                      ),
+                    },
+                  ],
+                },
+                {
+                  key: "/profile/my-salaries",
+                  icon: <DollarOutlined />,
+                  label: <Link to="/profile/my-salaries">My Salaries</Link>,
+                },
               ]
               : []),
             ...(auth?.staff?.role === "staff"
-              ? [{
-                key: "/profile/shift-schedule",
-                icon: <CalendarOutlined />,
-                label: (
-                  <Link to="/profile/shift-schedule">
-                    Shift Schedule
-                  </Link>
-                ),
-              },
-              {
-                key: "/profile/attendance",
-                icon: <CalendarOutlined />,
-                label: (
-                  <Link to="/profile/attendance">
-                    Attendance
-                  </Link>
-                ),
-              },
-              {
-                key: "/profile/my-salaries",
-                icon: <DollarOutlined />,
-                label: (
-                  <Link to="/profile/my-salaries">
-                    My Salaries
-                  </Link>
-                ),
-              },
-              {
-                key: "/profile/resignation",
-                icon: <FileTextOutlined />,
-                label: (
-                  <Link to="/profile/resignation">
-                    Submit Resignation
-                  </Link>
-                ),
-              },
+              ? [
+                {
+                  key: "/profile/shift-schedule",
+                  icon: <CalendarOutlined />,
+                  label: (
+                    <Link to="/profile/shift-schedule">Shift Schedule</Link>
+                  ),
+                },
+                {
+                  key: "/profile/attendance",
+                  icon: <CalendarOutlined />,
+                  label: <Link to="/profile/attendance">Attendance</Link>,
+                },
+                {
+                  key: "/profile/my-salaries",
+                  icon: <DollarOutlined />,
+                  label: <Link to="/profile/my-salaries">My Salaries</Link>,
+                },
+                {
+                  key: "/profile/resignation",
+                  icon: <FileTextOutlined />,
+                  label: (
+                    <Link to="/profile/resignation">Submit Resignation</Link>
+                  ),
+                },
+                {
+                  key: "/candidate-cv-management",
+                  icon: <FolderOutlined />,
+                  label: (
+                    <Link to="/candidate-cv-management">Candidate CVs</Link>
+                  ),
+                },
+                {
+                  key: "/employee-management",
+                  icon: <TeamOutlined />,
+                  label: <Link to="/employee-management">Employees</Link>,
+                },
+                {
+                  type: "divider",
+                },
+                {
+                  key: "department-group",
+                  icon: <StarOutlined />,
+                  label: "Departments",
+                  children: [
+                    {
+                      key: "/department-management",
+                      label: (
+                        <Link to="/department-management">Management</Link>
+                      ),
+                    },
+                    {
+                      key: "/department-review-management",
+                      label: (
+                        <Link to="/department-review-management">
+                          Reviews
+                        </Link>
+                      ),
+                    },
+                  ],
+                },
               ]
               : []),
           ]}

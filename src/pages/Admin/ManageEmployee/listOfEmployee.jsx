@@ -19,8 +19,8 @@ import {
   SafetyCertificateOutlined,
   CrownOutlined,
 } from "@ant-design/icons";
-import AddEmployeeModal from "./AddEmployeeModal";
-import EditEmployeeModal from "./EditEmployeeModal";
+import AddEmployeeModal from "./addEmployeeModal";
+import EditEmployeeModal from "./editEmployeeModal";
 import { toast } from "react-toastify";
 import "../../../styles/listOfEmployee.css";
 

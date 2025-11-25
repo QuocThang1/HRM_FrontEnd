@@ -29,33 +29,19 @@ const ListContract = () => {
             setLoading(true);
             const res = await getMyContractsApi();
 
-            console.log("Full API Response:", res);
-
             if (res && res.EC === 0) {
-                // API trả về single object, không phải array
-                // Chuyển thành array để dễ xử lý
                 let contractsData = [];
 
                 if (res.data) {
-                    // Nếu data là object, wrap vào array
                     if (typeof res.data === 'object' && !Array.isArray(res.data)) {
                         contractsData = [res.data];
                     }
-                    // Nếu data đã là array
                     else if (Array.isArray(res.data)) {
                         contractsData = res.data;
                     }
                 }
 
-                console.log("Contracts after parse:", contractsData);
-                console.log("Number of contracts:", contractsData.length);
                 setContracts(contractsData);
-            } else {
-                console.log("API returned error:", res?.EM);
-                toast.error(res?.EM || "Failed to fetch contracts", {
-                    autoClose: 2000,
-                });
-                setContracts([]);
             }
         } catch (error) {
             console.error("Fetch Error:", error);

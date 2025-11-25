@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 4422.95 5892.86">
+  <defs>
+    <style>
+      .cls-1 {
+        fill: url(#New_Gradient_Swatch-4);
+      }
+
+      .cls-1, .cls-2, .cls-3, .cls-4, .cls-5, .cls-6, .cls-7 {
+        fill-rule: evenodd;
+        stroke-width: 0px;
+      }
+
+      .cls-2 {
+        fill: url(#New_Gradient_Swatch-5);
+      }
+
+      .cls-3 {
+        fill: url(#New_Gradient_Swatch-6);
+      }
+
+      .cls-4 {
+        fill: url(#New_Gradient_Swatch-3);
+      }
+
+      .cls-5 {
+        fill: url(#New_Gradient_Swatch-2);
+      }
+
+      .cls-6 {
+        fill: url(#New_Gradient_Swatch);
+      }
+
+      .cls-7 {
+        fill: url(#New_Gradient_Swatch-7);
+      }
+    </style>
+    <linearGradient id="New_Gradient_Swatch" data-name="New Gradient Swatch" x1="0" y1="2787.28" x2="4422.95" y2="2787.28" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#2c3e50"/>
+      <stop offset="1" stop-color="#3498db"/>
+    </linearGradient>
+    <linearGradient id="New_Gradient_Swatch-2" data-name="New Gradient Swatch" x1="1715.86" y1="495.61" x2="2707.08" y2="495.61" xlink:href="#New_Gradient_Swatch"/>
+    <linearGradient id="New_Gradient_Swatch-3" data-name="New Gradient Swatch" x1="564.72" y1="4161.43" x2="3858.23" y2="4161.43" xlink:href="#New_Gradient_Swatch"/>
+    <linearGradient id="New_Gradient_Swatch-4" data-name="New Gradient Swatch" x1="859.01" y1="3361.97" x2="1563.69" y2="3361.97" xlink:href="#New_Gradient_Swatch"/>
+    <linearGradient id="New_Gradient_Swatch-5" data-name="New Gradient Swatch" x1="1740.49" y1="3374.92" x2="2682.41" y2="3374.92" xlink:href="#New_Gradient_Swatch"/>
+    <linearGradient id="New_Gradient_Swatch-6" data-name="New Gradient Swatch" x1="2859.21" y1="3361.94" x2="3563.94" y2="3361.94" xlink:href="#New_Gradient_Swatch"/>
+    <linearGradient id="New_Gradient_Swatch-7" data-name="New Gradient Swatch" x1="1881.24" y1="5562.63" x2="2541.71" y2="5562.63" xlink:href="#New_Gradient_Swatch"/>
+  </defs>
+  <path class="cls-6" d="m387.92,3681.1c0-1007.1,816.46-1823.61,1823.56-1823.61s1823.56,816.51,1823.56,1823.61c0,356.13-102.19,688.46-278.73,969.17,411.19-401.49,666.64-962.07,666.64-1582.11,0-990.14-650.64-1828.14-1547.74-2110.15v-.11c-38.95-12.28-78.32-23.54-118.08-33.61-127.08,161.5-324.25,265.26-545.65,265.26s-418.57-103.7-545.6-265.2c-39.75,10.13-79.13,21.38-118.08,33.67C650.64,1240.03,0,2078.03,0,3068.16c0,620.04,255.45,1180.61,666.64,1582.11-176.53-280.72-278.73-613.04-278.73-969.17"/>
+  <path class="cls-5" d="m1715.86,495.61c0,273.71,221.9,495.61,495.61,495.61s495.61-221.9,495.61-495.61S2485.19,0,2211.47,0s-495.61,221.9-495.61,495.61"/>
+  <path class="cls-4" d="m3858.23,3681.04c0-226.04-45.57-441.46-128-637.55,17.67,93.52,27.04,190.05,27.04,288.74,0,853.68-692.12,1545.8-1545.8,1545.8-853.68.05-1545.8-692.07-1545.8-1545.8,0-98.69,9.37-195.17,27.04-288.74-82.42,196.09-128,411.51-128,637.55,0,772.34,531.75,1420.39,1249.09,1598.33,88.51-124.01,233.63-204.98,397.67-204.98s309.11,80.91,397.67,204.98c717.34-177.88,1249.09-826.04,1249.09-1598.33"/>
+  <path class="cls-1" d="m1563.69,4539.41v-2354.88c-287.18,124.49-531.54,329.15-704.68,585.84v779.23c36.42,228.46,129.34,438.13,263.96,614.12v-773.95h-86.73l87.59-151.59,87.54-151.7,87.54,151.7,87.59,151.59h-86.73v964.65c80.05,71.48,168.61,133.7,263.91,184.99"/>
+  <path class="cls-2" d="m1740.49,2119.83v2498.87c120.51,44.18,248.94,71.87,382.59,80.43v-1756.38h-86.73l87.59-151.59,87.54-151.7,87.54,151.7,87.59,151.59h-86.73v1756.38c133.65-8.56,262.02-36.25,382.53-80.37v-2498.92c-149.11-44.93-307.17-69.12-470.93-69.12s-321.87,24.19-470.99,69.12"/>
+  <path class="cls-3" d="m2859.21,2184.47v2354.93c95.3-51.28,183.86-113.5,263.96-184.99v-964.65h-86.73l87.59-151.59,87.54-151.7,87.54,151.7,87.59,151.59h-86.73v773.95c134.62-176.05,227.55-385.66,263.96-614.12v-779.23c-173.19-256.69-417.55-461.45-704.73-585.89"/>
+  <path class="cls-7" d="m1881.24,5562.63c0,182.38,147.85,330.23,330.23,330.23s330.23-147.85,330.23-330.23-147.85-330.23-330.23-330.23-330.23,147.85-330.23,330.23"/>
+</svg>

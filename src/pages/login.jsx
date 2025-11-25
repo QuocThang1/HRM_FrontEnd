@@ -1,8 +1,8 @@
 import { Button, Form, Input, Card, Typography, Checkbox } from "antd";
-import { MailOutlined, LockOutlined, SafetyOutlined } from "@ant-design/icons";
+import { MailOutlined, LockOutlined } from "@ant-design/icons";
 import { loginApi } from "../utils/Api/accountApi.js";
-import { useNavigate, Link } from "react-router-dom";
-import { useContext } from "react";
+import { useNavigate, Link, useSearchParams } from "react-router-dom";
+import { useContext, useEffect } from "react";
 import { AuthContext } from "../context/auth.context.jsx";
 import { toast } from "react-toastify";
 import companyImage from "../assets/images/infopicture5.jpg";
@@ -13,6 +13,70 @@ const { Title, Text } = Typography;
 const LoginPage = () => {
   const navigate = useNavigate();
   const { setAuth } = useContext(AuthContext);
+  const [searchParams] = useSearchParams();
+
+  // Handle OAuth callback
+  useEffect(() => {
+    const token = searchParams.get("token");
+    const provider = searchParams.get("provider");
+    const error = searchParams.get("error");
+
+    if (error) {
+      toast.error("Authentication failed. Please try again.", {
+        autoClose: 2000,
+      });
+      window.history.replaceState({}, document.title, "/login");
+      return;
+    }
+
+    if (token && provider) {
+      // Save token and redirect
+      localStorage.setItem("access_token", token);
+      toast.success(`Logged in with ${provider}!`, { autoClose: 2000 });
+
+      // Robust JWT decode (handles base64url and UTF-8 unicode)
+      try {
+        const parseJwt = (token) => {
+          const base64Url = token.split(".")[1];
+          if (!base64Url) return null;
+          // base64Url -> base64
+          const base64 = base64Url.replace(/-/g, "+").replace(/_/g, "/");
+          // Pad with '=' to make length a multiple of 4
+          const pad = "=".repeat((4 - (base64.length % 4)) % 4);
+          const base64Padded = base64 + pad;
+          // atob gives binary string; decode UTF-8 percent-encoding
+          const binary = atob(base64Padded);
+          const percentEncoded = Array.prototype.map
+            .call(
+              binary,
+              (c) => "%" + ("00" + c.charCodeAt(0).toString(16)).slice(-2),
+            )
+            .join("");
+          return JSON.parse(decodeURIComponent(percentEncoded));
+        };
+
+        const payload = parseJwt(token);
+        if (payload) {
+          setAuth({
+            isAuthenticated: true,
+            staff: {
+              email: payload.email || "",
+              name: payload.name || "",
+              address: payload.address || "",
+              phone: payload.phone || "",
+              role: payload.role || "",
+            },
+          });
+        }
+      } catch (e) {
+        console.error("Failed to decode token:", e);
+      }
+
+      // Clear URL and navigate
+      window.history.replaceState({}, document.title, "/");
+      navigate("/");
+    }
+  }, [searchParams, navigate, setAuth]);
 
   const onFinish = async (values) => {
     const { email, password } = values;
@@ -47,7 +111,11 @@ const LoginPage = () => {
         <div className="branding-overlay"></div>
         <div className="branding-content">
           <div className="brand-logo">
-            <SafetyOutlined />
+            <img
+              src="/logoWhite.svg"
+              alt="Logo"
+              className="header-logo-image"
+            />
           </div>
           <Title level={1} className="brand-title">
             HRM System
@@ -81,7 +149,11 @@ const LoginPage = () => {
         <Card className="login-card" bordered={false}>
           <div className="form-header">
             <div className="welcome-icon">
-              <SafetyOutlined />
+              <img
+                src="/logoWhite.svg"
+                alt="Logo"
+                className="header-logo-image"
+              />
             </div>
             <Title level={2} className="form-title">
               Welcome Back
@@ -163,20 +235,28 @@ const LoginPage = () => {
           </div>
 
           <div className="social-login">
-            <Button className="social-button google" size="large">
+            <a
+              href={`${import.meta.env.VITE_BACKEND_URL || "http://localhost:8080"}/v1/api/auth/google`}
+              className="social-button google"
+              style={{ textDecoration: "none", color: "inherit" }}
+            >
               <img
                 src="https://www.gstatic.com/firebasejs/ui/2.0.0/images/auth/google.svg"
                 alt="Google"
               />
-              Google
-            </Button>
-            <Button className="social-button microsoft" size="large">
+              <span>Google</span>
+            </a>
+            <a
+              href={`${import.meta.env.VITE_BACKEND_URL || "http://localhost:8080"}/v1/api/auth/microsoft`}
+              className="social-button microsoft"
+              style={{ textDecoration: "none", color: "inherit" }}
+            >
               <img
                 src="https://upload.wikimedia.org/wikipedia/commons/4/44/Microsoft_logo.svg"
                 alt="Microsoft"
               />
-              Microsoft
-            </Button>
+              <span>Microsoft</span>
+            </a>
           </div>
         </Card>
       </div>

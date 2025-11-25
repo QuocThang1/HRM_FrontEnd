@@ -1,7 +1,6 @@
 import { Input, Button } from "antd";
 import { useState } from "react";
 import {
-  SafetyOutlined,
   PlusCircleFilled,
   MenuOutlined,
   SearchOutlined,
@@ -40,8 +39,8 @@ const Header = () => {
         {/* Header */}
         <div className="header-logo-section">
           <div className="logo-container">
-            <div className="logo-icon-wrapper">
-              <SafetyOutlined />
+            <div>
+              <img src="/logo.svg" alt="Logo" className="header-logo-image" />
             </div>
             <div className="logo-text-container">
               <div className="logo-title">NextGen Solution</div>
@@ -52,7 +51,7 @@ const Header = () => {
         <div className="search-section">
           <Input
             size="large"
-            placeholder="Tìm kiếm..."
+            placeholder="Search..."
             prefix={<SearchOutlined style={{ color: "#8c939d" }} />}
             className="search-input"
           />
@@ -61,8 +60,8 @@ const Header = () => {
             shape="circle"
             size="large"
             className="add-button"
-            aria-label="Thêm"
-            title="Thêm"
+            aria-label="Add"
+            title="Add"
           >
             <PlusCircleFilled style={{ color: "#fff", fontSize: 18 }} />
           </Button>
@@ -71,7 +70,7 @@ const Header = () => {
           <RollbackOutlined className="right-icon" />
           <IdcardOutlined className="right-icon" />
           <SettingOutlined className="right-icon" />
-          <span className="settings-text">Cài đặt</span>
+          <span className="settings-text">Settings</span>
           <ShareAltOutlined className="right-icon" />
           <CheckSquareOutlined className="right-icon" />
           <ClockCircleOutlined className="right-icon" />

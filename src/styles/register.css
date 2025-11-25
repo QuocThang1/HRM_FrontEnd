@@ -7,7 +7,11 @@
 /* ========== Left Side - Branding ========== */
 .register-branding {
   flex: 1;
-  background: linear-gradient(135deg, #2c3e50 0%, #3498db 100%); /* Navy gradient */
+  background: linear-gradient(
+    135deg,
+    #2c3e50 0%,
+    #3498db 100%
+  ); /* Navy gradient */
   display: flex;
   align-items: center;
   justify-content: center;
@@ -196,7 +200,11 @@
 
 /* Register Button */
 .register-button {
-  background: linear-gradient(135deg, #2c3e50 0%, #3498db 100%) !important; /* Navy gradient */
+  background: linear-gradient(
+    135deg,
+    #2c3e50 0%,
+    #3498db 100%
+  ) !important; /* Navy gradient */
   border: none !important;
   height: 48px !important;
   font-size: 16px !important;
@@ -208,7 +216,11 @@
 }
 
 .register-button:hover {
-  background: linear-gradient(135deg, #1e2d3d 0%, #2980b9 100%) !important; /* Darker gradient */
+  background: linear-gradient(
+    135deg,
+    #1e2d3d 0%,
+    #2980b9 100%
+  ) !important; /* Darker gradient */
   transform: translateY(-2px);
   box-shadow: 0 6px 20px rgba(44, 62, 80, 0.4) !important;
 }

@@ -71,7 +71,7 @@
   flex-direction: column;
   gap: 24px;
   padding: 24px;
-   background: linear-gradient(135deg, #1e2d3d 0%, #2980b9 100%) !important;
+  background: linear-gradient(135deg, #1e2d3d 0%, #2980b9 100%) !important;
   border-radius: 12px;
   color: white;
   margin-bottom: 24px;

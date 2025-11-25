@@ -46,7 +46,11 @@
 .logo-icon {
   width: 48px;
   height: 48px;
-  background: linear-gradient(135deg, #2c3e50 0%, #3498db 100%); /* Navy gradient */
+  background: linear-gradient(
+    135deg,
+    #2c3e50 0%,
+    #3498db 100%
+  ); /* Navy gradient */
   border-radius: 12px;
   display: flex;
   align-items: center;
@@ -80,7 +84,11 @@
 /* ========== Profile Card ========== */
 .sidebar-profile-card {
   padding: 24px 20px;
-  background: linear-gradient(135deg, #2c3e50 0%, #3498db 100%); /* Navy gradient */
+  background: linear-gradient(
+    135deg,
+    #2c3e50 0%,
+    #3498db 100%
+  ); /* Navy gradient */
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -215,7 +223,11 @@
 }
 
 .sidebar-menu .ant-menu-item-selected {
-  background: linear-gradient(135deg, rgba(44, 62, 80, 0.1) 0%, rgba(52, 152, 219, 0.1) 100%) !important;
+  background: linear-gradient(
+    135deg,
+    rgba(44, 62, 80, 0.1) 0%,
+    rgba(52, 152, 219, 0.1) 100%
+  ) !important;
   color: #2c3e50 !important; /* Navy */
   font-weight: 600;
   border-left: 3px solid #3498db; /* Blue accent */

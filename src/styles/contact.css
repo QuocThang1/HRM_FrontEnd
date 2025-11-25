@@ -6,7 +6,11 @@
 /* Hero Section */
 .contact-hero {
   position: relative;
-  background: linear-gradient(135deg, #2c3e50 0%, #3498db 100%); /* Navy gradient */
+  background: linear-gradient(
+    135deg,
+    #2c3e50 0%,
+    #3498db 100%
+  ); /* Navy gradient */
   padding: 100px 0 80px 0;
   overflow: hidden;
 }
@@ -144,7 +148,11 @@
 .feature-icon {
   width: 32px;
   height: 32px;
-  background: linear-gradient(135deg, #2c3e50 0%, #3498db 100%); /* Navy gradient */
+  background: linear-gradient(
+    135deg,
+    #2c3e50 0%,
+    #3498db 100%
+  ); /* Navy gradient */
   color: #fff;
   border-radius: 50%;
   display: flex;
@@ -204,7 +212,11 @@
 }
 
 .submit-btn {
-  background: linear-gradient(135deg, #2c3e50 0%, #3498db 100%) !important; /* Navy gradient */
+  background: linear-gradient(
+    135deg,
+    #2c3e50 0%,
+    #3498db 100%
+  ) !important; /* Navy gradient */
   border: none !important;
   color: #fff !important;
   font-weight: 600;
@@ -215,7 +227,11 @@
 }
 
 .submit-btn:hover {
-  background: linear-gradient(135deg, #1e2d3d 0%, #2980b9 100%) !important; /* Darker gradient */
+  background: linear-gradient(
+    135deg,
+    #1e2d3d 0%,
+    #2980b9 100%
+  ) !important; /* Darker gradient */
   transform: translateY(-2px);
   box-shadow: 0 8px 24px rgba(44, 62, 80, 0.4);
 }

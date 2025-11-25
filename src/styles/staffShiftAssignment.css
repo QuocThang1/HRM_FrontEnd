@@ -112,11 +112,15 @@
   border: 1px solid #f0f0f0;
 }
 
-.shift-calendar .ant-picker-cell-in-view.ant-picker-cell-selected .ant-picker-cell-inner {
+.shift-calendar
+  .ant-picker-cell-in-view.ant-picker-cell-selected
+  .ant-picker-cell-inner {
   background: #e8ecff;
 }
 
-.shift-calendar .ant-picker-cell-in-view.ant-picker-cell-today .ant-picker-cell-inner::before {
+.shift-calendar
+  .ant-picker-cell-in-view.ant-picker-cell-today
+  .ant-picker-cell-inner::before {
   border-color: #667eea;
 }
 

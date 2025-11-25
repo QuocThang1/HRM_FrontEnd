@@ -22,7 +22,7 @@ const Dashboard = () => {
             icon={
               <FileTextOutlined style={{ fontSize: 20, color: "#1890ff" }} />
             }
-            title="Hóa đơn đang chờ thanh toán"
+            title="Invoices pending payment"
             value="0/0"
             options={{ progressColor: "#1890ff" }}
           />
@@ -33,7 +33,7 @@ const Dashboard = () => {
             icon={
               <ProjectOutlined style={{ fontSize: 20, color: "#52c41a" }} />
             }
-            title="Mục tiêu đã hoàn thành"
+            title="Goal accomplished"
             value="0/0"
             options={{ progressColor: "#52c41a" }}
           />
@@ -44,7 +44,7 @@ const Dashboard = () => {
             icon={
               <SlidersOutlined style={{ fontSize: 20, color: "#faad14" }} />
             }
-            title="Các dự án Đang thực hiện"
+            title="Ongoing Projects"
             value="0/0"
             options={{ progressColor: "#faad14" }}
           />
@@ -53,7 +53,7 @@ const Dashboard = () => {
           <DashboardCard
             type="statCard"
             icon={<AuditOutlined style={{ fontSize: 20, color: "#ff4d4f" }} />}
-            title="Phân công chưa hoàn thành"
+            title="Incomplete assignment"
             value="0/0"
             height={120}
           />
@@ -67,27 +67,27 @@ const Dashboard = () => {
             type="progress-group"
             data={[
               {
-                title: "Tổng quan hóa đơn",
+                title: "Invoice Overview",
                 icon: <DollarCircleOutlined />,
                 iconColor: "#faad14",
                 items: [
-                  { label: "Nháp", value: 0, total: 10, color: "#999" },
-                  { label: "Chưa gửi", value: 0, total: 10, color: "#999" },
+                  { label: "Draft", value: 0, total: 10, color: "#999" },
+                  { label: "Not Sent", value: 0, total: 10, color: "#999" },
                   {
-                    label: "Chưa thanh toán",
+                    label: "Unpaid",
                     value: 0,
                     total: 10,
                     color: "#ff4d4f",
                   },
                   {
-                    label: "Đã thanh toán một phần",
+                    label: "Partially Paid",
                     value: 0,
                     total: 10,
                     color: "#faad14",
                   },
-                  { label: "Quá hạn", value: 0, total: 10, color: "#faad14" },
+                  { label: "Overdue", value: 0, total: 10, color: "#faad14" },
                   {
-                    label: "Đã thanh toán",
+                    label: "Paid",
                     value: 0,
                     total: 10,
                     color: "#52c41a",
@@ -95,40 +95,40 @@ const Dashboard = () => {
                 ],
               },
               {
-                title: "Tổng quan báo giá",
+                title: "Quote Overview",
                 icon: <FileTextOutlined />,
                 iconColor: "#1890ff",
                 items: [
-                  { label: "Nháp", value: 0, total: 10, color: "#999" },
-                  { label: "Chưa gửi", value: 0, total: 10, color: "#999" },
-                  { label: "Đã gửi", value: 0, total: 10, color: "#1890ff" },
-                  { label: "Hết hạn", value: 0, total: 10, color: "#faad14" },
-                  { label: "Từ chối", value: 0, total: 10, color: "#ff4d4f" },
-                  { label: "Chấp nhận", value: 0, total: 10, color: "#52c41a" },
+                  { label: "Draft", value: 0, total: 10, color: "#999" },
+                  { label: "Not Sent", value: 0, total: 10, color: "#999" },
+                  { label: "Sent", value: 0, total: 10, color: "#1890ff" },
+                  { label: "Expired", value: 0, total: 10, color: "#faad14" },
+                  { label: "Rejected", value: 0, total: 10, color: "#ff4d4f" },
+                  { label: "Accepted", value: 0, total: 10, color: "#52c41a" },
                 ],
               },
               {
-                title: "Tổng quan đề xuất dự án",
+                title: "Project Proposal Overview",
                 icon: <ProjectOutlined />,
                 iconColor: "#722ed1",
                 items: [
-                  { label: "Nháp", value: 0, total: 10, color: "#999" },
-                  { label: "Đã gửi", value: 0, total: 10, color: "#1890ff" },
-                  { label: "Đang mở", value: 0, total: 10, color: "#999" },
+                  { label: "Draft", value: 0, total: 10, color: "#999" },
+                  { label: "Sent", value: 0, total: 10, color: "#1890ff" },
+                  { label: "Open", value: 0, total: 10, color: "#999" },
                   {
-                    label: "Đã sửa đổi",
+                    label: "Revised",
                     value: 0,
                     total: 10,
                     color: "#1890ff",
                   },
                   {
-                    label: "Đã từ chối",
+                    label: "Rejected",
                     value: 0,
                     total: 10,
                     color: "#ff4d4f",
                   },
                   {
-                    label: "Đã chấp thuận",
+                    label: "Approved",
                     value: 0,
                     total: 10,
                     color: "#52c41a",
@@ -137,10 +137,14 @@ const Dashboard = () => {
               },
             ]}
             footerItems={[
-              { label: "Hóa đơn nổi bật", value: "$0.00", color: "#faad14" },
-              { label: "Hóa đơn quá hạn", value: "$0.00", color: "#999" },
               {
-                label: "Hóa đơn đã thanh toán",
+                label: "Outstanding Invoice",
+                value: "$0.00",
+                color: "#faad14",
+              },
+              { label: "Overdue Invoice", value: "$0.00", color: "#999" },
+              {
+                label: "Paid Invoice",
                 value: "$0.00",
                 color: "#52c41a",
               },
@@ -154,10 +158,10 @@ const Dashboard = () => {
         <Col xs={24} lg={16}>
           <DashboardCard
             type="task"
-            title="Nhắc nhở công việc của tôi"
+            title="My Task Reminders"
             extra={
               <div>
-                <a href="#">Xem tất cả</a> | <a href="#">Nhắc việc mới</a>
+                <a href="#">View All</a> | <a href="#">New Reminder</a>
               </div>
             }
             data={[
@@ -165,30 +169,31 @@ const Dashboard = () => {
                 icon: (
                   <ExclamationCircleOutlined style={{ color: "#faad14" }} />
                 ),
-                title: "Nhắc việc gần đây",
-                items: ["Không có ghi chú nhắc việc"],
+                title: "Recent Reminders",
+                items: ["No reminder notes available"],
                 color: "#faad14",
                 status: "pending",
               },
               {
                 icon: <CheckCircleOutlined style={{ color: "#52c41a" }} />,
-                title: "Việc vừa hoàn thành",
-                items: ["Không tìm thấy việc đã hoàn thành"],
+                title: "Recently Completed Tasks",
+                items: ["No completed tasks found"],
                 color: "#52c41a",
                 status: "done",
               },
             ]}
           />
         </Col>
+
         <Col xs={24} lg={8}>
           <DashboardCard
             type="pie"
-            title="Thống kê theo trạng thái dự án"
+            title="Project Status Statistics"
             data={[
-              { name: "Đang chờ", value: 0, color: "#faad14" },
-              { name: "Đang thực hiện", value: 0, color: "#1890ff" },
-              { name: "Hoàn thành", value: 0, color: "#52c41a" },
-              { name: "Tạm dừng", value: 0, color: "#ff4d4f" },
+              { name: "Pending", value: 0, color: "#faad14" },
+              { name: "In Progress", value: 0, color: "#1890ff" },
+              { name: "Completed", value: 0, color: "#52c41a" },
+              { name: "Paused", value: 0, color: "#ff4d4f" },
             ]}
             options={{
               dataKey: "value",
@@ -202,28 +207,29 @@ const Dashboard = () => {
         <Col xs={24} lg={16}>
           <DashboardCard
             type="calendar"
-            title="Lịch công việc"
+            title="Work Calendar"
             height={530}
             options={{
               calendarProps: {
                 events: [
                   {
-                    title: "Bắt đầu dự án",
+                    title: "Project Kickoff",
                     date: "2025-11-04",
                     color: "#1890ff",
                   },
                   {
-                    title: "Họp khách hàng",
+                    title: "Client Meeting",
                     date: "2025-11-06",
                     color: "#52c41a",
                   },
                 ],
                 initialView: "dayGridMonth",
-                locale: viLocale,
+                locale: viLocale, // If you want English, replace this with enLocale
                 selectable: true,
-                onDateClick: (info) => console.log("Click ngày:", info.dateStr),
+                onDateClick: (info) =>
+                  console.log("Date clicked:", info.dateStr),
                 onEventClick: (info) =>
-                  console.log("Click sự kiện:", info.event.title),
+                  console.log("Event clicked:", info.event.title),
               },
             }}
           />

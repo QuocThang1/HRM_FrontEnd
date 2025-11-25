@@ -1,16 +1,31 @@
 import { useEffect, useState } from "react";
-import { Table, Button, DatePicker, Popconfirm, Spin } from "antd";
+import {
+  Table,
+  Button,
+  DatePicker,
+  Popconfirm,
+  Spin,
+  Typography,
+} from "antd";
 import dayjs from "dayjs";
 import { toast } from "react-toastify";
-import { EditOutlined, DeleteOutlined } from "@ant-design/icons";
+import {
+  EditOutlined,
+  DeleteOutlined,
+  ReloadOutlined,
+  FileTextOutlined,
+  InboxOutlined,
+} from "@ant-design/icons";
 import {
   getDepartmentReviewsByAdminApi,
   deleteDepartmentReviewApi,
 } from "../../../utils/Api/departmentApi";
 import EditDepartmentReviewModal from "./editDepartmentReviewModal";
 import { useSearchParams } from "react-router-dom";
+import "../../../styles/departmentReview.css";
 
 const { MonthPicker } = DatePicker;
+const { Title } = Typography;
 
 const ManageDepartmentReview = () => {
   const [searchParams, setSearchParams] = useSearchParams();
@@ -70,25 +85,61 @@ const ManageDepartmentReview = () => {
     }
   };
 
+  const getScoreClass = (score) => {
+    if (score >= 9) return "excellent";
+    if (score >= 7) return "good";
+    if (score >= 5) return "average";
+    return "poor";
+  };
+
   const columns = [
     {
       title: "Month",
       dataIndex: "month",
-      render: (m) => (m ? dayjs(m).format("YYYY-MM") : "-"),
+      width: 120,
+      align: "center",
+      render: (m) => (
+        <span className="month-cell">
+          {m ? dayjs(m).format("MMM YYYY") : "-"}
+        </span>
+      ),
     },
     {
       title: "Department",
       dataIndex: "departmentId",
-      render: (d) => d?.departmentName || d?.name || "-",
+      width: 200,
+      render: (d) => (
+        <span className="department-tag">
+          {d?.departmentName || d?.name || "-"}
+        </span>
+      ),
     },
-    { title: "Score", dataIndex: "score" },
-    { title: "Comments", dataIndex: "comments", ellipsis: true },
     {
-      title: "",
+      title: "Score",
+      dataIndex: "score",
+      width: 100,
+      align: "center",
+      render: (score) => (
+        <div className={`score-badge ${getScoreClass(score)}`}>
+          {score}
+        </div>
+      ),
+    },
+    {
+      title: "Comments",
+      dataIndex: "comments",
+      ellipsis: true,
+      render: (text) => <div className="comments-cell">{text || "-"}</div>,
+    },
+    {
+      title: "Actions",
       key: "actions",
+      width: 120,
+      align: "center",
       render: (_, record) => (
-        <div style={{ display: "flex", gap: 8 }}>
+        <div className="action-buttons">
           <Button
+            className="action-btn edit-btn"
             icon={<EditOutlined />}
             onClick={(e) => {
               e.stopPropagation();
@@ -96,12 +147,15 @@ const ManageDepartmentReview = () => {
             }}
           />
           <Popconfirm
-            title="Delete this review?"
+            title="Delete Review"
+            description="Are you sure you want to delete this review?"
             onConfirm={() => handleDelete(record._id)}
             okText="Yes"
             cancelText="No"
+            okButtonProps={{ danger: true }}
           >
             <Button
+              className="action-btn delete-btn"
               danger
               icon={<DeleteOutlined />}
               onClick={(e) => e.stopPropagation()}
@@ -114,41 +168,85 @@ const ManageDepartmentReview = () => {
   ];
 
   return (
-    <div style={{ padding: 24 }}>
-      <div
-        style={{
-          display: "flex",
-          gap: 12,
-          alignItems: "center",
-          marginBottom: 16,
-        }}
-      >
+    <div className="department-review-page">
+      {/* Page Header */}
+      <div className="page-header">
+        <Title level={2} className="page-title">
+          <FileTextOutlined /> Department Reviews
+        </Title>
+        <div className="page-subtitle">
+          Manage and track department performance reviews
+        </div>
+      </div>
+
+      {/* Filter Section */}
+      <div className="filter-section">
         <MonthPicker
-          placeholder="Select month"
+          placeholder="Select month to filter"
           onChange={(v) => {
             const newMonth = v ? v : null;
             setMonth(newMonth);
             if (newMonth) {
-              setSearchParams({ month: dayjs(newMonth).format("YYYY-MM") });
+              setSearchParams({
+                month: dayjs(newMonth).format("YYYY-MM"),
+              });
             } else {
               setSearchParams({});
             }
           }}
           value={month}
+          style={{ width: 200 }}
         />
-        <Button onClick={loadReviews}>Reload</Button>
+        <Button
+          className="reload-button"
+          icon={<ReloadOutlined />}
+          onClick={loadReviews}
+        >
+          Reload
+        </Button>
         <div style={{ flex: 1 }} />
-        <Spin spinning={fetching || loading} />
+        {(fetching || loading) && (
+          <div className="loading-overlay">
+            <Spin />
+          </div>
+        )}
       </div>
 
-      <Table
-        dataSource={reviews}
-        columns={columns}
-        rowKey={(r) => r._id}
-        pagination={{ pageSize: 6 }}
-        locale={{ emptyText: "No reviews" }}
-      />
+      {/* Reviews Table */}
+      <div className="reviews-table-card">
+        <div className="table-header">
+          <h3 className="table-title">
+            <FileTextOutlined />
+            Review Records
+          </h3>
+        </div>
+        <Table
+          dataSource={reviews}
+          columns={columns}
+          rowKey={(r) => r._id}
+          pagination={{
+            pageSize: 10,
+            showSizeChanger: true,
+            showTotal: (total) => `Total ${total} reviews`,
+            pageSizeOptions: ["10", "20", "50"],
+          }}
+          locale={{
+            emptyText: (
+              <div className="empty-state-wrapper">
+                <InboxOutlined className="empty-icon" />
+                <div className="empty-title">No Reviews Found</div>
+                <div className="empty-description">
+                  {month
+                    ? "No reviews for the selected month"
+                    : "No department reviews available"}
+                </div>
+              </div>
+            ),
+          }}
+        />
+      </div>
 
+      {/* Edit Modal */}
       <EditDepartmentReviewModal
         open={editModalOpen}
         onClose={() => {

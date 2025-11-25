@@ -1,4 +1,198 @@
+.employee-department-page {
+    padding: 24px;
+    background: #f6f9fb;
+    min-height: 100vh;
+}
+
+.back-button {
+    font-size: 16px !important;
+    color: #1890ff !important;
+    height: auto !important;
+    padding: 8px 16px !important;
+    border-radius: 8px !important;
+    transition: all 0.3s ease !important;
+    border: none !important;
+    background: transparent !important;
+}
+
+.back-button:hover {
+    color: #096dd9 !important;
+    background: #e6f4ff !important;
+}
+
+.employee-department-page .page-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    margin-bottom: 32px;
+    gap: 24px;
+}
+
+.header-left {
+    flex: 1;
+}
+
+.header-actions {
+    display: flex;
+    gap: 12px;
+    flex-wrap: wrap;
+    align-items: center;
+}
+
+.header-actions .ant-btn {
+    border-radius: 8px;
+    height: 40px;
+    font-weight: 500;
+}
+
+.employees-table-card {
+    border-radius: 12px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+    overflow: hidden;
+}
+
+.employees-table-card .ant-card-head {
+    background: linear-gradient(135deg, #f0f5ff 0%, #e8f4ff 100%);
+    border-bottom: 2px solid #d6e4ff;
+}
+
+.employees-table-card .ant-card-head-title {
+    font-size: 18px;
+    font-weight: 600;
+    color: #1e2d3d;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.employee-department-page .ant-table-wrapper .ant-table-thead > tr > th {
+    background: #f0f5ff;
+    font-weight: 600;
+    color: #1e2d3d;
+    border-bottom: 2px solid #d6e4ff;
+}
+
+.employee-department-page .ant-table-wrapper .ant-table-tbody > tr {
+    transition: all 0.3s ease;
+}
+
+.employee-department-page .ant-table-wrapper .ant-table-tbody > tr:hover > td {
+    background: #f5f9ff;
+}
+
 .manager-row {
-  background-color: #ffe58f !important; /* vàng nhạt */
-  font-weight: bold;
+    background: linear-gradient(90deg, #fff9e6 0%, #fffbf0 100%) !important;
+}
+
+.manager-row:hover > td {
+    background: linear-gradient(90deg, #fff4d6 0%, #fff9e6 100%) !important;
+}
+
+.manager-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    background: linear-gradient(135deg, #ffd666 0%, #ffec8b 100%);
+    color: #ad6800;
+    padding: 4px 12px;
+    border-radius: 12px;
+    font-size: 12px;
+    font-weight: 600;
+    border: 1px solid #ffc53d;
+}
+
+.role-tag {
+    display: inline-block;
+    padding: 4px 12px;
+    border-radius: 12px;
+    font-size: 12px;
+    font-weight: 600;
+    text-transform: uppercase;
+}
+
+.role-tag.manager {
+    background: linear-gradient(135deg, #ffd666 0%, #ffec8b 100%);
+    color: #ad6800;
+    border: 1px solid #ffc53d;
+}
+
+.role-tag.staff {
+    background: linear-gradient(135deg, #95de64 0%, #b7eb8f 100%);
+    color: #389e0d;
+    border: 1px solid #73d13d;
+}
+
+.employee-department-page .action-button {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 32px;
+    height: 32px;
+    border-radius: 8px;
+    border: 1px solid #ff4d4f;
+    background: white;
+    color: #ff4d4f;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.employee-department-page .action-button:hover {
+    background: #ff4d4f;
+    color: white;
+    transform: scale(1.1);
+}
+
+.empty-state {
+    text-align: center;
+    padding: 60px 20px;
+}
+
+.empty-state .empty-icon {
+    font-size: 64px;
+    color: #d9d9d9;
+    margin-bottom: 16px;
+}
+
+.empty-state .empty-title {
+    font-size: 18px;
+    font-weight: 600;
+    color: #666;
+    margin-bottom: 8px;
+}
+
+.empty-state .empty-description {
+    font-size: 14px;
+    color: #999;
+    margin-bottom: 24px;
+}
+
+@media (max-width: 992px) {
+    .employee-department-page .page-header {
+        flex-direction: column;
+        align-items: stretch;
+    }
+
+    .header-actions {
+        width: 100%;
+        justify-content: flex-start;
+    }
+}
+
+@media (max-width: 768px) {
+    .employee-department-page {
+        padding: 16px;
+    }
+
+    .header-actions .ant-btn {
+        flex: 1;
+        min-width: 120px;
+    }
+
+    .department-info-card {
+        padding: 16px;
+    }
+
+    .department-info-card .info-value {
+        font-size: 16px;
+    }
 }

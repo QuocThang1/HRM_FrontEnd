@@ -26,15 +26,20 @@ import ManagerAttendanceManagement from "./pages/Manager/attendanceManagement/at
 import AboutPage from "./pages/about.jsx";
 import StaffResignationPage from "./pages/Staff/Resignation/staffResignation.jsx";
 import AdminResignationManagement from "./pages/Admin/ManageResignation/listOfResignation.jsx";
-import SalaryDetail from "./pages/Admin/ManageSalary/SalaryDetail/salaryDetail";
-import StaffSalaryDetail from "./pages/Admin/ManageSalary/SalaryDetail/staffSalaryDetail.jsx";
-import SalaryDashboard from "./pages/Admin/ManageSalary/SalaryDashboard/salaryDashboard.jsx";
-import CreateSalaryByMonth from "./pages/Admin/ManageSalary/CreateMonthSalaryForStaff/createSalaryByMonth.jsx";
+import SalaryDetail from './pages/Admin/ManageSalary/SalaryDetail/salaryDetail';
+import StaffSalaryDetail from './pages/Admin/ManageSalary/SalaryDetail/staffSalaryDetail.jsx';
+import SalaryDashboard from './pages/Admin/ManageSalary/SalaryDashboard/salaryDashboard.jsx';
+import CreateSalaryByMonth from './pages/Admin/ManageSalary/CreateMonthSalaryForStaff/createSalaryByMonth.jsx';
 import ReviewDepartment from "./pages/Manager/reviewDepartmentManagement/reviewDepartment.jsx";
 import ReviewStatistics from "./pages/Manager/reviewDepartmentManagement/reviewStatistics.jsx";
 import MySalary from "./pages/StaffAndManager/Salary/mySalary.jsx";
 import ListOfPolicy from "./pages/Admin/ManagePolicy/listOfPolicy";
-import PolicyDetail from "./pages/Admin/ManagePolicy/policyDetail";
+import PolicyDetail from "./pages/Admin/ManagePolicy/policyDetail"
+import ListOfContract from "./pages/Admin/ManageContract/listOfStaff.jsx";
+import StaffContracts from "./pages/Admin/ManageContract/staffContracts.jsx";
+import ContractDetail from "./pages/Admin/ManageContract/contractDetail.jsx";
+import ListContract from "./pages/StaffAndManager/Contract/listContract.jsx";
+import ContractDetailPage from "./pages/StaffAndManager/Contract/contractDetailPage.jsx";
 import Dashboard from "./pages/dashboard.jsx";
 
 const router = createBrowserRouter([
@@ -57,6 +62,9 @@ const router = createBrowserRouter([
   },
   { path: "/register", element: <RegisterPage /> },
   { path: "/login", element: <LoginPage /> },
+  { path: "/forgot-password", element: <ForgotPasswordPage /> },
+  { path: "/enter-otp", element: <EnterOtpPage /> },
+  { path: "/reset-password", element: <ResetPasswordPage /> },
   {
     path: "/profile",
     element: (
@@ -66,6 +74,10 @@ const router = createBrowserRouter([
     ),
     children: [
       { index: true, element: <StaffProfilePage /> },
+      {
+        path: "/dashboard",
+        element: <Dashboard />,
+      },
       {
         path: "policy-management",
         element: (
@@ -79,6 +91,30 @@ const router = createBrowserRouter([
         element: (
           <ProtectedRoute allowedRoles={["admin"]}>
             <PolicyDetail />
+          </ProtectedRoute>
+        )
+      },
+      {
+        path: "contract-management",
+        element: (
+          <ProtectedRoute allowedRoles={["admin"]}>
+            <ListOfContract />
+          </ProtectedRoute>
+        ),
+      },
+      {
+        path: "contract-management/staff/:staffId",
+        element: (
+          <ProtectedRoute allowedRoles={["admin"]}>
+            <StaffContracts />
+          </ProtectedRoute>
+        ),
+      },
+      {
+        path: "contract-management/detail/:contractId",
+        element: (
+          <ProtectedRoute allowedRoles={["admin"]}>
+            <ContractDetail />
           </ProtectedRoute>
         ),
       },
@@ -211,6 +247,22 @@ const router = createBrowserRouter([
         ),
       },
       {
+        path: "contract",
+        element: (
+          <ProtectedRoute allowedRoles={["staff", "manager"]}>
+            <ListContract />
+          </ProtectedRoute>
+        ),
+      },
+      {
+        path: "contract/:contractId",
+        element: (
+          <ProtectedRoute allowedRoles={["staff", "manager"]}>
+            <ContractDetailPage />
+          </ProtectedRoute>
+        ),
+      },
+      {
         path: "shift-schedule",
         element: (
           <ProtectedRoute allowedRoles={["staff"]}>
@@ -249,85 +301,7 @@ const router = createBrowserRouter([
             <ListEmployeeOfDepartment />
           </ProtectedRoute>
         ),
-      },
-    ],
-  },
-  {
-    path: "/",
-    element: <App />,
-    children: [
-      { index: true, element: <HomePage /> },
-      { path: "/contact", element: <ContactPage /> },
-      {
-        path: "/apply-cv",
-        element: (
-          <ProtectedRoute allowedRoles={["candidate"]}>
-            <ApplyCVPage />
-          </ProtectedRoute>
-        ),
-      },
-    ],
-  },
-  { path: "/register", element: <RegisterPage /> },
-  { path: "/login", element: <LoginPage /> },
-  { path: "/forgot-password", element: <ForgotPasswordPage /> },
-  { path: "/enter-otp", element: <EnterOtpPage /> },
-  { path: "/reset-password", element: <ResetPasswordPage /> },
-  {
-    element: (
-      <ProtectedRoute allowedRoles={["admin", "manager", "staff"]}>
-        <StaffLayout />
-      </ProtectedRoute>
-    ),
-    children: [
-      {
-        path: "/dashboard",
-        element: <Dashboard />,
-      },
-      {
-        path: "/profile",
-        element: <StaffProfilePage />,
-      },
-      {
-        path: "/candidate-cv-management",
-        element: (
-          <ProtectedRoute allowedRoles={["admin"]}>
-            <CandidateCVManagement />
-          </ProtectedRoute>
-        ),
-      },
-      {
-        path: "/employee-management",
-        element: (
-          <ProtectedRoute allowedRoles={["admin"]}>
-            <StaffPage />
-          </ProtectedRoute>
-        ),
-      },
-      {
-        path: "/department-management",
-        element: (
-          <ProtectedRoute allowedRoles={["admin"]}>
-            <DepartmentPage />
-          </ProtectedRoute>
-        ),
-      },
-      {
-        path: "/department-review-management",
-        element: (
-          <ProtectedRoute allowedRoles={["admin"]}>
-            <ManageDepartmentReview />
-          </ProtectedRoute>
-        ),
-      },
-      {
-        path: "/departments/:departmentId/employees",
-        element: (
-          <ProtectedRoute allowedRoles={["admin"]}>
-            <ListEmployeeOfDepartment />
-          </ProtectedRoute>
-        ),
-      },
+      }
     ],
   },
 ]);

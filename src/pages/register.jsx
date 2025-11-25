@@ -19,7 +19,6 @@ import {
   CalendarOutlined,
   ManOutlined,
   WomanOutlined,
-  SafetyOutlined,
 } from "@ant-design/icons";
 import { signUpApi } from "../utils/Api/accountApi.js";
 import { useNavigate, Link } from "react-router-dom";
@@ -135,7 +134,11 @@ const RegisterPage = () => {
       <div className="register-branding">
         <div className="branding-content">
           <div className="brand-logo">
-            <SafetyOutlined />
+            <img
+              src="/logoWhite.svg"
+              alt="Logo"
+              className="header-logo-image"
+            />
           </div>
           <Title level={1} className="brand-title">
             HRM System

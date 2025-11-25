@@ -1,9 +1,9 @@
 import { useState, useRef, useEffect } from "react";
 import { Card, Typography, Input, Button } from "antd";
-import { SafetyOutlined } from "@ant-design/icons";
 import { useNavigate, useLocation, Link } from "react-router-dom";
 import { toast } from "react-toastify";
 import { verifyOtpApi, forgotPasswordApi } from "../utils/Api/accountApi.js";
+import companyImage from "../assets/images/infopicture5.jpg";
 import "../styles/login.css";
 
 const { Title, Text } = Typography;
@@ -101,9 +101,14 @@ const EnterOtpPage = () => {
   return (
     <div className="login-page">
       <div className="login-branding">
+        <img src={companyImage} alt="Company" className="branding-background" />
         <div className="branding-content">
           <div className="brand-logo">
-            <SafetyOutlined />
+            <img
+              src="/logoWhite.svg"
+              alt="Logo"
+              className="header-logo-image"
+            />
           </div>
           <Title level={1} className="brand-title">
             HRM System

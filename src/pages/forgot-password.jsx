@@ -1,8 +1,9 @@
 import { Button, Form, Input, Card, Typography } from "antd";
-import { MailOutlined, SafetyOutlined } from "@ant-design/icons";
+import { MailOutlined } from "@ant-design/icons";
 import { useNavigate, Link } from "react-router-dom";
 import { toast } from "react-toastify";
 import { forgotPasswordApi } from "../utils/Api/accountApi.js";
+import companyImage from "../assets/images/infopicture5.jpg";
 import "../styles/login.css";
 
 const { Title, Text } = Typography;
@@ -41,9 +42,15 @@ const ForgotPasswordPage = () => {
     <div className="login-page">
       {/* Left Side - Branding */}
       <div className="login-branding">
+        <img src={companyImage} alt="Company" className="branding-background" />
+        <div className="branding-overlay"></div>
         <div className="branding-content">
           <div className="brand-logo">
-            <SafetyOutlined />
+            <img
+              src="/logoWhite.svg"
+              alt="Logo"
+              className="header-logo-image"
+            />
           </div>
           <Title level={1} className="brand-title">
             HRM System
@@ -71,7 +78,11 @@ const ForgotPasswordPage = () => {
         <Card className="login-card" bordered={false}>
           <div className="form-header">
             <div className="welcome-icon">
-              <SafetyOutlined />
+              <img
+                src="/logoWhite.svg"
+                alt="Logo"
+                className="header-logo-image"
+              />
             </div>
             <Title level={2} className="form-title">
               Forgot your password?

@@ -1,61 +1,61 @@
 /* Review Department Specific Styles */
 .review-department-page {
-    padding: 24px;
-    background: #f6f9fb;
-    min-height: 100vh;
+  padding: 24px;
+  background: #f6f9fb;
+  min-height: 100vh;
 }
 
 /* Loading Container */
 .loading-container {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    min-height: 400px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 400px;
 }
 
 /* Table Hover Effect */
 .ant-table-tbody > tr:hover {
-    background: rgba(52, 152, 219, 0.05) !important;
-    transition: all 0.3s ease;
+  background: rgba(52, 152, 219, 0.05) !important;
+  transition: all 0.3s ease;
 }
 
 /* Rating Tag Styles */
 .ant-tag {
-    border-radius: 6px;
-    padding: 4px 12px;
-    font-weight: 500;
-    display: inline-flex;
-    align-items: center;
-    gap: 4px;
+  border-radius: 6px;
+  padding: 4px 12px;
+  font-weight: 500;
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
 }
 
 /* Card Spacing */
 .ant-card {
-    border-radius: 12px;
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
-    transition: all 0.3s ease;
+  border-radius: 12px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+  transition: all 0.3s ease;
 }
 
 .ant-card:hover {
-    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.12);
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.12);
 }
 
 /* Filter Section */
 .filter-section {
-    background: white;
-    padding: 20px;
-    border-radius: 12px;
-    margin-bottom: 24px;
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+  background: white;
+  padding: 20px;
+  border-radius: 12px;
+  margin-bottom: 24px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
 }
 
 /* Responsive */
 @media (max-width: 768px) {
-    .stats-cards {
-        grid-template-columns: 1fr;
-    }
+  .stats-cards {
+    grid-template-columns: 1fr;
+  }
 
-    .ant-table {
-        font-size: 12px;
-    }
+  .ant-table {
+    font-size: 12px;
+  }
 }

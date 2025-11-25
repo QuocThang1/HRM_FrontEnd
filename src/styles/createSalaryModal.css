@@ -235,32 +235,32 @@
 }
 
 .salary-existing-month {
-    position: relative;
-    background-color: #ff4d4f !important;
-    color: #fff !important;
-    border-radius: 4px !important;
-    font-weight: bold !important;
+  position: relative;
+  background-color: #ff4d4f !important;
+  color: #fff !important;
+  border-radius: 4px !important;
+  font-weight: bold !important;
 }
 
 .salary-existing-month:hover {
-    background-color: #ff7875 !important;
+  background-color: #ff7875 !important;
 }
 
 /* DatePicker custom styles for existing months */
 .ant-picker-cell-in-view.ant-picker-cell-selected .salary-existing-month {
-    background-color: #cf1322 !important;
+  background-color: #cf1322 !important;
 }
 
 .ant-picker-cell:hover .salary-existing-month {
-    background-color: #ff7875 !important;
+  background-color: #ff7875 !important;
 }
 
 /* Tooltip for existing months */
 .salary-existing-month::after {
-    content: '✓';
-    position: absolute;
-    top: 2px;
-    right: 2px;
-    font-size: 10px;
-    font-weight: bold;
+  content: "✓";
+  position: absolute;
+  top: 2px;
+  right: 2px;
+  font-size: 10px;
+  font-weight: bold;
 }

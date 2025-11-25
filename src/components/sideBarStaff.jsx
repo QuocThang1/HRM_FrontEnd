@@ -272,6 +272,13 @@ const SideBarStaff = ({ collapsed }) => {
                   icon: <DollarOutlined />,
                   label: <Link to="/profile/my-salaries">My Salaries</Link>,
                 },
+                {
+                  key: "/profile/resignation",
+                  icon: <FileTextOutlined />,
+                  label: (
+                    <Link to="/profile/resignation">Submit Resignation</Link>
+                  ),
+                },
               ]
               : []),
             ...(auth?.staff?.role === "staff"
@@ -299,42 +306,6 @@ const SideBarStaff = ({ collapsed }) => {
                   label: (
                     <Link to="/profile/resignation">Submit Resignation</Link>
                   ),
-                },
-                {
-                  key: "/candidate-cv-management",
-                  icon: <FolderOutlined />,
-                  label: (
-                    <Link to="/candidate-cv-management">Candidate CVs</Link>
-                  ),
-                },
-                {
-                  key: "/employee-management",
-                  icon: <TeamOutlined />,
-                  label: <Link to="/employee-management">Employees</Link>,
-                },
-                {
-                  type: "divider",
-                },
-                {
-                  key: "department-group",
-                  icon: <StarOutlined />,
-                  label: "Departments",
-                  children: [
-                    {
-                      key: "/department-management",
-                      label: (
-                        <Link to="/department-management">Management</Link>
-                      ),
-                    },
-                    {
-                      key: "/department-review-management",
-                      label: (
-                        <Link to="/department-review-management">
-                          Reviews
-                        </Link>
-                      ),
-                    },
-                  ],
                 },
               ]
               : []),

@@ -66,6 +66,10 @@ const router = createBrowserRouter([
   { path: "/enter-otp", element: <EnterOtpPage /> },
   { path: "/reset-password", element: <ResetPasswordPage /> },
   {
+    path: "/dashboard",
+    element: <Dashboard />,
+  },
+  {
     path: "/profile",
     element: (
       <ProtectedRoute allowedRoles={["admin", "manager", "staff"]}>
@@ -74,10 +78,6 @@ const router = createBrowserRouter([
     ),
     children: [
       { index: true, element: <StaffProfilePage /> },
-      {
-        path: "/dashboard",
-        element: <Dashboard />,
-      },
       {
         path: "policy-management",
         element: (
@@ -281,7 +281,7 @@ const router = createBrowserRouter([
       {
         path: "resignation",
         element: (
-          <ProtectedRoute allowedRoles={["staff"]}>
+          <ProtectedRoute allowedRoles={["staff", "manager"]}>
             <StaffResignationPage />
           </ProtectedRoute>
         ),

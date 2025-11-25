@@ -32,6 +32,11 @@ import ReviewStatistics from "./pages/Manager/reviewDepartmentManagement/reviewS
 import MySalary from "./pages/StaffAndManager/Salary/mySalary.jsx";
 import ListOfPolicy from "./pages/Admin/ManagePolicy/listOfPolicy";
 import PolicyDetail from "./pages/Admin/ManagePolicy/policyDetail"
+import ListOfContract from "./pages/Admin/ManageContract/listOfStaff.jsx";
+import StaffContracts from "./pages/Admin/ManageContract/staffContracts.jsx";
+import ContractDetail from "./pages/Admin/ManageContract/contractDetail.jsx";
+import ListContract from "./pages/StaffAndManager/Contract/listContract.jsx";
+import ContractDetailPage from "./pages/StaffAndManager/Contract/contractDetailPage.jsx";
 
 const router = createBrowserRouter([
     {
@@ -75,6 +80,30 @@ const router = createBrowserRouter([
                 element: (
                     <ProtectedRoute allowedRoles={["admin"]}>
                         <PolicyDetail />
+                    </ProtectedRoute>
+                )
+            },
+            {
+                path: "contract-management",
+                element: (
+                    <ProtectedRoute allowedRoles={["admin"]}>
+                        <ListOfContract />
+                    </ProtectedRoute>
+                ),
+            },
+            {
+                path: "contract-management/staff/:staffId",
+                element: (
+                    <ProtectedRoute allowedRoles={["admin"]}>
+                        <StaffContracts />
+                    </ProtectedRoute>
+                ),
+            },
+            {
+                path: "contract-management/detail/:contractId",
+                element: (
+                    <ProtectedRoute allowedRoles={["admin"]}>
+                        <ContractDetail />
                     </ProtectedRoute>
                 ),
             },
@@ -203,6 +232,22 @@ const router = createBrowserRouter([
                 element: (
                     <ProtectedRoute allowedRoles={["staff", "manager"]}>
                         <MySalary />
+                    </ProtectedRoute>
+                ),
+            },
+            {
+                path: "contract",
+                element: (
+                    <ProtectedRoute allowedRoles={["staff", "manager"]}>
+                        <ListContract />
+                    </ProtectedRoute>
+                ),
+            },
+            {
+                path: "contract/:contractId",
+                element: (
+                    <ProtectedRoute allowedRoles={["staff", "manager"]}>
+                        <ContractDetailPage />
                     </ProtectedRoute>
                 ),
             },

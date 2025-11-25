@@ -1,14 +1,25 @@
 import { useEffect, useState, useContext } from "react";
-import { Table, Button, Popconfirm } from "antd";
+import { Table, Button, Popconfirm, Card, Space, Typography, Tag } from "antd";
 import { useParams, useNavigate, useLocation } from "react-router-dom";
 import { getStaffByDepartmentApi, removeStaffFromDepartmentApi } from "../../../utils/Api/staffApi";
-import { DeleteOutlined } from "@ant-design/icons";
+import {
+    DeleteOutlined,
+    ArrowLeftOutlined,
+    UserAddOutlined,
+    FileTextOutlined,
+    EyeOutlined,
+    TeamOutlined,
+    CrownOutlined,
+    UserOutlined,
+} from "@ant-design/icons";
 import AddEmployeeToDepartmentModal from "./addEmployeeToDepartmentModal";
-import "../../../styles/ListEmployeeOfDepartment.css"
 import CreateDepartmentReviewModal from "../ManageDepartmentReview/createDepartmentReviewModal";
 import { AuthContext } from "../../../context/auth.context";
 import { toast } from "react-toastify";
 import ViewDepartmentReviewsModal from "../ManageDepartment/viewDepartmentReviewsModal";
+import "../../../styles/ListEmployeeOfDepartment.css";
+
+const { Title, Text } = Typography;
 
 const ListEmployeeOfDepartment = () => {
     const { departmentId } = useParams();
@@ -56,94 +67,172 @@ const ListEmployeeOfDepartment = () => {
 
     const columns = [
         {
-            title: "No",
+            title: "No.",
             key: "index",
             width: 60,
             align: "center",
-            render: (text, record, index) => index + 1,
+            render: (_, __, index) => index + 1,
         },
         {
             title: "Full Name",
             dataIndex: ["personalInfo", "fullName"],
-            render: (text) => (
-                <div style={{
-                    whiteSpace: "normal",
-                    wordWrap: "break-word",
-                    lineHeight: "1.5"
-                }}>
-                    {text}
-                </div>
+            width: 250,
+            render: (text, record) => (
+                <Space direction="vertical" size={4}>
+                    <Text strong style={{ fontSize: 14 }}>
+                        {text}
+                    </Text>
+                    {managerId && record._id === managerId && (
+                        <Tag className="manager-badge" icon={<CrownOutlined />}>
+                            MANAGER
+                        </Tag>
+                    )}
+                </Space>
             ),
         },
         {
             title: "Email",
             dataIndex: ["personalInfo", "email"],
+            width: 280,
             render: (text) => (
-                <div style={{
-                    whiteSpace: "normal",
-                    wordWrap: "break-word",
-                    lineHeight: "1.5"
-                }}>
-                    {text}
-                </div>
+                <Text style={{ color: "#666" }}>{text}</Text>
             ),
         },
-        { title: "Role", dataIndex: "role" },
         {
-            title: "",
+            title: "Role",
+            dataIndex: "role",
+            width: 120,
+            align: "center",
+            render: (role) => (
+                <span className={`role-tag ${role}`}>
+                    {role}
+                </span>
+            ),
+        },
+        {
+            title: "Actions",
             key: "actions",
+            width: 80,
+            align: "center",
             render: (_, record) => (
                 <Popconfirm
-                    title="Remove this employee from department?"
+                    title="Remove Employee"
+                    description="Are you sure you want to remove this employee from the department?"
                     onConfirm={() => handleRemove(record._id)}
                     okText="Yes"
                     cancelText="No"
-                    onClick={e => e.stopPropagation()}
+                    okButtonProps={{ danger: true }}
+                    onClick={(e) => e.stopPropagation()}
                 >
-                    <DeleteOutlined style={{ color: "red", cursor: "pointer" }} onClick={e => e.stopPropagation()} />
+                    <button
+                        className="action-button"
+                        onClick={(e) => e.stopPropagation()}
+                    >
+                        <DeleteOutlined />
+                    </button>
                 </Popconfirm>
             ),
             onCell: () => ({
-                onClick: e => e.stopPropagation()
+                onClick: (e) => e.stopPropagation(),
             }),
         },
     ];
 
     return (
-        <div style={{ padding: "30px" }}>
-            <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: 16 }}>
-                <Button onClick={() => navigate(-1)}>
-                    Back
-                </Button>
-                <div>
-                    <Button type="primary" style={{ marginRight: 8 }} onClick={() => setIsCreateReviewModalOpen(true)}>
-                        Create Review
-                    </Button>
-                    <Button
-                        type="default"
-                        style={{ marginRight: 8 }}
-                        onClick={(e) => { e.stopPropagation(); setIsViewReviewsOpen(true); }}
-                    >
-                        View Reviews
-                    </Button>
-                    <Button type="primary" onClick={() => setIsAddEmployeeModalOpen(true)}>
-                        Add Employee
-                    </Button>
+        <div className="employee-department-page">
+            {/* Header */}
+            <div className="page-header">
+                <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", flexWrap: "wrap", gap: 16 }}>
+                    <div>
+                        <Button
+                            type="text"
+                            icon={<ArrowLeftOutlined />}
+                            onClick={() => navigate(-1)}
+                            className="back-button"
+                        >
+                            Back to Departments
+                        </Button>
+                        <Title level={2} className="page-title">
+                            <TeamOutlined /> {departmentName}
+                        </Title>
+                        <Text className="page-subtitle">
+                            Manage department employees and reviews
+                        </Text>
+                    </div>
+                    <div className="header-actions">
+                        <Button
+                            type="primary"
+                            icon={<FileTextOutlined />}
+                            onClick={() => setIsCreateReviewModalOpen(true)}
+                        >
+                            Create Review
+                        </Button>
+                        <Button
+                            type="default"
+                            icon={<EyeOutlined />}
+                            onClick={(e) => {
+                                e.stopPropagation();
+                                setIsViewReviewsOpen(true);
+                            }}
+                        >
+                            View Reviews
+                        </Button>
+                        <Button
+                            type="primary"
+                            icon={<UserAddOutlined />}
+                            onClick={() => setIsAddEmployeeModalOpen(true)}
+                        >
+                            Add Employee
+                        </Button>
+                    </div>
                 </div>
             </div>
-            <h2>Employees of {departmentName}</h2>
-            <Table
-                bordered
-                dataSource={employees}
-                columns={columns}
-                rowKey="_id"
-                locale={{ emptyText: "" }}
-                pagination={{ pageSize: 8 }}
-                rowClassName={(record) =>
-                    managerId && record._id === managerId ? "manager-row" : ""
-                }
-            />
 
+            {/* Employees Table */}
+            <Card
+                className="employees-table-card"
+                title={
+                    <Space>
+                        <UserOutlined />
+                        <span>Department Employees</span>
+                    </Space>
+                }
+            >
+                <Table
+                    columns={columns}
+                    dataSource={employees}
+                    rowKey="_id"
+                    pagination={{
+                        pageSize: 10,
+                        showSizeChanger: true,
+                        showTotal: (total) => `Total ${total} employees`,
+                        pageSizeOptions: ["10", "20", "50"],
+                    }}
+                    rowClassName={(record) =>
+                        managerId && record._id === managerId ? "manager-row" : ""
+                    }
+                    locale={{
+                        emptyText: (
+                            <div className="empty-state">
+                                <UserOutlined className="empty-icon" />
+                                <div className="empty-title">No Employees</div>
+                                <div className="empty-description">
+                                    This department does not have any employees yet.
+                                </div>
+                                <Button
+                                    type="primary"
+                                    icon={<UserAddOutlined />}
+                                    onClick={() => setIsAddEmployeeModalOpen(true)}
+                                >
+                                    Add First Employee
+                                </Button>
+                            </div>
+                        ),
+                    }}
+                />
+            </Card>
+
+            {/* Modals */}
             <AddEmployeeToDepartmentModal
                 open={isAddEmployeeModalOpen}
                 onClose={() => setIsAddEmployeeModalOpen(false)}
@@ -155,7 +244,9 @@ const ListEmployeeOfDepartment = () => {
                 onClose={() => setIsCreateReviewModalOpen(false)}
                 departmentId={departmentId}
                 adminId={auth.staff._id}
-                onSuccess={() => {/* Optionally reload reviews */ }}
+                onSuccess={() => {
+                    /* Optionally reload reviews */
+                }}
             />
             <ViewDepartmentReviewsModal
                 open={isViewReviewsOpen}

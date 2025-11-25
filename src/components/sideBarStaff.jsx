@@ -15,6 +15,7 @@ import {
   DollarOutlined,
   LineChartOutlined,
   FileProtectOutlined,
+  FolderOpenOutlined,
 } from "@ant-design/icons";
 import { Link, useNavigate, useLocation } from "react-router-dom";
 import { useContext } from "react";
@@ -115,8 +116,20 @@ const SideBarStaff = () => {
                   key: "/profile/policy-management",
                   icon: <FileProtectOutlined />,
                   label: <Link to="/profile/policy-management">Policy Management</Link>,
-                },]
-              : []),
+                },
+                {
+                  key: "/profile/contract-management",
+                  icon: <FolderOpenOutlined />,
+                  label: <Link to="/profile/contract-management">Contract Management</Link>,
+                },
+              ]
+              : [
+                {
+                  key: "/profile/contract",
+                  icon: <FolderOpenOutlined />,
+                  label: <Link to="/profile/contract">Contract</Link>,
+                },
+              ]),
             {
               type: "divider",
             },

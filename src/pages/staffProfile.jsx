@@ -12,6 +12,8 @@ import {
   Avatar,
   Divider,
   Space,
+  Spin,
+  Tag,
 } from "antd";
 import {
   UserOutlined,
@@ -22,9 +24,11 @@ import {
   ManOutlined,
   WomanOutlined,
   SaveOutlined,
+  DollarOutlined,
 } from "@ant-design/icons";
 import { AuthContext } from "../context/auth.context.jsx";
 import { updateProfileApi, getAccountApi } from "../utils/Api/accountApi.js";
+import { getMySalaryApi } from "../utils/Api/salaryApi.js";
 import { toast } from "react-toastify";
 import dayjs from "dayjs";
 import "../styles/staffProfile.css";
@@ -36,7 +40,9 @@ const StaffProfilePage = () => {
   const { auth, setAuth } = useContext(AuthContext);
   const [form] = Form.useForm();
   const [loading, setLoading] = useState(false);
+  const [salaryLoading, setSalaryLoading] = useState(false);
   const [shouldReloadAccount, setShouldReloadAccount] = useState(false);
+  const [hourlyRate, setHourlyRate] = useState(null);
 
   useEffect(() => {
     const fetchAccount = async () => {
@@ -64,11 +70,33 @@ const StaffProfilePage = () => {
             role: res.data.role,
           },
         });
+
+        // Fetch salary nếu là manager hoặc staff
+        if (res.data.role === "manager" || res.data.role === "staff") {
+          fetchMySalary();
+        }
       }
     };
     fetchAccount();
     setShouldReloadAccount(false);
   }, [setAuth, form, shouldReloadAccount]);
+
+  const fetchMySalary = async () => {
+    try {
+      setSalaryLoading(true);
+      const res = await getMySalaryApi();
+      if (res && res.EC === 0 && res.data) {
+        setHourlyRate(res.data.hourlyRate);
+      } else {
+        setHourlyRate(null);
+      }
+    } catch (error) {
+      console.error("Error fetching salary:", error);
+      setHourlyRate(null);
+    } finally {
+      setSalaryLoading(false);
+    }
+  };
 
   const onFinish = async (values) => {
     try {
@@ -139,11 +167,21 @@ const StaffProfilePage = () => {
     return Promise.resolve();
   };
 
+  const formatCurrency = (amount) => {
+    return new Intl.NumberFormat("en-US", {
+      style: "currency",
+      currency: "USD",
+    }).format(amount);
+  };
+
+  const shouldShowSalary =
+    auth?.staff?.role === "manager" || auth?.staff?.role === "staff";
+
   return (
     <div className="staff-profile-page">
       <div className="profile-container">
         {/* Header Section */}
-        <div className="profile-header">
+        <div className="page-header">
           <div className="header-content">
             <Avatar
               size={100}
@@ -167,6 +205,55 @@ const StaffProfilePage = () => {
           </div>
         </div>
 
+        {/* Salary Information Card - Chỉ hiển thị cho manager và staff */}
+        {shouldShowSalary && (
+          <Card className="salary-info-card" style={{ marginBottom: 24 }}>
+            <Space direction="vertical" size={4} style={{ width: "100%" }}>
+              <Space>
+                <DollarOutlined style={{ fontSize: 18, color: "#52c41a" }} />
+                <Title level={5} style={{ margin: 0 }}>
+                  Salary Information
+                </Title>
+              </Space>
+              <Divider style={{ margin: "12px 0" }} />
+              <Row gutter={16} align="middle">
+                <Col xs={24} sm={12}>
+                  <Space direction="vertical" size={0}>
+                    <Text type="secondary" style={{ fontSize: 13 }}>
+                      Hourly Rate
+                    </Text>
+                    {salaryLoading ? (
+                      <Spin size="small" />
+                    ) : hourlyRate !== null ? (
+                      <Text strong style={{ fontSize: 24, color: "#52c41a" }}>
+                        {formatCurrency(hourlyRate)}/h
+                      </Text>
+                    ) : (
+                      <Tag color="orange">Not Set</Tag>
+                    )}
+                  </Space>
+                </Col>
+                <Col xs={24} sm={12}>
+                  <Space direction="vertical" size={0}>
+                    <Text type="secondary" style={{ fontSize: 13 }}>
+                      Monthly Estimate (160h)
+                    </Text>
+                    {salaryLoading ? (
+                      <Spin size="small" />
+                    ) : hourlyRate !== null ? (
+                      <Text strong style={{ fontSize: 20, color: "#1890ff" }}>
+                        {formatCurrency(hourlyRate * 160)}
+                      </Text>
+                    ) : (
+                      <Text type="secondary">-</Text>
+                    )}
+                  </Space>
+                </Col>
+              </Row>
+            </Space>
+          </Card>
+        )}
+
         {/* Form Card */}
         <Card className="profile-form-card">
           <Title level={4} className="form-section-title">
@@ -183,7 +270,10 @@ const StaffProfilePage = () => {
                   name="name"
                   rules={[
                     { required: true, message: "Please enter full name!" },
-                    { min: 2, message: "Name must be at least 2 characters!" },
+                    {
+                      min: 2,
+                      message: "Name must be at least 2 characters!",
+                    },
                     {
                       max: 100,
                       message: "Name must not exceed 100 characters!",

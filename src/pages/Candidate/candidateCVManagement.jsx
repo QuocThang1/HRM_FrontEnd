@@ -116,6 +116,7 @@ const CandidateCVManagement = () => {
     {
       title: "Full Name",
       dataIndex: ["personalInfo", "fullName"],
+      width: 200,
       key: "fullName",
       sorter: (a, b) =>
         (a.personalInfo?.fullName || "").localeCompare(
@@ -133,13 +134,6 @@ const CandidateCVManagement = () => {
       dataIndex: ["personalInfo", "phone"],
       key: "phone",
       render: (phone) => phone || "-",
-    },
-    {
-      title: "Gender",
-      dataIndex: ["personalInfo", "gender"],
-      key: "gender",
-      render: (gender) =>
-        gender ? gender.charAt(0).toUpperCase() + gender.slice(1) : "-",
     },
     {
       title: "Status",

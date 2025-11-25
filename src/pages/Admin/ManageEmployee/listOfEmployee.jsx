@@ -1,6 +1,15 @@
-import { Table, Button, Popconfirm, Card, Space, Tag, Select } from "antd";
+import {
+  Table,
+  Button,
+  Popconfirm,
+  Card,
+  Space,
+  Tag,
+  Select,
+  Tooltip,
+} from "antd";
 import { useEffect, useState } from "react";
-import { getStaffApi, deleteStaffApi } from "../../utils/Api/staffApi";
+import { getStaffApi, deleteStaffApi } from "../../../utils/Api/staffApi";
 import {
   PlusOutlined,
   EditOutlined,
@@ -13,7 +22,7 @@ import {
 import AddEmployeeModal from "./AddEmployeeModal";
 import EditEmployeeModal from "./EditEmployeeModal";
 import { toast } from "react-toastify";
-import "../../styles/listOfEmployee.css";
+import "../../../styles/listOfEmployee.css";
 
 const { Option } = Select;
 
@@ -116,14 +125,11 @@ const StaffPage = () => {
 
   const columns = [
     {
-      title: "ID",
-      dataIndex: "_id",
-      key: "_id",
-      width: 120,
-      ellipsis: true,
-      render: (id) => (
-        <span className="employee-id">{id.substring(0, 8)}...</span>
-      ),
+      title: "No",
+      key: "index",
+      width: 60,
+      align: "center",
+      render: (text, record, index) => index + 1,
     },
     {
       title: "Full Name",
@@ -134,19 +140,43 @@ const StaffPage = () => {
         (a.personalInfo?.fullName || "").localeCompare(
           b.personalInfo?.fullName || "",
         ),
+      render: (text) => (
+        <div
+          style={{
+            whiteSpace: "normal",
+            wordWrap: "break-word",
+            lineHeight: "1.5",
+          }}
+        >
+          {text}
+        </div>
+      ),
     },
     {
       title: "Email",
       dataIndex: ["personalInfo", "email"],
       key: "email",
-      width: 180,
+      width: 160,
       ellipsis: true,
+      render: (email) => (
+        <div
+          style={{
+            whiteSpace: "normal",
+            wordWrap: "break-word",
+            lineHeight: "1.5",
+          }}
+        >
+          <Tooltip title={email}>
+            <span className="employee-email">{email}</span>
+          </Tooltip>
+        </div>
+      ),
     },
     {
       title: "Role",
       dataIndex: "role",
       key: "role",
-      width: 120,
+      width: 110,
       render: (role) => getRoleTag(role),
     },
     {

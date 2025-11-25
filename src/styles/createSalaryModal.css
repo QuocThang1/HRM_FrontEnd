@@ -1,0 +1,266 @@
+/* Create Salary Modal Styles */
+.create-salary-modal .ant-modal-header {
+  background: linear-gradient(135deg, #2c3e50 0%, #3498db 100%);
+  border-bottom: none;
+  padding: 20px 24px;
+}
+
+.create-salary-modal .ant-modal-title {
+  color: #ffffff;
+}
+
+.salary-modal-header {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  font-size: 18px;
+  font-weight: 600;
+  color: #ffffff;
+}
+
+.salary-modal-header-icon {
+  font-size: 24px;
+}
+
+.create-salary-modal .ant-modal-body {
+  padding: 24px;
+  max-height: 70vh;
+  overflow-y: auto;
+}
+
+/* Custom scrollbar */
+.create-salary-modal .ant-modal-body::-webkit-scrollbar {
+  width: 6px;
+}
+
+.create-salary-modal .ant-modal-body::-webkit-scrollbar-track {
+  background: #f0f0f0;
+  border-radius: 3px;
+}
+
+.create-salary-modal .ant-modal-body::-webkit-scrollbar-thumb {
+  background: #d9d9d9;
+  border-radius: 3px;
+}
+
+.create-salary-modal .ant-modal-body::-webkit-scrollbar-thumb:hover {
+  background: #bfbfbf;
+}
+
+.create-salary-modal .ant-modal-footer {
+  border-top: 1px solid #f0f0f0;
+  padding: 16px 24px;
+}
+
+/* Alert Box */
+.create-salary-modal .ant-alert {
+  border-radius: 8px;
+  border: none;
+  background: linear-gradient(135deg, #e3f2fd 0%, #bbdefb 100%);
+}
+
+.create-salary-modal .ant-alert-info .ant-alert-icon {
+  color: #2c3e50;
+}
+
+.create-salary-modal .ant-alert-message {
+  color: #1976d2;
+  font-weight: 600;
+  font-size: 14px;
+}
+
+.create-salary-modal .ant-alert-description {
+  color: #2c3e50;
+}
+
+.create-salary-modal .ant-alert-description .ant-typography {
+  margin-bottom: 4px;
+  font-size: 13px;
+}
+
+.create-salary-modal .ant-alert-description .ant-typography strong {
+  font-size: 15px;
+  color: #1565c0;
+}
+
+/* Form Styles */
+.salary-form .ant-form-item-label > label {
+  font-weight: 600;
+  color: #333;
+  font-size: 14px;
+}
+
+.salary-form .ant-input,
+.salary-form .ant-input-number,
+.salary-form .ant-input-affix-wrapper,
+.salary-form .ant-picker,
+.salary-form .ant-input-number-group-wrapper {
+  border-radius: 8px;
+  border: 1.5px solid #d9d9d9;
+  transition: all 0.3s ease;
+  width: 100%;
+}
+
+.salary-form .ant-input-number-input {
+  border: none;
+}
+
+.salary-form .ant-input:hover,
+.salary-form .ant-input-number:hover,
+.salary-form .ant-input-affix-wrapper:hover,
+.salary-form .ant-picker:hover {
+  border-color: #3498db;
+}
+
+.salary-form .ant-input:focus,
+.salary-form .ant-input-number:focus,
+.salary-form .ant-input-affix-wrapper:focus,
+.salary-form .ant-input-focused,
+.salary-form .ant-picker-focused,
+.salary-form .ant-input-number-focused {
+  border-color: #3498db;
+  box-shadow: 0 0 0 2px rgba(52, 152, 219, 0.1);
+}
+
+.salary-form .ant-picker-suffix {
+  color: #3498db;
+  font-size: 16px;
+}
+
+/* Input Number Suffix */
+.salary-form .ant-input-number-suffix {
+  color: #8c8c8c;
+  font-weight: 500;
+}
+
+/* Validation */
+.salary-form .ant-form-item-explain-error {
+  font-size: 12px;
+  color: #ff4d4f;
+  margin-top: 4px;
+}
+
+.salary-form .ant-form-item-has-error .ant-input,
+.salary-form .ant-form-item-has-error .ant-input-number,
+.salary-form .ant-form-item-has-error .ant-input-affix-wrapper,
+.salary-form .ant-form-item-has-error .ant-picker {
+  border-color: #ff4d4f !important;
+}
+
+/* TextArea */
+.salary-form .ant-input-textarea-show-count::after {
+  color: #8c8c8c;
+  font-size: 12px;
+}
+
+.salary-form textarea.ant-input {
+  resize: none;
+}
+
+/* Loading Spinner */
+.create-salary-modal .ant-spin-nested-loading {
+  min-height: 200px;
+}
+
+.create-salary-modal .ant-spin-container {
+  transition: opacity 0.3s ease;
+}
+
+.create-salary-modal .ant-spin-blur {
+  opacity: 0.5;
+  pointer-events: none;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .create-salary-modal .ant-modal {
+    max-width: calc(100vw - 32px);
+    margin: 16px auto;
+  }
+
+  .create-salary-modal .ant-modal-body {
+    padding: 16px;
+  }
+
+  .salary-modal-header {
+    font-size: 16px;
+  }
+
+  .salary-modal-header-icon {
+    font-size: 20px;
+  }
+
+  .salary-submit-button,
+  .salary-cancel-button {
+    width: 100%;
+    margin-top: 8px;
+  }
+
+  .create-salary-modal .ant-space-horizontal {
+    flex-direction: column;
+    width: 100%;
+  }
+}
+
+/* Focus visible for accessibility */
+.salary-form .ant-input:focus-visible,
+.salary-form .ant-input-number:focus-visible,
+.salary-form .ant-input-affix-wrapper:focus-visible,
+.salary-form .ant-picker:focus-visible {
+  outline: 2px solid #3498db;
+  outline-offset: 2px;
+}
+
+/* Loading State */
+.salary-submit-button.ant-btn-loading {
+  opacity: 0.8;
+}
+
+/* Number Input Formatting */
+.salary-form .ant-input-number-handler-wrap {
+  border-radius: 0 8px 8px 0;
+}
+
+.salary-form .ant-input-number-handler {
+  border: none;
+}
+
+.salary-form .ant-input-number-handler:hover {
+  background: rgba(52, 152, 219, 0.1);
+}
+
+.salary-form .ant-input-number-handler-up-inner,
+.salary-form .ant-input-number-handler-down-inner {
+  color: #3498db;
+}
+
+.salary-existing-month {
+    position: relative;
+    background-color: #ff4d4f !important;
+    color: #fff !important;
+    border-radius: 4px !important;
+    font-weight: bold !important;
+}
+
+.salary-existing-month:hover {
+    background-color: #ff7875 !important;
+}
+
+/* DatePicker custom styles for existing months */
+.ant-picker-cell-in-view.ant-picker-cell-selected .salary-existing-month {
+    background-color: #cf1322 !important;
+}
+
+.ant-picker-cell:hover .salary-existing-month {
+    background-color: #ff7875 !important;
+}
+
+/* Tooltip for existing months */
+.salary-existing-month::after {
+    content: '✓';
+    position: absolute;
+    top: 2px;
+    right: 2px;
+    font-size: 10px;
+    font-weight: bold;
+}

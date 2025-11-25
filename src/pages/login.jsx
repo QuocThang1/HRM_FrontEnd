@@ -5,6 +5,7 @@ import { useNavigate, Link } from "react-router-dom";
 import { useContext } from "react";
 import { AuthContext } from "../context/auth.context.jsx";
 import { toast } from "react-toastify";
+import companyImage from "../assets/images/infopicture5.jpg";
 import "../styles/login.css";
 
 const { Title, Text } = Typography;
@@ -42,6 +43,8 @@ const LoginPage = () => {
     <div className="login-page">
       {/* Left Side - Branding */}
       <div className="login-branding">
+        <img src={companyImage} alt="Company" className="branding-background" />
+        <div className="branding-overlay"></div>
         <div className="branding-content">
           <div className="brand-logo">
             <SafetyOutlined />

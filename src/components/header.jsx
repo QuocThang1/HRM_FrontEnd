@@ -6,6 +6,7 @@ import {
   RocketOutlined,
   PhoneOutlined,
   FileTextOutlined,
+  InfoCircleOutlined,
 } from "@ant-design/icons";
 import { Link, useNavigate, useLocation } from "react-router-dom";
 import { useContext } from "react";
@@ -47,6 +48,11 @@ const Header = () => {
       key: "/contact",
       icon: <PhoneOutlined />,
     },
+    {
+      label: <Link to="/about">About Us</Link>,
+      key: "/about",
+      icon: <InfoCircleOutlined />,
+    },
     ...(auth?.staff?.role === "candidate"
       ? [
           {
@@ -69,7 +75,6 @@ const Header = () => {
         mode="horizontal"
         items={leftItems}
         className="header-menu"
-        theme="dark"
         selectedKeys={[location.pathname]}
       />
 
@@ -108,12 +113,7 @@ const Header = () => {
           <Button
             type="primary"
             onClick={() => navigate("/login")}
-            style={{
-              background: "rgba(255, 255, 255, 0.2)",
-              borderColor: "rgba(255, 255, 255, 0.3)",
-              color: "#fff",
-              fontWeight: 600,
-            }}
+            className="header-login-btn"
           >
             Login
           </Button>

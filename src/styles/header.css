@@ -1,6 +1,6 @@
 .custom-header {
-  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%) !important;
-  box-shadow: 0 2px 8px rgba(102, 126, 234, 0.25);
+  background: linear-gradient(135deg, #2c3e50 0%, #3498db 100%) !important;
+  box-shadow: 0 4px 16px rgba(44, 62, 80, 0.3);
   padding: 0 24px !important;
   height: 64px !important;
   line-height: 64px !important;
@@ -10,13 +10,14 @@
   position: sticky;
   top: 0;
   z-index: 1000;
+  border-bottom: none;
 }
 
 .header-logo {
   display: flex;
   align-items: center;
   gap: 12px;
-  color: #fff;
+  color: #ffffff !important; /* White text */
   font-size: 20px;
   font-weight: 700;
   cursor: pointer;
@@ -30,7 +31,7 @@
 
 .header-logo-icon {
   font-size: 28px;
-  color: #fff;
+  color: #ffffff;
 }
 
 .header-menu {
@@ -42,7 +43,7 @@
 }
 
 .header-menu .ant-menu-item {
-  color: rgba(255, 255, 255, 0.85) !important;
+  color: rgba(255, 255, 255, 0.8) !important; /* White with opacity */
   font-weight: 500;
   border-bottom: 2px solid transparent !important;
   transition: all 0.3s ease;
@@ -51,15 +52,15 @@
 }
 
 .header-menu .ant-menu-item:hover {
-  color: #fff !important;
-  background: rgba(255, 255, 255, 0.15) !important;
-  border-bottom: 2px solid #fff !important;
+  color: #ffffff !important;
+  background: rgba(255, 255, 255, 0.1) !important;
+  border-bottom: 2px solid #ffffff !important;
 }
 
 .header-menu .ant-menu-item-selected {
-  color: #fff !important;
-  background: rgba(255, 255, 255, 0.2) !important;
-  border-bottom: 2px solid #fff !important;
+  color: #ffffff !important;
+  background: rgba(255, 255, 255, 0.15) !important;
+  border-bottom: 2px solid #ffffff !important;
 }
 
 .header-menu .ant-menu-item .anticon {
@@ -88,12 +89,12 @@
 .header-user-info:hover {
   background: rgba(255, 255, 255, 0.25);
   transform: translateY(-2px);
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  box-shadow: 0 4px 12px rgba(255, 255, 255, 0.2);
 }
 
 .header-avatar {
-  border: 2px solid rgba(255, 255, 255, 0.5) !important;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+  border: 2px solid #ffffff !important;
+  box-shadow: 0 2px 8px rgba(255, 255, 255, 0.3);
   flex-shrink: 0;
 }
 
@@ -106,7 +107,7 @@
 }
 
 .header-user-name {
-  color: #fff !important;
+  color: #ffffff !important;
   font-weight: 600;
   font-size: 14px;
   max-width: 150px;
@@ -128,11 +129,12 @@
   text-transform: uppercase;
   letter-spacing: 0.5px;
   line-height: 1 !important;
+  border: 1px solid rgba(255, 255, 255, 0.3);
 }
 
 .header-logout-btn {
   background: rgba(255, 255, 255, 0.2) !important;
-  border: 1px solid rgba(255, 255, 255, 0.3) !important;
+  border: 1px solid rgba(255, 255, 255, 0.4) !important;
   color: #fff !important;
   font-weight: 600;
   border-radius: 20px;
@@ -144,12 +146,35 @@
 
 .header-logout-btn:hover {
   background: rgba(255, 255, 255, 0.3) !important;
-  border-color: rgba(255, 255, 255, 0.5) !important;
+  border-color: rgba(255, 255, 255, 0.6) !important;
   transform: translateY(-2px);
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+  box-shadow: 0 4px 12px rgba(255, 255, 255, 0.3);
 }
 
 .header-logout-btn .anticon {
+  font-size: 14px;
+}
+
+.header-login-btn {
+  background: rgba(255, 255, 255, 0.2) !important;
+  border: 1px solid rgba(255, 255, 255, 0.4) !important;
+  color: #fff !important;
+  font-weight: 600;
+  border-radius: 20px;
+  padding: 4px 20px;
+  height: 36px;
+  transition: all 0.3s ease;
+  line-height: 1 !important;
+}
+
+.header-login-btn:hover {
+  background: rgba(255, 255, 255, 0.3) !important;
+  border-color: rgba(255, 255, 255, 0.6) !important;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(255, 255, 255, 0.3);
+}
+
+.header-login-btn .anticon {
   font-size: 14px;
 }
 

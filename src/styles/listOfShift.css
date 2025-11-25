@@ -1,0 +1,192 @@
+.shift-management-page {
+  padding: 0;
+  background: #f6f9fb;
+  min-height: 100vh;
+}
+
+/* ========== Page Header ========== */
+.page-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-radius: 0 0 24px 24px;
+}
+
+.header-content {
+  flex: 1;
+}
+
+.page-title {
+  color: #ffffff;
+  font-size: 32px;
+  font-weight: 700;
+  margin: 0 0 8px 0;
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.page-subtitle {
+  color: rgba(255, 255, 255, 0.9);
+  font-size: 15px;
+  margin: 0;
+}
+
+
+/* ========== Table Card ========== */
+.table-card {
+  margin: 0 32px 32px 32px;
+  border-radius: 12px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
+  overflow: hidden;
+}
+
+.shift-table .ant-table {
+  border-radius: 8px;
+}
+
+.shift-table .ant-table-thead > tr > th {
+  background: #fafafa;
+  font-weight: 600;
+  color: #333;
+  border-bottom: 2px solid #f0f0f0;
+  white-space: nowrap;
+}
+
+.shift-table .ant-table-tbody > tr:hover > td {
+  background: #f5f7ff;
+}
+
+.shift-table .ant-table-tbody > tr > td {
+  padding: 12px 16px;
+}
+
+/* ========== Table Cell Styles ========== */
+.shift-code-cell {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.shift-icon {
+  color: #667eea;
+  font-size: 16px;
+}
+
+.shift-code {
+  font-weight: 600;
+  color: #333;
+}
+
+.description-text {
+  color: #666;
+  font-size: 14px;
+}
+
+.time-range-cell {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+/* ========== Action Buttons ========== */
+.action-button {
+  border-radius: 6px !important;
+  font-weight: 500 !important;
+  transition: all 0.3s ease;
+  height: 32px !important;
+  padding: 4px 12px !important;
+  display: inline-flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  gap: 4px !important;
+}
+
+.action-button .anticon {
+  font-size: 14px;
+}
+
+.edit-button {
+  background: #1890ff !important;
+  border-color: #1890ff !important;
+}
+
+.edit-button:hover {
+  background: #40a9ff !important;
+  border-color: #40a9ff !important;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(24, 144, 255, 0.3);
+}
+
+.delete-button {
+  background: #ffffff !important;
+  border-color: #ff4d4f !important;
+  color: #ff4d4f !important;
+}
+
+.delete-button:hover {
+  background: #ff4d4f !important;
+  border-color: #ff4d4f !important;
+  color: #ffffff !important;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(255, 77, 79, 0.3);
+}
+
+/* ========== Pagination ========== */
+.shift-table .ant-pagination {
+  margin: 16px 0 0 0;
+}
+
+.shift-table .ant-pagination-item-active {
+  border-color: #667eea;
+  background: #667eea;
+}
+
+.shift-table .ant-pagination-item-active a {
+  color: #ffffff;
+}
+
+/* ========== Responsive ========== */
+@media (max-width: 768px) {
+  .page-header {
+    flex-direction: column;
+    gap: 16px;
+    padding: 24px;
+    border-radius: 0 0 16px 16px;
+  }
+
+  .page-title {
+    font-size: 24px;
+  }
+
+  .table-card {
+    margin: 0 16px 24px 16px;
+  }
+
+  .action-button span:not(.anticon) {
+    display: none;
+  }
+
+  .action-button {
+    padding: 4px 8px !important;
+    min-width: 32px;
+  }
+
+  .shift-table .ant-table-tbody > tr > td {
+    padding: 8px;
+    font-size: 13px;
+  }
+
+  .shift-table .ant-table-thead > tr > th {
+    padding: 8px;
+    font-size: 13px;
+  }
+}
+
+/* ========== Loading State ========== */
+.shift-table .ant-spin-container {
+  min-height: 400px;
+}
+
+/* ========== Empty State ========== */
+.shift-table .ant-empty {
+  padding: 60px 0;
+}

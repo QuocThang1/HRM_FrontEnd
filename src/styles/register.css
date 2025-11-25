@@ -1,13 +1,13 @@
 .register-page {
   display: flex;
   min-height: 100vh;
-  background: #f6f9fb;
+  background: #f6f9fb; /* Đồng bộ với background chính */
 }
 
 /* ========== Left Side - Branding ========== */
 .register-branding {
   flex: 1;
-  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  background: linear-gradient(135deg, #2c3e50 0%, #3498db 100%); /* Navy gradient */
   display: flex;
   align-items: center;
   justify-content: center;
@@ -115,6 +115,8 @@
   border-radius: 16px;
   box-shadow: 0 4px 24px rgba(0, 0, 0, 0.08);
   padding: 40px;
+  background: #ffffff;
+  border: 1px solid #e2e8f0;
 }
 
 .form-header {
@@ -123,25 +125,21 @@
 }
 
 .form-title {
-  color: #333 !important;
+  color: #2c3e50 !important; /* Navy */
   font-size: 32px !important;
   font-weight: 700 !important;
   margin-bottom: 8px !important;
-  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
 }
 
 .form-subtitle {
-  color: #666;
+  color: #64748b; /* Slate 500 */
   font-size: 15px;
 }
 
 /* ========== Form Styles ========== */
 .register-form .ant-form-item-label > label {
   font-weight: 600;
-  color: #333;
+  color: #2c3e50; /* Navy */
   font-size: 14px;
 }
 
@@ -150,7 +148,7 @@
 .register-form .ant-picker,
 .register-form .ant-select-selector {
   border-radius: 8px;
-  border: 1.5px solid #d9d9d9;
+  border: 1.5px solid #e2e8f0;
   transition: all 0.3s ease;
 }
 
@@ -158,7 +156,7 @@
 .register-form .ant-input-affix-wrapper:hover,
 .register-form .ant-picker:hover,
 .register-form .ant-select-selector:hover {
-  border-color: #667eea;
+  border-color: #3498db; /* Blue */
 }
 
 .register-form .ant-input:focus,
@@ -166,20 +164,20 @@
 .register-form .ant-input-focused,
 .register-form .ant-picker-focused,
 .register-form .ant-select-focused .ant-select-selector {
-  border-color: #667eea;
-  box-shadow: 0 0 0 2px rgba(102, 126, 234, 0.1);
+  border-color: #3498db; /* Blue */
+  box-shadow: 0 0 0 2px rgba(52, 152, 219, 0.1);
 }
 
 .register-form .ant-input-prefix,
 .register-form .ant-picker-suffix {
-  color: #667eea;
+  color: #3498db; /* Blue */
   font-size: 16px;
 }
 
 /* Validation */
 .register-form .ant-form-item-explain-error {
   font-size: 12px;
-  color: #ff4d4f;
+  color: #ef4444; /* Red 500 */
   margin-top: 4px;
 }
 
@@ -187,30 +185,32 @@
 .register-form .ant-form-item-has-error .ant-input-affix-wrapper,
 .register-form .ant-form-item-has-error .ant-picker,
 .register-form .ant-form-item-has-error .ant-select-selector {
-  border-color: #ff4d4f !important;
+  border-color: #ef4444 !important; /* Red 500 */
 }
 
 /* TextArea */
 .register-form .ant-input-textarea-show-count::after {
-  color: #8c8c8c;
+  color: #64748b;
   font-size: 12px;
 }
 
 /* Register Button */
 .register-button {
-  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%) !important;
+  background: linear-gradient(135deg, #2c3e50 0%, #3498db 100%) !important; /* Navy gradient */
   border: none !important;
   height: 48px !important;
   font-size: 16px !important;
   font-weight: 600 !important;
   border-radius: 8px !important;
-  box-shadow: 0 4px 12px rgba(102, 126, 234, 0.3);
+  box-shadow: 0 4px 12px rgba(44, 62, 80, 0.3);
   transition: all 0.3s ease;
+  color: #ffffff !important;
 }
 
 .register-button:hover {
+  background: linear-gradient(135deg, #1e2d3d 0%, #2980b9 100%) !important; /* Darker gradient */
   transform: translateY(-2px);
-  box-shadow: 0 6px 20px rgba(102, 126, 234, 0.4) !important;
+  box-shadow: 0 6px 20px rgba(44, 62, 80, 0.4) !important;
 }
 
 .register-button:active {
@@ -223,20 +223,44 @@
   margin-top: 24px;
 }
 
+.login-link .ant-typography {
+  color: #64748b; /* Slate 500 */
+}
+
 .link-text {
-  color: #667eea;
+  color: #3498db; /* Blue */
   font-weight: 600;
   transition: all 0.3s ease;
 }
 
 .link-text:hover {
-  color: #764ba2;
+  color: #2980b9; /* Darker blue */
   text-decoration: underline;
 }
 
 /* Gender Select */
 .register-form .ant-select-item-option-content .ant-space {
   font-weight: 500;
+}
+
+.register-form .ant-select-item-option-selected {
+  background: rgba(52, 152, 219, 0.1) !important;
+  color: #3498db !important;
+}
+
+/* Password Strength Indicator */
+.register-form .ant-input-password .ant-input-suffix {
+  color: #3498db;
+}
+
+/* Checkbox */
+.register-form .ant-checkbox-checked .ant-checkbox-inner {
+  background-color: #3498db;
+  border-color: #3498db;
+}
+
+.register-form .ant-checkbox-wrapper:hover .ant-checkbox-inner {
+  border-color: #3498db;
 }
 
 /* ========== Responsive ========== */
@@ -262,6 +286,21 @@
   .form-subtitle {
     font-size: 14px;
   }
+
+  .brand-title {
+    font-size: 36px !important;
+  }
+}
+
+@media (max-width: 576px) {
+  .register-card {
+    padding: 20px;
+  }
+
+  .register-button {
+    height: 44px !important;
+    font-size: 15px !important;
+  }
 }
 
 /* ========== Scrollbar ========== */
@@ -274,10 +313,33 @@
 }
 
 .register-form-section::-webkit-scrollbar-thumb {
-  background: #d9d9d9;
+  background: #cbd5e1; /* Slate 300 */
   border-radius: 3px;
 }
 
 .register-form-section::-webkit-scrollbar-thumb:hover {
-  background: #bfbfbf;
+  background: #94a3b8; /* Slate 400 */
+}
+
+/* ========== Loading State ========== */
+.register-button.ant-btn-loading {
+  opacity: 0.8;
+}
+
+/* ========== Success Message ========== */
+.ant-message-success .anticon {
+  color: #10b981; /* Green 500 */
+}
+
+/* ========== Print Styles ========== */
+@media print {
+  .register-branding {
+    background: linear-gradient(135deg, #2c3e50 0%, #3498db 100%) !important;
+    -webkit-print-color-adjust: exact;
+    print-color-adjust: exact;
+  }
+
+  .register-button {
+    background: linear-gradient(135deg, #2c3e50 0%, #3498db 100%) !important;
+  }
 }

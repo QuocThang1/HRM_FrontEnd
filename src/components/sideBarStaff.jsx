@@ -7,6 +7,12 @@ import {
   HomeOutlined,
   FolderOutlined,
   StarOutlined,
+  ClockCircleOutlined,
+  CalendarOutlined,
+  FileTextOutlined,
+  DollarOutlined,
+  LineChartOutlined,
+  FileProtectOutlined,
   DashboardOutlined,
 } from "@ant-design/icons";
 import { Link, useNavigate, useLocation } from "react-router-dom";
@@ -108,6 +114,185 @@ const SideBarStaff = ({ collapsed }) => {
             ...(auth?.staff?.role === "admin"
               ? [
                   {
+                    key: "/profile/policy-management",
+                    icon: <FileProtectOutlined />,
+                    label: (
+                      <Link to="/profile/policy-management">
+                        Policy Management
+                      </Link>
+                    ),
+                  },
+                ]
+              : []),
+            {
+              type: "divider",
+            },
+            ...(auth?.staff?.role === "admin"
+              ? [
+                  {
+                    key: "/profile/candidate-cv-management",
+                    icon: <FolderOutlined />,
+                    label: (
+                      <Link to="/profile/candidate-cv-management">
+                        Candidate CVs
+                      </Link>
+                    ),
+                  },
+                  {
+                    key: "/profile/resignation-management",
+                    icon: <FileTextOutlined />,
+                    label: (
+                      <Link to="/profile/resignation-management">
+                        Resignation
+                      </Link>
+                    ),
+                  },
+                  {
+                    type: "divider",
+                  },
+                  {
+                    key: "/profile/employee-management",
+                    icon: <TeamOutlined />,
+                    label: (
+                      <Link to="/profile/employee-management">Employees</Link>
+                    ),
+                  },
+                  {
+                    key: "salary-group",
+                    icon: <DollarOutlined />,
+                    label: "Salaries",
+                    children: [
+                      {
+                        key: "/profile/salary-management",
+                        label: (
+                          <Link to="/profile/salary-management">
+                            Salary Details
+                          </Link>
+                        ),
+                      },
+                      {
+                        key: "/profile/monthly-salary-create",
+                        label: (
+                          <Link to="/profile/monthly-salary-create">
+                            Monthly Salary Creation
+                          </Link>
+                        ),
+                      },
+                      {
+                        key: "/profile/salary-dashboard",
+                        label: (
+                          <Link to="/profile/salary-dashboard">
+                            Monthly Salary Report
+                          </Link>
+                        ),
+                      },
+                    ],
+                  },
+                  {
+                    key: "department-group",
+                    icon: <StarOutlined />,
+                    label: "Departments",
+                    children: [
+                      {
+                        key: "/profile/department-management",
+                        label: (
+                          <Link to="/profile/department-management">
+                            Management
+                          </Link>
+                        ),
+                      },
+                      {
+                        key: "/profile/department-review-management",
+                        label: (
+                          <Link to="/profile/department-review-management">
+                            Reviews
+                          </Link>
+                        ),
+                      },
+                    ],
+                  },
+                  {
+                    key: "/profile/shift-management",
+                    icon: <ClockCircleOutlined />,
+                    label: <Link to="/profile/shift-management">Shifts</Link>,
+                  },
+                ]
+              : []),
+            ...(auth?.staff?.role === "manager"
+              ? [
+                  {
+                    key: "/profile/department-shift-management",
+                    icon: <CalendarOutlined />,
+                    label: (
+                      <Link to="/profile/department-shift-management">
+                        Shift Management
+                      </Link>
+                    ),
+                  },
+                  {
+                    key: "/profile/attendance-management",
+                    icon: <CalendarOutlined />,
+                    label: (
+                      <Link to="/profile/attendance-management">
+                        Attendance Management
+                      </Link>
+                    ),
+                  },
+                  {
+                    key: "review-group",
+                    icon: <LineChartOutlined />,
+                    label: "View Reviews",
+                    children: [
+                      {
+                        key: "/profile/review-statistics",
+                        label: (
+                          <Link to="/profile/review-statistics">
+                            Review Statistics
+                          </Link>
+                        ),
+                      },
+                      {
+                        key: "/profile/view-reviews",
+                        label: (
+                          <Link to="/profile/view-reviews">View Reviews</Link>
+                        ),
+                      },
+                    ],
+                  },
+                  {
+                    key: "/profile/my-salaries",
+                    icon: <DollarOutlined />,
+                    label: <Link to="/profile/my-salaries">My Salaries</Link>,
+                  },
+                ]
+              : []),
+            ...(auth?.staff?.role === "staff"
+              ? [
+                  {
+                    key: "/profile/shift-schedule",
+                    icon: <CalendarOutlined />,
+                    label: (
+                      <Link to="/profile/shift-schedule">Shift Schedule</Link>
+                    ),
+                  },
+                  {
+                    key: "/profile/attendance",
+                    icon: <CalendarOutlined />,
+                    label: <Link to="/profile/attendance">Attendance</Link>,
+                  },
+                  {
+                    key: "/profile/my-salaries",
+                    icon: <DollarOutlined />,
+                    label: <Link to="/profile/my-salaries">My Salaries</Link>,
+                  },
+                  {
+                    key: "/profile/resignation",
+                    icon: <FileTextOutlined />,
+                    label: (
+                      <Link to="/profile/resignation">Submit Resignation</Link>
+                    ),
+                  },
+                  {
                     key: "/candidate-cv-management",
                     icon: <FolderOutlined />,
                     label: (
@@ -164,7 +349,8 @@ const SideBarStaff = ({ collapsed }) => {
             {
               key: "logout",
               icon: <LogoutOutlined />,
-              label: <span onClick={handleLogout}>Sign Out</span>,
+              label: "Sign Out",
+              onClick: handleLogout,
               danger: true,
             },
           ]}

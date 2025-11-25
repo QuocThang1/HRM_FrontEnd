@@ -106,25 +106,20 @@
   font-size: 16px;
 }
 
-/* Submit Button */
-.submit-button {
-  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%) !important;
-  border: none !important;
-  height: 48px !important;
-  font-size: 16px !important;
-  font-weight: 600 !important;
-  border-radius: 8px !important;
-  box-shadow: 0 4px 12px rgba(102, 126, 234, 0.3);
+.salary-info-card {
+  border-radius: 12px;
+  border: 2px solid #52c41a;
+  box-shadow: 0 2px 8px rgba(82, 196, 26, 0.15);
   transition: all 0.3s ease;
 }
 
-.submit-button:hover {
+.salary-info-card:hover {
+  box-shadow: 0 4px 16px rgba(82, 196, 26, 0.25);
   transform: translateY(-2px);
-  box-shadow: 0 6px 20px rgba(102, 126, 234, 0.4);
 }
 
-.submit-button:active {
-  transform: translateY(0);
+.salary-info-card .ant-card-body {
+  padding: 20px 24px;
 }
 
 /* Validation Messages */

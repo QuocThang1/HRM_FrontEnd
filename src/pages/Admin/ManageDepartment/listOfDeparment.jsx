@@ -69,14 +69,11 @@ const DepartmentPage = () => {
 
   const columns = [
     {
-      title: "ID",
-      dataIndex: "_id",
-      key: "_id",
-      width: 130,
-      ellipsis: true,
-      render: (id) => (
-        <span className="department-id">{id.substring(0, 8)}...</span>
-      ),
+      title: "No",
+      key: "index",
+      width: 60,
+      align: "center",
+      render: (text, record, index) => index + 1,
     },
     {
       title: "Department Name",
@@ -85,7 +82,14 @@ const DepartmentPage = () => {
       width: 170,
       sorter: (a, b) => a.departmentName.localeCompare(b.departmentName),
       render: (name) => (
-        <div className="department-name-cell">
+        <div
+          className="department-name-cell"
+          style={{
+            whiteSpace: "normal",
+            wordWrap: "break-word",
+            lineHeight: "1.5",
+          }}
+        >
           <ApartmentOutlined className="department-icon" />
           <span className="department-name">{name}</span>
         </div>
@@ -98,9 +102,17 @@ const DepartmentPage = () => {
       width: 200,
       ellipsis: true,
       render: (description) => (
-        <span className="description-text">
-          {description || "No description"}
-        </span>
+        <div
+          style={{
+            whiteSpace: "normal",
+            wordWrap: "break-word",
+            lineHeight: "1.5",
+          }}
+        >
+          <span className="description-text">
+            {description || "No description"}
+          </span>
+        </div>
       ),
     },
     {

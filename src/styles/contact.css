@@ -1,11 +1,12 @@
 .contact-page {
   min-height: 100vh;
+  background: #f6f9fb; /* Đồng bộ với background chính */
 }
 
 /* Hero Section */
 .contact-hero {
   position: relative;
-  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  background: linear-gradient(135deg, #2c3e50 0%, #3498db 100%); /* Navy gradient */
   padding: 100px 0 80px 0;
   overflow: hidden;
 }
@@ -36,11 +37,12 @@
   font-weight: 800;
   color: #fff;
   margin-bottom: 16px;
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
 }
 
 .contact-hero-subtitle {
   font-size: 18px;
-  color: rgba(255, 255, 255, 0.9);
+  color: rgba(255, 255, 255, 0.95);
   max-width: 600px;
   margin: 0 auto;
 }
@@ -48,7 +50,7 @@
 /* Contact Info Section */
 .contact-info-section {
   padding: 80px 0;
-  background: #f6f9fb;
+  background: #f6f9fb; /* Đồng bộ với background chính */
   margin-top: -40px;
   position: relative;
   z-index: 2;
@@ -63,7 +65,8 @@
 .contact-info-card {
   text-align: center;
   border-radius: 12px;
-  border: none;
+  border: 2px solid transparent;
+  background: #ffffff;
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
   transition: all 0.3s ease;
   height: 100%;
@@ -71,37 +74,41 @@
 
 .contact-info-card:hover {
   transform: translateY(-8px);
-  box-shadow: 0 8px 24px rgba(102, 126, 234, 0.2);
+  box-shadow: 0 8px 24px rgba(52, 152, 219, 0.25);
+  border-color: #3498db;
 }
 
 .contact-info-icon {
   font-size: 48px;
-  color: #667eea;
+  background: linear-gradient(135deg, #2c3e50 0%, #3498db 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
   margin-bottom: 16px;
 }
 
 .contact-info-title {
   font-size: 18px;
   font-weight: 600;
-  color: #333;
+  color: #2c3e50; /* Navy */
   margin-bottom: 12px;
 }
 
 .contact-info-content {
   font-size: 14px;
-  color: #666;
+  color: #475569;
   margin-bottom: 4px;
 }
 
 .contact-info-subcontent {
   font-size: 14px;
-  color: #999;
+  color: #64748b;
 }
 
 /* Contact Form Section */
 .contact-form-section {
   padding: 80px 0;
-  background: #fff;
+  background: #ffffff;
 }
 
 .contact-form-text {
@@ -111,13 +118,13 @@
 .section-title {
   font-size: 36px;
   font-weight: 700;
-  color: #333;
+  color: #2c3e50; /* Navy */
   margin-bottom: 16px;
 }
 
 .section-description {
   font-size: 16px;
-  color: #666;
+  color: #475569;
   line-height: 1.8;
   margin-bottom: 32px;
 }
@@ -137,7 +144,7 @@
 .feature-icon {
   width: 32px;
   height: 32px;
-  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  background: linear-gradient(135deg, #2c3e50 0%, #3498db 100%); /* Navy gradient */
   color: #fff;
   border-radius: 50%;
   display: flex;
@@ -145,66 +152,113 @@
   justify-content: center;
   font-weight: 700;
   flex-shrink: 0;
+  box-shadow: 0 2px 8px rgba(44, 62, 80, 0.3);
 }
 
 .contact-feature h4 {
   font-size: 16px;
   font-weight: 600;
-  color: #333;
+  color: #2c3e50; /* Navy */
   margin-bottom: 4px;
 }
 
 .contact-feature p {
   font-size: 14px;
-  color: #666;
+  color: #64748b;
   margin: 0;
 }
 
 .contact-form-card {
   border-radius: 12px;
-  box-shadow: 0 4px 24px rgba(0, 0, 0, 0.08);
-  border: none;
+  box-shadow: 0 4px 24px rgba(0, 0, 0, 0.06);
+  border: 2px solid #e2e8f0;
+  background: #ffffff;
+  transition: all 0.3s ease;
+}
+
+.contact-form-card:hover {
+  border-color: #3498db;
+  box-shadow: 0 4px 24px rgba(52, 152, 219, 0.15);
 }
 
 .contact-form-card .ant-form-item-label > label {
   font-weight: 600;
-  color: #333;
+  color: #2c3e50; /* Navy */
+}
+
+.contact-form-card .ant-input,
+.contact-form-card .ant-input-textarea {
+  border-color: #e2e8f0;
+  transition: all 0.3s ease;
+}
+
+.contact-form-card .ant-input:hover,
+.contact-form-card .ant-input-textarea:hover {
+  border-color: #3498db;
+}
+
+.contact-form-card .ant-input:focus,
+.contact-form-card .ant-input-textarea:focus {
+  border-color: #3498db;
+  box-shadow: 0 0 0 2px rgba(52, 152, 219, 0.1);
 }
 
 .submit-btn {
-  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%) !important;
+  background: linear-gradient(135deg, #2c3e50 0%, #3498db 100%) !important; /* Navy gradient */
   border: none !important;
+  color: #fff !important;
   font-weight: 600;
   height: 48px;
   font-size: 16px;
+  box-shadow: 0 4px 12px rgba(44, 62, 80, 0.3);
+  transition: all 0.3s ease;
 }
 
 .submit-btn:hover {
-  opacity: 0.9;
+  background: linear-gradient(135deg, #1e2d3d 0%, #2980b9 100%) !important; /* Darker gradient */
   transform: translateY(-2px);
-  box-shadow: 0 8px 24px rgba(102, 126, 234, 0.3);
+  box-shadow: 0 8px 24px rgba(44, 62, 80, 0.4);
 }
 
 /* Map Section */
 .map-section {
   padding: 80px 0;
-  background: #f6f9fb;
+  background: #f6f9fb; /* Đồng bộ với background chính */
 }
 
 .map-container {
   border-radius: 12px;
   overflow: hidden;
   box-shadow: 0 4px 24px rgba(0, 0, 0, 0.08);
+  border: 2px solid #e2e8f0;
+  transition: all 0.3s ease;
+}
+
+.map-container:hover {
+  border-color: #3498db;
+  box-shadow: 0 8px 32px rgba(52, 152, 219, 0.2);
 }
 
 /* Responsive */
 @media (max-width: 768px) {
+  .contact-hero {
+    padding: 80px 0 60px 0;
+  }
+
   .contact-hero-title {
     font-size: 36px;
   }
 
   .contact-hero-subtitle {
     font-size: 16px;
+  }
+
+  .contact-info-section {
+    padding: 60px 0;
+  }
+
+  .contact-form-section {
+    padding: 60px 0;
   }
 
   .section-title {
@@ -214,5 +268,28 @@
   .contact-form-text {
     padding-right: 0;
     margin-bottom: 32px;
+  }
+
+  .map-section {
+    padding: 60px 0;
+  }
+}
+
+/* Print Styles */
+@media print {
+  .contact-hero {
+    background: linear-gradient(135deg, #2c3e50 0%, #3498db 100%) !important;
+    -webkit-print-color-adjust: exact;
+    print-color-adjust: exact;
+  }
+
+  .contact-info-section,
+  .map-section {
+    background: #f6f9fb !important;
+  }
+
+  .feature-icon,
+  .submit-btn {
+    background: linear-gradient(135deg, #2c3e50 0%, #3498db 100%) !important;
   }
 }

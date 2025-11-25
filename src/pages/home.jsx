@@ -1,3 +1,4 @@
+import { useState, useEffect } from "react";
 import { Button, Row, Col, Card, Statistic } from "antd";
 import {
   RocketOutlined,
@@ -8,15 +9,70 @@ import {
   FolderOutlined,
   BarChartOutlined,
   CheckCircleOutlined,
+  LeftOutlined,
+  RightOutlined,
 } from "@ant-design/icons";
 import { useNavigate } from "react-router-dom";
 import { useContext } from "react";
 import { AuthContext } from "../context/auth.context";
 import "../styles/home.css";
 
+import heroImage1 from "../assets/images/infopicture1.png";
+import heroImage2 from "../assets/images/infopicture2.png";
+import heroImage3 from "../assets/images/infopicture3.png";
+
 const HomePage = () => {
   const navigate = useNavigate();
   const { auth } = useContext(AuthContext);
+  const [currentSlide, setCurrentSlide] = useState(0);
+
+  // Slider images
+  const sliderImages = [
+    {
+      src: heroImage1,
+      title: "JOIN THE FUTURE",
+      subtitle: "PERSONEL HUB",
+      description: "Your All-in-One HR Management Platform",
+      cta: "START FREE TRIAL TODAY!",
+    },
+    {
+      src: heroImage2,
+      title: "PERSONEL HUB",
+      subtitle: "Efficiency & Automation",
+      description: "Unique Features for Modern Workforce",
+      cta: "EXPLORE FEATURES",
+    },
+    {
+      src: heroImage3,
+      title: "STREAMLINE. EMPOWER. INNOVATE.",
+      subtitle: "Next-Gen HR Solutions",
+      description: "Experience Efficiency, Empowerment & Innovation",
+      cta: "GET STARTED NOW",
+    },
+  ];
+
+  // Auto slide every 5 seconds
+  useEffect(() => {
+    const timer = setInterval(() => {
+      setCurrentSlide((prev) => (prev + 1) % sliderImages.length);
+    }, 5000);
+
+    return () => clearInterval(timer);
+  }, []);
+
+  const nextSlide = () => {
+    setCurrentSlide((prev) => (prev + 1) % sliderImages.length);
+  };
+
+  const prevSlide = () => {
+    setCurrentSlide((prev) =>
+      prev === 0 ? sliderImages.length - 1 : prev - 1,
+    );
+  };
+
+  const goToSlide = (index) => {
+    setCurrentSlide(index);
+  };
 
   const features = [
     {
@@ -54,6 +110,55 @@ const HomePage = () => {
 
   return (
     <div className="home-page">
+      {/* Image Slider Section */}
+      <section className="slider-section">
+        <div className="slider-container">
+          {sliderImages.map((slide, index) => (
+            <div
+              key={index}
+              className={`slide ${index === currentSlide ? "active" : ""}`}
+              style={{ backgroundImage: `url(${slide.src})` }}
+            >
+              <div className="slide-overlay"></div>
+              <div className="slide-content">
+                <h1 className="slide-title">{slide.title}</h1>
+                <h2 className="slide-subtitle">{slide.subtitle}</h2>
+                <p className="slide-description">{slide.description}</p>
+                <Button
+                  type="primary"
+                  size="large"
+                  className="slide-cta"
+                  onClick={() =>
+                    navigate(auth?.isAuthenticated ? "/profile" : "/login")
+                  }
+                >
+                  {slide.cta}
+                </Button>
+              </div>
+            </div>
+          ))}
+
+          {/* Navigation Arrows */}
+          <button className="slider-arrow prev" onClick={prevSlide}>
+            <LeftOutlined />
+          </button>
+          <button className="slider-arrow next" onClick={nextSlide}>
+            <RightOutlined />
+          </button>
+
+          {/* Dots Indicator */}
+          <div className="slider-dots">
+            {sliderImages.map((_, index) => (
+              <button
+                key={index}
+                className={`dot ${index === currentSlide ? "active" : ""}`}
+                onClick={() => goToSlide(index)}
+              />
+            ))}
+          </div>
+        </div>
+      </section>
+
       {/* Hero Section */}
       <section className="hero-section">
         <div className="hero-overlay"></div>

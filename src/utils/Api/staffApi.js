@@ -5,44 +5,35 @@ const getStaffApi = (role) => {
   return axios.get(URL_API);
 };
 
-const addNewStaffApi = (
-  password,
-  fullName,
-  email,
-  phone,
-  address,
-  citizenId,
-  gender,
-  dob,
-) => {
-  const URL_API = "/v1/api/add-employee";
-  const data = {
-    password: password,
-    fullName: fullName,
-    email: email,
-    phone: phone,
-    address: address,
-    citizenId: citizenId,
-    gender: gender,
-    dob: dob,
-  };
+const addNewStaffApi = (password, fullName, email, phone, address, citizenId, gender, dob) => {
+    const URL_API = "/v1/api/staff/add-employee";
+    const data = {
+        password: password,
+        fullName: fullName,
+        email: email,
+        phone: phone,
+        address: address,
+        citizenId: citizenId,
+        gender: gender,
+        dob: dob
+    };
 
   return axios.post(URL_API, data);
 };
 
 const deleteStaffApi = (staffId) => {
-  const URL_API = `/v1/api/${staffId}`;
-  return axios.delete(URL_API);
+    const URL_API = `/v1/api/staff/${staffId}`;
+    return axios.delete(URL_API);
 };
 
 const detailStaffApi = (staffId) => {
-  const URL_API = `/v1/api/detail-employee/${staffId}`;
-  return axios.get(URL_API);
-};
+    const URL_API = `/v1/api/staff/detail-employee/${staffId}`;
+    return axios.get(URL_API);
+}
 
 const updateStaffApi = (staffId, updatedData) => {
-  const URL_API = `/v1/api/${staffId}`;
-  return axios.put(URL_API, updatedData);
+    const URL_API = `/v1/api/staff/${staffId}`;
+    return axios.put(URL_API, updatedData);
 };
 
 // Lấy danh sách nhân viên theo phòng ban

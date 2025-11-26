@@ -43,7 +43,7 @@ const ApplyCVPage = () => {
       {/* Hero Section */}
       <section className="apply-hero">
         <div className="apply-hero-overlay"></div>
-        <div className="apply-hero-content">
+        <div className="apply-hero-content" style={{ marginLeft: 38 }}>
           <h1 className="apply-hero-title">Join Our Team</h1>
           <p className="apply-hero-subtitle">
             Start your career journey with us. Share your CV link and we would

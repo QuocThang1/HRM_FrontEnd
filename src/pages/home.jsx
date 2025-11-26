@@ -178,7 +178,7 @@ const HomePage = () => {
                   type="primary"
                   size="large"
                   icon={<RocketOutlined />}
-                  onClick={() => navigate("/dashboard")}
+                  onClick={() => navigate("/profile/dashboard")}
                   className="hero-btn-primary"
                 >
                   Go to Dashboard

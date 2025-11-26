@@ -46,41 +46,74 @@ const StaffProfilePage = () => {
 
   useEffect(() => {
     const fetchAccount = async () => {
-      const res = await getAccountApi();
-      if (res) {
-        const personalInfo = res.data.personalInfo || {};
+      // Check if token exists before calling API
+      const token = localStorage.getItem("access_token");
+      if (!token) {
+        console.log("No access token found, skipping account fetch");
+        return;
+      }
 
-        form.setFieldsValue({
-          name: personalInfo.fullName,
-          email: personalInfo.email,
-          address: personalInfo.address,
-          phone: personalInfo.phone,
-          citizenId: personalInfo.citizenId,
-          gender: personalInfo.gender,
-          dob: personalInfo.dob ? dayjs(personalInfo.dob) : null,
-        });
+      try {
+        const res = await getAccountApi();
+        if (res && res.EC === 0 && res.data) {
+          const personalInfo = res.data.personalInfo || {};
 
-        setAuth({
-          isAuthenticated: true,
-          staff: {
-            email: personalInfo.email,
+          form.setFieldsValue({
             name: personalInfo.fullName,
+            email: personalInfo.email,
             address: personalInfo.address,
             phone: personalInfo.phone,
-            role: res.data.role,
-          },
-        });
+            citizenId: personalInfo.citizenId,
+            gender: personalInfo.gender,
+            dob: personalInfo.dob ? dayjs(personalInfo.dob) : null,
+          });
 
-        // Fetch salary nếu là manager hoặc staff
-        if (res.data.role === "manager" || res.data.role === "staff") {
-          fetchMySalary();
+          setAuth({
+            isAuthenticated: true,
+            staff: {
+              email: personalInfo.email,
+              name: personalInfo.fullName,
+              address: personalInfo.address,
+              phone: personalInfo.phone,
+              role: res.data.role,
+            },
+          });
+
+          // Fetch salary nếu là manager hoặc staff
+          if (res.data.role === "manager" || res.data.role === "staff") {
+            fetchMySalary();
+          }
+        } else if (res && res.EC !== 0) {
+          // API returned an error response, use auth context data instead
+          console.warn(
+            "Failed to fetch account from API, using cached auth data",
+          );
+          if (auth && auth.staff) {
+            form.setFieldsValue({
+              name: auth.staff.name,
+              email: auth.staff.email,
+              address: auth.staff.address,
+              phone: auth.staff.phone,
+            });
+          }
+        }
+      } catch (error) {
+        console.error("Error fetching account:", error);
+        // Use auth context data as fallback
+        if (auth && auth.staff) {
+          form.setFieldsValue({
+            name: auth.staff.name,
+            email: auth.staff.email,
+            address: auth.staff.address,
+            phone: auth.staff.phone,
+          });
         }
       }
     };
     fetchAccount();
+
     setShouldReloadAccount(false);
   }, [setAuth, form, shouldReloadAccount]);
-
   const fetchMySalary = async () => {
     try {
       setSalaryLoading(true);

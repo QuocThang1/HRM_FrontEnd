@@ -84,7 +84,7 @@ const Header = () => {
           <>
             <div
               className="header-user-info"
-              onClick={() => navigate("/profile")}
+              onClick={() => navigate("/profile/dashboard")}
             >
               <Avatar
                 size={36}

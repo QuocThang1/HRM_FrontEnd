@@ -49,7 +49,6 @@ const StaffProfilePage = () => {
       // Check if token exists before calling API
       const token = localStorage.getItem("access_token");
       if (!token) {
-        console.log("No access token found, skipping account fetch");
         return;
       }
 

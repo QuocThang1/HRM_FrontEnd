@@ -63,7 +63,6 @@ export const AuthWrapper = (props) => {
           const now = Math.floor(Date.now() / 1000);
           if (payload.exp && payload.exp < now) {
             // Token expired, try to refresh
-            console.log("Token expired, attempting refresh...");
             const refresh_token = localStorage.getItem("refresh_token");
             if (refresh_token) {
               try {

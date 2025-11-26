@@ -1,5 +1,4 @@
 import HeaderStaff from "../components/headerStaff";
-import { Outlet } from "react-router-dom";
 import { Layout } from "antd";
 
 const { Content } = Layout;
@@ -16,9 +15,7 @@ const StaffLayout = () => {
             minHeight: "100vh",
             overflow: "auto",
           }}
-        >
-          <Outlet />
-        </Content>
+        ></Content>
       </Layout>
     </Layout>
   );

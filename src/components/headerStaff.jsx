@@ -1,4 +1,13 @@
-import { Input, Button, Badge, Popover, List, Empty } from "antd";
+import {
+  Input,
+  Button,
+  Badge,
+  Popover,
+  List,
+  Empty,
+  Popconfirm,
+  Space,
+} from "antd";
 import { useState, useEffect } from "react";
 import {
   PlusCircleFilled,
@@ -9,6 +18,8 @@ import {
   CheckSquareOutlined,
   ClockCircleOutlined,
   BellOutlined,
+  CheckOutlined,
+  DeleteOutlined,
 } from "@ant-design/icons";
 import { Link } from "react-router-dom";
 import "../styles/headerStaff.css";
@@ -32,30 +43,28 @@ const Header = () => {
   const [periodItems, setPeriodItems] = useState([]);
   const [dueItems, setDueItems] = useState([]);
   const [notifItems, setNotifItems] = useState([]);
+  // fetch summary helper so other actions can refresh counts
+  const fetchSummary = async () => {
+    try {
+      const res = await axiosInstance.get("/v1/api/todos/summary");
+      if (res && res.EC === 0 && res.DT) {
+        setTodoSummary({
+          periodTasks: res.DT.periodTasks || 0,
+          dueSoon: res.DT.dueSoon || 0,
+          notifications: res.DT.notifications || 0,
+        });
+      }
+    } catch (error) {
+      console.error("Failed to load todo summary:", error);
+    }
+  };
 
   useEffect(() => {
     let mounted = true;
-    const fetchSummary = async () => {
-      try {
-        const res = await axiosInstance.get("/v1/api/todos/summary");
-        if (!mounted) return;
-        if (res && res.EC === 0 && res.DT) {
-          setTodoSummary({
-            periodTasks: res.DT.periodTasks || 0,
-            dueSoon: res.DT.dueSoon || 0,
-            notifications: res.DT.notifications || 0,
-          });
-        }
-      } catch (error) {
-        // ignore for now; keep badges at zero
-        console.error("Failed to load todo summary:", error);
-      }
-    };
-
     fetchSummary();
-
-    // Optional: refresh every 60s while mounted
-    const timer = setInterval(fetchSummary, 60000);
+    const timer = setInterval(() => {
+      if (mounted) fetchSummary();
+    }, 60000);
     return () => {
       mounted = false;
       clearInterval(timer);
@@ -98,6 +107,37 @@ const Header = () => {
     } catch (error) {
       console.error("Failed to load notifications:", error);
       setNotifItems([]);
+    }
+  };
+
+  const markAllRead = async () => {
+    try {
+      await axiosInstance.post("/v1/api/todos/notifications/mark-all-read");
+      await fetchSummary();
+      // refresh list if open
+      if (notifOpen) openNotifications();
+    } catch (error) {
+      console.error("Failed to mark all read:", error);
+    }
+  };
+
+  const markRead = async (id) => {
+    try {
+      await axiosInstance.post("/v1/api/todos/notifications/mark-read", { id });
+      await fetchSummary();
+      if (notifOpen) openNotifications();
+    } catch (error) {
+      console.error("Failed to mark read:", error);
+    }
+  };
+
+  const deleteNotif = async (id) => {
+    try {
+      await axiosInstance.delete(`/v1/api/todos/notifications/${id}`);
+      await fetchSummary();
+      if (notifOpen) openNotifications();
+    } catch (error) {
+      console.error("Failed to delete notification:", error);
     }
   };
   // Top header bar
@@ -224,7 +264,22 @@ const Header = () => {
 
           <Badge count={todoSummary.notifications} offset={[-5, 5]}>
             <Popover
-              title="Notifications"
+              title={
+                <div
+                  style={{
+                    display: "flex",
+                    justifyContent: "space-between",
+                    alignItems: "center",
+                  }}
+                >
+                  <div>Notifications</div>
+                  <Space>
+                    <Button size="small" type="text" onClick={markAllRead}>
+                      Mark all as read
+                    </Button>
+                  </Space>
+                </div>
+              }
               content={
                 notifItems.length === 0 ? (
                   <Empty description="No notifications" />
@@ -234,7 +289,32 @@ const Header = () => {
                     size="small"
                     style={{ width: 350 }}
                     renderItem={(item) => (
-                      <List.Item key={item._id}>
+                      <List.Item
+                        key={item._id}
+                        actions={[
+                          <Button
+                            key={`mark-${item._id}`}
+                            size="small"
+                            type="text"
+                            icon={<CheckOutlined />}
+                            onClick={() => markRead(item._id)}
+                          />,
+                          <Popconfirm
+                            key={`del-${item._id}`}
+                            title="Delete this notification?"
+                            onConfirm={() => deleteNotif(item._id)}
+                            okText="Yes"
+                            cancelText="No"
+                          >
+                            <Button
+                              size="small"
+                              type="text"
+                              icon={<DeleteOutlined />}
+                              danger
+                            />
+                          </Popconfirm>,
+                        ]}
+                      >
                         <List.Item.Meta
                           title={item.title}
                           description={`${new Date(item.createdAt).toLocaleString()}`}

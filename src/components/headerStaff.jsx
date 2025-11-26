@@ -1,23 +1,105 @@
-import { Input, Button } from "antd";
-import { useState } from "react";
+import { Input, Button, Badge, Popover, List, Empty } from "antd";
+import { useState, useEffect } from "react";
 import {
   PlusCircleFilled,
   MenuOutlined,
   SearchOutlined,
   RollbackOutlined,
-  IdcardOutlined,
   SettingOutlined,
-  ShareAltOutlined,
   CheckSquareOutlined,
   ClockCircleOutlined,
   BellOutlined,
 } from "@ant-design/icons";
+import { Link } from "react-router-dom";
 import "../styles/headerStaff.css";
 import { Outlet } from "react-router-dom";
 import SideBarStaff from "./sideBarStaff";
+import axiosInstance from "../utils/axios.customize";
 
 const Header = () => {
   const [sidebarCollapsed, setSidebarCollapsed] = useState(false);
+  const [todoSummary, setTodoSummary] = useState({
+    periodTasks: 0,
+    dueSoon: 0,
+    notifications: 0,
+  });
+
+  // Popover states for each icon
+  const [periodOpen, setPeriodOpen] = useState(false);
+  const [dueOpen, setDueOpen] = useState(false);
+  const [notifOpen, setNotifOpen] = useState(false);
+
+  const [periodItems, setPeriodItems] = useState([]);
+  const [dueItems, setDueItems] = useState([]);
+  const [notifItems, setNotifItems] = useState([]);
+
+  useEffect(() => {
+    let mounted = true;
+    const fetchSummary = async () => {
+      try {
+        const res = await axiosInstance.get("/v1/api/todos/summary");
+        if (!mounted) return;
+        if (res && res.EC === 0 && res.DT) {
+          setTodoSummary({
+            periodTasks: res.DT.periodTasks || 0,
+            dueSoon: res.DT.dueSoon || 0,
+            notifications: res.DT.notifications || 0,
+          });
+        }
+      } catch (error) {
+        // ignore for now; keep badges at zero
+        console.error("Failed to load todo summary:", error);
+      }
+    };
+
+    fetchSummary();
+
+    // Optional: refresh every 60s while mounted
+    const timer = setInterval(fetchSummary, 60000);
+    return () => {
+      mounted = false;
+      clearInterval(timer);
+    };
+  }, []);
+
+  const openPeriod = async () => {
+    setPeriodOpen(true);
+    try {
+      const res = await axiosInstance.get("/v1/api/todos/period");
+      if (res && res.EC === 0) {
+        setPeriodItems(res.DT || []);
+      }
+    } catch (error) {
+      console.error("Failed to load period tasks:", error);
+      setPeriodItems([]);
+    }
+  };
+
+  const openDueSoon = async () => {
+    setDueOpen(true);
+    try {
+      const res = await axiosInstance.get("/v1/api/todos/due-soon");
+      if (res && res.EC === 0) {
+        setDueItems(res.DT || []);
+      }
+    } catch (error) {
+      console.error("Failed to load due-soon tasks:", error);
+      setDueItems([]);
+    }
+  };
+
+  const openNotifications = async () => {
+    setNotifOpen(true);
+    try {
+      const res = await axiosInstance.get("/v1/api/todos/notifications");
+      if (res && res.EC === 0) {
+        setNotifItems(res.DT || []);
+      }
+    } catch (error) {
+      console.error("Failed to load notifications:", error);
+      setNotifItems([]);
+    }
+  };
   // Top header bar
 
   // Calculate submenu height after render
@@ -67,16 +149,115 @@ const Header = () => {
           </Button>
         </div>
         <div className="right-icons-section">
-          <RollbackOutlined className="right-icon" />
-          <IdcardOutlined className="right-icon" />
+          <Link to="/">
+            <RollbackOutlined className="right-icon" />
+          </Link>
           <SettingOutlined className="right-icon" />
           <span className="settings-text">Settings</span>
-          <ShareAltOutlined className="right-icon" />
-          <CheckSquareOutlined className="right-icon" />
-          <ClockCircleOutlined className="right-icon" />
-          <BellOutlined className="right-icon" />
+          <Badge count={todoSummary.periodTasks} offset={[-5, 5]}>
+            <Popover
+              title="Tasks in Period"
+              content={
+                periodItems.length === 0 ? (
+                  <Empty description="No tasks" />
+                ) : (
+                  <List
+                    dataSource={periodItems}
+                    size="small"
+                    style={{ width: 350 }}
+                    renderItem={(item) => (
+                      <List.Item key={item._id}>
+                        <List.Item.Meta
+                          title={item.title}
+                          description={`Due: ${item.dueDate ? new Date(item.dueDate).toLocaleDateString() : "N/A"}`}
+                        />
+                      </List.Item>
+                    )}
+                  />
+                )
+              }
+              open={periodOpen}
+              onOpenChange={setPeriodOpen}
+              trigger="click"
+              placement="bottomRight"
+            >
+              <CheckSquareOutlined
+                className="right-icon"
+                onClick={openPeriod}
+              />
+            </Popover>
+          </Badge>
+
+          <Badge count={todoSummary.dueSoon} offset={[-5, 5]}>
+            <Popover
+              title="Due Soon"
+              content={
+                dueItems.length === 0 ? (
+                  <Empty description="No tasks due soon" />
+                ) : (
+                  <List
+                    dataSource={dueItems}
+                    size="small"
+                    style={{ width: 350 }}
+                    renderItem={(item) => (
+                      <List.Item key={item._id}>
+                        <List.Item.Meta
+                          title={item.title}
+                          description={`Due: ${item.dueDate ? new Date(item.dueDate).toLocaleDateString() : "N/A"}`}
+                        />
+                      </List.Item>
+                    )}
+                  />
+                )
+              }
+              open={dueOpen}
+              onOpenChange={setDueOpen}
+              trigger="click"
+              placement="bottomRight"
+            >
+              <ClockCircleOutlined
+                className="right-icon"
+                onClick={openDueSoon}
+              />
+            </Popover>
+          </Badge>
+
+          <Badge count={todoSummary.notifications} offset={[-5, 5]}>
+            <Popover
+              title="Notifications"
+              content={
+                notifItems.length === 0 ? (
+                  <Empty description="No notifications" />
+                ) : (
+                  <List
+                    dataSource={notifItems}
+                    size="small"
+                    style={{ width: 350 }}
+                    renderItem={(item) => (
+                      <List.Item key={item._id}>
+                        <List.Item.Meta
+                          title={item.title}
+                          description={`${new Date(item.createdAt).toLocaleString()}`}
+                        />
+                      </List.Item>
+                    )}
+                  />
+                )
+              }
+              open={notifOpen}
+              onOpenChange={setNotifOpen}
+              trigger="click"
+              placement="bottomRight"
+            >
+              <BellOutlined
+                className="right-icon"
+                onClick={openNotifications}
+              />
+            </Popover>
+          </Badge>
         </div>
       </div>
+
       {/* Sidebar + Content */}
       <div className="main-content-wrapper">
         <SideBarStaff collapsed={sidebarCollapsed} />

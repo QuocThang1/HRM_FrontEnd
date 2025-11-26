@@ -17,7 +17,6 @@ instance.interceptors.request.use(
     } else {
       // Ensure no malformed bearer header is sent
       delete config.headers.Authorization;
-
     }
     return config;
   },

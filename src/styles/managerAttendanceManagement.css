@@ -84,15 +84,15 @@
 }
 
 .attendance-table .ant-table-thead > tr > th {
-  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-  color: #ffffff;
-  font-weight: 600;
-  text-align: center;
-  border: none;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%)!important;
+  color: #ffffff!important;
+  font-weight: 600!important;
+  text-align: center!important;
+  border: none!important;
 }
 
 .attendance-table .ant-table-tbody > tr:hover > td {
-  background: #f5f7ff;
+  background: #f5f7ff!important;
 }
 
 /* Date Cell */

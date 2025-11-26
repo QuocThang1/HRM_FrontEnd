@@ -1,12 +1,5 @@
 import { useEffect, useState } from "react";
-import {
-  Table,
-  Button,
-  DatePicker,
-  Popconfirm,
-  Spin,
-  Typography,
-} from "antd";
+import { Table, Button, DatePicker, Popconfirm, Spin, Typography } from "antd";
 import dayjs from "dayjs";
 import { toast } from "react-toastify";
 import {
@@ -120,9 +113,7 @@ const ManageDepartmentReview = () => {
       width: 100,
       align: "center",
       render: (score) => (
-        <div className={`score-badge ${getScoreClass(score)}`}>
-          {score}
-        </div>
+        <div className={`score-badge ${getScoreClass(score)}`}>{score}</div>
       ),
     },
     {

@@ -30,6 +30,12 @@ let refreshTokenRequest = null;
 
 instance.interceptors.response.use(
   function (response) {
+    // Capture new token from response header (sliding window refresh)
+    const newToken = response.headers["x-new-token"];
+    if (newToken) {
+      localStorage.setItem("access_token", newToken);
+    }
+
     // Any status code that lie within the range of 2xx cause this function to trigger
     // Do something with response data
     if (response && response.data) {

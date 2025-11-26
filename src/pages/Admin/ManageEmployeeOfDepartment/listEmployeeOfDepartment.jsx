@@ -1,7 +1,10 @@
 import { useEffect, useState, useContext } from "react";
 import { Table, Button, Popconfirm, Card, Space, Typography, Tag } from "antd";
 import { useParams, useNavigate, useLocation } from "react-router-dom";
-import { getStaffByDepartmentApi, removeStaffFromDepartmentApi } from "../../../utils/Api/staffApi";
+import {
+  getStaffByDepartmentApi,
+  removeStaffFromDepartmentApi,
+} from "../../../utils/Api/staffApi";
 import {
   DeleteOutlined,
   ArrowLeftOutlined,
@@ -44,7 +47,9 @@ const ListEmployeeOfDepartment = () => {
       if (res && res.EC === 0 && Array.isArray(res.data)) {
         setEmployees(res.data);
       } else {
-        toast.error(res?.EM || "Failed to fetch employees", { autoClose: 2000 });
+        toast.error(res?.EM || "Failed to fetch employees", {
+          autoClose: 2000,
+        });
       }
     } catch (error) {
       toast.error("Cannot fetch employees from server", { autoClose: 2000 });
@@ -58,10 +63,14 @@ const ListEmployeeOfDepartment = () => {
         toast.success(res.EM, { autoClose: 2000 });
         fetchEmployees();
       } else {
-        toast.error(res?.EM || "Failed to remove employee", { autoClose: 2000 });
+        toast.error(res?.EM || "Failed to remove employee", {
+          autoClose: 2000,
+        });
       }
     } catch (error) {
-      toast.error("Error removing employee from department", { autoClose: 2000 });
+      toast.error("Error removing employee from department", {
+        autoClose: 2000,
+      });
     }
   };
 
@@ -94,20 +103,14 @@ const ListEmployeeOfDepartment = () => {
       title: "Email",
       dataIndex: ["personalInfo", "email"],
       width: 280,
-      render: (text) => (
-        <Text style={{ color: "#666" }}>{text}</Text>
-      ),
+      render: (text) => <Text style={{ color: "#666" }}>{text}</Text>,
     },
     {
       title: "Role",
       dataIndex: "role",
       width: 120,
       align: "center",
-      render: (role) => (
-        <span className={`role-tag ${role}`}>
-          {role}
-        </span>
-      ),
+      render: (role) => <span className={`role-tag ${role}`}>{role}</span>,
     },
     {
       title: "Actions",
@@ -142,7 +145,15 @@ const ListEmployeeOfDepartment = () => {
     <div className="employee-department-page">
       {/* Header */}
       <div className="page-header">
-        <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", flexWrap: "wrap", gap: 16 }}>
+        <div
+          style={{
+            display: "flex",
+            justifyContent: "space-between",
+            alignItems: "center",
+            flexWrap: "wrap",
+            gap: 16,
+          }}
+        >
           <div>
             <Button
               type="text"

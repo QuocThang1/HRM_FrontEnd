@@ -1,77 +1,77 @@
 .list-contract-page {
-    padding: 24px;
-    background: #f6f9fb;
-    min-height: 100vh;
+  padding: 24px;
+  background: #f6f9fb;
+  min-height: 100vh;
 }
 
 .contracts-table-card {
-    background: white;
-    border-radius: 12px;
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
-    overflow: hidden;
+  background: white;
+  border-radius: 12px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+  overflow: hidden;
 }
 
 .contracts-table-card .table-header {
-    background: linear-gradient(135deg, #f0f5ff 0%, #e8f4ff 100%);
-    padding: 20px 24px;
-    border-bottom: 2px solid #d6e4ff;
+  background: linear-gradient(135deg, #f0f5ff 0%, #e8f4ff 100%);
+  padding: 20px 24px;
+  border-bottom: 2px solid #d6e4ff;
 }
 
 .contracts-table-card .table-title {
-    font-size: 18px;
-    font-weight: 600;
-    color: #1e2d3d;
-    margin: 0;
-    display: flex;
-    align-items: center;
-    gap: 8px;
+  font-size: 18px;
+  font-weight: 600;
+  color: #1e2d3d;
+  margin: 0;
+  display: flex;
+  align-items: center;
+  gap: 8px;
 }
 
 .list-contract-page .ant-table-wrapper {
-    padding: 24px;
+  padding: 24px;
 }
 
 .list-contract-page .ant-table-tbody > tr {
-    transition: all 0.3s ease;
+  transition: all 0.3s ease;
 }
 
 .list-contract-page .ant-table-tbody > tr:hover > td {
-    background: #f5f9ff !important;
+  background: #f5f9ff !important;
 }
 
 .empty-state {
-    text-align: center;
-    padding: 60px 20px;
+  text-align: center;
+  padding: 60px 20px;
 }
 
 .empty-state .empty-icon {
-    font-size: 64px;
-    color: #d9d9d9;
-    margin-bottom: 16px;
+  font-size: 64px;
+  color: #d9d9d9;
+  margin-bottom: 16px;
 }
 
 .empty-state .empty-title {
-    font-size: 18px;
-    font-weight: 600;
-    color: #666;
-    margin-bottom: 8px;
+  font-size: 18px;
+  font-weight: 600;
+  color: #666;
+  margin-bottom: 8px;
 }
 
 .empty-state .empty-description {
-    font-size: 14px;
-    color: #999;
+  font-size: 14px;
+  color: #999;
 }
 
 @media (max-width: 768px) {
-    .list-contract-page {
-        padding: 16px;
-    }
+  .list-contract-page {
+    padding: 16px;
+  }
 
-    .contracts-table-card .table-header {
-        padding: 16px;
-    }
+  .contracts-table-card .table-header {
+    padding: 16px;
+  }
 
-    .contracts-table-card .ant-table-wrapper {
-        padding: 16px;
-    }
+  .contracts-table-card .ant-table-wrapper {
+    padding: 16px;
+  }
 }

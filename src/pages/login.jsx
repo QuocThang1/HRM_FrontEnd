@@ -18,6 +18,7 @@ const LoginPage = () => {
   // Handle OAuth callback
   useEffect(() => {
     const token = searchParams.get("token");
+    const refresh_token = searchParams.get("refresh_token");
     const provider = searchParams.get("provider");
     const error = searchParams.get("error");
 
@@ -30,8 +31,11 @@ const LoginPage = () => {
     }
 
     if (token && provider) {
-      // Save token and redirect
+      // Save tokens
       localStorage.setItem("access_token", token);
+      if (refresh_token) {
+        localStorage.setItem("refresh_token", refresh_token);
+      }
       toast.success(`Logged in with ${provider}!`, { autoClose: 2000 });
 
       // Robust JWT decode (handles base64url and UTF-8 unicode)
@@ -84,6 +88,10 @@ const LoginPage = () => {
     const res = await loginApi(email, password);
     if (res && res.EC === 0) {
       localStorage.setItem("access_token", res.access_token);
+      // Store refresh token for session persistence
+      if (res.refresh_token) {
+        localStorage.setItem("refresh_token", res.refresh_token);
+      }
       toast.success(res.EM || "Login successful!", { autoClose: 2000 });
       setAuth({
         isAuthenticated: true,

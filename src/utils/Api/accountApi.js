@@ -57,6 +57,11 @@ const verifyOtpApi = (email, code) => {
   return axios.post(URL_API, { email, code });
 };
 
+const refreshTokenApi = (refresh_token) => {
+  const URL_API = "/v1/api/account/refresh-token";
+  return axios.post(URL_API, { refresh_token });
+};
+
 export {
   signUpApi,
   loginApi,
@@ -65,4 +70,5 @@ export {
   forgotPasswordApi,
   resetPasswordApi,
   verifyOtpApi,
+  refreshTokenApi,
 };

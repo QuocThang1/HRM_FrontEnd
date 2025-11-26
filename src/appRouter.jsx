@@ -26,15 +26,15 @@ import ManagerAttendanceManagement from "./pages/Manager/attendanceManagement/at
 import AboutPage from "./pages/about.jsx";
 import StaffResignationPage from "./pages/Staff/Resignation/staffResignation.jsx";
 import AdminResignationManagement from "./pages/Admin/ManageResignation/listOfResignation.jsx";
-import SalaryDetail from './pages/Admin/ManageSalary/SalaryDetail/salaryDetail';
-import StaffSalaryDetail from './pages/Admin/ManageSalary/SalaryDetail/staffSalaryDetail.jsx';
-import SalaryDashboard from './pages/Admin/ManageSalary/SalaryDashboard/salaryDashboard.jsx';
-import CreateSalaryByMonth from './pages/Admin/ManageSalary/CreateMonthSalaryForStaff/createSalaryByMonth.jsx';
+import SalaryDetail from "./pages/Admin/ManageSalary/SalaryDetail/salaryDetail";
+import StaffSalaryDetail from "./pages/Admin/ManageSalary/SalaryDetail/staffSalaryDetail.jsx";
+import SalaryDashboard from "./pages/Admin/ManageSalary/SalaryDashboard/salaryDashboard.jsx";
+import CreateSalaryByMonth from "./pages/Admin/ManageSalary/CreateMonthSalaryForStaff/createSalaryByMonth.jsx";
 import ReviewDepartment from "./pages/Manager/reviewDepartmentManagement/reviewDepartment.jsx";
 import ReviewStatistics from "./pages/Manager/reviewDepartmentManagement/reviewStatistics.jsx";
 import MySalary from "./pages/StaffAndManager/Salary/mySalary.jsx";
 import ListOfPolicy from "./pages/Admin/ManagePolicy/listOfPolicy";
-import PolicyDetail from "./pages/Admin/ManagePolicy/policyDetail"
+import PolicyDetail from "./pages/Admin/ManagePolicy/policyDetail";
 import ListOfContract from "./pages/Admin/ManageContract/listOfStaff.jsx";
 import StaffContracts from "./pages/Admin/ManageContract/staffContracts.jsx";
 import ContractDetail from "./pages/Admin/ManageContract/contractDetail.jsx";
@@ -66,10 +66,6 @@ const router = createBrowserRouter([
   { path: "/enter-otp", element: <EnterOtpPage /> },
   { path: "/reset-password", element: <ResetPasswordPage /> },
   {
-    path: "/dashboard",
-    element: <Dashboard />,
-  },
-  {
     path: "/profile",
     element: (
       <ProtectedRoute allowedRoles={["admin", "manager", "staff"]}>
@@ -78,6 +74,10 @@ const router = createBrowserRouter([
     ),
     children: [
       { index: true, element: <StaffProfilePage /> },
+      {
+        path: "dashboard",
+        element: <Dashboard />,
+      },
       {
         path: "policy-management",
         element: (
@@ -92,7 +92,7 @@ const router = createBrowserRouter([
           <ProtectedRoute allowedRoles={["admin"]}>
             <PolicyDetail />
           </ProtectedRoute>
-        )
+        ),
       },
       {
         path: "contract-management",
@@ -301,7 +301,7 @@ const router = createBrowserRouter([
             <ListEmployeeOfDepartment />
           </ProtectedRoute>
         ),
-      }
+      },
     ],
   },
 ]);

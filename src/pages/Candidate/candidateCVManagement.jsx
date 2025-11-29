@@ -1,18 +1,34 @@
 import { useState, useEffect } from "react";
-import { Table, Button, Tag, Select, Space, Card } from "antd";
+import {
+  Table,
+  Button,
+  Tag,
+  Select,
+  Space,
+  Card,
+  Modal,
+  Spin,
+  Popconfirm,
+} from "antd";
 import {
   EyeOutlined,
   CheckCircleOutlined,
   CloseCircleOutlined,
   ClockCircleOutlined,
   TeamOutlined,
+  RobotOutlined,
+  ExclamationCircleOutlined,
+  DeleteOutlined,
 } from "@ant-design/icons";
 import { toast } from "react-toastify";
 import {
   getAllCandidatesApi,
   updateCandidateStatusApi,
+  autoScreenCVApi,
+  deleteCVApi,
 } from "../../utils/Api/candidateApi";
 import CandidateDetailModal from "./candidateDetailModal";
+import AIScreenResultModal from "./aiScreenResultModal";
 import "../../styles/candidateCVManagement.css";
 
 const { Option } = Select;
@@ -21,28 +37,44 @@ const CandidateCVManagement = () => {
   const [candidates, setCandidates] = useState([]);
   const [filteredCandidates, setFilteredCandidates] = useState([]);
   const [loading, setLoading] = useState(false);
+  const [aiScreenLoading, setAiScreenLoading] = useState(false);
   const [statusFilter, setStatusFilter] = useState("all");
   const [selectedCandidate, setSelectedCandidate] = useState(null);
   const [viewModalOpen, setViewModalOpen] = useState(false);
+  const [aiResultModalOpen, setAiResultModalOpen] = useState(false);
+  const [aiScreenResult, setAiScreenResult] = useState(null);
 
   useEffect(() => {
     fetchCandidates();
   }, []);
+
+  useEffect(() => {
+    filterCandidatesByStatus();
+    // eslint-disable-next-line
+  }, [statusFilter, candidates]);
 
   const fetchCandidates = async () => {
     setLoading(true);
     try {
       const res = await getAllCandidatesApi();
       setCandidates(res.data);
-      setFilteredCandidates(res.data);
     } catch (error) {
       toast.error("Failed to fetch candidates. Please try again.", {
-        duration: 2000,
+        autoClose: 2000,
       });
       setCandidates([]);
-      setFilteredCandidates([]);
     } finally {
       setLoading(false);
+    }
+  };
+
+  const filterCandidatesByStatus = () => {
+    if (statusFilter === "all") {
+      setFilteredCandidates(candidates);
+    } else {
+      setFilteredCandidates(
+        candidates.filter((c) => c.candidateInfo?.status === statusFilter),
+      );
     }
   };
 
@@ -52,29 +84,112 @@ const CandidateCVManagement = () => {
       const res = await updateCandidateStatusApi(candidateId, newStatus);
 
       if (res && res.EC === 0) {
-        toast.success(res.EM, { duration: 2000 });
-
-        const updatedCandidates = candidates.map((c) =>
-          c._id === candidateId
-            ? {
-                ...c,
-                candidateInfo: { ...c.candidateInfo, status: newStatus },
-              }
-            : c,
-        );
-        setCandidates(updatedCandidates);
+        toast.success(res.EM, { autoClose: 2000 });
+        await fetchCandidates();
       } else {
         toast.error(res.EM || "Failed to update candidate status", {
-          duration: 2000,
+          autoClose: 2000,
         });
       }
     } catch (error) {
       toast.error(
         "An error occurred while updating status. Please try again.",
-        { duration: 2000 },
+        { autoClose: 2000 },
       );
     } finally {
       setLoading(false);
+    }
+  };
+
+  const handleAIScreen = async (candidate) => {
+    if (!candidate.candidateInfo?.cvUrl) {
+      toast.error("Candidate has not submitted CV yet", { autoClose: 2000 });
+      return;
+    }
+
+    if (candidate.candidateInfo?.status !== "pending") {
+      toast.warning("Can only screen candidates with pending status", {
+        autoClose: 2000,
+      });
+      return;
+    }
+
+    Modal.confirm({
+      title: "AI CV Screening",
+      icon: <ExclamationCircleOutlined />,
+      content: (
+        <div>
+          <p>AI will analyze the CV and check for required fields:</p>
+          <ul style={{ marginTop: 12 }}>
+            <li>Full Name</li>
+            <li>Email</li>
+            <li>Phone Number</li>
+            <li>Citizen ID</li>
+            <li>Date of Birth</li>
+            <li>Gender</li>
+            <li>Address</li>
+          </ul>
+          <p style={{ marginTop: 12, color: "#ff4d4f", fontWeight: 500 }}>
+            If any required field is missing, the CV will be automatically
+            rejected.
+          </p>
+        </div>
+      ),
+      okText: "Start AI Screening",
+      cancelText: "Cancel",
+      width: 500,
+      onOk: async () => {
+        await performAIScreen(candidate);
+      },
+    });
+  };
+
+  const performAIScreen = async (candidate) => {
+    try {
+      setAiScreenLoading(true);
+      toast.info(" AI is analyzing CV... Please wait", {
+        autoClose: 3000,
+      });
+
+      const requiredFields = {
+        fullName: candidate.personalInfo?.fullName || null,
+        email: candidate.personalInfo?.email || null,
+        phone: candidate.personalInfo?.phone || null,
+        citizenId: candidate.personalInfo?.citizenId || null,
+        dob: candidate.personalInfo?.dob || null,
+        gender: candidate.personalInfo?.gender || null,
+        address: candidate.personalInfo?.address || null,
+      };
+
+      const res = await autoScreenCVApi(candidate._id, requiredFields);
+
+      if (res && res.EC === 0) {
+        setAiScreenResult(res.data);
+        setAiResultModalOpen(true);
+
+        await fetchCandidates();
+
+        if (res.data.aiAnalysis.shouldReject) {
+          toast.error(" CV rejected by AI: Missing required fields", {
+            autoClose: 3000,
+          });
+        } else {
+          toast.success(" CV passed AI screening", {
+            autoClose: 3000,
+          });
+        }
+      } else {
+        toast.error(res?.EM || "AI screening failed", {
+          autoClose: 2000,
+        });
+      }
+    } catch (error) {
+      console.error("AI Screen Error:", error);
+      toast.error("Failed to perform AI screening. Please try again.", {
+        autoClose: 2000,
+      });
+    } finally {
+      setAiScreenLoading(false);
     }
   };
 
@@ -83,9 +198,32 @@ const CandidateCVManagement = () => {
     setViewModalOpen(true);
   };
 
+  const handleDeleteCV = async (candidate) => {
+    try {
+      setLoading(true);
+      const res = await deleteCVApi(candidate._id);
+
+      if (res && res.EC === 0) {
+        toast.success("CV deleted successfully");
+        await fetchCandidates();
+      } else {
+        toast.error(res?.EM || "Failed to delete CV");
+      }
+    } catch (error) {
+      toast.error("Failed to delete CV. Please try again.");
+    } finally {
+      setLoading(false);
+    }
+  };
+
   const handleCloseModal = () => {
     setViewModalOpen(false);
     setSelectedCandidate(null);
+  };
+
+  const handleCloseAIResultModal = () => {
+    setAiResultModalOpen(false);
+    setAiScreenResult(null);
   };
 
   const getStatusTag = (status) => {
@@ -144,6 +282,7 @@ const CandidateCVManagement = () => {
     {
       title: "",
       key: "actions",
+      width: 320,
       render: (_, record) => (
         <Space>
           <Button
@@ -154,16 +293,65 @@ const CandidateCVManagement = () => {
           >
             View CV
           </Button>
+
+          <Button
+            type="default"
+            icon={<RobotOutlined />}
+            size="small"
+            onClick={() => handleAIScreen(record)}
+            disabled={
+              !record.candidateInfo?.cvUrl ||
+              record.candidateInfo?.status !== "pending" ||
+              aiScreenLoading
+            }
+            style={{
+              background: "linear-gradient(135deg, #1e90ff 0%, #00d4ff 100%)",
+              color: "white",
+              border: "none",
+            }}
+          >
+            AI Screen
+          </Button>
+
           <Select
             value={record.candidateInfo?.status || "pending"}
-            style={{ width: 100 }}
+            style={{ width: 110 }}
             onChange={(value) => handleStatusChange(record._id, value)}
             size="small"
+            disabled={loading}
           >
             <Option value="pending">Pending</Option>
             <Option value="approved">Approved</Option>
             <Option value="rejected">Rejected</Option>
           </Select>
+
+          <Popconfirm
+            title="Delete CV"
+            description={
+              <div>
+                <p>Are you sure you want to delete this CV?</p>
+                <p style={{ color: "#ff4d4f", marginTop: 8 }}>
+                  You can only delete a rejected CV.
+                </p>
+              </div>
+            }
+            onConfirm={() => handleDeleteCV(record)}
+            okText="Yes, Delete"
+            cancelText="Cancel"
+            okButtonProps={{
+              danger: true,
+              loading: loading,
+            }}
+          >
+            <Button
+              danger
+              icon={<DeleteOutlined />}
+              size="small"
+              disabled={!record.candidateInfo?.cvUrl || loading}
+            >
+              Delete
+            </Button>
+          </Popconfirm>
         </Space>
       ),
     },
@@ -171,10 +359,21 @@ const CandidateCVManagement = () => {
 
   return (
     <div className="candidate-cv-management">
+      {/* Loading Overlay */}
+      {aiScreenLoading && (
+        <div className="ai-loading-overlay">
+          <Spin size="large" />
+          <div className="ai-loading-text">
+            <h3>AI is analyzing CV...</h3>
+            <p>This may take a few moments</p>
+          </div>
+        </div>
+      )}
+
       <div className="page-header">
         <h1 className="page-title">Candidate CV Management</h1>
         <p className="page-subtitle">
-          Review and manage candidate applications
+          Review and manage candidate applications with AI screening
         </p>
       </div>
 
@@ -245,7 +444,7 @@ const CandidateCVManagement = () => {
           rowKey={(record) => record._id}
           loading={loading}
           pagination={{
-            pageSize: 4,
+            pageSize: 10,
             showTotal: (total) => `Total ${total} candidates`,
           }}
           locale={{ emptyText: "No candidates found" }}
@@ -257,6 +456,13 @@ const CandidateCVManagement = () => {
         visible={viewModalOpen}
         candidate={selectedCandidate}
         onClose={handleCloseModal}
+      />
+
+      {/* AI Screen Result Modal */}
+      <AIScreenResultModal
+        visible={aiResultModalOpen}
+        result={aiScreenResult}
+        onClose={handleCloseAIResultModal}
       />
     </div>
   );

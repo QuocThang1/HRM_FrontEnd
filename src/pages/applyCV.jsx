@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Card, Form, Input, Button } from "antd";
+import { Card, Form, Input, Button, Alert } from "antd";
 import {
   MailOutlined,
   PhoneOutlined,
@@ -89,15 +89,26 @@ const ApplyCVPage = () => {
                 <div className="cv-tips">
                   <h4>💡 Tips for sharing your CV:</h4>
                   <ul>
-                    <li>
-                      Upload your CV to Google Drive, Dropbox, or OneDrive
-                    </li>
+                    <li>Upload your CV to Google Drive</li>
                     <li>
                       Make sure the link is set to Anyone with the link can view
                     </li>
                     <li>
-                      Ensure your CV is in PDF format for best compatibility
+                      Ensure your CV is in PDF format or image file is required
                     </li>
+                    <li>
+                      Make sure your CV has enough information about: Fullname,
+                      Email, Phone, CitizenID, Dob, Gender, Address
+                    </li>
+                    <h4>
+                      ⚠️ Note:
+                      <Alert
+                        message="If you don't have enough information in your CV, our AI system may not be able to process it."
+                        type="warning"
+                        showIcon
+                        style={{ marginTop: 8 }}
+                      />
+                    </h4>
                   </ul>
                 </div>
 

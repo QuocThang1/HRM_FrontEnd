@@ -220,7 +220,7 @@ const AdminResignationManagement = () => {
             onClick={() => handleViewDetail(record)}
             size="small"
           >
-            View CV
+            View Resignation
           </Button>
           <Button
             icon={<EditOutlined />}

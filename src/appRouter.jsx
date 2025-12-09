@@ -76,7 +76,11 @@ const router = createBrowserRouter([
       { index: true, element: <StaffProfilePage /> },
       {
         path: "dashboard",
-        element: <Dashboard />,
+        element: (
+          <ProtectedRoute allowedRoles={["admin"]}>
+            <Dashboard />
+          </ProtectedRoute>
+        ),
       },
       {
         path: "policy-management",

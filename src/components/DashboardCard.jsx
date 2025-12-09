@@ -269,9 +269,18 @@ const DashboardCard = ({
           </div>
         );
       case "statCard": {
-        const [current, total] = value ? value.split("/") : [0, 0];
-        const percent =
-          total > 0 ? (parseInt(current) / parseInt(total)) * 100 : 0;
+        let current, total;
+
+        // Xử lý value là string hoặc number
+        if (typeof value === 'string' && value.includes('/')) {
+          [current, total] = value.split("/");
+        } else {
+          // Nếu value là số, hiển thị số đó, không cần progress bar
+          current = value;
+          total = value;
+        }
+
+        const percent = total > 0 ? (parseInt(current) / parseInt(total)) * 100 : 0;
 
         return (
           <Card

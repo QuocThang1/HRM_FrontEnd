@@ -55,12 +55,12 @@ const Header = () => {
     },
     ...(auth?.staff?.role === "candidate"
       ? [
-          {
-            label: <Link to="/apply-cv">Apply CV</Link>,
-            key: "/apply-cv",
-            icon: <FileTextOutlined />,
-          },
-        ]
+        {
+          label: <Link to="/apply-cv">Apply CV</Link>,
+          key: "/apply-cv",
+          icon: <FileTextOutlined />,
+        },
+      ]
       : []),
   ];
 
@@ -84,7 +84,7 @@ const Header = () => {
           <>
             <div
               className="header-user-info"
-              onClick={() => navigate("/profile/dashboard")}
+              onClick={() => navigate("/profile")}
             >
               <Avatar
                 size={36}

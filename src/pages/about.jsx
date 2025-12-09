@@ -160,7 +160,7 @@ const AboutPage = () => {
               {stats.map((stat, index) => (
                 <Col xs={12} sm={12} lg={6} key={index}>
                   <Card className="stat-card">
-                    <div className="stat-icon">{stat.icon}</div>
+                    <div className="about-stat-icon">{stat.icon}</div>
                     <Statistic
                       title={stat.title}
                       value={stat.value}

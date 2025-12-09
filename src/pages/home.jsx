@@ -255,7 +255,7 @@ const HomePage = () => {
             {features.map((feature, index) => (
               <Col xs={24} sm={12} md={6} key={index}>
                 <Card className="feature-card" hoverable>
-                  <div className="feature-icon">{feature.icon}</div>
+                  <div className="home-feature-icon">{feature.icon}</div>
                   <h3 className="feature-title">{feature.title}</h3>
                   <p className="feature-description">{feature.description}</p>
                 </Card>
@@ -280,7 +280,7 @@ const HomePage = () => {
               onClick={() =>
                 navigate(auth?.isAuthenticated ? "/profile" : "/login")
               }
-              className="cta-button"
+              className="hero-btn-primary"
             >
               {auth?.isAuthenticated ? "Go to Dashboard" : "Start Free Trial"}
             </Button>

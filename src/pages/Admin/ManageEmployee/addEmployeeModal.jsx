@@ -58,6 +58,17 @@ const AddEmployeeModal = ({ open, onClose, onSuccess }) => {
     }
   };
 
+  const validateFullName = (_, value) => {
+    if (!value) {
+      return Promise.reject(new Error("Please enter your full name!"));
+    }
+    const nameRegex = /^[a-zA-Z\s]{2,40}$/;
+    if (!nameRegex.test(value)) {
+      return Promise.reject(new Error("Name must be at least 2 characters and contain only letters and spaces!"));
+    }
+    return Promise.resolve();
+  };
+
   const validatePhone = (_, value) => {
     if (!value) {
       return Promise.reject(new Error("Please enter phone number!"));
@@ -143,9 +154,7 @@ const AddEmployeeModal = ({ open, onClose, onSuccess }) => {
               label="Full Name"
               name="fullName"
               rules={[
-                { required: true, message: "Please enter full name!" },
-                { min: 2, message: "Name must be at least 2 characters!" },
-                { max: 100, message: "Name must not exceed 100 characters!" },
+                { validator: validateFullName },
               ]}
             >
               <Input

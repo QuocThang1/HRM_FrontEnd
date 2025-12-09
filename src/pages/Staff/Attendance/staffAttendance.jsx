@@ -355,9 +355,8 @@ const StaffAttendancePage = () => {
                           }
                         >
                           {todayAttendance.isEarlyLeave
-                            ? `YES (${
-                                todayAttendance.earlyLeaveMinutes || 0
-                              } min)`
+                            ? `YES (${todayAttendance.earlyLeaveMinutes || 0
+                            } min)`
                             : "NO"}
                         </Tag>
                       </div>

@@ -17,7 +17,7 @@ import {
   PlusCircleOutlined,
 } from "@ant-design/icons";
 import { getDepartmentsApi } from "../../../../utils/Api/departmentApi";
-import { getStaffByDepartmentApi } from "../../../../utils/Api/staffApi";
+import { getStaffByDepartmentApi, getStaffApi } from "../../../../utils/Api/staffApi";
 import CreateSalaryModal from "./createSalaryModal";
 import { toast } from "react-toastify";
 
@@ -28,7 +28,7 @@ const CreateSalaryByMonth = () => {
   const [departments, setDepartments] = useState([]);
   const [staffList, setStaffList] = useState([]);
   const [filteredStaffList, setFilteredStaffList] = useState([]);
-  const [selectedDepartment, setSelectedDepartment] = useState(null);
+  const [selectedDepartment, setSelectedDepartment] = useState("all"); // Set default to "all"
   const [searchText, setSearchText] = useState("");
   const [loading, setLoading] = useState(false);
   const [modalVisible, setModalVisible] = useState(false);
@@ -36,10 +36,13 @@ const CreateSalaryByMonth = () => {
 
   useEffect(() => {
     fetchDepartments();
+    fetchAllStaff(); // Fetch all staff on mount
   }, []);
 
   useEffect(() => {
-    if (selectedDepartment) {
+    if (selectedDepartment === "all") {
+      fetchAllStaff();
+    } else if (selectedDepartment) {
       fetchStaffByDepartment();
     }
   }, [selectedDepartment]);
@@ -56,6 +59,24 @@ const CreateSalaryByMonth = () => {
       }
     } catch (error) {
       toast.error("Error loading department list", { autoClose: 2000 });
+    }
+  };
+
+  const fetchAllStaff = async () => {
+    try {
+      setLoading(true);
+      const response = await getStaffApi();
+      if (response?.EC === 0) {
+        // Filter out candidates, only show staff and managers
+        const filteredStaff = response.data.filter(
+          (staff) => staff.role === "staff" || staff.role === "manager"
+        );
+        setStaffList(filteredStaff);
+      }
+    } catch (error) {
+      toast.error("Error loading employee list", { autoClose: 2000 });
+    } finally {
+      setLoading(false);
     }
   };
 
@@ -124,6 +145,17 @@ const CreateSalaryByMonth = () => {
       ),
     },
     {
+      title: "Department",
+      key: "department",
+      align: "center",
+      render: (_, record) => (
+        <Tag color="geekblue">
+          {record.departmentId?.departmentName || "N/A"}
+        </Tag>
+      ),
+      width: 180,
+    },
+    {
       title: "Role",
       dataIndex: "role",
       key: "role",
@@ -164,6 +196,9 @@ const CreateSalaryByMonth = () => {
                 style={{ width: 250 }}
                 placeholder="Select department"
               >
+                <Option key="all" value="all">
+                  All Departments
+                </Option>
                 {departments.map((dept) => (
                   <Option key={dept._id} value={dept._id}>
                     {dept.departmentName}
@@ -186,54 +221,44 @@ const CreateSalaryByMonth = () => {
             </Space>
           </Space>
 
-          {selectedDepartment && (
-            <Alert
-              message={`Found ${filteredStaffList.length} employees`}
-              type="info"
-              showIcon
-            />
-          )}
+          <Alert
+            message={`Found ${filteredStaffList.length} employees`}
+            type="info"
+            showIcon
+          />
         </Space>
       </Card>
 
       <Card title="Employee List" loading={loading}>
-        {!selectedDepartment ? (
-          <Alert
-            message="Please select a department"
-            description="Select a department to view employee list"
-            type="info"
-            showIcon
-          />
-        ) : (
-          <Table
-            columns={columns}
-            dataSource={filteredStaffList}
-            rowKey="_id"
-            loading={loading}
-            onRow={(record) => ({
-              onClick: () => handleStaffClick(record),
-              style: { cursor: "pointer" },
-            })}
-            rowClassName="hoverable-row"
-            pagination={{
-              pageSize: 10,
-              showSizeChanger: true,
-              showTotal: (total) => `Total ${total} employees`,
-              pageSizeOptions: ["10", "20", "50"],
-            }}
-            locale={{
-              emptyText: "No employees found",
-            }}
-          />
-        )}
+        <Table
+          columns={columns}
+          dataSource={filteredStaffList}
+          rowKey="_id"
+          loading={loading}
+          onRow={(record) => ({
+            onClick: () => handleStaffClick(record),
+            style: { cursor: "pointer" },
+          })}
+          rowClassName="hoverable-row"
+          pagination={{
+            pageSize: 10,
+            showSizeChanger: true,
+            showTotal: (total) => `Total ${total} employees`,
+            pageSizeOptions: ["10", "20", "50"],
+          }}
+          locale={{
+            emptyText: "No employees found",
+          }}
+        />
       </Card>
 
       <CreateSalaryModal
         visible={modalVisible}
         onCancel={() => setModalVisible(false)}
         staff={selectedStaff}
-        departmentId={selectedDepartment}
-        onSuccess={fetchStaffByDepartment}
+        departmentId={selectedDepartment === "all" ? null : selectedDepartment}
+        onSuccess={selectedDepartment === "all" ? fetchAllStaff : fetchStaffByDepartment}
+        onSuccessCallback={selectedDepartment === "all" ? fetchAllStaff : fetchStaffByDepartment}
       />
     </div>
   );

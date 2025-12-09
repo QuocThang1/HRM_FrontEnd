@@ -16,7 +16,7 @@ import {
   UserOutlined,
 } from "@ant-design/icons";
 import { getDepartmentsApi } from "../../../../utils/Api/departmentApi";
-import { getStaffByDepartmentApi } from "../../../../utils/Api/staffApi";
+import { getStaffByDepartmentApi, getStaffApi } from "../../../../utils/Api/staffApi";
 import { getAllSalariesApi } from "../../../../utils/Api/salaryApi";
 import { toast } from "react-toastify";
 import { useNavigate } from "react-router-dom";
@@ -28,7 +28,7 @@ const SalaryDetail = () => {
   const navigate = useNavigate();
   const [loading, setLoading] = useState(false);
   const [departments, setDepartments] = useState([]);
-  const [selectedDepartment, setSelectedDepartment] = useState(null);
+  const [selectedDepartment, setSelectedDepartment] = useState("all"); // Set default to "all"
   const [staffList, setStaffList] = useState([]);
   const [filteredStaffList, setFilteredStaffList] = useState([]);
   const [salaries, setSalaries] = useState([]);
@@ -37,10 +37,13 @@ const SalaryDetail = () => {
   useEffect(() => {
     fetchDepartments();
     fetchAllSalaries();
+    fetchAllStaff(); // Fetch all staff on mount
   }, []);
 
   useEffect(() => {
-    if (selectedDepartment) {
+    if (selectedDepartment === "all") {
+      fetchAllStaff();
+    } else if (selectedDepartment) {
       fetchStaffByDepartment(selectedDepartment);
     } else {
       setStaffList([]);
@@ -74,6 +77,27 @@ const SalaryDetail = () => {
       }
     } catch (error) {
       console.error("Error fetching salaries:", error);
+    }
+  };
+
+  const fetchAllStaff = async () => {
+    try {
+      setLoading(true);
+      const res = await getStaffApi();
+      if (res && res.EC === 0 && res.data) {
+        // Filter out candidates, only show staff and managers
+        const filteredStaff = res.data.filter(
+          (staff) => staff.role === "staff" || staff.role === "manager"
+        );
+        setStaffList(filteredStaff);
+      } else {
+        toast.error(res?.EM || "Failed to fetch staff");
+      }
+    } catch (error) {
+      console.error("Error fetching all staff:", error);
+      toast.error("An error occurred while fetching staff");
+    } finally {
+      setLoading(false);
     }
   };
 
@@ -135,6 +159,17 @@ const SalaryDetail = () => {
           </Text>
         </Space>
       ),
+    },
+    {
+      title: "Department",
+      key: "department",
+      align: "center",
+      render: (_, record) => (
+        <Tag color="geekblue">
+          {record.departmentId?.departmentName || "N/A"}
+        </Tag>
+      ),
+      width: 150,
     },
     {
       title: "Role",
@@ -209,12 +244,14 @@ const SalaryDetail = () => {
             size="large"
             value={selectedDepartment}
             onChange={setSelectedDepartment}
-            allowClear
             showSearch
             filterOption={(input, option) =>
               option.children.toLowerCase().includes(input.toLowerCase())
             }
           >
+            <Option key="all" value="all">
+              All Departments
+            </Option>
             {departments.map((dept) => (
               <Option key={dept._id} value={dept._id}>
                 {dept.departmentName}
@@ -225,102 +262,82 @@ const SalaryDetail = () => {
       </Card>
 
       {/* Stats Cards */}
-      {selectedDepartment && (
-        <div className="stats-cards">
-          <Card
-            className={`stat-card ${salaryFilter === "all" ? "active" : ""}`}
-            hoverable
-            onClick={() => handleStatCardClick("all")}
-          >
-            <div className="stat-icon all">
-              <TeamOutlined />
-            </div>
-            <div className="stat-content">
-              <div className="stat-value">{totalStaff}</div>
-              <div className="stat-label">Total Staff</div>
-            </div>
-          </Card>
+      <div className="stats-cards">
+        <Card
+          className={`stat-card ${salaryFilter === "all" ? "active" : ""}`}
+          hoverable
+          onClick={() => handleStatCardClick("all")}
+        >
+          <div className="stat-icon all">
+            <TeamOutlined />
+          </div>
+          <div className="stat-content">
+            <div className="stat-value">{totalStaff}</div>
+            <div className="stat-label">Total Staff</div>
+          </div>
+        </Card>
 
-          <Card
-            className={`stat-card ${salaryFilter === "set" ? "active" : ""}`}
-            hoverable
-            onClick={() => handleStatCardClick("set")}
-          >
-            <div className="stat-icon approved">
-              <DollarOutlined />
-            </div>
-            <div className="stat-content">
-              <div className="stat-value">{staffWithSalary}</div>
-              <div className="stat-label">Salary Set</div>
-            </div>
-          </Card>
+        <Card
+          className={`stat-card ${salaryFilter === "set" ? "active" : ""}`}
+          hoverable
+          onClick={() => handleStatCardClick("set")}
+        >
+          <div className="stat-icon approved">
+            <DollarOutlined />
+          </div>
+          <div className="stat-content">
+            <div className="stat-value">{staffWithSalary}</div>
+            <div className="stat-label">Salary Set</div>
+          </div>
+        </Card>
 
-          <Card
-            className={`stat-card ${salaryFilter === "not-set" ? "active" : ""}`}
-            hoverable
-            onClick={() => handleStatCardClick("not-set")}
-          >
-            <div className="stat-icon pending">
-              <UserOutlined />
-            </div>
-            <div className="stat-content">
-              <div className="stat-value">{staffWithoutSalary}</div>
-              <div className="stat-label">Salary Not Set</div>
-            </div>
-          </Card>
-        </div>
-      )}
+        <Card
+          className={`stat-card ${salaryFilter === "not-set" ? "active" : ""}`}
+          hoverable
+          onClick={() => handleStatCardClick("not-set")}
+        >
+          <div className="stat-icon pending">
+            <UserOutlined />
+          </div>
+          <div className="stat-content">
+            <div className="stat-value">{staffWithoutSalary}</div>
+            <div className="stat-label">Salary Not Set</div>
+          </div>
+        </Card>
+      </div>
 
       {/* Staff Table */}
-      {selectedDepartment ? (
-        <Card
-          className="table-card"
-          title={
-            <Space>
-              <TeamOutlined />
-              <span>
-                Staff List - {selectedDept?.departmentName || "Department"}
-              </span>
-            </Space>
-          }
-        >
-          <Table
-            columns={columns}
-            dataSource={filteredStaffList}
-            rowKey="_id"
-            loading={loading}
-            pagination={{
-              pageSize: 4,
-              showSizeChanger: true,
-              showTotal: (total) => `Total ${total} staff members`,
-            }}
-            locale={{
-              emptyText: (
-                <Empty
-                  description="No staff found"
-                  image={Empty.PRESENTED_IMAGE_SIMPLE}
-                />
-              ),
-            }}
-          />
-        </Card>
-      ) : (
-        <Card className="empty-state-card">
-          <Empty
-            description={
-              <Space direction="vertical" size="small">
-                <Text type="secondary" style={{ fontSize: 16 }}>
-                  Please select a department to view staff salaries
-                </Text>
-                <Text type="secondary">
-                  Use the dropdown above to choose a department
-                </Text>
-              </Space>
-            }
-            image={Empty.PRESENTED_IMAGE_SIMPLE}
-          />
-        </Card>
-      )}
+      <Card
+        className="table-card"
+        title={
+          <Space>
+            <TeamOutlined />
+            <span>
+              Staff List - {selectedDepartment === "all" ? "All Departments" : (selectedDept?.departmentName || "Department")}
+            </span>
+          </Space>
+        }
+      >
+        <Table
+          columns={columns}
+          dataSource={filteredStaffList}
+          rowKey="_id"
+          loading={loading}
+          pagination={{
+            pageSize: 4,
+            showSizeChanger: true,
+            showTotal: (total) => `Total ${total} staff members`,
+          }}
+          locale={{
+            emptyText: (
+              <Empty
+                description="No staff found"
+                image={Empty.PRESENTED_IMAGE_SIMPLE}
+              />
+            ),
+          }}
+        />
+      </Card>
     </div>
   );
 };

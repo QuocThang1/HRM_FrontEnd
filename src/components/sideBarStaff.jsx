@@ -97,215 +97,215 @@ const SideBarStaff = ({ collapsed }) => {
           selectedKeys={[location.pathname]}
           className="sidebar-menu"
           items={[
-            {
-              key: "/profile/dashboard",
-              icon: <DashboardOutlined />,
-              label: <Link to="/profile/dashboard">Dashboard</Link>,
-            },
             ...(auth?.staff?.role === "admin"
               ? [
-                  {
-                    key: "/profile/policy-management",
-                    icon: <FileProtectOutlined />,
-                    label: (
-                      <Link to="/profile/policy-management">
-                        Policy Management
-                      </Link>
-                    ),
-                  },
-                  {
-                    key: "/profile/contract-management",
-                    icon: <FolderOpenOutlined />,
-                    label: (
-                      <Link to="/profile/contract-management">
-                        Contract Management
-                      </Link>
-                    ),
-                  },
-                ]
+                {
+                  key: "/profile/dashboard",
+                  icon: <DashboardOutlined />,
+                  label: <Link to="/profile/dashboard">Dashboard</Link>,
+                },
+                {
+                  key: "/profile/policy-management",
+                  icon: <FileProtectOutlined />,
+                  label: (
+                    <Link to="/profile/policy-management">
+                      Policy Management
+                    </Link>
+                  ),
+                },
+                {
+                  key: "/profile/contract-management",
+                  icon: <FolderOpenOutlined />,
+                  label: (
+                    <Link to="/profile/contract-management">
+                      Contract Management
+                    </Link>
+                  ),
+                },
+              ]
               : [
-                  {
-                    key: "/profile/contract",
-                    icon: <FolderOpenOutlined />,
-                    label: <Link to="/profile/contract">Contract</Link>,
-                  },
-                ]),
+                {
+                  key: "/profile/contract",
+                  icon: <FolderOpenOutlined />,
+                  label: <Link to="/profile/contract">Contract</Link>,
+                },
+              ]),
             {
               type: "divider",
             },
             ...(auth?.staff?.role === "admin"
               ? [
-                  {
-                    key: "/profile/candidate-cv-management",
-                    icon: <FolderOutlined />,
-                    label: (
-                      <Link to="/profile/candidate-cv-management">
-                        Candidate CVs
-                      </Link>
-                    ),
-                  },
-                  {
-                    key: "/profile/resignation-management",
-                    icon: <FileTextOutlined />,
-                    label: (
-                      <Link to="/profile/resignation-management">
-                        Resignation
-                      </Link>
-                    ),
-                  },
-                  {
-                    type: "divider",
-                  },
-                  {
-                    key: "/profile/employee-management",
-                    icon: <TeamOutlined />,
-                    label: (
-                      <Link to="/profile/employee-management">Employees</Link>
-                    ),
-                  },
-                  {
-                    key: "salary-group",
-                    icon: <DollarOutlined />,
-                    label: "Salaries",
-                    children: [
-                      {
-                        key: "/profile/salary-management",
-                        label: (
-                          <Link to="/profile/salary-management">
-                            Salary Details
-                          </Link>
-                        ),
-                      },
-                      {
-                        key: "/profile/monthly-salary-create",
-                        label: (
-                          <Link to="/profile/monthly-salary-create">
-                            Monthly Salary Creation
-                          </Link>
-                        ),
-                      },
-                      {
-                        key: "/profile/salary-dashboard",
-                        label: (
-                          <Link to="/profile/salary-dashboard">
-                            Monthly Salary Report
-                          </Link>
-                        ),
-                      },
-                    ],
-                  },
-                  {
-                    key: "department-group",
-                    icon: <StarOutlined />,
-                    label: "Departments",
-                    children: [
-                      {
-                        key: "/profile/department-management",
-                        label: (
-                          <Link to="/profile/department-management">
-                            Management
-                          </Link>
-                        ),
-                      },
-                      {
-                        key: "/profile/department-review-management",
-                        label: (
-                          <Link to="/profile/department-review-management">
-                            Reviews
-                          </Link>
-                        ),
-                      },
-                    ],
-                  },
-                  {
-                    key: "/profile/shift-management",
-                    icon: <ClockCircleOutlined />,
-                    label: <Link to="/profile/shift-management">Shifts</Link>,
-                  },
-                ]
+                {
+                  key: "/profile/candidate-cv-management",
+                  icon: <FolderOutlined />,
+                  label: (
+                    <Link to="/profile/candidate-cv-management">
+                      Candidate CVs
+                    </Link>
+                  ),
+                },
+                {
+                  key: "/profile/resignation-management",
+                  icon: <FileTextOutlined />,
+                  label: (
+                    <Link to="/profile/resignation-management">
+                      Resignation
+                    </Link>
+                  ),
+                },
+                {
+                  type: "divider",
+                },
+                {
+                  key: "/profile/employee-management",
+                  icon: <TeamOutlined />,
+                  label: (
+                    <Link to="/profile/employee-management">Employees</Link>
+                  ),
+                },
+                {
+                  key: "salary-group",
+                  icon: <DollarOutlined />,
+                  label: "Salaries",
+                  children: [
+                    {
+                      key: "/profile/salary-management",
+                      label: (
+                        <Link to="/profile/salary-management">
+                          Salary Details
+                        </Link>
+                      ),
+                    },
+                    {
+                      key: "/profile/monthly-salary-create",
+                      label: (
+                        <Link to="/profile/monthly-salary-create">
+                          Monthly Salary Creation
+                        </Link>
+                      ),
+                    },
+                    {
+                      key: "/profile/salary-dashboard",
+                      label: (
+                        <Link to="/profile/salary-dashboard">
+                          Monthly Salary Report
+                        </Link>
+                      ),
+                    },
+                  ],
+                },
+                {
+                  key: "department-group",
+                  icon: <StarOutlined />,
+                  label: "Departments",
+                  children: [
+                    {
+                      key: "/profile/department-management",
+                      label: (
+                        <Link to="/profile/department-management">
+                          Management
+                        </Link>
+                      ),
+                    },
+                    {
+                      key: "/profile/department-review-management",
+                      label: (
+                        <Link to="/profile/department-review-management">
+                          Reviews
+                        </Link>
+                      ),
+                    },
+                  ],
+                },
+                {
+                  key: "/profile/shift-management",
+                  icon: <ClockCircleOutlined />,
+                  label: <Link to="/profile/shift-management">Shifts</Link>,
+                },
+              ]
               : []),
             ...(auth?.staff?.role === "manager"
               ? [
-                  {
-                    key: "/profile/department-shift-management",
-                    icon: <CalendarOutlined />,
-                    label: (
-                      <Link to="/profile/department-shift-management">
-                        Shift Management
-                      </Link>
-                    ),
-                  },
-                  {
-                    key: "/profile/attendance-management",
-                    icon: <CalendarOutlined />,
-                    label: (
-                      <Link to="/profile/attendance-management">
-                        Attendance Management
-                      </Link>
-                    ),
-                  },
-                  {
-                    key: "review-group",
-                    icon: <LineChartOutlined />,
-                    label: "View Reviews",
-                    children: [
-                      {
-                        key: "/profile/review-statistics",
-                        label: (
-                          <Link to="/profile/review-statistics">
-                            Review Statistics
-                          </Link>
-                        ),
-                      },
-                      {
-                        key: "/profile/view-reviews",
-                        label: (
-                          <Link to="/profile/view-reviews">View Reviews</Link>
-                        ),
-                      },
-                    ],
-                  },
-                  {
-                    key: "/profile/my-salaries",
-                    icon: <DollarOutlined />,
-                    label: <Link to="/profile/my-salaries">My Salaries</Link>,
-                  },
-                  {
-                    key: "/profile/resignation",
-                    icon: <FileTextOutlined />,
-                    label: (
-                      <Link to="/profile/resignation">Submit Resignation</Link>
-                    ),
-                  },
-                ]
+                {
+                  key: "/profile/department-shift-management",
+                  icon: <CalendarOutlined />,
+                  label: (
+                    <Link to="/profile/department-shift-management">
+                      Shift Management
+                    </Link>
+                  ),
+                },
+                {
+                  key: "/profile/attendance-management",
+                  icon: <CalendarOutlined />,
+                  label: (
+                    <Link to="/profile/attendance-management">
+                      Attendance Management
+                    </Link>
+                  ),
+                },
+                {
+                  key: "review-group",
+                  icon: <LineChartOutlined />,
+                  label: "View Reviews",
+                  children: [
+                    {
+                      key: "/profile/review-statistics",
+                      label: (
+                        <Link to="/profile/review-statistics">
+                          Review Statistics
+                        </Link>
+                      ),
+                    },
+                    {
+                      key: "/profile/view-reviews",
+                      label: (
+                        <Link to="/profile/view-reviews">View Reviews</Link>
+                      ),
+                    },
+                  ],
+                },
+                {
+                  key: "/profile/my-salaries",
+                  icon: <DollarOutlined />,
+                  label: <Link to="/profile/my-salaries">My Salaries</Link>,
+                },
+                {
+                  key: "/profile/resignation",
+                  icon: <FileTextOutlined />,
+                  label: (
+                    <Link to="/profile/resignation">Submit Resignation</Link>
+                  ),
+                },
+              ]
               : []),
             ...(auth?.staff?.role === "staff"
               ? [
-                  {
-                    key: "/profile/shift-schedule",
-                    icon: <CalendarOutlined />,
-                    label: (
-                      <Link to="/profile/shift-schedule">Shift Schedule</Link>
-                    ),
-                  },
-                  {
-                    key: "/profile/attendance",
-                    icon: <CalendarOutlined />,
-                    label: <Link to="/profile/attendance">Attendance</Link>,
-                  },
-                  {
-                    key: "/profile/my-salaries",
-                    icon: <DollarOutlined />,
-                    label: <Link to="/profile/my-salaries">My Salaries</Link>,
-                  },
-                  {
-                    key: "/profile/resignation",
-                    icon: <FileTextOutlined />,
-                    label: (
-                      <Link to="/profile/resignation">Submit Resignation</Link>
-                    ),
-                  },
-                ]
+                {
+                  key: "/profile/shift-schedule",
+                  icon: <CalendarOutlined />,
+                  label: (
+                    <Link to="/profile/shift-schedule">Shift Schedule</Link>
+                  ),
+                },
+                {
+                  key: "/profile/attendance",
+                  icon: <CalendarOutlined />,
+                  label: <Link to="/profile/attendance">Attendance</Link>,
+                },
+                {
+                  key: "/profile/my-salaries",
+                  icon: <DollarOutlined />,
+                  label: <Link to="/profile/my-salaries">My Salaries</Link>,
+                },
+                {
+                  key: "/profile/resignation",
+                  icon: <FileTextOutlined />,
+                  label: (
+                    <Link to="/profile/resignation">Submit Resignation</Link>
+                  ),
+                },
+              ]
               : []),
           ]}
         />

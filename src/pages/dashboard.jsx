@@ -282,7 +282,7 @@ const Dashboard = () => {
       };
 
       staffRes?.data
-        ?.filter((staff) => staff.role === "candidate")
+        ?.filter((staff) => staff.role === "candidate" && staff.candidateInfo)
         .forEach((candidate) => {
           const status = candidate.candidateInfo?.status || "pending";
           candidateStatusMap[status] = (candidateStatusMap[status] || 0) + 1;

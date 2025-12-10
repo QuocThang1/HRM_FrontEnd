@@ -18,6 +18,7 @@ import {
 } from "@ant-design/icons";
 import { getDepartmentsApi } from "../../../../utils/Api/departmentApi";
 import { getStaffByDepartmentApi, getStaffApi } from "../../../../utils/Api/staffApi";
+import { getAllSalariesApi } from "../../../../utils/Api/salaryApi";
 import CreateSalaryModal from "./createSalaryModal";
 import { toast } from "react-toastify";
 
@@ -27,6 +28,7 @@ const { Title, Text } = Typography;
 const CreateSalaryByMonth = () => {
   const [departments, setDepartments] = useState([]);
   const [staffList, setStaffList] = useState([]);
+  const [salaries, setSalaries] = useState([]);
   const [filteredStaffList, setFilteredStaffList] = useState([]);
   const [selectedDepartment, setSelectedDepartment] = useState("all"); // Set default to "all"
   const [searchText, setSearchText] = useState("");
@@ -40,6 +42,7 @@ const CreateSalaryByMonth = () => {
   }, []);
 
   useEffect(() => {
+    fetchAllSalaries();
     if (selectedDepartment === "all") {
       fetchAllStaff();
     } else if (selectedDepartment) {
@@ -67,8 +70,10 @@ const CreateSalaryByMonth = () => {
       setLoading(true);
       const response = await getStaffApi();
       if (response?.EC === 0) {
-        // Filter out candidates, only show staff and managers
-        const filteredStaff = response.data.filter(
+        const listStaff = response.data.filter(
+          (staff) => staff.departmentId !== null
+        )
+        const filteredStaff = listStaff.filter(
           (staff) => staff.role === "staff" || staff.role === "manager"
         );
         setStaffList(filteredStaff);
@@ -78,6 +83,22 @@ const CreateSalaryByMonth = () => {
     } finally {
       setLoading(false);
     }
+  };
+
+  const fetchAllSalaries = async () => {
+    try {
+      const response = await getAllSalariesApi();
+      if (response?.EC === 0) {
+        setSalaries(response.data);
+      }
+    } catch (error) {
+      toast.error("Error loading salaries", { autoClose: 2000 });
+    }
+  };
+
+  const getSalaryByStaffId = (staffId) => {
+    const salary = salaries.find((s) => s.staffId?._id === staffId || s.staffId === staffId);
+    return salary?.hourlyRate || null;
   };
 
   const fetchStaffByDepartment = async () => {
@@ -145,12 +166,28 @@ const CreateSalaryByMonth = () => {
       ),
     },
     {
+      title: "Hourly Rate",
+      key: "hourlyRate",
+      align: "center",
+      render: (_, record) => {
+        const hourlyRate = getSalaryByStaffId(record._id);
+        return hourlyRate ? (
+          <Text strong style={{ color: "#52c41a", fontSize: 16 }}>
+            ${hourlyRate.toLocaleString()}/h
+          </Text>
+        ) : (
+          <Tag color="orange">Not Set</Tag>
+        );
+      },
+      width: 150,
+    },
+    {
       title: "Department",
       key: "department",
       align: "center",
       render: (_, record) => (
         <Tag color="geekblue">
-          {record.departmentId?.departmentName || "N/A"}
+          {record.departmentId?.departmentName || "No Department"}
         </Tag>
       ),
       width: 180,

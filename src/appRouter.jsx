@@ -41,6 +41,7 @@ import ContractDetail from "./pages/Admin/ManageContract/contractDetail.jsx";
 import ListContract from "./pages/StaffAndManager/Contract/listContract.jsx";
 import ContractDetailPage from "./pages/StaffAndManager/Contract/contractDetailPage.jsx";
 import Dashboard from "./pages/dashboard.jsx";
+import EmployeeDetail from "./pages/Admin/ManageEmployee/employeeDetail.jsx";
 
 const router = createBrowserRouter([
   {
@@ -143,6 +144,14 @@ const router = createBrowserRouter([
         element: (
           <ProtectedRoute allowedRoles={["admin"]}>
             <StaffPage />
+          </ProtectedRoute>
+        ),
+      },
+      {
+        path: "employee-management/:staffId",
+        element: (
+          <ProtectedRoute allowedRoles={["admin"]}>
+            <EmployeeDetail />
           </ProtectedRoute>
         ),
       },

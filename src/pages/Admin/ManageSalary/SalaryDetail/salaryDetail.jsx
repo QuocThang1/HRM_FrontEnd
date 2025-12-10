@@ -85,8 +85,10 @@ const SalaryDetail = () => {
       setLoading(true);
       const res = await getStaffApi();
       if (res && res.EC === 0 && res.data) {
-        // Filter out candidates, only show staff and managers
-        const filteredStaff = res.data.filter(
+        const listStaff = res.data.filter(
+          (staff) => staff.departmentId !== null
+        )
+        const filteredStaff = listStaff.filter(
           (staff) => staff.role === "staff" || staff.role === "manager"
         );
         setStaffList(filteredStaff);
@@ -166,7 +168,7 @@ const SalaryDetail = () => {
       align: "center",
       render: (_, record) => (
         <Tag color="geekblue">
-          {record.departmentId?.departmentName || "N/A"}
+          {record.departmentId?.departmentName || "No Department"}
         </Tag>
       ),
       width: 150,
@@ -176,7 +178,7 @@ const SalaryDetail = () => {
       dataIndex: "role",
       key: "role",
       align: "center",
-      render: (role) => <Tag color="blue">{role?.toUpperCase() || "N/A"}</Tag>,
+      render: (role) => <Tag color="blue">{role?.toUpperCase() || "No role"}</Tag>,
       width: 120,
     },
     {

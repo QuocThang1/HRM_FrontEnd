@@ -9,6 +9,7 @@ import {
   Tooltip,
 } from "antd";
 import { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
 import { getStaffApi, deleteStaffApi } from "../../../utils/Api/staffApi";
 import {
   PlusOutlined,
@@ -27,6 +28,7 @@ import "../../../styles/listOfEmployee.css";
 const { Option } = Select;
 
 const StaffPage = () => {
+  const navigate = useNavigate();
   const [dataSource, setDataSource] = useState([]);
   const [filteredData, setFilteredData] = useState([]);
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -190,7 +192,10 @@ const StaffPage = () => {
             type="primary"
             icon={<EditOutlined />}
             size="small"
-            onClick={() => handleEdit(record)}
+            onClick={(e) => {
+              e.stopPropagation();
+              handleEdit(record);
+            }}
             className="action-button edit-button"
           >
             Edit
@@ -198,7 +203,10 @@ const StaffPage = () => {
           <Popconfirm
             title="Delete Employee"
             description="Are you sure to delete this employee?"
-            onConfirm={() => handleDelete(record._id)}
+            onConfirm={(e) => {
+              e.stopPropagation();
+              handleDelete(record._id);
+            }}
             okText="Yes"
             cancelText="No"
             okButtonProps={{ danger: true }}
@@ -338,6 +346,11 @@ const StaffPage = () => {
           columns={columns}
           rowKey="_id"
           loading={loading}
+          onRow={(record) => ({
+            onClick: () => navigate(`/profile/employee-management/${record._id}`),
+            style: { cursor: "pointer" },
+          })}
+          rowClassName="hoverable-row"
           pagination={{
             pageSize: 6,
             showTotal: (total) => `Total ${total} employees`,

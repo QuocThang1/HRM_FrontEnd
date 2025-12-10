@@ -56,8 +56,14 @@ const DepartmentPage = () => {
   const handleDelete = async (departmentId) => {
     try {
       setLoading(true);
-      await deleteDepartmentApi(departmentId);
-      toast.success("Department deleted successfully", { autoClose: 2000 });
+      const res = await deleteDepartmentApi(departmentId);
+      if (res && res.EC === 0) {
+        toast.success(res.EM, { autoClose: 2000 });
+      } else {
+        toast.error(res?.EM || "Failed to delete department", {
+          autoClose: 2000,
+        });
+      }
       fetchDepartments();
     } catch (error) {
       console.error("Error deleting department:", error);

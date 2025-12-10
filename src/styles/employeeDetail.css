@@ -1,0 +1,130 @@
+/* Employee Detail Page Styles */
+.employee-detail-page {
+  padding: 24px;
+  background: #f0f2f5;
+  min-height: 100vh;
+}
+
+.employee-detail-page .page-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 24px;
+  flex-wrap: wrap;
+  gap: 16px;
+}
+
+.employee-detail-page .back-button {
+  border-radius: 8px;
+  font-weight: 500;
+}
+
+.employee-detail-page .back-button:hover {
+  border-color: #667eea;
+  color: #667eea;
+}
+
+/* Profile Card */
+.employee-detail-page .profile-card {
+  border-radius: 12px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+  border: none;
+}
+
+.employee-detail-page .profile-card .ant-descriptions-bordered .ant-descriptions-item-label {
+  background: #fafafa;
+  font-weight: 600;
+  width: 180px;
+}
+
+.employee-detail-page .profile-card .ant-descriptions-item-content {
+  font-size: 14px;
+}
+
+/* Stat Cards */
+.employee-detail-page .stat-card {
+  border-radius: 12px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+  border: none;
+  transition: all 0.3s ease;
+}
+
+.employee-detail-page .stat-card:hover {
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.12);
+  transform: translateY(-2px);
+}
+
+.employee-detail-page .stat-card .ant-statistic-title {
+  font-size: 14px;
+  color: rgba(0, 0, 0, 0.65);
+  margin-bottom: 8px;
+}
+
+.employee-detail-page .stat-card .ant-statistic-content {
+  font-size: 24px;
+  font-weight: 600;
+}
+
+/* Info Cards */
+.employee-detail-page .info-card {
+  border-radius: 12px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+  border: none;
+  height: 100%;
+}
+
+.employee-detail-page .info-card .ant-card-head {
+  background: linear-gradient(135deg, #2c3e50 0%, #3498db 100%);
+  border-radius: 12px 12px 0 0;
+  border: none;
+}
+
+.employee-detail-page .info-card .ant-card-head-title {
+  color: white;
+  font-weight: 600;
+  font-size: 16px;
+}
+
+.employee-detail-page .info-card .ant-descriptions-bordered .ant-descriptions-item-label {
+  background: #fafafa;
+  font-weight: 600;
+  width: 140px;
+}
+
+/* Timeline */
+.employee-detail-page .ant-timeline {
+  margin-top: 16px;
+}
+
+.employee-detail-page .ant-timeline-item-content {
+  margin-left: 20px;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .employee-detail-page {
+    padding: 16px;
+  }
+
+  .employee-detail-page .page-header {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .employee-detail-page .back-button {
+    width: 100%;
+  }
+
+  .employee-detail-page .stat-card .ant-statistic-content {
+    font-size: 20px;
+  }
+}
+
+/* Empty State */
+.employee-detail-page .ant-empty {
+  padding: 40px 0;
+}
+
+.employee-detail-page .ant-empty-description {
+  color: rgba(0, 0, 0, 0.45);
+}

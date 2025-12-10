@@ -147,7 +147,7 @@ const SalaryDashboard = () => {
   };
 
   const getDepartmentName = (staff) => {
-    if (!staff || !staff.departmentId) return "N/A";
+    if (!staff || !staff.departmentId) return "No Department";
 
     if (staff.departmentId.departmentName) {
       return staff.departmentId.departmentName;
@@ -203,7 +203,7 @@ const SalaryDashboard = () => {
       align: "center",
       render: (role, record) => {
         const staffRole = role || record.staffId?.role;
-        return staffRole ? getRoleTag(staffRole) : <Tag>N/A</Tag>;
+        return staffRole ? getRoleTag(staffRole) : <Tag>No Role</Tag>;
       },
     },
     {

@@ -1,12 +1,18 @@
 import { useState, useEffect } from "react";
-import { Modal, Form, Select, DatePicker } from "antd";
+import { Modal, Form, Select, DatePicker, Alert } from "antd";
 import { CalendarOutlined } from "@ant-design/icons";
 import { getManagerDepartmentApi } from "../../../utils/Api/departmentApi";
 import { getDepartmentShiftsApi } from "../../../utils/Api/departmentShiftApi";
-import { createShiftAssignmentApi } from "../../../utils/Api/shiftAssignmentApi";
+import {
+  createShiftAssignmentApi,
+  getAllShiftAssignmentsApi,
+} from "../../../utils/Api/shiftAssignmentApi";
 import { toast } from "react-toastify";
 import dayjs from "dayjs";
+import isBetween from "dayjs/plugin/isBetween";
 import "../../../styles/assignShiftModal.css";
+
+dayjs.extend(isBetween);
 
 const { RangePicker } = DatePicker;
 
@@ -16,24 +22,23 @@ const AssignShiftModal = ({ open, onClose, staffId, staff, onSuccess }) => {
   const [shifts, setShifts] = useState([]);
   const [loading, setLoading] = useState(false);
   const [submitting, setSubmitting] = useState(false);
+  const [scheduledShifts, setScheduledShifts] = useState([]);
 
   useEffect(() => {
-    if (open) {
+    if (open && staffId) {
       fetchDepartmentAndShifts();
+      fetchStaffScheduledShifts();
     }
-  }, [open]);
+  }, [open, staffId]);
 
   const fetchDepartmentAndShifts = async () => {
     try {
       setLoading(true);
-      // Lấy department của manager
       const deptRes = await getManagerDepartmentApi();
       if (deptRes.data) {
         setDepartment(deptRes.data);
-        // Lấy danh sách ca của department
         const shiftsRes = await getDepartmentShiftsApi(deptRes.data._id);
         if (shiftsRes && Array.isArray(shiftsRes.data)) {
-          // Chỉ lấy ca active
           const activeShifts = shiftsRes.data.filter((s) => s.isActive);
           setShifts(activeShifts);
         }
@@ -46,6 +51,49 @@ const AssignShiftModal = ({ open, onClose, staffId, staff, onSuccess }) => {
     } finally {
       setLoading(false);
     }
+  };
+
+  const fetchStaffScheduledShifts = async () => {
+    try {
+      const res = await getAllShiftAssignmentsApi(null, staffId);
+      if (res && res.EC === 0 && res.data) {
+        const scheduled = res.data.filter(
+          (shift) => shift.status === "scheduled"
+        );
+        setScheduledShifts(scheduled);
+        console.log("Scheduled shifts for staff:", scheduled);
+      }
+    } catch (error) {
+      console.error("Error fetching scheduled shifts:", error);
+    }
+  };
+
+  const isDateInScheduledRange = (date) => {
+    return scheduledShifts.some((shift) => {
+      const fromDate = dayjs(shift.fromDate).startOf("day");
+      const toDate = dayjs(shift.toDate).endOf("day");
+      const currentDate = dayjs(date);
+
+      return (
+        currentDate.isSame(fromDate, "day") ||
+        currentDate.isSame(toDate, "day") ||
+        currentDate.isBetween(fromDate, toDate, "day")
+      );
+    });
+  };
+
+  const disabledDate = (current) => {
+    if (!current) return false;
+
+    if (current < dayjs().startOf("day")) {
+      return true;
+    }
+
+    if (isDateInScheduledRange(current)) {
+      return true;
+    }
+
+    return false;
   };
 
   const handleSubmit = async () => {
@@ -154,6 +202,16 @@ const AssignShiftModal = ({ open, onClose, staffId, staff, onSuccess }) => {
           />
         </Form.Item>
 
+        {scheduledShifts.length > 0 && (
+          <Alert
+            message="Note"
+            description="Dates already have scheduled shifts that cannot be selected."
+            type="info"
+            showIcon
+            style={{ marginBottom: 16 }}
+          />
+        )}
+
         <Form.Item
           label="Date Range"
           name="dateRange"
@@ -168,10 +226,7 @@ const AssignShiftModal = ({ open, onClose, staffId, staff, onSuccess }) => {
             style={{ width: "100%" }}
             size="large"
             format="DD/MM/YYYY"
-            disabledDate={(current) => {
-              // Không cho chọn ngày trong quá khứ
-              return current && current < dayjs().startOf("day");
-            }}
+            disabledDate={disabledDate}
           />
         </Form.Item>
       </Form>

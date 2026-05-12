@@ -21,7 +21,7 @@ This repository contains the frontend source code for the Human Resource Managem
 1. Clone the repository:
    ```bash
    git clone [https://github.com/QuocThang1/HRM_FrontEnd.git](https://github.com/QuocThang1/HRM_FrontEnd.git)
-Navigate to the project directory:
+2. Navigate to the project directory:
 
 Bash
 cd HRM_FrontEnd
@@ -29,7 +29,7 @@ cd HRM_FrontEnd
 3. Install the required dependencies:
    ```bash
    npm install
-Start the development server:
+4. Start the development server:
 
 Bash
 npm start
